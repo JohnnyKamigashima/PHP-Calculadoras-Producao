@@ -206,7 +206,7 @@ function pesoNeto(alt, larg, peso, pais) {
             [258065, 12.7]
         ],
         MC_NET = [
-            [20, 2],
+            [50, 2],
             [200, 3],
             [1000, 4],
             [1001, 6]
@@ -214,7 +214,7 @@ function pesoNeto(alt, larg, peso, pais) {
         MC_FOP = [
             [4000, 2],
             [17000, 3],
-            [65000, 4],
+            [65000, 4.5],
             [260000, 6],
             [260001, 10]
         ],
@@ -242,7 +242,6 @@ function pesoNeto(alt, larg, peso, pais) {
     let areaFOP = alt * larg;
 
     console.log(areaFOP);
-    console.log(PE_NET[0][0]);
 
     if (pais == 'PE' || pais == 'BO' || pais == 'CAM' || pais == 'RD') {
         document.getElementById("descricao").innerHTML = "Tamanho do conteúdo independente.";
@@ -283,10 +282,13 @@ function pesoNeto(alt, larg, peso, pais) {
 
 function verifica(array, valor) {
     for (x = 0; x <= array.length - 1; x++) {
+        
+        console.log(valor, array[x][0]);
+
         if (x < array.length - 1) {
             if (valor <= array[x][0] && x == 0) {
                 return array[x][1];
-            } else if (x > 0 && array[x - 1][0] < valor && valor < array[x][0]) {
+            } else if (x > 0 && array[x - 1][0] < valor && valor <= array[x][0]) {
                 return array[x][1];
             }
         } else {

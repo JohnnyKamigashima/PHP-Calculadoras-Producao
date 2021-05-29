@@ -75,7 +75,7 @@ div.entrada {
 }
 
 div.rotulo {
-    width: 100px;
+    width: 140px;
     margin: 5px;
     font-size: small;
     display:inline-block;
@@ -88,7 +88,7 @@ div.rotulo {
 }
 
 input {
-    width: 125px;
+    width: 85px;
 }
 
 label.cadaCalc {
