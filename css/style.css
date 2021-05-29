@@ -1,0 +1,123 @@
+html {
+
+}
+
+#main {
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    font-size: small;
+    background-color: antiquewhite;
+    width: 610px;
+    margin: auto;
+    border-radius: 2px;
+}
+
+.header {
+    background-color: darkgrey;
+    width: 100%px;
+    height: 50px;
+    text-align: center;
+    font-size: large;
+    font-weight: bold;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+}
+
+input.radio {
+    width: 10px;
+    height: 10px;
+    display: inline-block;
+}
+
+label {
+    font-size: small;
+    font-weight: 100;
+}
+
+.cadaCalcE {
+    width: 49.7%;
+    padding: 15px;
+    background-color: darkgrey;
+    font-size: medium;
+    margin-top: 5px;
+    color: rgb(22, 22, 22);
+    position: relative;
+    display: inline-block;
+    margin-left: 0px;
+    vertical-align: top;
+}
+
+.desc {
+    font-size: x-small;
+    padding: 4px;
+}
+
+.footDock {
+    height: 150px;
+}
+.cadaCalcD {
+    width: 49.7%;
+    padding: 15px;
+    background-color: rgb(154, 161, 163);
+    font-size: medium;
+    margin-top: 5px;
+    color: rgb(22, 22, 22);
+    position: relative;
+    display: inline-block;
+    margin-left: 0px;
+    vertical-align: top;
+}
+
+div.entrada {
+
+    display: inline;
+    position: relative;
+}
+
+div.rotulo {
+    width: 100px;
+    margin: 5px;
+    font-size: small;
+    display:inline-block;
+}
+
+.titulo {
+    font-weight: bold;
+    text-align: center;
+    padding-bottom: 10px;
+}
+
+input {
+    width: 125px;
+}
+
+label.cadaCalc {
+    font-size: large;
+}
+
+.icon {
+    width: 25px;
+}
+
+.icon:hover {
+    cursor: pointer;
+}
+
+.footerMid {
+    margin: auto;
+    position: relative;
+    width: 609px;
+    background-color: darkgrey;
+    padding: 15px;
+}
+
+.footer {
+    position: fixed;
+    width: 100%;
+    height: auto;
+    bottom: 15px;
+    left: 0px;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: smaller;
+    text-align: center;
+}

@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<link rel="stylesheet" href="./css/style.css">
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+
+<!-- jQuery library -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+<!-- Latest compiled JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+<script src="./js/library.js"></script>
+
+<html>
+<meta name="viewport" content="width=device-width, initial-scale=1.0" charset="utf-8" />
+
+<body>
+    <title>
+        Calculadoras
+    </title>
+
+    <div id="main" class="container-md">
+        <div class="header">
+
+            <head>
+                Calculadoras de produção
+            </head>
+        </div>
+        <!-- calc plano escala -->
+        <div class="cadaCalcE">
+            <div class="titulo">
+                Escala de Plano
+            </div>
+            <div class="rotulo">
+                Medida real:
+            </div>
+            <div class="entrada">
+                <input type="text" id="medR" value="0">
+            </div>
+
+            <div class="rotulo">
+                Medida atual:
+            </div>
+            <div class="entrada">
+                <input type="text" id="medA" value="0">
+            </div>
+
+            <div class="rotulo">
+                Escala (%):
+            </div>
+            <div class="entrada">
+                <input type="text" id="escalaC" value="0">
+                <img src="https://cdn4.iconfinder.com/data/icons/ionicons/512/icon-clipboard-512.png" alt=""
+                    class="icon" onclick="copyToClipboard(document.getElementById('escalaC').value+'%')">
+            </div>
+            <script>
+                $(document).ready(function () {
+                    $('#medA').keyup(function () { //calculate scale
+                        $("#escalaC").val(escalaPlano($("#medA"), $("#medR")));
+                    })
+                    $('#medR').keyup(function () { //calculate scale
+                        $("#escalaC").val(escalaPlano($("#medA"), $("#medR")));
+                    })
+                })
+            </script>
+        </div>
+        <!-- Calculadora Px2mm -->
+        <div class="cadaCalcD">
+            <div class="titulo">
+                Pixel para mm
+            </div>
+            <div class="rotulo">
+                Resolução (dpi):
+            </div>
+            <div class="entrada">
+                <input type="text" id="resolucao" value="300">
+            </div>
+
+            <div class="rotulo">
+                Milimetros:
+            </div>
+            <div class="entrada">
+                <input type="text" id="mm" value="0.015">
+                <img src="https://cdn4.iconfinder.com/data/icons/ionicons/512/icon-clipboard-512.png" alt=""
+                    class="icon" onclick="copyToClipboard(document.getElementById('mm').value+' mm')">
+            </div>
+
+            <div class="rotulo">
+                Pixeis:
+            </div>
+            <div class="entrada">
+                <input type="text" id="pixel" value="0">
+                <img src="https://cdn4.iconfinder.com/data/icons/ionicons/512/icon-clipboard-512.png" alt=""
+                    class="icon" onclick="copyToClipboard(document.getElementById('pixel').value+' px')">
+            </div>
+            <script>
+                $(document).ready(function () {
+                    $('#mm').keyup(function () { //calculate when Milimetros is filled
+                        $("#pixel").val(mm2px($("#resolucao"), $("#mm")));
+                    })
+                    $('#pixel').keyup(function () { //Calculate when Pixels is filled
+                        $("#mm").val(px2mm($("#resolucao"), $("#pixel")));
+                    })
+                })
+            </script>
+        </div>
+        <!-- calculadora AltoEm -->
+        <div class="cadaCalcD">
+            <div class="titulo">
+                Alto Em
+            </div>
+            <div class="rotulo">
+                Altura FOP:
+            </div>
+            <div class="entrada">
+                <input type="text" id="altFOP" value="">
+            </div>
+
+            <div class="rotulo">
+                Largura FOP:
+            </div>
+            <div class="entrada">
+                <input type="text" id="largFOP" value="">
+            </div>
+
+            <div class="rotulo">
+                Area FOP:
+            </div>
+            <div class="entrada">
+                <input type="text" id="areaFOP" value="">
+            </div>
+            <div class="rotulo">
+                Nutrientes:
+            </div>
+            <div class="entrada">
+                <select name="nutrientes" id="nutrientes">
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                </select>
+            </div><br>
+            <div class="rotulo">
+                Tipos:
+            </div>
+            <div class="entrada">
+                <select name="tipo" id="tipo">
+                    <option value="I">I</option>
+                    <option value="--">--</option>
+                    <option value="0">O</option>
+                    <option value="L">L</option>
+                    <option value="q">q</option>
+                    <option value="p">p</option>
+                </select>
+            </div><br>
+            <div class="rotulo">
+                A largura do elemento ALTO EM deve ser de:
+            </div>
+            <div class="entrada">
+                <input type="text" id="largF" value="0">
+                <img src="https://cdn4.iconfinder.com/data/icons/ionicons/512/icon-clipboard-512.png" alt=""
+                    class="icon" onclick="copyToClipboard(document.getElementById('largF').value+' mm')">
+            </div>
+
+            <script>
+                $(document).ready(function () {
+                    $('#altFOP').change(function () {
+                        $("#largF").val(altoEm($("#altFOP"), $("#largFOP"), $("#areaFOP"), $("#nutrientes"), $("#tipo")));
+                        $("#altFOP1").val($("#altFOP").val());
+                        $("#altFOP2").val($("#altFOP").val());
+                        $("#altFOP3").val($("#altFOP").val());
+                    })
+                    $('#largFOP').change(function () {
+                        $("#largF").val(altoEm($("#altFOP"), $("#largFOP"), $("#areaFOP"), $("#nutrientes"), $("#tipo")));
+                        $("#largFOP1").val($("#largFOP").val());
+                        $("#largFOP2").val($("#largFOP").val());
+                        $("#largFOP3").val($("#largFOP").val());
+                    })
+                    $('#areaFOP').change(function () {
+                        $("#largF").val(altoEm($("#altFOP"), $("#largFOP"), $("#areaFOP"), $("#nutrientes"), $("#tipo")));
+                    })
+                    $('#nutrientes').change(function () {
+                        $("#largF").val(altoEm($("#altFOP"), $("#largFOP"), $("#areaFOP"), $("#nutrientes"), $("#tipo")));
+                    })
+                    $('#tipo').change(function () {
+                        $("#largF").val(altoEm($("#altFOP"), $("#largFOP"), $("#areaFOP"), $("#nutrientes"), $("#tipo")));
+                    })
+                })
+            </script>
+        </div>
+        <!-- calculadora Farol EQ-->
+        <div class="cadaCalcE">
+            <div class="titulo">
+                Tamanho do Farol do Equador
+            </div>
+            <div class="rotulo">
+                Altura FOP:
+            </div>
+            <div class="entrada">
+                <input type="text" id="altFOP1" value="">
+            </div>
+
+            <div class="rotulo">
+                Largura FOP:
+            </div>
+            <div class="entrada">
+                <input type="text" id="largFOP1" value="">
+            </div>
+
+            <div class="rotulo">
+                Area FOP:
+            </div>
+            <div class="entrada">
+                <input type="text" id="areaFOP1" value="">
+            </div>
+            <div class="rotulo">
+                Cilindrico:
+            </div>
+            <div class="entrada">
+                <input type="radio" class="radio" id="cilindroYes" name="cilindro" value="true">
+                <label for="cilindro">Sim</label>
+                <input type="radio" class="radio" id="cilindroNo" name="cilindro" value="false" checked>
+                <label for="cilindro">Não</label>
+            </div><br>
+            <div class="rotulo">
+                A largura do Farol deve ser de:
+            </div>
+            <div class="entrada">
+                <input type="text" id="largF1" value="0">
+                <img src="https://cdn4.iconfinder.com/data/icons/ionicons/512/icon-clipboard-512.png" alt=""
+                    class="icon" onclick="copyToClipboard(document.getElementById('largF1').value+' mm')">
+            </div>
+
+            <script>
+                $(document).ready(function () {
+                    $('#altFOP1').change(function () {
+                        $("#largF1").val(farolEq($("#altFOP1"), $("#largFOP1"), $("#areaFOP1")));
+                        $("#altFOP").val($("#altFOP1").val());
+                        $("#altFOP2").val($("#altFOP1").val());
+                        $("#altFOP3").val($("#altFOP1").val());
+                    })
+                    $('#largFOP1').change(function () {
+                        $("#largF1").val(farolEq($("#altFOP1"), $("#largFOP1"), $("#areaFOP1")));
+                        $("#largFOP").val($("#largFOP1").val());
+                        $("#largFOP2").val($("#largFOP1").val());
+                        $("#largFOP3").val($("#largFOP1").val());
+                    })
+                    $('#areaFOP1').change(function () {
+                        $("#largF1").val(farolEq($("#altFOP1"), $("#largFOP1"), $("#areaFOP1")));
+                    })
+                    $('#cilindroYes').change(function () {
+                        $("#largF1").val(farolEq($("#altFOP1"), $("#largFOP1"), $("#areaFOP1")));
+                    })
+                    $('#cilindroNo').change(function () {
+                        $("#largF1").val(farolEq($("#altFOP1"), $("#largFOP1"), $("#areaFOP1")));
+                    })
+                })
+            </script>
+        </div>
+
+
+
+        <!-- calc plano pt2mm -->
+        <div class="cadaCalcE">
+            <div class="titulo">
+                Pontos para mm
+            </div>
+            <div class="rotulo">
+                Pontos (pt):
+            </div>
+            <div class="entrada">
+                <input type="text" id="pt" value="">
+                <img src="https://cdn4.iconfinder.com/data/icons/ionicons/512/icon-clipboard-512.png" alt=""
+                    class="icon" onclick="copyToClipboard(document.getElementById('pt').value+' pt')">
+            </div>
+            <div class="rotulo">
+                mm:
+            </div>
+            <div class="entrada">
+                <input type="text" id="resultmm" value="">
+                <img src="https://cdn4.iconfinder.com/data/icons/ionicons/512/icon-clipboard-512.png" alt=""
+                    class="icon" onclick="copyToClipboard(document.getElementById('resultmm').value+' mm')">
+            </div>
+            <script>
+                $(document).ready(function () {
+                    $('#pt').keyup(function () { //calculate points
+                        $("#resultmm").val(pt2mm($("#pt"), 0));
+                    })
+                    $('#resultmm').keyup(function () { //calculate mm
+                        $("#pt").val(pt2mm(0, $("#resultmm")));
+                    })
+
+                })
+            </script>
+        </div>
+
+
+
+        <!-- calculadora T Transgenico -->
+        <div class="cadaCalcD">
+            <div class="titulo">
+                Calculo do Triângulo de Transgênico
+            </div>
+            <div class="rotulo">
+                Altura FOP:
+            </div>
+            <div class="entrada">
+                <input type="text" id="altFOP2" value="">
+            </div>
+
+            <div class="rotulo">
+                Largura FOP:
+            </div>
+            <div class="entrada">
+                <input type="text" id="largFOP2" value="">
+            </div>
+            <div class="rotulo">
+                A largura mínima do triângulo de transgênico deve ser (mm):
+            </div>
+            <div class="entrada">
+                <input type="text" id="largT1" value="0">
+                <img src="https://cdn4.iconfinder.com/data/icons/ionicons/512/icon-clipboard-512.png" alt=""
+                    class="icon" onclick="copyToClipboard(document.getElementById('largT1').value+' mm')">
+            </div>
+
+            <script>
+                $(document).ready(function () {
+                    $('#altFOP2').keyup(function () { //calculate points
+                        $("#altFOP").val($("#altFOP2").val());
+                        $("#altFOP1").val($("#altFOP2").val());
+                        $("#altFOP3").val($("#altFOP2").val());
+                        $("#largT1").val(Transgenico($("#altFOP2"), $("#largFOP2")));
+                    })
+
+                    $('#largFOP2').keyup(function () { //calculate points
+                        $("#largFOP").val($("#largFOP2").val());
+                        $("#largFOP1").val($("#largFOP2").val());
+                        $("#largFOP3").val($("#largFOP2").val());
+                        $("#largT1").val(Transgenico($("#altFOP2"), $("#largFOP2")));
+
+                    })
+
+                })
+            </script>
+        </div>
+
+
+
+        <!-- Tabela Net Content -->
+        <div class="cadaCalcE">
+            <div class="titulo">
+                Tabela de Peso Neto
+            </div>
+            <div class="rotulo">
+                País:
+            </div>
+            <div class="entrada">
+                <select name="pais" id="pais" value="MC">
+                    <option value="MC" selected>Mercosul (AR, BR, UY, PY)</option>
+                    <option value="PE">Peru</option>
+                    <option value="BO">Bolívia</option>
+                    <option value="EC">Equador</option>
+                    <option value="CL">Chile</option>
+                    <option value="CO">Colômbia</option>
+                    <option value="CAM">A.Central (CR, ES, GT, HN, NI, PA)</option>
+                    <option value="RD">República Dominicana</option>
+                    <option value="PR">Porto Rico</option>
+                    <option value="IC">Ilhas Cayman</option>
+                    <option value="MX">México</option>
+                </select>
+            </div>
+            <div class="desc">
+                <p id="descricao">
+                </p>
+            </div>
+            <div class="rotulo">
+                Altura FOP (mm):
+            </div>
+            <div class="entrada">
+                <input type="text" id="altFOP3" name="altFOP3">
+            </div>
+            <div class="rotulo">
+                Largura FOP (mm):
+            </div>
+            <div class="entrada">
+                <input type="text" name="largFOP3" id="largFOP3">
+            </div>
+            <div class="rotulo">
+                Peso (em g):
+            </div>
+            <div class="entrada">
+                <input type="text" id="peso" value="">
+            </div>
+            <div class="rotulo">
+                Tamanho min (mm):
+            </div>
+            <div class="entrada">
+                <input type="text" id="resultmm1" value="">
+                <img src="https://cdn4.iconfinder.com/data/icons/ionicons/512/icon-clipboard-512.png" alt=""
+                    class="icon" onclick="copyToClipboard(document.getElementById('resultmm1').value+' mm')">
+            </div>
+            <script>
+                sort("pais");
+                $("#pais").val("MC");
+                $(document).ready(function () {
+                    $('#largFOP3').keyup(function () {
+                        $("#peso").val("");
+                        $("#largFOP").val($("#largFOP3").val());
+                        $("#largFOP1").val($("#largFOP3").val());
+                        $("#largFOP2").val($("#largFOP3").val());
+                        $("#resultmm1").val(pesoNeto($("#altFOP3"), $("#largFOP3"), $("#peso"), $("#pais")));
+                    })
+                    $('#altFOP3').keyup(function () {
+                        $("#peso").val("");
+                        $("#altFOP").val($("#altFOP3").val());
+                        $("#altFOP1").val($("#altFOP3").val());
+                        $("#altFOP2").val($("#altFOP3").val());
+                        $("#resultmm1").val(pesoNeto($("#altFOP3"), $("#largFOP3"), $("#peso"), $("#pais")));
+                    })
+                    $('#pais').change(function () {
+                        $("#resultmm1").val(pesoNeto($("#altFOP3"), $("#largFOP3"), $("#peso"), $("#pais")));
+                    })
+                    $("#peso").keyup(function () {
+                        $("#altFOP3").val("");
+                        $("#largFOP3").val("");
+                        $("#resultmm1").val(pesoNeto($("#altFOP3"), $("#largFOP3"), $("#peso"), $("#pais")));
+                    })
+                })
+
+            </script>
+        </div>
+        <script>
+
+        </script>
+    </div>
+
+    <div class="footDock">
+    </div>
+
+
+    <footer>
+        <div class="footer">
+            <div class="footerMid">
+                FOP - Front of Package (Painel frontal que o consumidor vê na gôndola), BOP - Back of Package
+                (Painel
+                que fica escondido na gôndola), Atenção para o triângulo de transgênico cuja area de silêncio é igual ao
+                círculo que circunscreve as três pontas do triângulo.
+            </div>
+        </div>
+    </footer>
+    </div>
+</body>
+
+</html>
