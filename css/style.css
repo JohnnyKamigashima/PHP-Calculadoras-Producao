@@ -112,7 +112,6 @@ label.cadaCalc {
 .footerMid {
     margin: auto;
     position: relative;
-    width: 609px;
     background-color: darkgrey;
     padding: 15px;
 }
@@ -120,6 +119,7 @@ label.cadaCalc {
 .footer {
     position: fixed;
     width: 100%;
+    display: inline-block;
     height: auto;
     bottom: 15px;
     left: 0px;
