@@ -6,9 +6,11 @@ html {
     font-family: Georgia, 'Times New Roman', Times, serif;
     font-size: small;
     background-color: antiquewhite;
-    width: 610px;
+    //width: 610px;
     margin: auto;
     border-radius: 2px;
+    justify-content: center;
+    text-align: center;
 }
 
 .header {
@@ -35,7 +37,7 @@ label {
 }
 
 .cadaCalcE {
-    width: 49.7%;
+    max-width: 300px;
     padding: 15px;
     background-color: darkgrey;
     font-size: medium;
@@ -43,8 +45,10 @@ label {
     color: rgb(22, 22, 22);
     position: relative;
     display: inline-block;
-    margin-left: 0px;
+    margin-left: auto;
+    margin-right: auto;
     vertical-align: top;
+    text-align: left;
 }
 
 .desc {
@@ -56,7 +60,8 @@ label {
     height: 150px;
 }
 .cadaCalcD {
-    width: 49.7%;
+
+    max-width: 300px;
     padding: 15px;
     background-color: rgb(154, 161, 163);
     font-size: medium;
@@ -66,6 +71,7 @@ label {
     display: inline-block;
     margin-left: 0px;
     vertical-align: top;
+    text-align: left;
 }
 
 div.entrada {
