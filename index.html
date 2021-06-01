@@ -1,13 +1,18 @@
 <!DOCTYPE html>
 <link rel="stylesheet" href="./css/style.css">
 <!-- Latest compiled and minified CSS -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css"
+    integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
 
-<!-- jQuery library -->
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-
-<!-- Latest compiled JavaScript -->
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+    integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+    crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
+    integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN"
+    crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.min.js"
+    integrity="sha384-+YQ4JLhjyBLPDQt//I+STsc9iw4uQqACwlvpslubQzn4u2UU2UFM80nGisd026JF"
+    crossorigin="anonymous"></script>
 
 <script src="./js/library.js"></script>
 
@@ -26,33 +31,40 @@
                 Calculadoras de produção
             </head>
         </div>
+
         <!-- calc plano escala -->
         <div class="cadaCalcE">
             <div class="titulo">
                 Escala de Plano
             </div>
-            <div class="rotulo">
-                Medida real:
-            </div>
-            <div class="entrada">
-                <input type="text" id="medR" value="0">
-            </div>
-
-            <div class="rotulo">
-                Medida atual:
-            </div>
-            <div class="entrada">
-                <input type="text" id="medA" value="0">
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                    <span class="input-group-text" id="inputGroup-sizing-default">Medida real:</span>
+                </div>
+                <input type="text" class="form-control" id="medR" value="0">
             </div>
 
-            <div class="rotulo">
-                Escala (%):
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                    <span class="input-group-text" id="inputGroup-sizing-default">Medida atual:</span>
+                </div>
+                <input type="text" class="form-control" id="medA" value="0">
             </div>
-            <div class="entrada">
-                <input type="text" id="escalaC" value="0">
-                <img src="https://cdn4.iconfinder.com/data/icons/ionicons/512/icon-clipboard-512.png" alt=""
-                    class="icon" onclick="copyToClipboard(document.getElementById('escalaC').value+'%')">
+
+
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                    <span class="input-group-text">Escala (%):</span>
+                </div>
+                <input type="text" class="form-control" id="escalaC" value="0">
+                <div class="input-group-append">
+                    <span class="input-group-text">
+                        <img src="https://cdn4.iconfinder.com/data/icons/ionicons/512/icon-clipboard-512.png" alt=""
+                            class="icon" onclick="copyToClipboard(document.getElementById('escalaC').value+'%')">
+                    </span>
+                </div>
             </div>
+
             <script>
                 $(document).ready(function () {
                     $('#medA').keyup(function () { //calculate scale
@@ -64,35 +76,55 @@
                 })
             </script>
         </div>
+
+
         <!-- Calculadora Px2mm -->
         <div class="cadaCalcD">
             <div class="titulo">
                 Pixel para mm
             </div>
-            <div class="rotulo">
-                Resolução (dpi):
-            </div>
-            <div class="entrada">
-                <input type="text" id="resolucao" value="300">
+
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                    <span class="input-group-text" id="inputGroup-sizing-default">
+                        Resolução (dpi):
+                    </span>
+                </div>
+                <input type="text" class="form-control" id="resolucao" value="300">
             </div>
 
-            <div class="rotulo">
-                Milimetros:
-            </div>
-            <div class="entrada">
-                <input type="text" id="mm" value="0.015">
-                <img src="https://cdn4.iconfinder.com/data/icons/ionicons/512/icon-clipboard-512.png" alt=""
-                    class="icon" onclick="copyToClipboard(document.getElementById('mm').value+' mm')">
+
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                    <span class="input-group-text">
+                        Milimetros:
+                    </span>
+                </div>
+                <input type="text" class="form-control" id="mm" value="0.015">
+                <div class="input-group-append">
+                    <span class="input-group-text">
+                        <img src="https://cdn4.iconfinder.com/data/icons/ionicons/512/icon-clipboard-512.png" alt=""
+                            class="icon" onclick="copyToClipboard(document.getElementById('mm').value+' mm')">
+                    </span>
+                </div>
             </div>
 
-            <div class="rotulo">
-                Pixeis:
+
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                    <span class="input-group-text">
+                        Pixeis:
+                    </span>
+                </div>
+                <input type="text" class="form-control" id="pixel" value="">
+                <div class="input-group-append">
+                    <span class="input-group-text">
+                        <img src="https://cdn4.iconfinder.com/data/icons/ionicons/512/icon-clipboard-512.png" alt=""
+                            class="icon" onclick="copyToClipboard(document.getElementById('pixel').value+' px')">
+                    </span>
+                </div>
             </div>
-            <div class="entrada">
-                <input type="text" id="pixel" value="0">
-                <img src="https://cdn4.iconfinder.com/data/icons/ionicons/512/icon-clipboard-512.png" alt=""
-                    class="icon" onclick="copyToClipboard(document.getElementById('pixel').value+' px')">
-            </div>
+
             <script>
                 $(document).ready(function () {
                     $('#mm').keyup(function () { //calculate when Milimetros is filled
@@ -104,46 +136,65 @@
                 })
             </script>
         </div>
+
+
+
         <!-- calculadora AltoEm -->
         <div class="cadaCalcE">
             <div class="titulo">
                 Alto Em
             </div>
-            <div class="rotulo">
-                Altura FOP (mm):
-            </div>
-            <div class="entrada">
-                <input type="text" id="altFOP" value="">
+
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                    <span class="input-group-text" id="inputGroup-sizing-default">
+                        Altura FOP (mm):
+                    </span>
+                </div>
+                <input type="text" class="form-control" id="altFOP" value="">
             </div>
 
-            <div class="rotulo">
-                Largura FOP (mm):
-            </div>
-            <div class="entrada">
-                <input type="text" id="largFOP" value="">
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                    <span class="input-group-text" id="inputGroup-sizing-default">
+                        Largura FOP (mm):
+                    </span>
+                </div>
+                <input type="text" class="form-control" id="largFOP" value="">
             </div>
 
-            <div class="rotulo">
-                Area FOP (mm2):
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                    <span class="input-group-text" id="inputGroup-sizing-default">
+                        Area FOP (mm2):
+                    </span>
+                </div>
+                <input type="text" class="form-control" id="areaFOP" value="">
             </div>
-            <div class="entrada">
-                <input type="text" id="areaFOP" value="">
-            </div>
-            <div class="rotulo">
-                Nutrientes:
-            </div>
-            <div class="entrada">
-                <select name="nutrientes" id="nutrientes">
+
+
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                    <span class="input-group-text">
+                        Nutrientes:
+                    </span>
+                </div>
+                <select name="nutrientes" id="nutrientes" class="form-control" required>
                     <option value="1">1</option>
                     <option value="2">2</option>
                     <option value="3">3</option>
                 </select>
-            </div><br>
-            <div class="rotulo">
-                Tipos:
+
             </div>
-            <div class="entrada">
-                <select name="tipo" id="tipo">
+
+
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                    <span class="input-group-text">
+                        Tipos:
+                    </span>
+                </div>
+                <select name="tipo" id="tipo" class="form-control">
                     <option value="I">I</option>
                     <option value="--">--</option>
                     <option value="0">O</option>
@@ -151,15 +202,26 @@
                     <option value="q">q</option>
                     <option value="p">p</option>
                 </select>
-            </div><br>
-            <div class="rotulo">
-                A largura do elemento ALTO EM deve ser de:
+
             </div>
-            <div class="entrada">
-                <input type="text" id="largF" value="0">
-                <img src="https://cdn4.iconfinder.com/data/icons/ionicons/512/icon-clipboard-512.png" alt=""
-                    class="icon" onclick="copyToClipboard(document.getElementById('largF').value+' mm')">
+
+
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                    <span class="input-group-text" style="padding-top:2em; padding-bottom:2em">
+                        A largura de<br>ALTO EM deve ser:
+                    </span>
+                </div>
+                <input type="text" class="form-control" id="largF" value="0" style="height:66px; margin:auto">
+                <div class="input-group-append">
+                    <span class="input-group-text" style="height:66px; margin:auto">
+                        <img src="https://cdn4.iconfinder.com/data/icons/ionicons/512/icon-clipboard-512.png" alt=""
+                            class="icon" onclick="copyToClipboard(document.getElementById('largF').value+' mm')">
+                    </span>
+                </div>
             </div>
+
+
 
             <script>
                 $(document).ready(function () {
@@ -187,47 +249,72 @@
                 })
             </script>
         </div>
+
+
+
         <!-- calculadora Farol EQ-->
         <div class="cadaCalcD">
             <div class="titulo">
                 Tamanho do Farol do Equador
             </div>
-            <div class="rotulo">
-                Altura FOP (mm):
-            </div>
-            <div class="entrada">
-                <input type="text" id="altFOP1" value="">
+
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                    <span class="input-group-text" id="inputGroup-sizing-default">
+                        Altura FOP (mm):
+                    </span>
+                </div>
+                <input type="text" class="form-control" id="altFOP1" value="">
             </div>
 
-            <div class="rotulo">
-                Largura FOP (mm):
-            </div>
-            <div class="entrada">
-                <input type="text" id="largFOP1" value="">
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                    <span class="input-group-text" id="inputGroup-sizing-default">
+                        Largura FOP (mm):
+                    </span>
+                </div>
+                <input type="text" class="form-control" id="largFOP1" value="">
             </div>
 
-            <div class="rotulo">
-                Area FOP (mm2):
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                    <span class="input-group-text" id="inputGroup-sizing-default">
+                        Area FOP (mm2):
+                    </span>
+                </div>
+                <input type="text" class="form-control" id="areaFOP1" value="">
             </div>
-            <div class="entrada">
-                <input type="text" id="areaFOP1" value="">
+
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                    <span class="input-group-text" id="inputGroup-sizing-default">
+                        Cilindrico:
+                    </span>
+                </div>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" id="cilindroYes" name="cilindro" value="true"
+                        style="margin-left: 15px;">
+                    <label class="form-check-label" for="inlineCheckbox1">Sim</label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" id="cilindroNo" name="cilindro" value="false" checked>
+                    <label class="form-check-label" for="inlineCheckbox2">Não</label>
+                </div>
             </div>
-            <div class="rotulo">
-                Cilindrico:
-            </div><br>
-            <div class="entrada">
-                <input type="radio" class="radio" id="cilindroYes" name="cilindro" value="true">
-                <label for="cilindro">Sim</label>
-                <input type="radio" class="radio" id="cilindroNo" name="cilindro" value="false" checked>
-                <label for="cilindro">Não</label>
-            </div><br>
-            <div class="rotulo">
-                A largura do Farol deve ser de:
-            </div>
-            <div class="entrada">
-                <input type="text" id="largF1" value="0">
-                <img src="https://cdn4.iconfinder.com/data/icons/ionicons/512/icon-clipboard-512.png" alt=""
-                    class="icon" onclick="copyToClipboard(document.getElementById('largF1').value+' mm')">
+
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                    <span class="input-group-text" style="padding-top:2em; padding-bottom:2em">
+                        A largura do Farol <br> deve ser de:
+                    </span>
+                </div>
+                <input type="text" class="form-control" id="largF1" value="0" style="height:66px; margin:auto">
+                <div class="input-group-append">
+                    <span class="input-group-text" style="height:66px; margin:auto">
+                        <img src="https://cdn4.iconfinder.com/data/icons/ionicons/512/icon-clipboard-512.png" alt=""
+                            class="icon" onclick="copyToClipboard(document.getElementById('largF1').value+' mm')">
+                    </span>
+                </div>
             </div>
 
             <script>
@@ -264,22 +351,38 @@
             <div class="titulo">
                 Pontos para mm
             </div>
-            <div class="rotulo">
-                Pontos (pt):
+
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                    <span class="input-group-text">
+                        Pontos (pt):
+                    </span>
+                </div>
+                <input type="text" class="form-control" id="pt" value="">
+                <div class="input-group-append">
+                    <span class="input-group-text">
+                        <img src="https://cdn4.iconfinder.com/data/icons/ionicons/512/icon-clipboard-512.png" alt=""
+                            class="icon" onclick="copyToClipboard(document.getElementById('pt').value+' pt')">
+                    </span>
+                </div>
             </div>
-            <div class="entrada">
-                <input type="text" id="pt" value="">
-                <img src="https://cdn4.iconfinder.com/data/icons/ionicons/512/icon-clipboard-512.png" alt=""
-                    class="icon" onclick="copyToClipboard(document.getElementById('pt').value+' pt')">
+
+
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                    <span class="input-group-text">
+                        mm:
+                    </span>
+                </div>
+                <input type="text" class="form-control" id="resultmm" value="">
+                <div class="input-group-append">
+                    <span class="input-group-text">
+                        <img src="https://cdn4.iconfinder.com/data/icons/ionicons/512/icon-clipboard-512.png" alt=""
+                            class="icon" onclick="copyToClipboard(document.getElementById('resultmm').value+' mm')">
+                    </span>
+                </div>
             </div>
-            <div class="rotulo">
-                mm:
-            </div>
-            <div class="entrada">
-                <input type="text" id="resultmm" value="">
-                <img src="https://cdn4.iconfinder.com/data/icons/ionicons/512/icon-clipboard-512.png" alt=""
-                    class="icon" onclick="copyToClipboard(document.getElementById('resultmm').value+' mm')">
-            </div>
+
             <script>
                 $(document).ready(function () {
                     $('#pt').keyup(function () { //calculate points
@@ -300,27 +403,40 @@
             <div class="titulo">
                 Calculo do Triângulo de Transgênico
             </div>
-            <div class="rotulo">
-                Altura FOP (mm):
-            </div>
-            <div class="entrada">
-                <input type="text" id="altFOP2" value="">
+
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                    <span class="input-group-text" id="inputGroup-sizing-default">
+                        Altura FOP (mm):
+                    </span>
+                </div>
+                <input type="text" class="form-control" id="altFOP2" value="">
             </div>
 
-            <div class="rotulo">
-                Largura FOP (mm):
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                    <span class="input-group-text" id="inputGroup-sizing-default">
+                        Largura FOP (mm):
+                    </span>
+                </div>
+                <input type="text" class="form-control" id="largFOP2" value="">
             </div>
-            <div class="entrada">
-                <input type="text" id="largFOP2" value="">
+
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                    <span class="input-group-text" style="padding-top:3em; padding-bottom:3em">
+                        A largura mínima do <br>triângulo de transg. <br>deve ser (mm):
+                    </span>
+                </div>
+                <input type="text" class="form-control" id="largT1" value="0" style="height:98px; margin:auto">
+                <div class="input-group-append">
+                    <span class="input-group-text" style="height:98px; margin:auto">
+                        <img src="https://cdn4.iconfinder.com/data/icons/ionicons/512/icon-clipboard-512.png" alt=""
+                            class="icon" onclick="copyToClipboard(document.getElementById('largT1').value+' mm')">
+                    </span>
+                </div>
             </div>
-            <div class="rotulo">
-                A largura mínima do triângulo de transgênico deve ser (mm):
-            </div>
-            <div class="entrada">
-                <input type="text" id="largT1" value="0">
-                <img src="https://cdn4.iconfinder.com/data/icons/ionicons/512/icon-clipboard-512.png" alt=""
-                    class="icon" onclick="copyToClipboard(document.getElementById('largT1').value+' mm')">
-            </div>
+
 
             <script>
                 $(document).ready(function () {
@@ -354,7 +470,7 @@
                 País:
             </div>
             <div class="entrada">
-                <select name="pais" id="pais" value="MC">
+                <select name="pais" id="pais" value="MC" class="form-control">
                     <option value="MC" selected>Mercosul (AR, BR, UY, PY)</option>
                     <option value="PE">Peru</option>
                     <option value="BO">Bolívia</option>
@@ -372,32 +488,58 @@
                 <p id="descricao">
                 </p>
             </div>
-            <div class="rotulo">
-                Altura FOP (mm):
+
+
+
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                    <span class="input-group-text" id="inputGroup-sizing-default">
+                        Altura FOP (mm):
+                    </span>
+                </div>
+                <input type="text" class="form-control" id="altFOP3" name="altFOP3">
             </div>
-            <div class="entrada">
-                <input type="text" id="altFOP3" name="altFOP3">
+
+
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                    <span class="input-group-text" id="inputGroup-sizing-default">
+                        Largura FOP (mm):
+                    </span>
+                </div>
+                <input type="text" class="form-control" name="largFOP3" id="largFOP3">
             </div>
-            <div class="rotulo">
-                Largura FOP (mm):
+
+
+
+
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                    <span class="input-group-text" id="inputGroup-sizing-default">
+                        Peso (em g):
+                    </span>
+                </div>
+                <input type="text" class="form-control" id="peso" value="">
             </div>
-            <div class="entrada">
-                <input type="text" name="largFOP3" id="largFOP3">
+
+
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                    <span class="input-group-text">
+
+                        Tam. min (mm):
+
+                    </span>
+                </div>
+                <input type="text" class="form-control" id="resultmm1" value="">
+                <div class="input-group-append">
+                    <span class="input-group-text">
+                        <img src="https://cdn4.iconfinder.com/data/icons/ionicons/512/icon-clipboard-512.png" alt=""
+                            class="icon" onclick="copyToClipboard(document.getElementById('resultmm1').value+' mm')">
+                    </span>
+                </div>
             </div>
-            <div class="rotulo">
-                Peso (em g):
-            </div>
-            <div class="entrada">
-                <input type="text" id="peso" value="">
-            </div>
-            <div class="rotulo">
-                Tamanho min (mm):
-            </div>
-            <div class="entrada">
-                <input type="text" id="resultmm1" value="">
-                <img src="https://cdn4.iconfinder.com/data/icons/ionicons/512/icon-clipboard-512.png" alt=""
-                    class="icon" onclick="copyToClipboard(document.getElementById('resultmm1').value+' mm')">
-            </div>
+
             <script>
                 sort("pais");
                 $("#pais").val("MC");
@@ -430,23 +572,24 @@
         </div>
 
         <div class="footDock">
-    </div>
-
-
-    <footer>
-        <div class="footer">
-            <div class="footerMid">
-                FOP - Front of Package (Painel frontal que o consumidor vê na gôndola), BOP - Back of Package
-                (Painel
-                que fica escondido na gôndola), Atenção para o triângulo de transgênico cuja area de silêncio é igual ao
-                círculo que circunscreve as três pontas do triângulo.
-            </div>
         </div>
-    </footer>
+
+
+        <footer>
+            <div class="footer">
+                <div class="footerMid">
+                    FOP - Front of Package (Painel frontal que o consumidor vê na gôndola), BOP - Back of Package
+                    (Painel
+                    que fica escondido na gôndola), Atenção para o triângulo de transgênico cuja area de silêncio é
+                    igual ao
+                    círculo que circunscreve as três pontas do triângulo.
+                </div>
+            </div>
+        </footer>
     </div>
     </div>
 
-    
+
 </body>
 
 </html>
