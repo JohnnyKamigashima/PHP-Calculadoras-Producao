@@ -9,6 +9,15 @@ function escalaPlano(medA, medR) {
     return isNaN(((medR.val() * 100) / medA.val())) ? 0 : ((medR.val() * 100) / medA.val()).toFixed(2);
 }
 
+function distorC(medA, medR, rep) {
+    return isNaN(((medR.val() * 100) / (medA.val() * rep))) ? 0 : ((medR.val() * 100) / (medA.val() * rep)).toFixed(3);
+}
+
+function handleClick(myRadio) {
+    $("#distorc").val(distorC($("#arteA"), $("#cilindro"), $("input[type='radio'][name='repetition']:checked").val()));
+
+}
+
 function altoEm(altura, largura, area, nutrientes, tipo) {
 
     let larguraFinal = 0,
