@@ -1,0 +1,183 @@
+@import "bootstrap/scss/bootstrap";
+
+.cells {
+    @extend .col-md-4;
+    @extend .col-sm-12;
+    background-color: rgb(216, 216, 216);
+    border-radius: 1rem;
+    border: solid antiquewhite 5px;
+    // margin: 10px;
+}
+
+
+.titulo {
+    text-align: center;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    padding: 10px;
+    background-color: aquamarine;
+    color: black;
+    border-radius: 1rem;
+    font-weight: 600;
+}
+
+.row {
+    margin-left: 0%;
+    margin-right: 0%;
+    width: 100%;
+}
+
+#main {
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    font-size: small;
+    background-color: antiquewhite;
+    margin: auto;
+    border-radius: 2px;
+    justify-content: center;
+    text-align: center;
+}
+
+// #inputGroup-sizing-default {
+//  width: 160px;
+//  viewport-fit: 300px;
+// }
+
+
+// .form-check-input {
+//     margin-left: 15px;
+// }
+
+
+// .input-group {
+//     width: 100%;
+// }
+// input.form-control, #medR.form-control select.form-control {
+//     width:45px;
+// }
+
+// .input-group-text {
+//     height:38px;
+// }
+
+// select option:disabled {
+//     color: darkgray;
+//     background-color: aquamarine;
+//   }
+
+// .header {
+//     background-color: rgb(0, 207, 179);
+//     color: aliceblue;
+//     text-shadow: 2px 2px 3px black;
+//     width: 100%;
+//     height: 50px;
+//     text-align: center;
+//     font-size: x-large;
+//     font-weight: regular;
+//     display: flex;
+//     justify-content: center;
+//     flex-direction: column;
+//     border-radius: 5px;
+// }
+
+// input.radio {
+//     width: 10px;
+//     height: 10px;
+
+// }
+
+// label {
+//     font-size: small;
+//     font-weight: 100;
+// }
+
+// .cadaCalcE {
+//     max-width: 300px;
+//     padding: 15px;
+//     background-color: rgb(218, 218, 218);
+//     font-size: medium;
+//     margin-top: 5px;
+//     color: rgb(22, 22, 22);
+//     position: relative;
+//     display: inline-block;
+//     margin-left: auto;
+//     margin-right: auto;
+//     vertical-align: top;
+//     text-align: left;
+//     border-radius: 5px;
+// }
+
+// .desc {
+//     font-size: x-small;
+//     padding: 4px;
+// }
+
+// .footDock {
+//     height: 150px;
+// }
+// .cadaCalcD {
+
+//     max-width: 323px;
+//     padding: 15px;
+//     background-color: rgb(202, 214, 218);
+//     font-size: medium;
+//     margin-top: 5px;
+//     color: rgb(22, 22, 22);
+//     position: relative;
+//     display: inline-block;
+//     margin-left: 0px;
+//     vertical-align: top;
+//     text-align: left;
+//     border-radius: 5px;
+// }
+
+// div.entrada {
+
+//     display: inline;
+//     position: relative;
+// }
+
+// div.rotulo {
+//     width: 140px;
+//     margin: 5px;
+//     font-size: small;
+//     display:inline-block;
+// }
+
+// .titulo {
+//     font-weight: bold;
+//     text-align: center;
+//     padding-bottom: 10px;
+// }
+
+
+// label.cadaCalc {
+//     font-size: large;
+// }
+
+.icon {
+    width: 25px;
+}
+
+.icon:hover {
+    cursor: pointer;
+}
+
+// .footerMid {
+//     margin: auto;
+//     position: relative;
+//     background-color: darkgrey;
+//     padding: 15px;
+// }
+
+// .footer {
+//     position: fixed;
+//     width: 100%;
+//     display: inline-block;
+//     height: auto;
+//     bottom: 15px;
+//     left: 0px;
+//     opacity: 0.9;
+//     font-family: 'Courier New', Courier, monospace;
+//     font-size: smaller;
+//     text-align: center;
+// }

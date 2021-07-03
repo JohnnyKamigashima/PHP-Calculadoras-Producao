@@ -1249,7 +1249,7 @@ progress {
             flex: 0 0 auto;
     width: 91.66667%;
   }
-  .col-sm-12, .cells {
+  .col-sm-12 {
     -webkit-box-flex: 0;
         -ms-flex: 0 0 auto;
             flex: 0 0 auto;
@@ -1366,7 +1366,7 @@ progress {
             flex: 0 0 auto;
     width: 25%;
   }
-  .col-md-4, .cells {
+  .col-md-4 {
     -webkit-box-flex: 0;
         -ms-flex: 0 0 auto;
             flex: 0 0 auto;
@@ -11497,47 +11497,4 @@ fieldset:disabled .btn {
     display: none !important;
   }
 }
-
-.cells {
-  background-color: #d8d8d8;
-  border-radius: 1rem;
-  border: solid antiquewhite 5px;
-}
-
-.titulo {
-  text-align: center;
-  margin-top: 10px;
-  margin-bottom: 10px;
-  padding: 10px;
-  background-color: aquamarine;
-  color: black;
-  border-radius: 1rem;
-  font-weight: 600;
-}
-
-.row {
-  margin-left: 0%;
-  margin-right: 0%;
-  width: 100%;
-}
-
-#main {
-  font-family: Georgia, 'Times New Roman', Times, serif;
-  font-size: small;
-  background-color: antiquewhite;
-  margin: auto;
-  border-radius: 2px;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
-  text-align: center;
-}
-
-.icon {
-  width: 25px;
-}
-
-.icon:hover {
-  cursor: pointer;
-}
-/*# sourceMappingURL=style.css.map */
+/*# sourceMappingURL=bootstrap.css.map */
