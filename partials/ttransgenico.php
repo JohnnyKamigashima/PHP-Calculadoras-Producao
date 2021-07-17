@@ -23,18 +23,18 @@
      </div>
 
      <div class="input-group mb-3">
-                <div class="row bg-light py-2">
-                    <div class="col-7 align-self-center">
-                    A largura mínima do <br>triângulo de transg. <br>deve ser (mm):
-                    </div>
-                    <div class="col-3 align-self-center">
-                    <input type="text" class="form-control" id="largT1" value="0">
-                    </div>
-                    <div class="col-2 align-self-center pl-5"><img src="https://cdn4.iconfinder.com/data/icons/ionicons/512/icon-clipboard-512.png" alt="" class="icon" onclick="copyToClipboard(document.getElementById('largT1').value+' mm')">
-                </div>
-                </div>
-         
-                 
+         <div class="row bg-light py-2">
+             <div class="col-7 align-self-center">
+                 A largura mínima do <br>triângulo de transg. <br>deve ser (mm):
+             </div>
+             <div class="col-3 align-self-center">
+                 <input type="text" class="form-control" id="largT1" value="0">
+             </div>
+             <div class="col-2 align-self-center pl-5"><img src="https://cdn4.iconfinder.com/data/icons/ionicons/512/icon-clipboard-512.png" alt="" class="icon" onclick="copyToClipboard(document.getElementById('largT1').value+' mm')">
+             </div>
+         </div>
+
+
      </div>
 
 
