@@ -2,7 +2,7 @@
 <script src="./js/library.js"></script>
 <div class="cells">
     <div class="titulo">
-        Tamanho do Farol Octagono
+        Tamanho do Farol Octagono <img src="./images/altoenoctagono.png" class="icon" >
     </div>
     <div class="entrada mb-3">
          <select name="pais" id="pais5" value="PE" class="form-control">
@@ -79,12 +79,14 @@
             $('#altFOP5').change(function() {
                 $("#largF5").val(farol_octagono($("#altFOP5"), $("#largFOP5"), $("#areaFOP5"), $("#pais5")));
                 $("#altFOP").val($("#altFOP5").val());
+                $("#altFOP1").val($("#altFOP5").val());
                 $("#altFOP2").val($("#altFOP5").val());
                 $("#altFOP3").val($("#altFOP5").val());
             })
             $('#largFOP5').change(function() {
                 $("#largF5").val(farol_octagono($("#altFOP5"), $("#largFOP5"), $("#areaFOP5"), $("#pais5")));
                 $("#largFOP").val($("#largFOP5").val());
+                $("#largFOP1").val($("#largFOP5").val());
                 $("#largFOP2").val($("#largFOP5").val());
                 $("#largFOP3").val($("#largFOP5").val());
             })
