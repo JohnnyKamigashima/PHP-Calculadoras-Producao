@@ -32,6 +32,7 @@
         <div class="row">
             <?php
             include_once 'partials/faroleq.php';
+            include_once 'partials/faroloctagono.php';
             include_once 'partials/altoem.php';
             ?>
         </div>
