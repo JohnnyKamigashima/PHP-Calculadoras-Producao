@@ -1,7 +1,7 @@
 <!-- calculadora Farol EQ-->
 <div class="cells">
     <div class="titulo">
-        Tamanho do Farol do Equador
+        Tamanho do Farol do Equador <img src="./images/farolequador.png" class="icon" >
     </div>
 
     <div class="input-group mb-3">

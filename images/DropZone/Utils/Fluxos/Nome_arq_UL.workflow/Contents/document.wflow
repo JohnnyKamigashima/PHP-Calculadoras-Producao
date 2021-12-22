@@ -1,0 +1,1759 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>AMApplicationBuild</key>
+	<string>444.7</string>
+	<key>AMApplicationVersion</key>
+	<string>2.8</string>
+	<key>AMDocumentVersion</key>
+	<string>2</string>
+	<key>actions</key>
+	<array>
+		<dict>
+			<key>action</key>
+			<dict>
+				<key>AMAccepts</key>
+				<dict>
+					<key>Container</key>
+					<string>List</string>
+					<key>Optional</key>
+					<false/>
+					<key>Types</key>
+					<array>
+						<string>com.apple.cocoa.url</string>
+					</array>
+				</dict>
+				<key>AMActionVersion</key>
+				<string>1.1.1</string>
+				<key>AMApplication</key>
+				<array>
+					<string>Finder</string>
+				</array>
+				<key>AMParameterProperties</key>
+				<dict/>
+				<key>AMProvides</key>
+				<dict>
+					<key>Container</key>
+					<string>List</string>
+					<key>Types</key>
+					<array>
+						<string>com.apple.cocoa.url</string>
+					</array>
+				</dict>
+				<key>AMRequiredResources</key>
+				<array/>
+				<key>ActionBundlePath</key>
+				<string>/System/Library/Automator/Duplicate Finder Items.action</string>
+				<key>ActionName</key>
+				<string>Duplicar Itens do Finder</string>
+				<key>ActionParameters</key>
+				<dict/>
+				<key>BundleIdentifier</key>
+				<string>com.apple.Automator.DuplicateFinderItems</string>
+				<key>CFBundleVersion</key>
+				<string>1.1.1</string>
+				<key>CanShowSelectedItemsWhenRun</key>
+				<true/>
+				<key>CanShowWhenRun</key>
+				<true/>
+				<key>Category</key>
+				<array>
+					<string>AMCategoryFilesAndFolders</string>
+				</array>
+				<key>Class Name</key>
+				<string>AMDuplicateFinderItemsAction</string>
+				<key>Disabled</key>
+				<true/>
+				<key>InputUUID</key>
+				<string>4DAEF2EF-DB9D-4F45-95A0-E639FD858678</string>
+				<key>Keywords</key>
+				<array>
+					<string>Duplicate</string>
+					<string>File</string>
+					<string>Copy</string>
+				</array>
+				<key>OutputUUID</key>
+				<string>44BE4C74-766A-41DE-8E81-B7811C4F5C11</string>
+				<key>UUID</key>
+				<string>A586D69D-D01B-43FF-919A-22577114C120</string>
+				<key>UnlocalizedApplications</key>
+				<array>
+					<string>Finder</string>
+				</array>
+				<key>arguments</key>
+				<dict/>
+			</dict>
+		</dict>
+		<dict>
+			<key>action</key>
+			<dict>
+				<key>AMAccepts</key>
+				<dict>
+					<key>Container</key>
+					<string>List</string>
+					<key>Optional</key>
+					<true/>
+					<key>Types</key>
+					<array>
+						<string>com.apple.cocoa.path</string>
+					</array>
+				</dict>
+				<key>AMActionVersion</key>
+				<string>2.1.1</string>
+				<key>AMApplication</key>
+				<array>
+					<string>Finder</string>
+				</array>
+				<key>AMParameterProperties</key>
+				<dict/>
+				<key>AMProvides</key>
+				<dict>
+					<key>Container</key>
+					<string>List</string>
+					<key>Types</key>
+					<array>
+						<string>com.apple.cocoa.path</string>
+					</array>
+				</dict>
+				<key>AMRequiredResources</key>
+				<array/>
+				<key>ActionBundlePath</key>
+				<string>/System/Library/Automator/Get Selected Finder Items 2.action</string>
+				<key>ActionName</key>
+				<string>Obter Itens Selecionados do Finder</string>
+				<key>ActionParameters</key>
+				<dict/>
+				<key>BundleIdentifier</key>
+				<string>com.apple.Automator.GetSelectedFinderItems2</string>
+				<key>CFBundleVersion</key>
+				<string>2.1.1</string>
+				<key>CanShowSelectedItemsWhenRun</key>
+				<false/>
+				<key>CanShowWhenRun</key>
+				<true/>
+				<key>Category</key>
+				<array>
+					<string>AMCategoryFilesAndFolders</string>
+				</array>
+				<key>Class Name</key>
+				<string>AMGetSelectedFinderItemsAction</string>
+				<key>Disabled</key>
+				<true/>
+				<key>InputUUID</key>
+				<string>DEBF6C23-68F5-4AFF-82C7-0F505A1D7E59</string>
+				<key>Keywords</key>
+				<array/>
+				<key>OutputUUID</key>
+				<string>68BC3C55-6293-4537-9200-BBE1509DC82B</string>
+				<key>UUID</key>
+				<string>EF0E016A-30F5-4EB1-A5D9-7EB65F97F50D</string>
+				<key>UnlocalizedApplications</key>
+				<array>
+					<string>Finder</string>
+				</array>
+				<key>arguments</key>
+				<dict/>
+			</dict>
+		</dict>
+		<dict>
+			<key>action</key>
+			<dict>
+				<key>AMAccepts</key>
+				<dict>
+					<key>Container</key>
+					<string>List</string>
+					<key>Optional</key>
+					<true/>
+					<key>Types</key>
+					<array>
+						<string>com.apple.applescript.object</string>
+					</array>
+				</dict>
+				<key>AMActionVersion</key>
+				<string>1.0.2</string>
+				<key>AMApplication</key>
+				<array>
+					<string>Automator</string>
+				</array>
+				<key>AMParameterProperties</key>
+				<dict>
+					<key>source</key>
+					<dict/>
+				</dict>
+				<key>AMProvides</key>
+				<dict>
+					<key>Container</key>
+					<string>List</string>
+					<key>Types</key>
+					<array>
+						<string>com.apple.applescript.object</string>
+					</array>
+				</dict>
+				<key>ActionBundlePath</key>
+				<string>/System/Library/Automator/Run AppleScript.action</string>
+				<key>ActionName</key>
+				<string>Executar AppleScript</string>
+				<key>ActionParameters</key>
+				<dict>
+					<key>source</key>
+					<string>on trim(someText, theseCharacters)	-- Lazy default (AppleScript doesn't support default values)	if theseCharacters is true then set theseCharacters to {" ", tab, ASCII character 10, return, ASCII character 0}		repeat until first character of someText is not in theseCharacters		set someText to text 2 thru -1 of someText	end repeat		repeat until last character of someText is not in theseCharacters		set someText to text 1 thru -2 of someText	end repeat		return someTextend trimon run {input, parameters}	set ScaminhoI to POSIX path of input	-- display dialog ScaminhoI	set Sarquivoext to do shell script "basename " &amp; quoted form of ScaminhoI	set Sarquivo to text 1 thru ((offset of "." in Sarquivoext) - 1) of Sarquivoext		tell application "Finder" to set Scaminho to (folder of item input) as string	set Scaminho to POSIX path of Scaminho		tell application "Finder" to set Sext to (name extension of item input) as string		(* Your script goes here *)	set SCM to ""		repeat while SCM = ""		set SCM to display dialog "Qual o CM?" default answer ""		set SCM to text returned of SCM	end repeat		set ROUNDchoice to {"1", "2", "3", "4", "5", "6"}	set SROUND to choose from list ROUNDchoice with prompt "Qual round?" default items {"1"}	SROUND		set SFNAME to ""	repeat while SFNAME = ""		set SFNAME to display dialog "Qual o nome do arquivo UL?" default answer ""		set SFNAME to text returned of SFNAME		set SFNAME to trim(SFNAME, " ")	end repeat			set ETAPAchoice to {"PA", "SEPARAÇÃO"}	set SETAPA to choose from list ETAPAchoice with prompt "Qual etapa?" default items {"PA"}	SETAPA		set PAISchoice to {"Brasil", "Argentina", "México", "Colômbia"}	set SPAIS to choose from list PAISchoice with prompt "Qual pais?" default items {"Brasil"}	SPAIS	set SNOMEARQ to ""			if SETAPA as string = "PA" then				if SPAIS as string = "Brasil" or SPAIS as string = "Colômbia" or SPAIS as string = "México"  then			set SNOMEARQ to (SCM as text) &amp; "_" &amp; SROUND &amp; "_" &amp; SFNAME as text			-- display dialog SNOMEARQ		else if SPAIS as string = "Argentina" then			set SNOMEARQ to (SCM as text) &amp; "_" &amp; SROUND &amp; "_" &amp; SFNAME as text								end if					else if SETAPA as string = "SEPARAÇÃO" then --Nomenclatura para Separacao						set LINKchoice to {"Arquivo Final", "Link"}		set SLINKS to choose from list LINKchoice with prompt "Arquivo de Link ou SEPARAÇÃO?" default items {"Arquivo Final"}		SLINKS		if SLINKS as string = "Arquivo Final" then						if SPAIS as string = "Brasil" or SPAIS as string = "Colômbia" or SPAIS as string = "México" then								set SNOMEARQ to (SCM as text) &amp; "_" &amp; SFNAME &amp; "_SC_" &amp; SROUND as text							else if SPAIS as string = "Argentina" then				set SNOMEARQ to ((SCM as text) &amp; "_" &amp; SROUND &amp; "_" &amp; SFNAME as text) &amp; "_SC"			end if		else if SLINKS as string = "Link" then						set SODT to ""			repeat while SODT = ""				set SODT to display dialog "Qual ODT?" default answer ""				set SODT to text returned of SODT			end repeat						set SNOMEARQ to ((SODT as text) &amp; "_" &amp; SCM as text) &amp; "_" &amp; SFNAME as text								end if	end if	set SNOMEARQ to trim(SNOMEARQ, true)		set Srenomeia to "mv -i " &amp; quoted form of ScaminhoI &amp; " " &amp; quoted form of (Scaminho &amp; SNOMEARQ &amp; "." &amp; Sext)	set Srenomeia to trim(Srenomeia, true)	do shell script Srenomeia	return inputend run</string>
+				</dict>
+				<key>BundleIdentifier</key>
+				<string>com.apple.Automator.RunScript</string>
+				<key>CFBundleVersion</key>
+				<string>1.0.2</string>
+				<key>CanShowSelectedItemsWhenRun</key>
+				<false/>
+				<key>CanShowWhenRun</key>
+				<true/>
+				<key>Category</key>
+				<array>
+					<string>AMCategoryUtilities</string>
+				</array>
+				<key>Class Name</key>
+				<string>RunScriptAction</string>
+				<key>InputUUID</key>
+				<string>FF30B727-2200-4457-B75A-D4257A34CF30</string>
+				<key>Keywords</key>
+				<array>
+					<string>Executar</string>
+				</array>
+				<key>OutputUUID</key>
+				<string>6C5A971B-0386-417B-B542-1893C39A9FEF</string>
+				<key>UUID</key>
+				<string>53438CC6-6F3B-4C9E-9A53-145476BF3099</string>
+				<key>UnlocalizedApplications</key>
+				<array>
+					<string>Automator</string>
+				</array>
+				<key>arguments</key>
+				<dict>
+					<key>0</key>
+					<dict>
+						<key>default value</key>
+						<string>on run {input, parameters}
+	
+	(* Your script goes here *)
+	
+	return input
+end run</string>
+						<key>name</key>
+						<string>source</string>
+						<key>required</key>
+						<string>0</string>
+						<key>type</key>
+						<string>0</string>
+						<key>uuid</key>
+						<string>0</string>
+					</dict>
+				</dict>
+				<key>isViewVisible</key>
+				<true/>
+				<key>location</key>
+				<string>851.500000:400.000000</string>
+				<key>nibPath</key>
+				<string>/System/Library/Automator/Run AppleScript.action/Contents/Resources/Base.lproj/main.nib</string>
+			</dict>
+			<key>isViewVisible</key>
+			<true/>
+		</dict>
+		<dict>
+			<key>action</key>
+			<dict>
+				<key>AMAccepts</key>
+				<dict>
+					<key>Container</key>
+					<string>List</string>
+					<key>Optional</key>
+					<false/>
+					<key>Types</key>
+					<array>
+						<string>com.apple.cocoa.path</string>
+					</array>
+				</dict>
+				<key>AMActionVersion</key>
+				<string>1.3.2</string>
+				<key>AMApplication</key>
+				<array>
+					<string>Finder</string>
+				</array>
+				<key>AMParameterProperties</key>
+				<dict>
+					<key>caseIndicator</key>
+					<dict/>
+					<key>dateFormat</key>
+					<dict/>
+					<key>datePlacement</key>
+					<dict/>
+					<key>dateSeparator</key>
+					<dict/>
+					<key>dateToUse</key>
+					<dict/>
+					<key>defaultName</key>
+					<dict/>
+					<key>ignoreCase</key>
+					<dict/>
+					<key>includeExtensions</key>
+					<dict/>
+					<key>insertionPosition</key>
+					<dict/>
+					<key>minimumCount</key>
+					<dict/>
+					<key>nameDateSeparator</key>
+					<dict/>
+					<key>nameSingleItem</key>
+					<dict/>
+					<key>numberLocation</key>
+					<dict/>
+					<key>numberSeparator</key>
+					<dict/>
+					<key>renameItems</key>
+					<dict/>
+					<key>renameType</key>
+					<dict/>
+					<key>replaceWithText</key>
+					<dict/>
+					<key>singleItemOption</key>
+					<dict/>
+					<key>startingNumber</key>
+					<dict/>
+					<key>textInput</key>
+					<dict/>
+					<key>textToFind</key>
+					<dict>
+						<key>tokenizedValue</key>
+						<array>
+							<string>?</string>
+						</array>
+					</dict>
+					<key>useLeadingZeros</key>
+					<dict/>
+				</dict>
+				<key>AMProvides</key>
+				<dict>
+					<key>Container</key>
+					<string>List</string>
+					<key>Types</key>
+					<array>
+						<string>com.apple.cocoa.path</string>
+					</array>
+				</dict>
+				<key>ActionBundlePath</key>
+				<string>/System/Library/Automator/Rename Finder Items.action</string>
+				<key>ActionName</key>
+				<string>Renomear Itens do Finder: Substituir Texto</string>
+				<key>ActionParameters</key>
+				<dict>
+					<key>caseIndicator</key>
+					<integer>0</integer>
+					<key>dateFormat</key>
+					<string>0</string>
+					<key>datePlacement</key>
+					<integer>0</integer>
+					<key>dateSeparator</key>
+					<string>0</string>
+					<key>dateToUse</key>
+					<integer>0</integer>
+					<key>defaultName</key>
+					<string></string>
+					<key>ignoreCase</key>
+					<true/>
+					<key>includeExtensions</key>
+					<integer>0</integer>
+					<key>insertionPosition</key>
+					<integer>0</integer>
+					<key>minimumCount</key>
+					<string>2</string>
+					<key>nameDateSeparator</key>
+					<integer>0</integer>
+					<key>nameSingleItem</key>
+					<string></string>
+					<key>numberLocation</key>
+					<integer>0</integer>
+					<key>numberSeparator</key>
+					<integer>0</integer>
+					<key>renameItems</key>
+					<integer>0</integer>
+					<key>renameType</key>
+					<integer>4</integer>
+					<key>replaceWithText</key>
+					<string></string>
+					<key>singleItemOption</key>
+					<integer>0</integer>
+					<key>startingNumber</key>
+					<integer>1</integer>
+					<key>textInput</key>
+					<string></string>
+					<key>textToFind</key>
+					<string>?</string>
+					<key>useLeadingZeros</key>
+					<false/>
+				</dict>
+				<key>BundleIdentifier</key>
+				<string>com.apple.Automator.AddNumbersToFinderNames</string>
+				<key>CFBundleVersion</key>
+				<string>1.3.2</string>
+				<key>CanShowSelectedItemsWhenRun</key>
+				<false/>
+				<key>CanShowWhenRun</key>
+				<true/>
+				<key>Category</key>
+				<array>
+					<string>AMCategoryFilesAndFolders</string>
+				</array>
+				<key>Class Name</key>
+				<string>AMRenameFinderItemsAction</string>
+				<key>InputUUID</key>
+				<string>DA3581C3-676E-40EA-BEE1-33C57F3FAE45</string>
+				<key>Keywords</key>
+				<array>
+					<string>Nome</string>
+					<string>Arquivo</string>
+					<string>Pasta</string>
+					<string>Adicionar</string>
+					<string>Número</string>
+					<string>Alterar</string>
+					<string>Maiúsculas/Minúsculas</string>
+					<string>Renomear</string>
+					<string>Data</string>
+					<string>Hora</string>
+					<string>Definir</string>
+					<string>Texto</string>
+					<string>Buscar</string>
+					<string>Substituir</string>
+					<string>Criar</string>
+					<string>Sequencial</string>
+				</array>
+				<key>OutputUUID</key>
+				<string>D7FC20F4-66ED-499A-9CA7-1ACB031862EE</string>
+				<key>UUID</key>
+				<string>979675AA-FEEC-40D8-AF9D-1CD0BF63394B</string>
+				<key>UnlocalizedApplications</key>
+				<array>
+					<string>Finder</string>
+				</array>
+				<key>arguments</key>
+				<dict>
+					<key>0</key>
+					<dict>
+						<key>default value</key>
+						<integer>0</integer>
+						<key>name</key>
+						<string>nameDateSeparator</string>
+						<key>required</key>
+						<string>0</string>
+						<key>type</key>
+						<string>0</string>
+						<key>uuid</key>
+						<string>0</string>
+					</dict>
+					<key>1</key>
+					<dict>
+						<key>default value</key>
+						<string></string>
+						<key>name</key>
+						<string>textToFind</string>
+						<key>required</key>
+						<string>0</string>
+						<key>type</key>
+						<string>0</string>
+						<key>uuid</key>
+						<string>1</string>
+					</dict>
+					<key>10</key>
+					<dict>
+						<key>default value</key>
+						<string></string>
+						<key>name</key>
+						<string>nameSingleItem</string>
+						<key>required</key>
+						<string>0</string>
+						<key>type</key>
+						<string>0</string>
+						<key>uuid</key>
+						<string>10</string>
+					</dict>
+					<key>11</key>
+					<dict>
+						<key>default value</key>
+						<true/>
+						<key>name</key>
+						<string>ignoreCase</string>
+						<key>required</key>
+						<string>0</string>
+						<key>type</key>
+						<string>0</string>
+						<key>uuid</key>
+						<string>11</string>
+					</dict>
+					<key>12</key>
+					<dict>
+						<key>default value</key>
+						<string></string>
+						<key>name</key>
+						<string>textInput</string>
+						<key>required</key>
+						<string>0</string>
+						<key>type</key>
+						<string>0</string>
+						<key>uuid</key>
+						<string>12</string>
+					</dict>
+					<key>13</key>
+					<dict>
+						<key>default value</key>
+						<integer>0</integer>
+						<key>name</key>
+						<string>dateToUse</string>
+						<key>required</key>
+						<string>0</string>
+						<key>type</key>
+						<string>0</string>
+						<key>uuid</key>
+						<string>13</string>
+					</dict>
+					<key>14</key>
+					<dict>
+						<key>default value</key>
+						<integer>0</integer>
+						<key>name</key>
+						<string>includeExtensions</string>
+						<key>required</key>
+						<string>0</string>
+						<key>type</key>
+						<string>0</string>
+						<key>uuid</key>
+						<string>14</string>
+					</dict>
+					<key>15</key>
+					<dict>
+						<key>default value</key>
+						<string></string>
+						<key>name</key>
+						<string>replaceWithText</string>
+						<key>required</key>
+						<string>0</string>
+						<key>type</key>
+						<string>0</string>
+						<key>uuid</key>
+						<string>15</string>
+					</dict>
+					<key>16</key>
+					<dict>
+						<key>default value</key>
+						<integer>0</integer>
+						<key>name</key>
+						<string>renameItems</string>
+						<key>required</key>
+						<string>0</string>
+						<key>type</key>
+						<string>0</string>
+						<key>uuid</key>
+						<string>16</string>
+					</dict>
+					<key>17</key>
+					<dict>
+						<key>default value</key>
+						<string></string>
+						<key>name</key>
+						<string>defaultName</string>
+						<key>required</key>
+						<string>0</string>
+						<key>type</key>
+						<string>0</string>
+						<key>uuid</key>
+						<string>17</string>
+					</dict>
+					<key>18</key>
+					<dict>
+						<key>default value</key>
+						<integer>1</integer>
+						<key>name</key>
+						<string>startingNumber</string>
+						<key>required</key>
+						<string>0</string>
+						<key>type</key>
+						<string>0</string>
+						<key>uuid</key>
+						<string>18</string>
+					</dict>
+					<key>19</key>
+					<dict>
+						<key>default value</key>
+						<integer>0</integer>
+						<key>name</key>
+						<string>numberSeparator</string>
+						<key>required</key>
+						<string>0</string>
+						<key>type</key>
+						<string>0</string>
+						<key>uuid</key>
+						<string>19</string>
+					</dict>
+					<key>2</key>
+					<dict>
+						<key>default value</key>
+						<integer>0</integer>
+						<key>name</key>
+						<string>datePlacement</string>
+						<key>required</key>
+						<string>0</string>
+						<key>type</key>
+						<string>0</string>
+						<key>uuid</key>
+						<string>2</string>
+					</dict>
+					<key>20</key>
+					<dict>
+						<key>default value</key>
+						<integer>0</integer>
+						<key>name</key>
+						<string>caseIndicator</string>
+						<key>required</key>
+						<string>0</string>
+						<key>type</key>
+						<string>0</string>
+						<key>uuid</key>
+						<string>20</string>
+					</dict>
+					<key>21</key>
+					<dict>
+						<key>default value</key>
+						<string>0</string>
+						<key>name</key>
+						<string>dateFormat</string>
+						<key>required</key>
+						<string>0</string>
+						<key>type</key>
+						<string>0</string>
+						<key>uuid</key>
+						<string>21</string>
+					</dict>
+					<key>3</key>
+					<dict>
+						<key>default value</key>
+						<integer>0</integer>
+						<key>name</key>
+						<string>insertionPosition</string>
+						<key>required</key>
+						<string>0</string>
+						<key>type</key>
+						<string>0</string>
+						<key>uuid</key>
+						<string>3</string>
+					</dict>
+					<key>4</key>
+					<dict>
+						<key>default value</key>
+						<string>0</string>
+						<key>name</key>
+						<string>dateSeparator</string>
+						<key>required</key>
+						<string>0</string>
+						<key>type</key>
+						<string>0</string>
+						<key>uuid</key>
+						<string>4</string>
+					</dict>
+					<key>5</key>
+					<dict>
+						<key>default value</key>
+						<string>2</string>
+						<key>name</key>
+						<string>minimumCount</string>
+						<key>required</key>
+						<string>0</string>
+						<key>type</key>
+						<string>0</string>
+						<key>uuid</key>
+						<string>5</string>
+					</dict>
+					<key>6</key>
+					<dict>
+						<key>default value</key>
+						<integer>0</integer>
+						<key>name</key>
+						<string>numberLocation</string>
+						<key>required</key>
+						<string>0</string>
+						<key>type</key>
+						<string>0</string>
+						<key>uuid</key>
+						<string>6</string>
+					</dict>
+					<key>7</key>
+					<dict>
+						<key>default value</key>
+						<false/>
+						<key>name</key>
+						<string>useLeadingZeros</string>
+						<key>required</key>
+						<string>0</string>
+						<key>type</key>
+						<string>0</string>
+						<key>uuid</key>
+						<string>7</string>
+					</dict>
+					<key>8</key>
+					<dict>
+						<key>default value</key>
+						<integer>0</integer>
+						<key>name</key>
+						<string>singleItemOption</string>
+						<key>required</key>
+						<string>0</string>
+						<key>type</key>
+						<string>0</string>
+						<key>uuid</key>
+						<string>8</string>
+					</dict>
+					<key>9</key>
+					<dict>
+						<key>default value</key>
+						<integer>0</integer>
+						<key>name</key>
+						<string>renameType</string>
+						<key>required</key>
+						<string>0</string>
+						<key>type</key>
+						<string>0</string>
+						<key>uuid</key>
+						<string>9</string>
+					</dict>
+				</dict>
+				<key>isViewVisible</key>
+				<true/>
+				<key>location</key>
+				<string>851.500000:588.000000</string>
+				<key>nibPath</key>
+				<string>/System/Library/Automator/Rename Finder Items.action/Contents/Resources/Base.lproj/main.nib</string>
+			</dict>
+			<key>isViewVisible</key>
+			<true/>
+		</dict>
+		<dict>
+			<key>action</key>
+			<dict>
+				<key>AMAccepts</key>
+				<dict>
+					<key>Container</key>
+					<string>List</string>
+					<key>Optional</key>
+					<false/>
+					<key>Types</key>
+					<array>
+						<string>com.apple.cocoa.path</string>
+					</array>
+				</dict>
+				<key>AMActionVersion</key>
+				<string>1.3.2</string>
+				<key>AMApplication</key>
+				<array>
+					<string>Finder</string>
+				</array>
+				<key>AMParameterProperties</key>
+				<dict>
+					<key>caseIndicator</key>
+					<dict/>
+					<key>dateFormat</key>
+					<dict/>
+					<key>datePlacement</key>
+					<dict/>
+					<key>dateSeparator</key>
+					<dict/>
+					<key>dateToUse</key>
+					<dict/>
+					<key>defaultName</key>
+					<dict/>
+					<key>ignoreCase</key>
+					<dict/>
+					<key>includeExtensions</key>
+					<dict/>
+					<key>insertionPosition</key>
+					<dict/>
+					<key>minimumCount</key>
+					<dict/>
+					<key>nameDateSeparator</key>
+					<dict/>
+					<key>nameSingleItem</key>
+					<dict/>
+					<key>numberLocation</key>
+					<dict/>
+					<key>numberSeparator</key>
+					<dict/>
+					<key>renameItems</key>
+					<dict/>
+					<key>renameType</key>
+					<dict/>
+					<key>replaceWithText</key>
+					<dict/>
+					<key>singleItemOption</key>
+					<dict/>
+					<key>startingNumber</key>
+					<dict/>
+					<key>textInput</key>
+					<dict/>
+					<key>textToFind</key>
+					<dict>
+						<key>tokenizedValue</key>
+						<array>
+							<string>	</string>
+						</array>
+					</dict>
+					<key>useLeadingZeros</key>
+					<dict/>
+				</dict>
+				<key>AMProvides</key>
+				<dict>
+					<key>Container</key>
+					<string>List</string>
+					<key>Types</key>
+					<array>
+						<string>com.apple.cocoa.path</string>
+					</array>
+				</dict>
+				<key>ActionBundlePath</key>
+				<string>/System/Library/Automator/Rename Finder Items.action</string>
+				<key>ActionName</key>
+				<string>Renomear Itens do Finder: Substituir Texto</string>
+				<key>ActionParameters</key>
+				<dict>
+					<key>caseIndicator</key>
+					<integer>0</integer>
+					<key>dateFormat</key>
+					<string>0</string>
+					<key>datePlacement</key>
+					<integer>0</integer>
+					<key>dateSeparator</key>
+					<string>0</string>
+					<key>dateToUse</key>
+					<integer>0</integer>
+					<key>defaultName</key>
+					<string></string>
+					<key>ignoreCase</key>
+					<true/>
+					<key>includeExtensions</key>
+					<integer>0</integer>
+					<key>insertionPosition</key>
+					<integer>0</integer>
+					<key>minimumCount</key>
+					<string>2</string>
+					<key>nameDateSeparator</key>
+					<integer>0</integer>
+					<key>nameSingleItem</key>
+					<string></string>
+					<key>numberLocation</key>
+					<integer>0</integer>
+					<key>numberSeparator</key>
+					<integer>0</integer>
+					<key>renameItems</key>
+					<integer>0</integer>
+					<key>renameType</key>
+					<integer>4</integer>
+					<key>replaceWithText</key>
+					<string></string>
+					<key>singleItemOption</key>
+					<integer>0</integer>
+					<key>startingNumber</key>
+					<integer>1</integer>
+					<key>textInput</key>
+					<string></string>
+					<key>textToFind</key>
+					<string>	</string>
+					<key>useLeadingZeros</key>
+					<false/>
+				</dict>
+				<key>BundleIdentifier</key>
+				<string>com.apple.Automator.AddNumbersToFinderNames</string>
+				<key>CFBundleVersion</key>
+				<string>1.3.2</string>
+				<key>CanShowSelectedItemsWhenRun</key>
+				<false/>
+				<key>CanShowWhenRun</key>
+				<true/>
+				<key>Category</key>
+				<array>
+					<string>AMCategoryFilesAndFolders</string>
+				</array>
+				<key>Class Name</key>
+				<string>AMRenameFinderItemsAction</string>
+				<key>InputUUID</key>
+				<string>E896D0B6-ADB9-4DBB-BF24-3B32E0B488C4</string>
+				<key>Keywords</key>
+				<array>
+					<string>Nome</string>
+					<string>Arquivo</string>
+					<string>Pasta</string>
+					<string>Adicionar</string>
+					<string>Número</string>
+					<string>Alterar</string>
+					<string>Maiúsculas/Minúsculas</string>
+					<string>Renomear</string>
+					<string>Data</string>
+					<string>Hora</string>
+					<string>Definir</string>
+					<string>Texto</string>
+					<string>Buscar</string>
+					<string>Substituir</string>
+					<string>Criar</string>
+					<string>Sequencial</string>
+				</array>
+				<key>OutputUUID</key>
+				<string>3804C271-78B1-44DA-A8F0-B17FE769B4F8</string>
+				<key>UUID</key>
+				<string>953E4658-D182-4256-9E73-708201F35A26</string>
+				<key>UnlocalizedApplications</key>
+				<array>
+					<string>Finder</string>
+				</array>
+				<key>arguments</key>
+				<dict>
+					<key>0</key>
+					<dict>
+						<key>default value</key>
+						<integer>0</integer>
+						<key>name</key>
+						<string>nameDateSeparator</string>
+						<key>required</key>
+						<string>0</string>
+						<key>type</key>
+						<string>0</string>
+						<key>uuid</key>
+						<string>0</string>
+					</dict>
+					<key>1</key>
+					<dict>
+						<key>default value</key>
+						<string></string>
+						<key>name</key>
+						<string>textToFind</string>
+						<key>required</key>
+						<string>0</string>
+						<key>type</key>
+						<string>0</string>
+						<key>uuid</key>
+						<string>1</string>
+					</dict>
+					<key>10</key>
+					<dict>
+						<key>default value</key>
+						<string></string>
+						<key>name</key>
+						<string>nameSingleItem</string>
+						<key>required</key>
+						<string>0</string>
+						<key>type</key>
+						<string>0</string>
+						<key>uuid</key>
+						<string>10</string>
+					</dict>
+					<key>11</key>
+					<dict>
+						<key>default value</key>
+						<true/>
+						<key>name</key>
+						<string>ignoreCase</string>
+						<key>required</key>
+						<string>0</string>
+						<key>type</key>
+						<string>0</string>
+						<key>uuid</key>
+						<string>11</string>
+					</dict>
+					<key>12</key>
+					<dict>
+						<key>default value</key>
+						<string></string>
+						<key>name</key>
+						<string>textInput</string>
+						<key>required</key>
+						<string>0</string>
+						<key>type</key>
+						<string>0</string>
+						<key>uuid</key>
+						<string>12</string>
+					</dict>
+					<key>13</key>
+					<dict>
+						<key>default value</key>
+						<integer>0</integer>
+						<key>name</key>
+						<string>dateToUse</string>
+						<key>required</key>
+						<string>0</string>
+						<key>type</key>
+						<string>0</string>
+						<key>uuid</key>
+						<string>13</string>
+					</dict>
+					<key>14</key>
+					<dict>
+						<key>default value</key>
+						<integer>0</integer>
+						<key>name</key>
+						<string>includeExtensions</string>
+						<key>required</key>
+						<string>0</string>
+						<key>type</key>
+						<string>0</string>
+						<key>uuid</key>
+						<string>14</string>
+					</dict>
+					<key>15</key>
+					<dict>
+						<key>default value</key>
+						<string></string>
+						<key>name</key>
+						<string>replaceWithText</string>
+						<key>required</key>
+						<string>0</string>
+						<key>type</key>
+						<string>0</string>
+						<key>uuid</key>
+						<string>15</string>
+					</dict>
+					<key>16</key>
+					<dict>
+						<key>default value</key>
+						<integer>0</integer>
+						<key>name</key>
+						<string>renameItems</string>
+						<key>required</key>
+						<string>0</string>
+						<key>type</key>
+						<string>0</string>
+						<key>uuid</key>
+						<string>16</string>
+					</dict>
+					<key>17</key>
+					<dict>
+						<key>default value</key>
+						<string></string>
+						<key>name</key>
+						<string>defaultName</string>
+						<key>required</key>
+						<string>0</string>
+						<key>type</key>
+						<string>0</string>
+						<key>uuid</key>
+						<string>17</string>
+					</dict>
+					<key>18</key>
+					<dict>
+						<key>default value</key>
+						<integer>1</integer>
+						<key>name</key>
+						<string>startingNumber</string>
+						<key>required</key>
+						<string>0</string>
+						<key>type</key>
+						<string>0</string>
+						<key>uuid</key>
+						<string>18</string>
+					</dict>
+					<key>19</key>
+					<dict>
+						<key>default value</key>
+						<integer>0</integer>
+						<key>name</key>
+						<string>numberSeparator</string>
+						<key>required</key>
+						<string>0</string>
+						<key>type</key>
+						<string>0</string>
+						<key>uuid</key>
+						<string>19</string>
+					</dict>
+					<key>2</key>
+					<dict>
+						<key>default value</key>
+						<integer>0</integer>
+						<key>name</key>
+						<string>datePlacement</string>
+						<key>required</key>
+						<string>0</string>
+						<key>type</key>
+						<string>0</string>
+						<key>uuid</key>
+						<string>2</string>
+					</dict>
+					<key>20</key>
+					<dict>
+						<key>default value</key>
+						<integer>0</integer>
+						<key>name</key>
+						<string>caseIndicator</string>
+						<key>required</key>
+						<string>0</string>
+						<key>type</key>
+						<string>0</string>
+						<key>uuid</key>
+						<string>20</string>
+					</dict>
+					<key>21</key>
+					<dict>
+						<key>default value</key>
+						<string>0</string>
+						<key>name</key>
+						<string>dateFormat</string>
+						<key>required</key>
+						<string>0</string>
+						<key>type</key>
+						<string>0</string>
+						<key>uuid</key>
+						<string>21</string>
+					</dict>
+					<key>3</key>
+					<dict>
+						<key>default value</key>
+						<integer>0</integer>
+						<key>name</key>
+						<string>insertionPosition</string>
+						<key>required</key>
+						<string>0</string>
+						<key>type</key>
+						<string>0</string>
+						<key>uuid</key>
+						<string>3</string>
+					</dict>
+					<key>4</key>
+					<dict>
+						<key>default value</key>
+						<string>0</string>
+						<key>name</key>
+						<string>dateSeparator</string>
+						<key>required</key>
+						<string>0</string>
+						<key>type</key>
+						<string>0</string>
+						<key>uuid</key>
+						<string>4</string>
+					</dict>
+					<key>5</key>
+					<dict>
+						<key>default value</key>
+						<string>2</string>
+						<key>name</key>
+						<string>minimumCount</string>
+						<key>required</key>
+						<string>0</string>
+						<key>type</key>
+						<string>0</string>
+						<key>uuid</key>
+						<string>5</string>
+					</dict>
+					<key>6</key>
+					<dict>
+						<key>default value</key>
+						<integer>0</integer>
+						<key>name</key>
+						<string>numberLocation</string>
+						<key>required</key>
+						<string>0</string>
+						<key>type</key>
+						<string>0</string>
+						<key>uuid</key>
+						<string>6</string>
+					</dict>
+					<key>7</key>
+					<dict>
+						<key>default value</key>
+						<false/>
+						<key>name</key>
+						<string>useLeadingZeros</string>
+						<key>required</key>
+						<string>0</string>
+						<key>type</key>
+						<string>0</string>
+						<key>uuid</key>
+						<string>7</string>
+					</dict>
+					<key>8</key>
+					<dict>
+						<key>default value</key>
+						<integer>0</integer>
+						<key>name</key>
+						<string>singleItemOption</string>
+						<key>required</key>
+						<string>0</string>
+						<key>type</key>
+						<string>0</string>
+						<key>uuid</key>
+						<string>8</string>
+					</dict>
+					<key>9</key>
+					<dict>
+						<key>default value</key>
+						<integer>0</integer>
+						<key>name</key>
+						<string>renameType</string>
+						<key>required</key>
+						<string>0</string>
+						<key>type</key>
+						<string>0</string>
+						<key>uuid</key>
+						<string>9</string>
+					</dict>
+				</dict>
+				<key>isViewVisible</key>
+				<true/>
+				<key>location</key>
+				<string>851.500000:776.000000</string>
+				<key>nibPath</key>
+				<string>/System/Library/Automator/Rename Finder Items.action/Contents/Resources/Base.lproj/main.nib</string>
+			</dict>
+			<key>isViewVisible</key>
+			<true/>
+		</dict>
+		<dict>
+			<key>action</key>
+			<dict>
+				<key>AMAccepts</key>
+				<dict>
+					<key>Container</key>
+					<string>List</string>
+					<key>Optional</key>
+					<false/>
+					<key>Types</key>
+					<array>
+						<string>com.apple.cocoa.path</string>
+					</array>
+				</dict>
+				<key>AMActionVersion</key>
+				<string>1.3.2</string>
+				<key>AMApplication</key>
+				<array>
+					<string>Finder</string>
+				</array>
+				<key>AMParameterProperties</key>
+				<dict>
+					<key>caseIndicator</key>
+					<dict/>
+					<key>dateFormat</key>
+					<dict/>
+					<key>datePlacement</key>
+					<dict/>
+					<key>dateSeparator</key>
+					<dict/>
+					<key>dateToUse</key>
+					<dict/>
+					<key>defaultName</key>
+					<dict/>
+					<key>ignoreCase</key>
+					<dict/>
+					<key>includeExtensions</key>
+					<dict/>
+					<key>insertionPosition</key>
+					<dict/>
+					<key>minimumCount</key>
+					<dict/>
+					<key>nameDateSeparator</key>
+					<dict/>
+					<key>nameSingleItem</key>
+					<dict/>
+					<key>numberLocation</key>
+					<dict/>
+					<key>numberSeparator</key>
+					<dict/>
+					<key>renameItems</key>
+					<dict/>
+					<key>renameType</key>
+					<dict/>
+					<key>replaceWithText</key>
+					<dict/>
+					<key>singleItemOption</key>
+					<dict/>
+					<key>startingNumber</key>
+					<dict/>
+					<key>textInput</key>
+					<dict/>
+					<key>textToFind</key>
+					<dict>
+						<key>tokenizedValue</key>
+						<array>
+							<string> </string>
+						</array>
+					</dict>
+					<key>useLeadingZeros</key>
+					<dict/>
+				</dict>
+				<key>AMProvides</key>
+				<dict>
+					<key>Container</key>
+					<string>List</string>
+					<key>Types</key>
+					<array>
+						<string>com.apple.cocoa.path</string>
+					</array>
+				</dict>
+				<key>ActionBundlePath</key>
+				<string>/System/Library/Automator/Rename Finder Items.action</string>
+				<key>ActionName</key>
+				<string>Renomear Itens do Finder: Substituir Texto</string>
+				<key>ActionParameters</key>
+				<dict>
+					<key>caseIndicator</key>
+					<integer>0</integer>
+					<key>dateFormat</key>
+					<string>0</string>
+					<key>datePlacement</key>
+					<integer>0</integer>
+					<key>dateSeparator</key>
+					<string>0</string>
+					<key>dateToUse</key>
+					<integer>0</integer>
+					<key>defaultName</key>
+					<string></string>
+					<key>ignoreCase</key>
+					<true/>
+					<key>includeExtensions</key>
+					<integer>0</integer>
+					<key>insertionPosition</key>
+					<integer>0</integer>
+					<key>minimumCount</key>
+					<string>2</string>
+					<key>nameDateSeparator</key>
+					<integer>0</integer>
+					<key>nameSingleItem</key>
+					<string></string>
+					<key>numberLocation</key>
+					<integer>0</integer>
+					<key>numberSeparator</key>
+					<integer>0</integer>
+					<key>renameItems</key>
+					<integer>0</integer>
+					<key>renameType</key>
+					<integer>4</integer>
+					<key>replaceWithText</key>
+					<string></string>
+					<key>singleItemOption</key>
+					<integer>0</integer>
+					<key>startingNumber</key>
+					<integer>1</integer>
+					<key>textInput</key>
+					<string></string>
+					<key>textToFind</key>
+					<string> </string>
+					<key>useLeadingZeros</key>
+					<false/>
+				</dict>
+				<key>BundleIdentifier</key>
+				<string>com.apple.Automator.AddNumbersToFinderNames</string>
+				<key>CFBundleVersion</key>
+				<string>1.3.2</string>
+				<key>CanShowSelectedItemsWhenRun</key>
+				<false/>
+				<key>CanShowWhenRun</key>
+				<true/>
+				<key>Category</key>
+				<array>
+					<string>AMCategoryFilesAndFolders</string>
+				</array>
+				<key>Class Name</key>
+				<string>AMRenameFinderItemsAction</string>
+				<key>Disabled</key>
+				<true/>
+				<key>InputUUID</key>
+				<string>53E1C804-3ED3-4644-B86C-C0FEE6537CB2</string>
+				<key>Keywords</key>
+				<array>
+					<string>Nome</string>
+					<string>Arquivo</string>
+					<string>Pasta</string>
+					<string>Adicionar</string>
+					<string>Número</string>
+					<string>Alterar</string>
+					<string>Maiúsculas/Minúsculas</string>
+					<string>Renomear</string>
+					<string>Data</string>
+					<string>Hora</string>
+					<string>Definir</string>
+					<string>Texto</string>
+					<string>Buscar</string>
+					<string>Substituir</string>
+					<string>Criar</string>
+					<string>Sequencial</string>
+				</array>
+				<key>OutputUUID</key>
+				<string>FBFFA659-BE78-46A4-84D5-037FA8015E6B</string>
+				<key>UUID</key>
+				<string>2DD9FAE2-9F2C-4A22-81A9-22D55C2D837D</string>
+				<key>UnlocalizedApplications</key>
+				<array>
+					<string>Finder</string>
+				</array>
+				<key>arguments</key>
+				<dict>
+					<key>0</key>
+					<dict>
+						<key>default value</key>
+						<integer>0</integer>
+						<key>name</key>
+						<string>nameDateSeparator</string>
+						<key>required</key>
+						<string>0</string>
+						<key>type</key>
+						<string>0</string>
+						<key>uuid</key>
+						<string>0</string>
+					</dict>
+					<key>1</key>
+					<dict>
+						<key>default value</key>
+						<string></string>
+						<key>name</key>
+						<string>textToFind</string>
+						<key>required</key>
+						<string>0</string>
+						<key>type</key>
+						<string>0</string>
+						<key>uuid</key>
+						<string>1</string>
+					</dict>
+					<key>10</key>
+					<dict>
+						<key>default value</key>
+						<string></string>
+						<key>name</key>
+						<string>nameSingleItem</string>
+						<key>required</key>
+						<string>0</string>
+						<key>type</key>
+						<string>0</string>
+						<key>uuid</key>
+						<string>10</string>
+					</dict>
+					<key>11</key>
+					<dict>
+						<key>default value</key>
+						<true/>
+						<key>name</key>
+						<string>ignoreCase</string>
+						<key>required</key>
+						<string>0</string>
+						<key>type</key>
+						<string>0</string>
+						<key>uuid</key>
+						<string>11</string>
+					</dict>
+					<key>12</key>
+					<dict>
+						<key>default value</key>
+						<string></string>
+						<key>name</key>
+						<string>textInput</string>
+						<key>required</key>
+						<string>0</string>
+						<key>type</key>
+						<string>0</string>
+						<key>uuid</key>
+						<string>12</string>
+					</dict>
+					<key>13</key>
+					<dict>
+						<key>default value</key>
+						<integer>0</integer>
+						<key>name</key>
+						<string>dateToUse</string>
+						<key>required</key>
+						<string>0</string>
+						<key>type</key>
+						<string>0</string>
+						<key>uuid</key>
+						<string>13</string>
+					</dict>
+					<key>14</key>
+					<dict>
+						<key>default value</key>
+						<integer>0</integer>
+						<key>name</key>
+						<string>includeExtensions</string>
+						<key>required</key>
+						<string>0</string>
+						<key>type</key>
+						<string>0</string>
+						<key>uuid</key>
+						<string>14</string>
+					</dict>
+					<key>15</key>
+					<dict>
+						<key>default value</key>
+						<string></string>
+						<key>name</key>
+						<string>replaceWithText</string>
+						<key>required</key>
+						<string>0</string>
+						<key>type</key>
+						<string>0</string>
+						<key>uuid</key>
+						<string>15</string>
+					</dict>
+					<key>16</key>
+					<dict>
+						<key>default value</key>
+						<integer>0</integer>
+						<key>name</key>
+						<string>renameItems</string>
+						<key>required</key>
+						<string>0</string>
+						<key>type</key>
+						<string>0</string>
+						<key>uuid</key>
+						<string>16</string>
+					</dict>
+					<key>17</key>
+					<dict>
+						<key>default value</key>
+						<string></string>
+						<key>name</key>
+						<string>defaultName</string>
+						<key>required</key>
+						<string>0</string>
+						<key>type</key>
+						<string>0</string>
+						<key>uuid</key>
+						<string>17</string>
+					</dict>
+					<key>18</key>
+					<dict>
+						<key>default value</key>
+						<integer>1</integer>
+						<key>name</key>
+						<string>startingNumber</string>
+						<key>required</key>
+						<string>0</string>
+						<key>type</key>
+						<string>0</string>
+						<key>uuid</key>
+						<string>18</string>
+					</dict>
+					<key>19</key>
+					<dict>
+						<key>default value</key>
+						<integer>0</integer>
+						<key>name</key>
+						<string>numberSeparator</string>
+						<key>required</key>
+						<string>0</string>
+						<key>type</key>
+						<string>0</string>
+						<key>uuid</key>
+						<string>19</string>
+					</dict>
+					<key>2</key>
+					<dict>
+						<key>default value</key>
+						<integer>0</integer>
+						<key>name</key>
+						<string>datePlacement</string>
+						<key>required</key>
+						<string>0</string>
+						<key>type</key>
+						<string>0</string>
+						<key>uuid</key>
+						<string>2</string>
+					</dict>
+					<key>20</key>
+					<dict>
+						<key>default value</key>
+						<integer>0</integer>
+						<key>name</key>
+						<string>caseIndicator</string>
+						<key>required</key>
+						<string>0</string>
+						<key>type</key>
+						<string>0</string>
+						<key>uuid</key>
+						<string>20</string>
+					</dict>
+					<key>21</key>
+					<dict>
+						<key>default value</key>
+						<string>0</string>
+						<key>name</key>
+						<string>dateFormat</string>
+						<key>required</key>
+						<string>0</string>
+						<key>type</key>
+						<string>0</string>
+						<key>uuid</key>
+						<string>21</string>
+					</dict>
+					<key>3</key>
+					<dict>
+						<key>default value</key>
+						<integer>0</integer>
+						<key>name</key>
+						<string>insertionPosition</string>
+						<key>required</key>
+						<string>0</string>
+						<key>type</key>
+						<string>0</string>
+						<key>uuid</key>
+						<string>3</string>
+					</dict>
+					<key>4</key>
+					<dict>
+						<key>default value</key>
+						<string>0</string>
+						<key>name</key>
+						<string>dateSeparator</string>
+						<key>required</key>
+						<string>0</string>
+						<key>type</key>
+						<string>0</string>
+						<key>uuid</key>
+						<string>4</string>
+					</dict>
+					<key>5</key>
+					<dict>
+						<key>default value</key>
+						<string>2</string>
+						<key>name</key>
+						<string>minimumCount</string>
+						<key>required</key>
+						<string>0</string>
+						<key>type</key>
+						<string>0</string>
+						<key>uuid</key>
+						<string>5</string>
+					</dict>
+					<key>6</key>
+					<dict>
+						<key>default value</key>
+						<integer>0</integer>
+						<key>name</key>
+						<string>numberLocation</string>
+						<key>required</key>
+						<string>0</string>
+						<key>type</key>
+						<string>0</string>
+						<key>uuid</key>
+						<string>6</string>
+					</dict>
+					<key>7</key>
+					<dict>
+						<key>default value</key>
+						<false/>
+						<key>name</key>
+						<string>useLeadingZeros</string>
+						<key>required</key>
+						<string>0</string>
+						<key>type</key>
+						<string>0</string>
+						<key>uuid</key>
+						<string>7</string>
+					</dict>
+					<key>8</key>
+					<dict>
+						<key>default value</key>
+						<integer>0</integer>
+						<key>name</key>
+						<string>singleItemOption</string>
+						<key>required</key>
+						<string>0</string>
+						<key>type</key>
+						<string>0</string>
+						<key>uuid</key>
+						<string>8</string>
+					</dict>
+					<key>9</key>
+					<dict>
+						<key>default value</key>
+						<integer>0</integer>
+						<key>name</key>
+						<string>renameType</string>
+						<key>required</key>
+						<string>0</string>
+						<key>type</key>
+						<string>0</string>
+						<key>uuid</key>
+						<string>9</string>
+					</dict>
+				</dict>
+				<key>isViewVisible</key>
+				<false/>
+				<key>location</key>
+				<string>851.500000:818.000000</string>
+				<key>nibPath</key>
+				<string>/System/Library/Automator/Rename Finder Items.action/Contents/Resources/Base.lproj/main.nib</string>
+			</dict>
+			<key>isViewVisible</key>
+			<false/>
+		</dict>
+	</array>
+	<key>connectors</key>
+	<dict>
+		<key>00A76CBF-8C47-4F48-88D7-03CF60EF3643</key>
+		<dict>
+			<key>from</key>
+			<string>A586D69D-D01B-43FF-919A-22577114C120 - A586D69D-D01B-43FF-919A-22577114C120</string>
+			<key>to</key>
+			<string>EF0E016A-30F5-4EB1-A5D9-7EB65F97F50D - EF0E016A-30F5-4EB1-A5D9-7EB65F97F50D</string>
+		</dict>
+		<key>2E88DF6A-8094-4098-ABE3-71CA0B82228E</key>
+		<dict>
+			<key>from</key>
+			<string>979675AA-FEEC-40D8-AF9D-1CD0BF63394B - 979675AA-FEEC-40D8-AF9D-1CD0BF63394B</string>
+			<key>to</key>
+			<string>953E4658-D182-4256-9E73-708201F35A26 - 953E4658-D182-4256-9E73-708201F35A26</string>
+		</dict>
+		<key>48C4790B-5771-4439-9350-2BA43C2DB2A7</key>
+		<dict>
+			<key>from</key>
+			<string>953E4658-D182-4256-9E73-708201F35A26 - 953E4658-D182-4256-9E73-708201F35A26</string>
+			<key>to</key>
+			<string>2DD9FAE2-9F2C-4A22-81A9-22D55C2D837D - 2DD9FAE2-9F2C-4A22-81A9-22D55C2D837D</string>
+		</dict>
+		<key>78A7B5EE-3526-401F-B5A9-27AD976CBFFC</key>
+		<dict>
+			<key>from</key>
+			<string>EF0E016A-30F5-4EB1-A5D9-7EB65F97F50D - EF0E016A-30F5-4EB1-A5D9-7EB65F97F50D</string>
+			<key>to</key>
+			<string>53438CC6-6F3B-4C9E-9A53-145476BF3099 - 53438CC6-6F3B-4C9E-9A53-145476BF3099</string>
+		</dict>
+		<key>D07C925F-3CAA-49AC-8232-F86F0BD67451</key>
+		<dict>
+			<key>from</key>
+			<string>53438CC6-6F3B-4C9E-9A53-145476BF3099 - 53438CC6-6F3B-4C9E-9A53-145476BF3099</string>
+			<key>to</key>
+			<string>979675AA-FEEC-40D8-AF9D-1CD0BF63394B - 979675AA-FEEC-40D8-AF9D-1CD0BF63394B</string>
+		</dict>
+	</dict>
+	<key>variables</key>
+	<array>
+		<dict>
+			<key>UUID</key>
+			<string>C7E246ED-D092-45A0-B7A0-E361C8C0D118</string>
+			<key>identifier</key>
+			<string>com.apple.Automator.Variable.Storage</string>
+			<key>name</key>
+			<string>SNOMEARQ</string>
+		</dict>
+		<dict>
+			<key>UUID</key>
+			<string>3917E256-F0AE-49F6-8F5E-1D49AE9D532F</string>
+			<key>identifier</key>
+			<string>com.apple.Automator.Variable.Storage</string>
+			<key>name</key>
+			<string>SARQ</string>
+		</dict>
+	</array>
+	<key>workflowMetaData</key>
+	<dict>
+		<key>serviceApplicationBundleID</key>
+		<string></string>
+		<key>serviceApplicationPath</key>
+		<string></string>
+		<key>serviceInputTypeIdentifier</key>
+		<string>com.apple.Automator.fileSystemObject</string>
+		<key>serviceOutputTypeIdentifier</key>
+		<string>com.apple.Automator.nothing</string>
+		<key>serviceProcessesInput</key>
+		<integer>0</integer>
+		<key>workflowTypeIdentifier</key>
+		<string>com.apple.Automator.servicesMenu</string>
+	</dict>
+</dict>
+</plist>

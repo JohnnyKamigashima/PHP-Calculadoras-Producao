@@ -5,7 +5,7 @@
     </div>
     <div class="input-group mb-3">
         <div class="input-group-prepend">
-            <span class="input-group-text" id="inputGroup-sizing-default">Medida real:</span>
+            <span class="input-group-text" id="inputGroup-sizing-default">Medida real (cota):</span>
         </div>
         <input type="text" class="form-control" id="medR" value="0">
     </div>

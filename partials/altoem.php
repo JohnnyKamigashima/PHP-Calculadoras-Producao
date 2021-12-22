@@ -1,7 +1,7 @@
 <!-- calculadora AltoEm -->
 <div class="cells">
     <div class="titulo">
-        Alto Em
+        Alto Em (Farol Brasil) <img src="./images/altoembr.png" class="icon" >
     </div>
 
     <div class="input-group mb-3">

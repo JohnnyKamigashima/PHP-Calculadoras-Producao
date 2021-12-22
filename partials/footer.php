@@ -6,6 +6,6 @@
             que fica escondido na gôndola), Atenção para o triângulo de transgênico cuja area de
             silêncio é
             igual ao
-            círculo que circunscreve as três pontas do triângulo. <a href="../imagens/Dropzone.zip">Dropzone Toolkit</a></span>
+            círculo que circunscreve as três pontas do triângulo. <a href="./images/Dropzone.zip">Dropzone Toolkit</a></span>
   </div>
 </footer>

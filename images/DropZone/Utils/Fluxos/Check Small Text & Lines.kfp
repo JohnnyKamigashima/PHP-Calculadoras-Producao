@@ -1,0 +1,402 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<pdfpreflight version="16.0">
+	<package>
+		<id3>f65e3f69d1eddad46ac460ef7bf48e25</id3>
+		<pdfxoutintentlist>
+		</pdfxoutintentlist>
+		<iccprofilelist>
+		</iccprofilelist>
+		<ccpolicies>
+		</ccpolicies>
+		<occdsetups>
+		</occdsetups>
+		<curves>
+		</curves>
+		<fspolicies>
+		</fspolicies>
+		<resources>
+		</resources>
+		<variables>
+		</variables>
+		<conditions>
+			<condition>
+				<id1>Ca58a0ed2659ba5cc7e6bfd3bcce189ca</id1>
+				<id2>Ce01d879746e4f3955094a4b3e2a3fafc</id2>
+				<id3>c60192d6844febcdf7396ed8c2cea848</id3>
+				<id4>cb5fea3c4ce32d41f10527df92c91555</id4>
+				<id5>Ce01d879746e4f3955094a4b3e2a3fafc</id5>
+				<name></name>
+				<comment></comment>
+				<flags user_units="1" edit="1" visible="1"></flags>
+				<atom>
+					<group>Group::CSTEXT</group>
+					<token>CSTEXT::Textsize</token>
+					<operator>OP::less_or_equal</operator>
+					<data>
+						<num>
+							<value>5</value>
+							<tolerance>0</tolerance>
+						</num>
+					</data>
+				</atom>
+			</condition>
+			<condition>
+				<id1>C958a1a53f992174bf1212751ebae90b5</id1>
+				<id2>C2ec51547cb5216e7e4a410ca0549c7fc</id2>
+				<id3>ee4da6a85d311a6a7d3a7751c7ab2a07</id3>
+				<id4>12d4d2b7f6ec515617f1fb0fc153a504</id4>
+				<id5>C2ec51547cb5216e7e4a410ca0549c7fc</id5>
+				<name></name>
+				<comment></comment>
+				<flags user_units="1" edit="1" visible="1"></flags>
+				<atom>
+					<group>Group::CSTEXT</group>
+					<token>CSTEXT::Textsize</token>
+					<operator>OP::less_or_equal</operator>
+					<data>
+						<num>
+							<value>8</value>
+							<tolerance>0</tolerance>
+						</num>
+					</data>
+				</atom>
+			</condition>
+			<condition>
+				<id1>Ca78c91e2fb5db5b22ef628267e0178f5</id1>
+				<id2>Cf20ad0253291be2ce3837e904adfb05e</id2>
+				<id3>e0f09231176dc49b38ef1b285bfd8622</id3>
+				<id4>27e17cbd8becf76f0d88a666ee8b70cf</id4>
+				<id5>Cf20ad0253291be2ce3837e904adfb05e</id5>
+				<name></name>
+				<comment></comment>
+				<flags user_units="1" edit="1" visible="1"></flags>
+				<atom>
+					<group>Group::CSTEXT</group>
+					<token>CSTEXT::Textsize</token>
+					<operator>OP::less_or_equal</operator>
+					<data>
+						<num>
+							<value>4</value>
+							<tolerance>0</tolerance>
+						</num>
+					</data>
+				</atom>
+			</condition>
+			<condition>
+				<id1>Cf6388e73a2667856908cf5f025c684e2</id1>
+				<id2>Cdbe9a194c7d054a1fccff49625112be9</id2>
+				<id3>f91ce9ee5abe1ae5276fdcd32e672619</id3>
+				<id4>71676ae08f21b561227cb1e88fd99736</id4>
+				<id5>Cdbe9a194c7d054a1fccff49625112be9</id5>
+				<name></name>
+				<comment></comment>
+				<flags user_units="1" edit="1" visible="1"></flags>
+				<atom>
+					<group>Group::CSTEXT</group>
+					<token>CSTEXT::Textsize</token>
+					<operator>OP::less_or_equal</operator>
+					<data>
+						<num>
+							<value>6</value>
+							<tolerance>0</tolerance>
+						</num>
+					</data>
+				</atom>
+			</condition>
+			<condition>
+				<id1>Cebd3c8a019f86b7b4c269d5314c81ab2</id1>
+				<id2>C67f0ca5b982b55a69c6d1a5a40ba7263</id2>
+				<id3>1947d5531620310b6f6b678b90c0642a</id3>
+				<id4>49a7bcd258b9da1a0e1062e64509a108</id4>
+				<id5>C67f0ca5b982b55a69c6d1a5a40ba7263</id5>
+				<name></name>
+				<comment></comment>
+				<flags user_units="1" edit="1" visible="1"></flags>
+				<atom>
+					<group>Group::CSTEXT</group>
+					<token>CSTEXT::Textsize</token>
+					<operator>OP::less_or_equal</operator>
+					<data>
+						<num>
+							<value>7</value>
+							<tolerance>0</tolerance>
+						</num>
+					</data>
+				</atom>
+			</condition>
+			<condition>
+				<id1>C1dc4fb5bacdd5d69c9c0c89f0103f7a9</id1>
+				<id2>C759ede0896434aa2a2334a2155033cd2</id2>
+				<id3>663cbbdc4f5136963add6a36f1ff8f02</id3>
+				<id4>9f37c36b75920f2eea1e7b4d1cded65d</id4>
+				<id5>C759ede0896434aa2a2334a2155033cd2</id5>
+				<name></name>
+				<comment></comment>
+				<flags user_units="1" edit="1" visible="1"></flags>
+				<atom>
+					<group>Group::CSTEXT</group>
+					<token>CSTEXT::EffectiveTextxHeight_mm</token>
+					<operator>OP::less</operator>
+					<data>
+						<num>
+							<value>1</value>
+							<tolerance>0</tolerance>
+						</num>
+					</data>
+				</atom>
+			</condition>
+			<condition>
+				<id1>C3a4abd3abff927164ff67b2357ac869b</id1>
+				<id2>Ce61caafcf90b836eb58bd72a80f3c99a</id2>
+				<id3>6e6a0e52685f23288814f12874d7c742</id3>
+				<id4>257e9b63d89f554f77715f9fe577a0b1</id4>
+				<id5>Ce61caafcf90b836eb58bd72a80f3c99a</id5>
+				<name></name>
+				<comment></comment>
+				<flags user_units="1" edit="1" visible="1"></flags>
+				<atom>
+					<group>Group::CSTEXT</group>
+					<token>CSTEXT::EffectiveTextxHeight_mm</token>
+					<operator>OP::less</operator>
+					<data>
+						<num>
+							<value>1.2</value>
+							<tolerance>0</tolerance>
+						</num>
+					</data>
+				</atom>
+			</condition>
+			<condition>
+				<id1>C7636870f384e4196a73f47ace6d1d404</id1>
+				<id2>Cee08c91b0232e8efe86f68a10fd6d97c</id2>
+				<id3>5a9ff6210ecc5893583e4a9f33b91db5</id3>
+				<id4>721de6fe18481317c3b52d52d851e340</id4>
+				<id5>Cee08c91b0232e8efe86f68a10fd6d97c</id5>
+				<name></name>
+				<comment></comment>
+				<flags user_units="1" edit="1" visible="1"></flags>
+				<atom>
+					<group>Group::CSTEXT</group>
+					<token>CSTEXT::EffectiveTextxHeight_mm</token>
+					<operator>OP::less</operator>
+					<data>
+						<num>
+							<value>1.5</value>
+							<tolerance>0</tolerance>
+						</num>
+					</data>
+				</atom>
+			</condition>
+		</conditions>
+		<rules>
+			<rule>
+				<id1>R9e95fa13231ea06dac60febd2c9a4bec</id1>
+				<id2>Rc2c1b2b0bbbcee0658cd3057907be497</id2>
+				<id3>d346c2cb2e5739bf05b5d95d0528d5d2</id3>
+				<id4>dfc16d98f7fd4458593be37ecb56092b</id4>
+				<id5>Rc2c1b2b0bbbcee0658cd3057907be497</id5>
+				<name>R_6_Textissmallerthan5pt</name>
+				<comment>R_6_Textissmallerthan5pt</comment>
+				<flags analysis="17" condition_logic="0" ignore_objects="2" edit="1" visible="1" dict="1"></flags>
+				<creation>D:20181128192748-03&apos;00&apos;</creation>
+				<modification>D:20200614164052-03&apos;00&apos;</modification>
+				<report_no_match></report_no_match>
+				<conditions>
+					<condition>Ca58a0ed2659ba5cc7e6bfd3bcce189ca</condition>
+				</conditions>
+			</rule>
+			<rule>
+				<id1>R4f30977bf120da95d593d00995ecf05a</id1>
+				<id2>R0674578dda979a8f7a8f5cc5dfcee613</id2>
+				<id3>b9c347e7832345d9d104ea6fb0f4d070</id3>
+				<id4>a1fa61374ec6ec5c09ccd141d0825d55</id4>
+				<id5>R0674578dda979a8f7a8f5cc5dfcee613</id5>
+				<name>R_6_Textissmallerthanpt</name>
+				<comment>R_6_Textissmallerthanpt</comment>
+				<flags analysis="17" condition_logic="0" ignore_objects="2" edit="1" visible="1" dict="1"></flags>
+				<creation>D:20181128192748-03&apos;00&apos;</creation>
+				<modification>D:20200614164052-03&apos;00&apos;</modification>
+				<report_no_match></report_no_match>
+				<conditions>
+					<condition>C958a1a53f992174bf1212751ebae90b5</condition>
+				</conditions>
+			</rule>
+			<rule>
+				<id1>Rf9bf48b6129623ae333af3d8cc4995df</id1>
+				<id2>R3b2647524374e283b26c4523b5c9a7ca</id2>
+				<id3>a86f0ffe56200b63dbcf3219d1886f94</id3>
+				<id4>e34f9997595baf99b077b63fa6c9b355</id4>
+				<id5>Rdba969fd95952489d6f273a56fd2ff45</id5>
+				<name>Text is smaller than 4 pt </name>
+				<comment>Identifies very small text with a size of less than 5 pt. It might be difficult to print small text in the selected printing process.</comment>
+				<flags analysis="17" condition_logic="0" ignore_objects="2" edit="1" visible="1"></flags>
+				<creation>D:20200614215339-03&apos;00&apos;</creation>
+				<modification>D:20200614164052-03&apos;00&apos;</modification>
+				<report_no_match></report_no_match>
+				<conditions>
+					<condition>Ca78c91e2fb5db5b22ef628267e0178f5</condition>
+				</conditions>
+			</rule>
+			<rule>
+				<id1>R01989e57c6c9acde5c06db9f114a3bf6</id1>
+				<id2>R646a8ab643557e7d02b1f241b6be9226</id2>
+				<id3>4f45a11280b7b3d019216ae82a7f5523</id3>
+				<id4>d0c756c5ad8be13b18d1aad118e646c4</id4>
+				<id5>R9a0f67f88c5de7cf18ea3bee66717ab6</id5>
+				<name>Text is smaller than 6 pt </name>
+				<comment>Identifies very small text with a size of less than 5 pt. It might be difficult to print small text in the selected printing process.</comment>
+				<flags analysis="17" condition_logic="0" ignore_objects="2" edit="1" visible="1"></flags>
+				<creation>D:20200614215351-03&apos;00&apos;</creation>
+				<modification>D:20200614164052-03&apos;00&apos;</modification>
+				<report_no_match></report_no_match>
+				<conditions>
+					<condition>Cf6388e73a2667856908cf5f025c684e2</condition>
+				</conditions>
+			</rule>
+			<rule>
+				<id1>Rcfc403bae56e4b49f2c99b8c5af78d94</id1>
+				<id2>R989508cb061d3e34f38248c4b9cb580e</id2>
+				<id3>a28c23b914d2f3a3ed27d640ee3b61a1</id3>
+				<id4>610c4b8e37655feb2157f630a19e880d</id4>
+				<id5>R12a9e7b8dc8ea74f4705a1b7699cb94a</id5>
+				<name>Text is smaller than 7 pt</name>
+				<comment>Identifies very small text with a size of less than 5 pt. It might be difficult to print small text in the selected printing process.</comment>
+				<flags analysis="17" condition_logic="0" ignore_objects="2" edit="1" visible="1"></flags>
+				<creation>D:20200614215403-03&apos;00&apos;</creation>
+				<modification>D:20200614164052-03&apos;00&apos;</modification>
+				<report_no_match></report_no_match>
+				<conditions>
+					<condition>Cebd3c8a019f86b7b4c269d5314c81ab2</condition>
+				</conditions>
+			</rule>
+			<rule>
+				<id1>R3630246cd7a79d120348e7b48c3e14ed</id1>
+				<id2>R40ef2528c6ba61ff6abfee98cd7ee63b</id2>
+				<id3>8921ff68423a6de31ee9ec1dab886bd8</id3>
+				<id4>7e686c14e541747585c3a88f0c31f8ee</id4>
+				<id5>Rfddb1fb9777ce5292fe55276454aae06</id5>
+				<name>Effective text x-height is below 1 mm (Copy 1)</name>
+				<comment>Embalagens SOCO devem ter pelo menos 1mm pela letra caixa baixa.</comment>
+				<flags analysis="17" condition_logic="0" ignore_objects="0" edit="1" visible="1"></flags>
+				<creation>D:20200614215510-03&apos;00&apos;</creation>
+				<modification>D:20200614164052-03&apos;00&apos;</modification>
+				<report_no_match></report_no_match>
+				<conditions>
+					<condition>C1dc4fb5bacdd5d69c9c0c89f0103f7a9</condition>
+				</conditions>
+			</rule>
+			<rule>
+				<id1>Rf93d4d176f2ace6e49a46afdd420e77a</id1>
+				<id2>R73bb45e12e8e70b6b82ead91f8f4c036</id2>
+				<id3>0a67fea64cbff32e2fb3e1530e15ad2c</id3>
+				<id4>3b8fc98f51057b0d7ae0d05ee6e33f73</id4>
+				<id5>R73bb45e12e8e70b6b82ead91f8f4c036</id5>
+				<name>R_13_Effectivetextxheightisbelow12mm</name>
+				<comment>R_13_Effectivetextxheightisbelow12mm</comment>
+				<flags analysis="17" condition_logic="0" ignore_objects="0" edit="1" visible="1" dict="1"></flags>
+				<creation>D:20181128192748-03&apos;00&apos;</creation>
+				<modification>D:20200614164052-03&apos;00&apos;</modification>
+				<report_no_match></report_no_match>
+				<conditions>
+					<condition>C3a4abd3abff927164ff67b2357ac869b</condition>
+				</conditions>
+			</rule>
+			<rule>
+				<id1>R0ce813b80f4efc66786d537b341babd2</id1>
+				<id2>Re256375d547714b16760639e89ce312a</id2>
+				<id3>7e12dffabcf9db1a980efad29b8aefa2</id3>
+				<id4>ccef9d1e193dde082cdacd15e9041ccb</id4>
+				<id5>R2352499224b8c72add7aa3bf7f2acf32</id5>
+				<name>Effective text x-height is below 1.5mm </name>
+				<comment>Letras regulatorios de MX devem ter 1,5mm pela caixa baixa</comment>
+				<flags analysis="17" condition_logic="0" ignore_objects="0" edit="1" visible="1"></flags>
+				<creation>D:20200614215705-03&apos;00&apos;</creation>
+				<modification>D:20200614164052-03&apos;00&apos;</modification>
+				<report_no_match></report_no_match>
+				<conditions>
+					<condition>C7636870f384e4196a73f47ace6d1d404</condition>
+				</conditions>
+			</rule>
+		</rules>
+		<rulesets>
+			<ruleset>
+				<id1>S4a5da91dfb1c74057754da182f3e2ea4</id1>
+				<id2>S1c83ce83f17a704417b249309364b416</id2>
+				<id3>bb2b40abdb9ce52ed4c1d1cc6492f357</id3>
+				<id4>99b6e3aa609495dc88df2406d3099f7a</id4>
+				<id5>S1c83ce83f17a704417b249309364b416</id5>
+				<name>SSS_RULESET_DEF_NAME</name>
+				<comment>SSS_RULESET_DEF_NAME</comment>
+				<flags edit="1" visible="1" dict="1"></flags>
+				<rules>
+					<rule check_severity="3" check_timing="2">R9e95fa13231ea06dac60febd2c9a4bec</rule>
+					<rule check_severity="3" check_timing="2">R4f30977bf120da95d593d00995ecf05a</rule>
+					<rule check_severity="3" check_timing="2">Rf9bf48b6129623ae333af3d8cc4995df</rule>
+					<rule check_severity="3" check_timing="2">R01989e57c6c9acde5c06db9f114a3bf6</rule>
+					<rule check_severity="3" check_timing="2">Rcfc403bae56e4b49f2c99b8c5af78d94</rule>
+					<rule check_severity="3" check_timing="2">R3630246cd7a79d120348e7b48c3e14ed</rule>
+					<rule check_severity="3" check_timing="2">Rf93d4d176f2ace6e49a46afdd420e77a</rule>
+					<rule check_severity="3" check_timing="2">R0ce813b80f4efc66786d537b341babd2</rule>
+				</rules>
+			</ruleset>
+		</rulesets>
+		<fixups>
+		</fixups>
+		<fixupsets>
+		</fixupsets>
+		<actions>
+		</actions>
+		<profiles>
+			<profile>
+				<id1>Pa6d3e7219a8e8af37ab79417c5013527</id1>
+				<id2>Pc0f490c62353b68fb3fd11b8b8bb814d</id2>
+				<id3>f49597721d76e05ab51f6a758d4b04c6</id3>
+				<id4>21fe2ede50ca03cfa76b90e92be009fe</id4>
+				<id5>P49227deb084429eb1e865fafe15a198d</id5>
+				<name>Check Small Text &amp; Lines</name>
+				<comment></comment>
+				<flags edit="1" visible="1"></flags>
+				<metalist>
+					<metadata>
+						<metakey>author</metakey>
+						<metavalue>Johnny Kamigashima</metavalue>
+					</metadata>
+					<metadata>
+						<metakey>email</metakey>
+						<metavalue>johnny.kamigashima@diadeis.com</metavalue>
+					</metadata>
+				</metalist>
+				<creation>D:20200325131609-03&apos;00&apos;</creation>
+				<modification>D:20200614164052-03&apos;00&apos;</modification>
+				<pdfstd>
+					<pdfx convert="0"></pdfx>
+					<pdfa convert="0"></pdfa>
+					<pdfe convert="0"></pdfe>
+					<outcond></outcond>
+					<trapped>0</trapped>
+					<oioptions>0</oioptions>
+				</pdfstd>
+				<pdfstdemb>
+					<pdfx convert="0"></pdfx>
+					<pdfa convert="0"></pdfa>
+					<pdfe convert="0"></pdfe>
+					<outcond></outcond>
+					<trapped>0</trapped>
+					<oioptions>0</oioptions>
+					<afrelationship set_relationship="0"></afrelationship>
+				</pdfstdemb>
+				<wizard>
+				</wizard>
+				<rulesets>
+					<ruleset>S4a5da91dfb1c74057754da182f3e2ea4</ruleset>
+				</rulesets>
+				<fixupsets>
+				</fixupsets>
+			</profile>
+		</profiles>
+		<metaprofs>
+		</metaprofs>
+		<profgroups>
+		</profgroups>
+	</package>
+</pdfpreflight>
