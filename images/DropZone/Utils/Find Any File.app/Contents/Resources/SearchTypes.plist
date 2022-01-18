@@ -63,10 +63,27 @@
 			</dict>
 		</array>
 	</dict>
-	<key>Numeric</key>
+	<key>PlainNumber</key>
+	<dict>
+		<key>Type</key>
+		<integer>8</integer>
+		<key>LocalizationKey</key>
+		<string>Numeric</string>
+		<key>NeedsValue</key>
+		<true/>
+		<key>Verbs</key>
+		<array>
+			<integer>0</integer>
+			<integer>1</integer>
+			<integer>2</integer>
+		</array>
+	</dict>
+	<key>ByteCount</key>
 	<dict>
 		<key>Type</key>
 		<integer>1</integer>
+		<key>LocalizationKey</key>
+		<string>Numeric</string>
 		<key>NeedsValue</key>
 		<true/>
 		<key>ValueToolTipKey</key>

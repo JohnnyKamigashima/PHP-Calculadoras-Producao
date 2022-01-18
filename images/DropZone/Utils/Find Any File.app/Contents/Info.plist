@@ -3,9 +3,9 @@
 <plist version="1.0">
 <dict>
 	<key>BuildDateString</key>
-	<string>2021-07-14T18:51:12+0200</string>
+	<string>2021-12-29T22:36:59+0100</string>
 	<key>BuildMachineOSBuild</key>
-	<string>20F71</string>
+	<string>21C52</string>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
 	<key>CFBundleDocumentTypes</key>
@@ -42,14 +42,14 @@
 				<string>paths</string>
 			</array>
 			<key>CFBundleTypeName</key>
-			<string>POSIX Paths</string>
+			<string>POSIX Paths File</string>
 			<key>CFBundleTypeRole</key>
 			<string>Editor</string>
 			<key>LSHandlerRank</key>
 			<string>Owner</string>
 			<key>LSItemContentTypes</key>
 			<array>
-				<string>posix.paths</string>
+				<string>cc.utis.paths-file</string>
 			</array>
 			<key>LSTypeIsPackage</key>
 			<integer>0</integer>
@@ -82,7 +82,7 @@
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>
-	<string>2.3.1</string>
+	<string>2.3.2</string>
 	<key>CFBundleSupportedPlatforms</key>
 	<array>
 		<string>MacOSX</string>
@@ -103,23 +103,44 @@
 		</dict>
 	</array>
 	<key>CFBundleVersion</key>
-	<string>280</string>
+	<string>302</string>
 	<key>DTCompiler</key>
 	<string>com.apple.compilers.llvm.clang.1_0</string>
 	<key>DTPlatformBuild</key>
-	<string>12E507</string>
+	<string>13A1030d</string>
 	<key>DTPlatformName</key>
 	<string>macosx</string>
 	<key>DTPlatformVersion</key>
-	<string>11.3</string>
+	<string>12.0</string>
 	<key>DTSDKBuild</key>
-	<string>20E214</string>
+	<string>21A344</string>
 	<key>DTSDKName</key>
-	<string>macosx11.3</string>
+	<string>macosx12.0</string>
 	<key>DTXcode</key>
-	<string>1251</string>
+	<string>1310</string>
 	<key>DTXcodeBuild</key>
-	<string>12E507</string>
+	<string>13A1030d</string>
+	<key>DockIconsToChooseFrom</key>
+	<array>
+		<dict>
+			<key>file name</key>
+			<string>AppIcon.icns</string>
+			<key>title</key>
+			<string>Classic Icon</string>
+		</dict>
+		<dict>
+			<key>file name</key>
+			<string>BS-Blue.icns</string>
+			<key>title</key>
+			<string>Squircle Blue</string>
+		</dict>
+		<dict>
+			<key>file name</key>
+			<string>BS-Orange.icns</string>
+			<key>title</key>
+			<string>Squircle Orange</string>
+		</dict>
+	</array>
 	<key>ITSAppUsesNonExemptEncryption</key>
 	<false/>
 	<key>LSApplicationCategoryType</key>
@@ -237,8 +258,7 @@
 		<dict>
 			<key>UTTypeConformsTo</key>
 			<array>
-				<string>public.data</string>
-				<string>public.plain-text</string>
+				<string>public.utf8-plain-text</string>
 			</array>
 			<key>UTTypeDescription</key>
 			<string>FAF search</string>
@@ -261,12 +281,16 @@
 		<dict>
 			<key>UTTypeConformsTo</key>
 			<array>
-				<string>public.plain-text</string>
+				<string>public.utf8-plain-text</string>
+				<string>posix.paths</string>
+				<string>org.tempel.findanyfile.paths</string>
 			</array>
 			<key>UTTypeDescription</key>
-			<string>POSIX Paths</string>
+			<string>POSIX Paths File</string>
 			<key>UTTypeIdentifier</key>
-			<string>posix.paths</string>
+			<string>cc.utis.paths-file</string>
+			<key>UTTypeReferenceURL</key>
+			<string>https://github.com/utiscc/DotPathsFileSpec</string>
 			<key>UTTypeTagSpecification</key>
 			<dict>
 				<key>public.filename-extension</key>
@@ -283,6 +307,30 @@
 			<string>Directory</string>
 			<key>UTTypeIdentifier</key>
 			<string>public.directory</string>
+			<key>UTTypeTagSpecification</key>
+			<dict/>
+		</dict>
+		<dict>
+			<key>UTTypeConformsTo</key>
+			<array>
+				<string>public.plain-text</string>
+			</array>
+			<key>UTTypeDescription</key>
+			<string>POSIX Paths</string>
+			<key>UTTypeIdentifier</key>
+			<string>posix.paths</string>
+			<key>UTTypeTagSpecification</key>
+			<dict/>
+		</dict>
+		<dict>
+			<key>UTTypeConformsTo</key>
+			<array>
+				<string>public.plain-text</string>
+			</array>
+			<key>UTTypeDescription</key>
+			<string>POSIX Paths</string>
+			<key>UTTypeIdentifier</key>
+			<string>org.tempel.findanyfile.paths</string>
 			<key>UTTypeTagSpecification</key>
 			<dict/>
 		</dict>

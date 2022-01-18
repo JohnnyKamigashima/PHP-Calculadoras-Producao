@@ -38,13 +38,13 @@
 		<key>Subject</key>
 		<integer>6</integer>
 		<key>Type</key>
-		<string>Numeric</string>
+		<string>ByteCount</string>
 	</dict>
 	<dict>
 		<key>Subject</key>
 		<integer>21</integer>
 		<key>Type</key>
-		<string>Numeric</string>
+		<string>ByteCount</string>
 		<key>ExpertOption</key>
 		<true/>
 	</dict>
@@ -91,6 +91,20 @@
 		<string>Bool</string>
 		<key>Once</key>
 		<true/>
+		<key>ToolTipKey</key>
+		<string>Tr.Helptext_Case_Sensitive</string>
+	</dict>
+	<dict>
+		<key>Subject</key>
+		<integer>32</integer>
+		<key>Type</key>
+		<string>Bool</string>
+		<key>Once</key>
+		<true/>
+		<key>DefaultVerbIndex</key>
+		<integer>1</integer>
+		<key>ToolTipKey</key>
+		<string>Tr.Helptext_Diacritics_Sensitive</string>
 	</dict>
 	<dict>
 		<key>Subject</key>
@@ -143,6 +157,14 @@
 		<string>EqualsNumber</string>
 		<key>Once</key>
 		<true/>
+		<key>ExpertOption</key>
+		<true/>
+	</dict>
+	<dict>
+		<key>Subject</key>
+		<integer>31</integer>
+		<key>Type</key>
+		<string>PlainNumber</string>
 		<key>ExpertOption</key>
 		<true/>
 	</dict>

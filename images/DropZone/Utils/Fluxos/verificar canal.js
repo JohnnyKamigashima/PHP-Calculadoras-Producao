@@ -10,6 +10,7 @@ for (var y = 0; y < Ncanais; y++) {
         channelRef = docRef.channels[y];
         if(upperName.indexOf("SUBSTRATO") == -1 && upperName.indexOf("TECH") == -1 && upperName.indexOf("DIE") == -1 &&upperName.indexOf("REGUA") == -1 && upperName.indexOf("COLOR") == -1 &&upperName.indexOf("VARNISH") == -1 ){
         docRef.channels[y].visible = true;
+       if(y!=0){ docRef.channels[y-1].visible = false;}
         app.refresh();
         wait(1000);
         if(y+1 < Ncanais){

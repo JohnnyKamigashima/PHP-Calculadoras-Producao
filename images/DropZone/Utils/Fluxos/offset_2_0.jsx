@@ -37,7 +37,7 @@ function firstRun(docRef)
     if (idealResolution==null){return;}
 
     var firstRunVar = offsetValue;
-    var rerunValue = prompt("Rodar quantas vezes?",4);
+    var rerunValue = prompt("Rodar quantas vezes?",6);
     if (rerunValue==null){return;}
 
     var timeValue = prompt("Com quanto de intervalo? (em segundos)",0);

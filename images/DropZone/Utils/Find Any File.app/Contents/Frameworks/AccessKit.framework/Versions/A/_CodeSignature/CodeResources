@@ -12,17 +12,25 @@
 		<data>
 		lnhfozcyrMMmeHdV++xkWRVn8j0=
 		</data>
-		<key>Resources/AccessKitViewController.nib</key>
+		<key>Resources/AccessKitViewController.nib/keyedobjects-101300.nib</key>
 		<data>
-		10Z/C8pJlaR4qPuILqEfajKUcjI=
+		CFRQoNJ5DrdmopKq+Mh7wtikUqk=
 		</data>
-		<key>Resources/Base.lproj/AccessKitWindowController.nib</key>
+		<key>Resources/AccessKitViewController.nib/keyedobjects.nib</key>
 		<data>
-		EQ44o9kNDPwxltCqAyCtQM/W5Zo=
+		pMJ2C761IyCNiOkI+995GpqGchE=
+		</data>
+		<key>Resources/Base.lproj/AccessKitWindowController.nib/keyedobjects-101300.nib</key>
+		<data>
+		1Zo4eBQKSOvlxXEPk2yWCuy4cYE=
+		</data>
+		<key>Resources/Base.lproj/AccessKitWindowController.nib/keyedobjects.nib</key>
+		<data>
+		oubzY1zOLR96xSXvtAImetgvLiQ=
 		</data>
 		<key>Resources/Info.plist</key>
 		<data>
-		/6ShIVkdVM3vY/nycj1zsL6F5FU=
+		vTPJYcE/A5MTJjVp1d58Rg82/d4=
 		</data>
 		<key>Resources/Prompts.plist</key>
 		<data>
@@ -120,37 +128,59 @@
 			5mVnwJYYNBnO0sMKM/F93gBVCBAOZ7FHrUfr8GxYIYI=
 			</data>
 		</dict>
-		<key>Resources/AccessKitViewController.nib</key>
+		<key>Resources/AccessKitViewController.nib/keyedobjects-101300.nib</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			10Z/C8pJlaR4qPuILqEfajKUcjI=
+			CFRQoNJ5DrdmopKq+Mh7wtikUqk=
 			</data>
 			<key>hash2</key>
 			<data>
-			d/LOd10shlhV8v/CwJSuGjdJLTxC2WwHvbLaS6C6Z9k=
+			qWFLxhK7RNxcq1O/Y1pLAPh/Yg/8xzHDMPk2D2Q+aRg=
 			</data>
 		</dict>
-		<key>Resources/Base.lproj/AccessKitWindowController.nib</key>
+		<key>Resources/AccessKitViewController.nib/keyedobjects.nib</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			EQ44o9kNDPwxltCqAyCtQM/W5Zo=
+			pMJ2C761IyCNiOkI+995GpqGchE=
 			</data>
 			<key>hash2</key>
 			<data>
-			KBINud7uKzRoCLigIFYwkE64An8qzGfDA2FoAmrElKo=
+			jJwzkdRnS01Xe5YYLv2V37pT+NLeW/yhEtyS4NJTtcM=
+			</data>
+		</dict>
+		<key>Resources/Base.lproj/AccessKitWindowController.nib/keyedobjects-101300.nib</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			1Zo4eBQKSOvlxXEPk2yWCuy4cYE=
+			</data>
+			<key>hash2</key>
+			<data>
+			WfoKi1buDyKcMucBpHK4cMTyaXn1ADt9Zmb2MSlBJoA=
+			</data>
+		</dict>
+		<key>Resources/Base.lproj/AccessKitWindowController.nib/keyedobjects.nib</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			oubzY1zOLR96xSXvtAImetgvLiQ=
+			</data>
+			<key>hash2</key>
+			<data>
+			0Ccv+mezyEO42sSksQiSkeoI2Ed2tFs+yBWmN7wPmNs=
 			</data>
 		</dict>
 		<key>Resources/Info.plist</key>
 		<dict>
 			<key>hash</key>
 			<data>
-			/6ShIVkdVM3vY/nycj1zsL6F5FU=
+			vTPJYcE/A5MTJjVp1d58Rg82/d4=
 			</data>
 			<key>hash2</key>
 			<data>
-			FqZvYx5awibqr1Hsnmoy/ogbptVhnZ9W7x6/YMDgZwk=
+			bJbq57e2ahVkmok9PluedRZOHOvXNvfAA8AphITyuLM=
 			</data>
 		</dict>
 		<key>Resources/Prompts.plist</key>
