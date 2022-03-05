@@ -2,35 +2,49 @@
 #target photoshop
 
 var docRef = app.activeDocument,
+    oldName = docRef.name,
     Ncanais = docRef.channels.length,
     actionBreakout = "Breakout 2%",
     actionGrupo = "QC 11-2020",
-    actionFlexopreview = "FlexoPrint";
+    newDoc = docRef.duplicate();                        // Duplica arquivo atual
+    newDoc.name = oldName + " " + actionBreakout;
+    newDoc.flatten();
 
-docRef.changeMode(ChangeMode.MULTICHANNEL);
+newDoc.changeMode(ChangeMode.MULTICHANNEL);
 
 for (var y = 0; y < Ncanais; y++) {
-    var upperName = docRef.channels[y].name.toUpperCase(),
-        channelRef = docRef.channels[y];
-        theChannels = new Array(docRef.channels[y]); //select current channel
-        
+    var upperName = newDoc.channels[y].name.toUpperCase(),
+        channelRef = newDoc.channels[y];
+        theChannels = new Array(newDoc.channels[y]); //select current channel
+
     if (upperName.indexOf("SUBSTRATO") == -1 && upperName.indexOf("VARNISH") == -1 && upperName.indexOf("PRIMER") == -1 && upperName.indexOf("DIE") == -1 && upperName.indexOf("TECH") == -1 && upperName.indexOf("GUIDE") == -1 && upperName.indexOf("DIMEN") == -1 && upperName.indexOf("REGUA") == -1) {
-        docRef.activeChannels=theChannels;
+        newDoc.activeChannels=theChannels;
         app.doAction(actionBreakout, actionGrupo);
         app.refresh();                  // perde performance mas deixa o usuario ver o que aconteceu
         scriptAlert("Alerta","Deletar Breakout de "+upperName+"?");
-        theChannels = docRef.channels.getByName(actionBreakout); //select current channel
+        theChannels = newDoc.channels.getByName(actionBreakout); //select current channel
         theChannels.remove();
-        theChannels = new Array(docRef.channels[y]); //select current channel
-        docRef.activeChannels=theChannels;
-        app.doAction(actionFlexopreview, actionGrupo);
+        theChannels = new Array(newDoc.channels[y]); //select current channel
+         newDoc.activeChannels=theChannels;
+        flexoprintpreview(newDoc,theChannels,"Background");
         app.refresh();                  // perde performance mas deixa o usuario ver o que aconteceu
         scriptAlert("Alerta","Deletar subir mínimas de "+upperName+"?");
-        theChannels = docRef.channels.getByName("FlexoPrintPreview"); //select current channel
+        theChannels = newDoc.channels.getByName("FlexoPrintPreview"); //select current channel
         theChannels.remove();
     }
 }
 allChannelsVisible();
+newDoc.close(SaveOptions.DONOTSAVECHANGES);
+
+function flexoprintpreview(docRef,activeChannel,layerName){
+    var curveArray = new Array(Array(25,0), Array(98,56),Array(243,158), Array(251,195),Array(255,255)),
+        layerRef = docRef.artLayers.getByName(layerName);
+
+        newChannel = activeChannel[0].duplicate(docRef);
+        newChannel.name = "FlexoPrintPreview";
+        layerRef.adjustCurves(curveArray);
+        layerRef.adjustCurves(curveArray);
+    }
 
 function changeColor(channelName, cyan, magenta, yellow, black, opacity) {
     var newChannel = app.activeDocument.channels.getByName(channelName),
@@ -67,11 +81,11 @@ function newRuler(chanName) {
     nc = docc.channels.add();
     white = new SolidColor,
     newColor = new SolidColor;
-    
+
     white.gray.gray = 0;
     nc.kind = ChannelType.SPOTCOLOR;
     nc.opacity = 33;
-        
+
     newColor.cmyk.cyan = 100;
     newColor.cmyk.magenta = 10;
     newColor.cmyk.yellow = 70;
@@ -117,11 +131,11 @@ function ajustaEscala(){
     var milimetro=10; //relaçao pixel polegada
     var resolucao = app.activeDocument.resolution;
     var relacao = resolucao/2.54;
-    
+
     app.activeDocument.measurementScale.pixelLength = Math.round(relacao);
     app.activeDocument.measurementScale.logicalLength = milimetro;
     app.activeDocument.measurementScale.logicalUnits = "mm";
-    
+
 }
 
 function warn(str, del)
@@ -158,34 +172,32 @@ function warn(str, del)
         }
     catch (e) { alert(e); throw(e); }
     }
-    
 
+function scriptAlert(alertTitle, alertString1, alertString2) {
+    var alertWindow = new Window("dialog", undefined, undefined, {resizeable: false});
+        alertWindow.text = alertTitle;
+        alertWindow.preferredSize.width = 200;
+        alertWindow.preferredSize.height = 10;
+        alertWindow.orientation = "column";
+        alertWindow.alignChildren = ["center", "top"];
+        alertWindow.spacing = 25;
+        alertWindow.margins = 20;
+        alertWindow.frameLocation = [50,50];
+        alertWindow.opacity = 0.5;
+    var alertText = alertWindow.add("group");
+        alertText.orientation = "column";
 
-    function scriptAlert(alertTitle, alertString1, alertString2) {
-        var alertWindow = new Window("dialog", undefined, undefined, {resizeable: false});
-            alertWindow.text = alertTitle;
-            alertWindow.preferredSize.width = 200;
-            alertWindow.preferredSize.height = 10;
-            alertWindow.orientation = "column";
-            alertWindow.alignChildren = ["center", "top"];
-            alertWindow.spacing = 25;
-            alertWindow.margins = 20;
-            alertWindow.frameLocation = [50,50];
-            alertWindow.opacity = 0.5;
-        var alertText = alertWindow.add("group");
-            alertText.orientation = "column";
-            
-            alertText.alignChildren = ["left", "center"];
-            alertText.spacing = 0;
-            alertText.alignment = ["left", "top"];
-             alertStringSize1 = alertText.add("statictext", undefined, alertString1, {name: "alertText", multiline: true});
-             alertStringSize1.graphics.font = ScriptUI.newFont ("dialog", "BOLD", 13);
-            // alertStringSize2 = alertText.add("statictext", undefined, alertString2, {name: "alertText", multiline: true});
-            // alertStringSize2.graphics.font = "dialog:13";
-        var okButton = alertWindow.add("button", undefined, undefined, {name: "okButton"});
-            okButton.text = "OK";
-            okButton.alignment = ["center", "top"];
-            okButton.graphics.font = "dialog:13";
-        
-        alertWindow.show();
-    }
+        alertText.alignChildren = ["left", "center"];
+        alertText.spacing = 0;
+        alertText.alignment = ["left", "top"];
+         alertStringSize1 = alertText.add("statictext", undefined, alertString1, {name: "alertText", multiline: true});
+         alertStringSize1.graphics.font = ScriptUI.newFont ("dialog", "BOLD", 13);
+        // alertStringSize2 = alertText.add("statictext", undefined, alertString2, {name: "alertText", multiline: true});
+        // alertStringSize2.graphics.font = "dialog:13";
+    var okButton = alertWindow.add("button", undefined, undefined, {name: "okButton"});
+        okButton.text = "OK";
+        okButton.alignment = ["center", "top"];
+        okButton.graphics.font = "dialog:13";
+
+    alertWindow.show();
+}

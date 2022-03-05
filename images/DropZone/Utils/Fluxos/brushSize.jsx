@@ -8,7 +8,10 @@ if (getTool() != 'pencilTool') {
     setTool('pencilTool');
 }
 setCurrentBrushSize((nResol*Nmedida));
-
+// Change fg color.
+app.foregroundColor.rgb.hexValue = "000000";
+// Change bg color.
+app.backgroundColor.rgb.hexValue = "ffffff";
 
 
 
