@@ -3,20 +3,17 @@
     include_once 'partials/header.php';
     ?>
 </div>
-
 <?php
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
 session_start();
-if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    $sessionDoc = $_POST['textDoc'];
-    $sessionArte = $_POST['textArte'];
-    $sessionEDuplo = (isset($_POST['espacoDuplo'])) ? $_POST['espacoDuplo'] : '';
-    $sessionEArte = (isset($_POST['caixaAlta'])) ? $_POST['caixaAlta'] : '';
-    $textDoc = '';
-    $textArte = '';
-} else {
-    $sessionDoc = '';
-    $sessionArte = '';
-}
+    
+    $sessionEDuplo = (isset($_POST['espacoDuplo'])) ? $_POST['espacoDuplo'] : 'checked';
+    $sessionEArte = (isset($_POST['caixaAlta'])) ? $_POST['caixaAlta'] : 'checked';
+    $sessionDoc = (isset($_POST['textDoc']))?$_POST['textDoc']:'';
+    $sessionArte = (isset($_POST['textArte']))?$_POST['textArte']:'';
+
 ?>
 <html>
 
@@ -85,6 +82,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
             $textDoc = $_POST['textDoc'];
             $textArte = $_POST['textArte'];
+            $textDoc = preg_replace("/\t/", " ", $textDoc);
+            $textArte = preg_replace("/\t/", " ", $textArte);
+
             if (isset($_POST['espacoDuplo'])) $espacoDuplo = ($_POST['espacoDuplo'] == 'checked') ? true : false;
             else $espacoDuplo = false;
             if (isset($_POST['caixaAlta'])) $caixaAlta = ($_POST['caixaAlta'] == 'checked') ? true : false;
@@ -144,10 +144,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 foreach ($textArteLinhas as $arteLinha) {
                     $pattern = ($caixaAlta) ? '/i' : '/';
 
-                    if (preg_match('/' . $docLinha . $pattern, $arteLinha) || (($caixaAlta) ? str_contains(strtoupper($arteLinha), strtoupper($docLinha)) : str_contains($arteLinha, $docLinha)) && ($caixaAlta) ? str_contains(strtoupper($docLinha),strtoupper($arteLinha)) : str_contains($docLinha,$arteLinha)) {
+                    // if (preg_match('/' . $docLinha . $pattern, $arteLinha)) {
+                    // if (($caixaAlta) ? strpos(strtoupper($arteLinha),  strtoupper($docLinha)) > -1 : strpos($arteLinha, $docLinha) > -1 ) {
+                        
+                    if (strpos(strtoupper($arteLinha),  strtoupper($docLinha)) > -1 && strpos(strtoupper($docLinha), strtoupper($arteLinha)) > -1) {
+                        // echo '<br>' . $arteLinha . ' = ' . $docLinha;
                         if ($docLinha != '') array_push($textCompara, $arteLinha);
-                        array_splice($textDocLinhas, array_search($docLinha, $textDocLinhas), 1);
-                        array_splice($textArteLinhas, array_search($arteLinha, $textArteLinhas), 1);
+                            array_splice($textDocLinhas, array_search($docLinha, $textDocLinhas), 1);
+                            array_splice($textArteLinhas, array_search($arteLinha, $textArteLinhas), 1);
                     }
                 }
             }
@@ -321,19 +325,19 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     }
                 }
             }
+            foreach ($textDocLinhas as $sobra) array_push($textDocLinhasNovo, $sobra);
         }
-        foreach ($textDocLinhas as $sobra) array_push($textDocLinhasNovo, $sobra);
 
         ?>
 
 
         <div class="container p-3 m-0">
             <?php
-            if (count($unidadeMedidaEspaco) > 0) {
+            if (isset($unidadeMedidaEspaco) && count($unidadeMedidaEspaco) > 0) {
                 echo "<h6>Unidades de medida sem espaço: </h6>";
                 foreach ($unidadeMedidaEspaco as $erro) echo "<br><h7>" . str_replace($replaceChars[1], $replaceChars[2], $erro) . "</h7><br>";
             }
-            if (count($unidadeMedidaCaixa) > 0) {
+            if (isset($unidadeMedidaCaixa) && count($unidadeMedidaCaixa) > 0) {
                 echo "<br><h6>Unidades de medida com escrita errada: </h6>";
                 foreach ($unidadeMedidaCaixa as $erro) echo "<br><h7>" . str_replace($replaceChars[1], $replaceChars[2], $erro) . "</h7><br>";
             }
@@ -370,6 +374,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         <div class="row p-3"></div>
 
     </div>
+</div>
     <?php include_once 'partials/footer.php'; ?>
-
 </html>

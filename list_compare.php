@@ -72,8 +72,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     $textDoc = preg_replace("/  /"," ",$textDoc);
     $textArte = preg_replace("/  /"," ",$textArte);
-    $textDoc = preg_replace(array('/\r+/','/\n+/', '/\,+/'),",",$textDoc);
-    $textArte = preg_replace(array('/\r+/','/\n+/','/\,+/'),',',$textArte);
+    $textDoc = preg_replace(array('/\r+/','/\n+/','/\t+/', '/\,+/'),",",$textDoc);
+    $textArte = preg_replace(array('/\r+/','/\n+/','/\t+/','/\,+/'),',',$textArte);
 
     $textDocLinhas = explode(',',$textDoc,9999);
     $textArteLinhas = explode(',',$textArte,9999);
