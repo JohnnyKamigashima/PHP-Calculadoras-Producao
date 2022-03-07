@@ -12,6 +12,10 @@
         <li class="nav-item">
           <a class="nav-link" href="list_compare.php">Compare Listas</a>
         </li>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="text_compare.php">Compara texto</a>
+        </li>
       </ul>
     </div>
   </div>
