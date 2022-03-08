@@ -1,4 +1,4 @@
-@import 'bootstrap.css';
+// @import "bootstrap.css";
 
 .cells {
     background-color: rgb(216, 216, 216);
@@ -34,13 +34,18 @@
     padding: 5px;
 }
 
-// textarea {
-//   width:100%;
-// }
+.icon{
+    width: 25px;
+    height: 25px;
+}
 
-// .textwrapper {
-//   border:1px solid #999999;
-//   margin:5px 0;
-//   padding:3px;
-//   width:100%
-// }
+textarea {
+  width:100%;
+ }
+
+ .textwrapper {
+   border:1px solid #999999;
+   margin:5px 0;
+   padding:3px;
+   width:100%
+ }

@@ -1,5 +1,5 @@
  <!-- Tabela Net Content -->
- <div class="cells">
+ <div class="col-md-4 cells">
      <div class="titulo">
          Tabela de Peso Neto
      </div>

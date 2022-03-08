@@ -1,5 +1,5 @@
  <!-- calculadora T Transgenico -->
- <div class="cells">
+ <div class="col-md-4 cells">
      <div class="titulo">
          Calculo do Triângulo de Transgênico
      </div>

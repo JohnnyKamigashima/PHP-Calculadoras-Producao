@@ -1,5 +1,5 @@
 <!-- calc plano escala -->
-<div class="cells">
+<div class="col-md-4 cells">
     <div class="titulo">
         Escala de Plano
     </div>

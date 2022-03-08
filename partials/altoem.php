@@ -1,5 +1,5 @@
 <!-- calculadora AltoEm -->
-<div class="cells">
+<div class="col-md-4 cells">
     <div class="titulo">
         Alto Em (Farol Brasil) <img src="./images/altoembr.png" class="icon" >
     </div>

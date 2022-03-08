@@ -1,5 +1,5 @@
   <!-- calc distorçao -->
-  <div class="cells">
+  <div class="col-md-4 cells">
       <div class="titulo">
           Distorção de Cilindro
       </div>

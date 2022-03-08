@@ -1,6 +1,6 @@
 <!-- calculadora Farol Octagono-->
 <script src="./js/library.js"></script>
-<div class="cells">
+<div class="col-md-4 cells">
     <div class="titulo">
         Tamanho do Farol Octagono <img src="./images/altoenoctagono.png" class="icon" >
     </div>
