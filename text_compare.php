@@ -1,3 +1,4 @@
+<link rel="icon" type="image/png" href="./images/favicon.svg" />
 <div class="row">
     <?php
     include_once 'partials/header.php';
