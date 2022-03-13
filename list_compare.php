@@ -74,7 +74,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $textDoc = $_POST['textDoc'];
         $textArte = $_POST['textArte'];
         $textRef = $_POST['textRef'];
-        $extensoes = array('psd', 'tif');
+        $extensoes = array('psd', 'tif','jpg','png');
 
         foreach ($extensoes as $ext) {
             $textDoc = str_replace("." . $ext, "", $textDoc);
@@ -120,7 +120,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         }
 
         //compara Sobra do Mysgs com Refs
-        // $textDocLinhas=array_filter(array_unique($textDocLinhas));
+        $textDocLinhas=array_filter(array_unique($textDocLinhas));
         foreach ($textDocLinhas as $docLinha) {
             foreach ($textRefLinhas as $refLinha) {
                 // if(preg_match('/' . $docLinha . '$/i',$refLinha)){
