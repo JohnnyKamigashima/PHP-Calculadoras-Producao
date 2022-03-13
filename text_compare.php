@@ -129,7 +129,6 @@ $sessionArte = (isset($_POST['textArte'])) ? $_POST['textArte'] : '';
             $unidadeMedidaEspaco = preg_grep($unidadeMedida, $textArteLinhas);
             $unidadeMedidaCaixa = preg_grep($termosInvalidos, $textArteLinhas);
 
-
             // remove sapaço em branco antes e depois de cada linha
             $textDocLinhas = array_map('trim', $textDocLinhas);
             $textArteLinhas = array_map('trim', $textArteLinhas);
@@ -162,27 +161,20 @@ $sessionArte = (isset($_POST['textArte'])) ? $_POST['textArte'] : '';
             foreach ($textDocLinhas as $cadalinha)      array_push($textDocPalavras, explode(' ', $cadalinha));
             foreach ($textArteLinhas as $cadalinha)        array_push($textArtePalavras, explode(' ', $cadalinha));
 
-
             foreach ($textDocPalavras as $indicePalavraDoc => $palavrasDoc) {
                 $palavrasIguais = array();
 
                 // joga palavras iguais numa array para ver qual linha tem mais repeticoes
                 foreach ($textArtePalavras as $indicePalavraArte => $palavrasArte) {
                     $difNumPalavras = 9999 - abs(count($palavrasDoc) - count($palavrasArte));
-                    if ($caixaAlta) array_push($palavrasIguais, [$difNumPalavras, count(array_uintersect($palavrasDoc, $palavrasArte, "strcasecmp")), $indicePalavraDoc, $indicePalavraArte]);
-                    else array_push($palavrasIguais, [$difNumPalavras, count(array_uintersect($palavrasDoc, $palavrasArte, "strcmp")), $indicePalavraDoc, $indicePalavraArte]);
-                    // if ($caixaAlta) array_push($palavrasIguais, [count(array_uintersect($palavrasDoc, $palavrasArte, "strcasecmp")),$difNumPalavras, $indicePalavraDoc, $indicePalavraArte]);
-                    // else array_push($palavrasIguais, [count(array_uintersect($palavrasDoc, $palavrasArte, "strcmp")),$difNumPalavras, $indicePalavraDoc, $indicePalavraArte]);
+                    $correspond = true;
+                    if (abs(count($palavrasDoc) - count($palavrasArte)) > count($palavrasDoc) / 3) $correspond = false;
+                    if ($caixaAlta) array_push($palavrasIguais, [$difNumPalavras, count(array_uintersect($palavrasDoc, $palavrasArte, "strcasecmp")), $indicePalavraDoc, $indicePalavraArte, $correspond]);
+                    else array_push($palavrasIguais, [$difNumPalavras, count(array_uintersect($palavrasDoc, $palavrasArte, "strcmp")), $indicePalavraDoc, $indicePalavraArte, $correspond]);
                 }
                 rsort($palavrasIguais); //coloca em ordem decrescente para que a linha com mais repeticoes seja a primeira
-                // echo "<pre>", var_dump($palavrasIguais),"</pre>";
 
-                if (isset($palavrasIguais[0][1]) && $palavrasIguais[0][1] > 0) {
-                    // echo '<pre><br> Palavras iguais: ' . $palavrasIguais[0][1] . '<br>';
-                    // var_dump( $textDocPalavras[$palavrasIguais[0][2]]);
-                    // echo ' = ';
-                    // var_dump($textArtePalavras[$palavrasIguais[0][3]]);
-                    // echo '</pre>';
+                if (isset($palavrasIguais[0][1]) && $palavrasIguais[0][1] > 0 && $palavrasIguais[0][4] == true) {
 
                     $difdeDoc = comparaArrays($textDocPalavras[$palavrasIguais[0][2]], $textArtePalavras[$palavrasIguais[0][3]], $caixaAlta);
                     $difdeArte = comparaArrays($textArtePalavras[$palavrasIguais[0][3]], $textDocPalavras[$palavrasIguais[0][2]], $caixaAlta);
@@ -238,7 +230,6 @@ $sessionArte = (isset($_POST['textArte'])) ? $_POST['textArte'] : '';
         }
         ?>
 
-
         <div class="container p-3 m-0">
             <?php
             if (isset($unidadeMedidaEspaco) && count($unidadeMedidaEspaco) > 0) {
@@ -253,17 +244,14 @@ $sessionArte = (isset($_POST['textArte'])) ? $_POST['textArte'] : '';
             ?>
         </div>
 
-
-
-
         <?php
         if ((isset($textDocLinhasNovo) && count($textDocLinhasNovo) > 0) || (isset($textArteLinhasNovo) && count($textArteLinhasNovo) > 0) || max(count($textDocPalavras), count($textArtePalavras)) > 0) {
             echo '<div class="row p-3 m-0">';
             echo '<div class="col-md-6">';
-            echo '<h5>Os ' . count($textDocLinhasNovo) + count($textDocPalavras) . '/' . (count($textDocLinhasNovo) + count($textCompara) + count($textDocPalavras)) . ' parágrafos não correspondentes<br>no Documento são:</h5><br>';
+            echo '<h5>Os ' . count_valid($textDocLinhasNovo) . '/' . (count_valid($textDocLinhasNovo) + count_valid($textCompara) + count_valid($textDocPalavras)) . ' parágrafos não correspondentes<br>no Documento são:</h5><br>';
             echo '</div>';
             echo '<div class="col-md-6">';
-            echo '<h5>Os ' . count($textArteLinhasNovo) + count($textArtePalavras) . '/' . (count($textArteLinhasNovo) + count($textCompara) + count($textArtePalavras)) .  ' parágrafos não correspondentes<br>na Arte são:</h5><br>';
+            echo '<h5>Os ' . count_valid($textArteLinhasNovo)  . '/' . (count_valid($textArteLinhasNovo) + count_valid($textCompara) + count_valid($textArtePalavras)) .  ' parágrafos não correspondentes<br>na Arte são:</h5><br>';
             echo '</div>';
             echo '</div>';
 
@@ -274,11 +262,9 @@ $sessionArte = (isset($_POST['textArte'])) ? $_POST['textArte'] : '';
                 if (count(array_filter($textDocLinhasNovo[$item])) > 0 && count(array_filter($textArteLinhasNovo[$item])) > 0) {
                     echo '<div class="row p-3 m-0">';
                     echo '<div class="col-md-6">';
-                    // echo $item .'/'. count($textDocLinhasNovo) . ' - ';
                     foreach ($textDocLinhasNovo[$item] as $textResult) echo str_replace($replaceChars[1], $replaceChars[2], $textResult) . ' ';
                     echo '</div>';
                     echo '<div class="col-md-6">';
-                    // echo $item .'/'. count($textArteLinhasNovo). ' - ';
                     foreach ($textArteLinhasNovo[$item] as $textResult) echo str_replace($replaceChars[1], $replaceChars[2], $textResult) . ' ';
                     echo '</div>';
                     echo '</div>';
@@ -288,17 +274,30 @@ $sessionArte = (isset($_POST['textArte'])) ? $_POST['textArte'] : '';
         while (count($textDocPalavras) > count($textArtePalavras)) array_push($textArtePalavras, array(''));
         while (count($textArtePalavras) > count($textDocPalavras)) array_push($textDocPalavras, array(''));
 
-        for ($item = 0; $item < max(count($textDocPalavras), count($textArtePalavras)); $item++) {
+        for ($item = 0; $item <= max(count($textDocPalavras), count($textArtePalavras)); $item++) {
             echo '<div class="row p-3 m-0">';
             echo '<div class="col-md-6">';
-            // echo $item .'/'. count($textDocLinhasNovo) . ' - ';
             if (isset($textDocPalavras[$item])) foreach ($textDocPalavras[$item] as $textResult) echo str_replace($replaceChars[1], $replaceChars[2], $textResult) . ' ';
             echo '</div>';
             echo '<div class="col-md-6">';
-            // echo $item .'/'. count($textArteLinhasNovo). ' - ';
             if (isset($textArtePalavras[$item])) foreach ($textArtePalavras[$item] as $textResult) echo str_replace($replaceChars[1], $replaceChars[2], $textResult) . ' ';
             echo '</div>';
             echo '</div>';
+        }
+
+        function count_valid($array)
+        {
+            $conta = 0;
+            $array = array_filter($array);
+            foreach ($array as $ind => $arr) {
+                if (gettype($arr) == 'array') {
+                    foreach ($arr as $x) if ($x != "") {
+                        $conta++;
+                        break;
+                    }
+                } else if ($arr != "") $conta++;
+            }
+            return $conta;
         }
         ?>
     </div>
