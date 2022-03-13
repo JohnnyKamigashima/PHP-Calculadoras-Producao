@@ -9,11 +9,14 @@ ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 session_start();
-    
-    $sessionEDuplo = (isset($_POST['espacoDuplo'])) ? $_POST['espacoDuplo'] : 'checked';
-    $sessionEArte = (isset($_POST['caixaAlta'])) ? $_POST['caixaAlta'] : 'checked';
-    $sessionDoc = (isset($_POST['textDoc']))?$_POST['textDoc']:'';
-    $sessionArte = (isset($_POST['textArte']))?$_POST['textArte']:'';
+if (isset($_POST['espacoDuplo'])) {
+    $sessionEDuplo = ($_POST['espacoDuplo'] == 'checked') ? 'checked' : '';
+} else $sessionEDuplo = 'checked';
+if (isset($_POST['caixaAlta'])) {
+    $sessionECaixa =  ($_POST['caixaAlta'] == 'checked') ? 'checked' : '';
+} else $sessionECaixa =  'checked';
+$sessionDoc = (isset($_POST['textDoc'])) ? $_POST['textDoc'] : '';
+$sessionArte = (isset($_POST['textArte'])) ? $_POST['textArte'] : '';
 
 ?>
 <html>
@@ -50,15 +53,12 @@ session_start();
                         <textarea rows="30" cols="50" name="textArte" style="width:100%"><?php echo $sessionArte; ?></textarea>
                     </div>
                 </div>
-
                 <div class="form-check ml-3">
-
                     <input class="form-check-input" type="checkbox" id="espacoDuplo" name="espacoDuplo" value="checked" <?php echo $sessionEDuplo; ?>>
                     <label class="form-check-label" for="espacoDuplo">Ignorar espaços duplos</label>
                 </div>
                 <div class="form-check ml-3">
-
-                    <input class="form-check-input" type="checkbox" id="caixaAlta" name="caixaAlta" value="checked" <?php echo $sessionEArte; ?>>
+                    <input class="form-check-input" type="checkbox" id="caixaAlta" name="caixaAlta" value="checked" <?php echo $sessionECaixa; ?>>
                     <label class="form-check-label" for="caixaAlta">Ignorar Maiúsculas</label>
                 </div>
                 <!-- <div class="form-check ml-3">
@@ -143,18 +143,13 @@ session_start();
             $alerta = 'color:#FF0000';
 
             // Compara linha por linha
-            foreach ($textDocLinhas as $docLinha) {
-                foreach ($textArteLinhas as $arteLinha) {
+            foreach ($textDocLinhas as $indiceDoc => $docLinha) {
+                foreach ($textArteLinhas as $indiceArte => $arteLinha) {
                     $pattern = ($caixaAlta) ? '/i' : '/';
-
-                    // if (preg_match('/' . $docLinha . $pattern, $arteLinha)) {
-                    // if (($caixaAlta) ? strpos(strtoupper($arteLinha),  strtoupper($docLinha)) > -1 : strpos($arteLinha, $docLinha) > -1 ) {
-                        
-                    if (strpos(strtoupper($arteLinha),  strtoupper($docLinha)) > -1 && strpos(strtoupper($docLinha), strtoupper($arteLinha)) > -1) {
-                        // echo '<br>' . $arteLinha . ' = ' . $docLinha;
+                    if (($caixaAlta) ? (strtoupper($arteLinha) == strtoupper($docLinha)) : ($arteLinha == $docLinha)) {
                         if ($docLinha != '') array_push($textCompara, $arteLinha);
-                            array_splice($textDocLinhas, array_search($docLinha, $textDocLinhas), 1);
-                            array_splice($textArteLinhas, array_search($arteLinha, $textArteLinhas), 1);
+                        unset($textDocLinhas[$indiceDoc]);
+                        unset($textArteLinhas[$indiceArte]);
                     }
                 }
             }
@@ -169,168 +164,78 @@ session_start();
 
 
             foreach ($textDocPalavras as $indicePalavraDoc => $palavrasDoc) {
+                $palavrasIguais = array();
+
+                // joga palavras iguais numa array para ver qual linha tem mais repeticoes
                 foreach ($textArtePalavras as $indicePalavraArte => $palavrasArte) {
+                    $difNumPalavras = 9999 - abs(count($palavrasDoc) - count($palavrasArte));
+                    if ($caixaAlta) array_push($palavrasIguais, [$difNumPalavras, count(array_uintersect($palavrasDoc, $palavrasArte, "strcasecmp")), $indicePalavraDoc, $indicePalavraArte]);
+                    else array_push($palavrasIguais, [$difNumPalavras, count(array_uintersect($palavrasDoc, $palavrasArte, "strcmp")), $indicePalavraDoc, $indicePalavraArte]);
+                    // if ($caixaAlta) array_push($palavrasIguais, [count(array_uintersect($palavrasDoc, $palavrasArte, "strcasecmp")),$difNumPalavras, $indicePalavraDoc, $indicePalavraArte]);
+                    // else array_push($palavrasIguais, [count(array_uintersect($palavrasDoc, $palavrasArte, "strcmp")),$difNumPalavras, $indicePalavraDoc, $indicePalavraArte]);
+                }
+                rsort($palavrasIguais); //coloca em ordem decrescente para que a linha com mais repeticoes seja a primeira
+                // echo "<pre>", var_dump($palavrasIguais),"</pre>";
 
-                    $repeticoes = 0;
-                    foreach ($palavrasDoc as $palDoc) {
-                        foreach ($palavrasArte as $palArte) {
+                if (isset($palavrasIguais[0][1]) && $palavrasIguais[0][1] > 0) {
+                    // echo '<pre><br> Palavras iguais: ' . $palavrasIguais[0][1] . '<br>';
+                    // var_dump( $textDocPalavras[$palavrasIguais[0][2]]);
+                    // echo ' = ';
+                    // var_dump($textArtePalavras[$palavrasIguais[0][3]]);
+                    // echo '</pre>';
 
-                            if (strtolower($palDoc) == strtolower($palArte)) {
-                                $repeticoes++;
+                    $difdeDoc = comparaArrays($textDocPalavras[$palavrasIguais[0][2]], $textArtePalavras[$palavrasIguais[0][3]], $caixaAlta);
+                    $difdeArte = comparaArrays($textArtePalavras[$palavrasIguais[0][3]], $textDocPalavras[$palavrasIguais[0][2]], $caixaAlta);
+
+                    foreach ($difdeDoc as $palavra) {
+                        foreach ($textDocPalavras[$palavrasIguais[0][2]] as $indexDocPalavra => $docPalavra) {
+                            if ($palavra == $docPalavra) {
+                                $textDocPalavras[$palavrasIguais[0][2]][$indexDocPalavra] = "<strong style=$alerta>" . $textDocPalavras[$palavrasIguais[0][2]][$indexDocPalavra] . '</strong>';
                                 break;
                             }
                         }
                     }
-
-                    if ($repeticoes >= count($palavrasDoc) * 0.66) {
-                        if ($caixaAlta) {
-                            $difDoc = array_diff(array_map('strtoupper', $textDocPalavras[$indicePalavraDoc]), array_map('strtoupper', $textArtePalavras[$indicePalavraArte]));
-                            $difArte = array_diff(array_map('strtoupper', $textArtePalavras[$indicePalavraArte]), array_map('strtoupper', $textDocPalavras[$indicePalavraDoc]));
-                        } else {
-                            $difDoc = array_diff($textDocPalavras[$indicePalavraDoc], $textArtePalavras[$indicePalavraArte]);
-                            $difArte = array_diff($textArtePalavras[$indicePalavraArte], $textDocPalavras[$indicePalavraDoc]);
-                        }
-                        if ($caixaAlta) {
-                            $indiceTemp = -1;
-                            foreach ($difDoc as $keyDifDoc => $difDocPalavra) {
-                                $ultimoElemento = count($textDocLinhasNovo) - 1;
-                                $textPalAntDoc = isset($textDocPalavras[$indicePalavraDoc][$keyDifDoc - 1]) ? $textDocPalavras[$indicePalavraDoc][$keyDifDoc - 1] : '';
-                                $textPalProxDoc = isset($textDocPalavras[$indicePalavraDoc][$keyDifDoc + 1]) ? $textDocPalavras[$indicePalavraDoc][$keyDifDoc + 1] : '';
-                                $textPalAntArte = isset($textArtePalavras[$indicePalavraArte][$keyDifDoc - 1]) ? $textArtePalavras[$indicePalavraArte][$keyDifDoc - 1] : '';
-                                $textPalProxArte = isset($textArtePalavras[$indicePalavraArte][$keyDifDoc + 1]) ? $textArtePalavras[$indicePalavraArte][$keyDifDoc + 1] : '';
-                                if ($indiceTemp == $indicePalavraDoc) {
-                                    if ($textPalAntDoc == $textPalAntArte && $textPalProxDoc == $textPalProxArte)
-                                        $textDocLinhasNovo[$ultimoElemento] = str_ireplace($textPalAntDoc . ' ' . $difDocPalavra . ' ' . $textPalProxDoc, "<text style=$atencao>" . $textPalAntDoc . "</text> <strong style=$alerta>" . $difDocPalavra . "</strong> <text style=$atencao>" . $textPalProxDoc . '</text>', $textDocLinhasNovo[$ultimoElemento]);
-                                    elseif ($textPalAntDoc == $textPalAntArte)
-                                        $textDocLinhasNovo[$ultimoElemento] = str_ireplace($textPalAntDoc . ' ' . $difDocPalavra, "<text style=$atencao>" . $textPalAntDoc . "</text> <strong style=$alerta>" . $difDocPalavra . '</strong>', $textDocLinhasNovo[$ultimoElemento]);
-                                    elseif ($textPalProxDoc == $textPalProxArte)
-                                        $textDocLinhasNovo[$ultimoElemento] = str_ireplace($difDocPalavra . ' ' . $textPalProxDoc, "<strong style=$alerta>" . $difDocPalavra . "</strong> <text style=$atencao>" . $textPalProxDoc . '</text>', $textDocLinhasNovo[$ultimoElemento]);
-                                    else
-                                        $textDocLinhasNovo[$ultimoElemento] = str_ireplace($textPalAntDoc . ' ' . $difDocPalavra . ' ' . $textPalProxDoc, "<strong style=$alerta>" . $textPalAntDoc . " " . $difDocPalavra . " " . $textPalProxDoc . '</strong>', $textDocLinhasNovo[$ultimoElemento]);
-                                } else {
-                                    if ($textPalAntDoc == $textPalAntArte && $textPalProxDoc == $textPalProxArte) {
-                                        array_push($textDocLinhasNovo, str_ireplace($textPalAntDoc . ' ' . $difDocPalavra . ' ' . $textPalProxDoc, "<text style=$atencao>" . $textPalAntDoc . "</text> <strong style=$alerta>" . $difDocPalavra . "</strong> <text style=$atencao>" . $textPalProxDoc . '</text>', $textDocLinhas[$indicePalavraDoc]));
-                                        unset($textDocLinhas[$indicePalavraDoc]);
-                                    } elseif ($textPalAntDoc == $textPalAntArte) {
-                                        array_push($textDocLinhasNovo, str_ireplace($textPalAntDoc . ' ' . $difDocPalavra, "<text style=$atencao>" . $textPalAntDoc . "</text> <strong style=$alerta>" . $difDocPalavra . '</strong>', $textDocLinhas[$indicePalavraDoc]));
-                                        unset($textDocLinhas[$indicePalavraDoc]);
-                                    } elseif ($textPalProxDoc == $textPalProxArte) {
-                                        array_push($textDocLinhasNovo, str_ireplace($difDocPalavra . ' ' . $textPalProxDoc, "<strong style=$alerta>" . $difDocPalavra . "</strong> <text style=$atencao>" . $textPalProxDoc . '</text>', $textDocLinhas[$indicePalavraDoc]));
-                                        unset($textDocLinhas[$indicePalavraDoc]);
-                                    } else {
-                                        array_push($textDocLinhasNovo, str_ireplace($textPalAntDoc . ' ' . $difDocPalavra . ' ' . $textPalProxDoc, "<strong style=$alerta>" . $textPalAntDoc . " " . $difDocPalavra . " " . $textPalProxDoc . '</strong>', $textDocLinhas[$indicePalavraDoc]));
-                                        unset($textDocLinhas[$indicePalavraDoc]);
-                                    }
-                                    $indiceTemp = $indicePalavraDoc;
-                                }
-                            }
-                            $indiceTemp = -1;
-                            foreach ($difArte as $keyDifArte => $difArtePalavra) {
-                                $ultimoElemento = count($textArteLinhasNovo) - 1;
-                                $textPalAntDoc = isset($textDocPalavras[$indicePalavraDoc][$keyDifArte - 1]) ? $textDocPalavras[$indicePalavraDoc][$keyDifArte - 1] : '';
-                                $textPalProxDoc = isset($textDocPalavras[$indicePalavraDoc][$keyDifArte + 1]) ? $textDocPalavras[$indicePalavraDoc][$keyDifArte + 1] : '';
-                                $textPalAntArte = isset($textArtePalavras[$indicePalavraArte][$keyDifArte - 1]) ? $textArtePalavras[$indicePalavraArte][$keyDifArte - 1] : '';
-                                $textPalProxArte = isset($textArtePalavras[$indicePalavraArte][$keyDifArte + 1]) ? $textArtePalavras[$indicePalavraArte][$keyDifArte + 1] : '';
-                                if ($indiceTemp == $indicePalavraArte) {
-                                    if ($textPalAntDoc == $textPalAntArte && $textPalProxDoc == $textPalProxArte)
-                                        $textArteLinhasNovo[$ultimoElemento] = str_ireplace($textPalAntArte . ' ' . $difArtePalavra . ' ' . $textPalProxArte, "<text style=$atencao>" . $textPalAntArte . "</text> <strong style=$alerta>" . $difArtePalavra . "</strong> <text style=$atencao>" . $textPalProxArte . '</text>', $textArteLinhasNovo[$ultimoElemento]);
-                                    elseif ($textPalAntArte == $textPalAntDoc)
-                                        $textArteLinhasNovo[$ultimoElemento] = str_ireplace($textPalAntArte . ' ' . $difArtePalavra, "<text style=$atencao>" . $textPalAntArte . "</text> <strong style=$alerta>" . $difArtePalavra . '</strong>', $textArteLinhasNovo[$ultimoElemento]);
-                                    elseif ($textPalProxArte == $textPalProxDoc)
-                                        $textArteLinhasNovo[$ultimoElemento] = str_ireplace($difArtePalavra . ' ' . $textPalProxArte, "<strong style=$alerta>" . $difArtePalavra . "</strong> <text style=$atencao>" . $textPalProxArte . '</text>', $textArteLinhasNovo[$ultimoElemento]);
-                                    else
-                                        $textArteLinhasNovo[$ultimoElemento] = str_ireplace($textPalAntArte . ' ' . $difArtePalavra . ' ' . $textPalProxArte, "<strong style=$alerta>" . $textPalAntArte . " " . $difArtePalavra . " " . $textPalProxArte . '</strong>', $textArteLinhasNovo[$ultimoElemento]);
-                                } else {
-                                    if ($textPalAntArte == $textPalAntDoc && $textPalProxArte == $textPalProxDoc && isset($textArteLinhas[$indicePalavraArte])) {
-                                        array_push($textArteLinhasNovo, str_ireplace($textPalAntArte . ' ' . $difArtePalavra . ' ' . $textPalProxArte, "<text style=$atencao>" . $textPalAntArte . "</text> <strong style=$alerta>" . $difArtePalavra . "</strong> <text style=$atencao>" . $textPalProxArte . '</text>', $textArteLinhas[$indicePalavraArte]));
-                                        unset($textArteLinhas[$indicePalavraArte]);
-                                    } elseif ($textPalAntArte == $textPalAntDoc &&  isset($textArteLinhas[$indicePalavraArte])) {
-                                        array_push($textArteLinhasNovo, str_ireplace($textPalAntArte . ' ' . $difArtePalavra, "<text style=$atencao>" . $textPalAntArte . "</text> <strong style=$alerta>" . $difArtePalavra . '</strong>', $textArteLinhas[$indicePalavraArte]));
-                                        unset($textArteLinhas[$indicePalavraArte]);
-                                    } elseif ($textPalProxArte == $textPalProxDoc && isset($textArteLinhas[$indicePalavraArte])) {
-                                        array_push($textArteLinhasNovo, str_ireplace($difArtePalavra . ' ' . $textPalProxArte, "<strong style=$alerta>" . $difArtePalavra . "</strong> <text style=$atencao>" . $textPalProxArte . '</text>', $textArteLinhas[$indicePalavraArte]));
-                                        unset($textArteLinhas[$indicePalavraArte]);
-                                    } else {
-                                        array_push($textArteLinhasNovo, str_ireplace($textPalAntArte . ' ' . $difArtePalavra . ' ' . $textPalProxArte, "<strong style=$alerta>" . $textPalAntArte . " " . $difArtePalavra . " " . $textPalProxArte . '</strong>', $textArteLinhas[$indicePalavraArte]));
-                                        unset($textArteLinhas[$indicePalavraArte]);
-                                    }
-                                    $indiceTemp = $indicePalavraArte;
-                                }
-                            }
-                        } else {
-                            $indiceTemp = -1;
-                            foreach ($difDoc as $keyDifDoc => $difDocPalavra) {
-                                $ultimoElemento = count($textDocLinhasNovo) - 1;
-                                $textPalAntDoc = isset($textDocPalavras[$indicePalavraDoc][$keyDifDoc - 1]) ? $textDocPalavras[$indicePalavraDoc][$keyDifDoc - 1] : '';
-                                $textPalProxDoc = isset($textDocPalavras[$indicePalavraDoc][$keyDifDoc + 1]) ? $textDocPalavras[$indicePalavraDoc][$keyDifDoc + 1] : '';
-                                $textPalAntArte = isset($textArtePalavras[$indicePalavraArte][$keyDifDoc - 1]) ? $textArtePalavras[$indicePalavraArte][$keyDifDoc - 1] : '';
-                                $textPalProxArte = isset($textArtePalavras[$indicePalavraArte][$keyDifDoc + 1]) ? $textArtePalavras[$indicePalavraArte][$keyDifDoc + 1] : '';
-                                if ($indiceTemp == $indicePalavraDoc) {
-                                    if ($textPalAntDoc == $textPalAntArte && $textPalProxDoc == $textPalProxArte)
-                                        $textDocLinhasNovo[$ultimoElemento] = str_replace($textPalAntDoc . ' ' . $difDocPalavra . ' ' . $textPalProxDoc, "<text style=$atencao>" . $textPalAntDoc . "</text> <strong style=$alerta>" . $difDocPalavra . "</strong> <text style=$atencao>" . $textPalProxDoc . '</text>', $textDocLinhasNovo[$ultimoElemento]);
-                                    elseif ($textPalAntDoc == $textPalAntArte)
-                                        $textDocLinhasNovo[$ultimoElemento] = str_replace($textPalAntDoc . ' ' . $difDocPalavra, "<text style=$atencao>" . $textPalAntDoc . "</text> <strong style=$alerta>" . $difDocPalavra . '</strong>', $textDocLinhasNovo[$ultimoElemento]);
-                                    elseif ($textPalProxDoc == $textPalProxArte)
-                                        $textDocLinhasNovo[$ultimoElemento] = str_replace($difDocPalavra . ' ' . $textPalProxDoc, "<strong style=$alerta>" . $difDocPalavra . "</strong> <text style=$atencao>" . $textPalProxDoc . '</text>', $textDocLinhasNovo[$ultimoElemento]);
-                                    else
-                                        $textDocLinhasNovo[$ultimoElemento] = str_replace($textPalAntDoc . ' ' . $difDocPalavra . ' ' . $textPalProxDoc, "<strong style=$alerta>" . $textPalAntDoc . " " . $difDocPalavra . " " . $textPalProxDoc . '</strong>', $textDocLinhasNovo[$ultimoElemento]);
-                                } else {
-                                    if ($textPalAntDoc == $textPalAntArte && $textPalProxDoc == $textPalProxArte) {
-                                        array_push($textDocLinhasNovo, str_replace($textPalAntDoc . ' ' . $difDocPalavra . ' ' . $textPalProxDoc, "<text style=$atencao>" . $textPalAntDoc . "</text> <strong style=$alerta>" . $difDocPalavra . "</strong> <text style=$atencao>" . $textPalProxDoc . '</text>', $textDocLinhas[$indicePalavraDoc]));
-                                        unset($textDocLinhas[$indicePalavraDoc]);
-                                    } elseif ($textPalAntDoc == $textPalAntArte) {
-                                        array_push($textDocLinhasNovo, str_replace($textPalAntDoc . ' ' . $difDocPalavra, "<text style=$atencao>" . $textPalAntDoc . "</text> <strong style=$alerta>" . $difDocPalavra . '</strong>', $textDocLinhas[$indicePalavraDoc]));
-                                        unset($textDocLinhas[$indicePalavraDoc]);
-                                    } elseif ($textPalProxDoc == $textPalProxArte) {
-                                        array_push($textDocLinhasNovo, str_replace($difDocPalavra . ' ' . $textPalProxDoc, "<strong style=$alerta>" . $difDocPalavra . "</strong> <text style=$atencao>" . $textPalProxDoc . '</text>', $textDocLinhas[$indicePalavraDoc]));
-                                        unset($textDocLinhas[$indicePalavraDoc]);
-                                    } else {
-                                        array_push($textDocLinhasNovo, str_replace($textPalAntDoc . ' ' . $difDocPalavra . ' ' . $textPalProxDoc, "<strong style=$alerta>" . $textPalAntDoc . " " . $difDocPalavra . " " . $textPalProxDoc . '</strong>', $textDocLinhas[$indicePalavraDoc]));
-                                        unset($textDocLinhas[$indicePalavraDoc]);
-                                    }
-                                    $indiceTemp = $indicePalavraDoc;
-                                }
-                            }
-                            $indiceTemp = -1;
-                            foreach ($difArte as $keyDifArte => $difArtePalavra) {
-                                $ultimoElemento = count($textArteLinhasNovo) - 1;
-                                $textPalAntDoc = isset($textDocPalavras[$indicePalavraDoc][$keyDifArte - 1]) ? $textDocPalavras[$indicePalavraDoc][$keyDifArte - 1] : '';
-                                $textPalProxDoc = isset($textDocPalavras[$indicePalavraDoc][$keyDifArte + 1]) ? $textDocPalavras[$indicePalavraDoc][$keyDifArte + 1] : '';
-                                $textPalAntArte = isset($textArtePalavras[$indicePalavraArte][$keyDifArte - 1]) ? $textArtePalavras[$indicePalavraArte][$keyDifArte - 1] : '';
-                                $textPalProxArte = isset($textArtePalavras[$indicePalavraArte][$keyDifArte + 1]) ? $textArtePalavras[$indicePalavraArte][$keyDifArte + 1] : '';
-                                if ($indiceTemp == $indicePalavraArte) {
-                                    if ($textPalAntDoc == $textPalAntArte && $textPalProxDoc == $textPalProxArte)
-                                        $textArteLinhasNovo[$ultimoElemento] = str_replace($textPalAntArte . ' ' . $difArtePalavra . ' ' . $textPalProxArte, "<text style=$atencao>" . $textPalAntArte . "</text> <strong style=$alerta>" . $difArtePalavra . "</strong> <text style=$atencao>" . $textPalProxArte . '</text>', $textArteLinhasNovo[$ultimoElemento]);
-                                    elseif ($textPalAntArte == $textPalAntDoc)
-                                        $textArteLinhasNovo[$ultimoElemento] = str_replace($textPalAntArte . ' ' . $difArtePalavra, "<text style=$atencao>" . $textPalAntArte . "</text> <strong style=$alerta>" . $difArtePalavra . '</strong>', $textArteLinhasNovo[$ultimoElemento]);
-                                    elseif ($textPalProxArte == $textPalProxDoc)
-                                        $textArteLinhasNovo[$ultimoElemento] = str_replace($difArtePalavra . ' ' . $textPalProxArte, "<strong style=$alerta>" . $difArtePalavra . "</strong> <text style=$atencao>" . $textPalProxArte . '</text>', $textArteLinhasNovo[$ultimoElemento]);
-                                    else
-                                        $textArteLinhasNovo[$ultimoElemento] = str_replace($textPalAntArte . ' ' . $difArtePalavra . ' ' . $textPalProxArte, "<strong style=$alerta>" . $textPalAntArte . " " . $difArtePalavra . " " . $textPalProxArte . '</strong>', $textArteLinhasNovo[$ultimoElemento]);
-                                } else {
-                                    if ($textPalAntArte == $textPalAntDoc && $textPalProxArte == $textPalProxDoc) {
-                                        array_push($textArteLinhasNovo, str_replace($textPalAntArte . ' ' . $difArtePalavra . ' ' . $textPalProxArte, "<text style=$atencao>" . $textPalAntArte . "</text> <strong style=$alerta>" . $difArtePalavra . "</strong> <text style=$atencao>" . $textPalProxArte . '</text>', $textArteLinhas[$indicePalavraArte]));
-                                        unset($textArteLinhas[$indicePalavraArte]);
-                                    } elseif ($textPalAntArte == $textPalAntDoc) {
-                                        array_push($textArteLinhasNovo, str_replace($textPalAntArte . ' ' . $difArtePalavra, "<text style=$atencao>" . $textPalAntArte . "</text> <strong style=$alerta>" . $difArtePalavra . '</strong>', $textArteLinhas[$indicePalavraArte]));
-                                        unset($textArteLinhas[$indicePalavraArte]);
-                                    } elseif ($textPalProxArte == $textPalProxDoc) {
-                                        array_push($textArteLinhasNovo, str_replace($difArtePalavra . ' ' . $textPalProxArte, "<strong style=$alerta>" . $difArtePalavra . "</strong> <text style=$atencao>" . $textPalProxArte . '</text>', $textArteLinhas[$indicePalavraArte]));
-                                        unset($textArteLinhas[$indicePalavraArte]);
-                                    } else {
-                                        array_push($textArteLinhasNovo, str_replace($textPalAntArte . ' ' . $difArtePalavra . ' ' . $textPalProxArte, "<strong style=$alerta>" . $textPalAntArte . " " . $difArtePalavra . " " . $textPalProxArte . '</strong>', $textArteLinhas[$indicePalavraArte]));
-                                        unset($textArteLinhas[$indicePalavraArte]);
-                                    }
-                                    $indiceTemp = $indicePalavraArte;
-                                }
+                    foreach ($difdeArte as $palavra) {
+                        foreach ($textArtePalavras[$palavrasIguais[0][3]] as $indexDocArte => $docArte) {
+                            if ($palavra == $docArte) {
+                                $textArtePalavras[$palavrasIguais[0][3]][$indexDocArte] = "<strong style=$alerta>" . $textArtePalavras[$palavrasIguais[0][3]][$indexDocArte] . '</strong>';
+                                break;
                             }
                         }
                     }
+                    array_push($textDocLinhasNovo, $textDocPalavras[$palavrasIguais[0][2]]);
+                    array_push($textArteLinhasNovo, $textArtePalavras[$palavrasIguais[0][3]]);
+                    unset($textArtePalavras[$palavrasIguais[0][3]]);
+                    unset($textDocPalavras[$palavrasIguais[0][2]]);
+                } else {
+                    if (isset($palavrasIguais[0][2])) array_push($textDocLinhasNovo, $textDocPalavras[$palavrasIguais[0][2]]);
+                    array_push($textArteLinhasNovo, array(''));
                 }
             }
-            foreach ($textDocLinhas as $sobra) array_push($textDocLinhasNovo, $sobra);
+            while (count($textDocLinhasNovo) < count($textArteLinhasNovo)) {
+                array_push($textDocLinhasNovo, array(''));
+            }
         }
-
+        function comparaArrays($arr1, $arr2, $case)
+        {
+            $result = array();
+            $resTemp = '';
+            foreach ($arr1 as $ind1 => $uniq1) {
+                $resTemp = $uniq1;
+                foreach ($arr2 as $ind2 => $uniq2) {
+                    $doIt = false;
+                    if ($case && strtoupper($uniq1) == strtoupper($uniq2)) $doIt = true;
+                    else if (!$case && $uniq1 == $uniq2) $doIt = true;
+                    if ($doIt) {
+                        unset($arr2[$ind2]);
+                        $resTemp = '';
+                        break;
+                    }
+                }
+                if ($resTemp != '') array_push($result, $resTemp);
+            }
+            return $result;
+        }
         ?>
 
 
@@ -348,35 +253,58 @@ session_start();
             ?>
         </div>
 
-        <div class="row p-3 m-0">
 
-            <div class="col-md-6">
-                <?php
-                if (isset($textDocLinhasNovo) && count($textDocLinhasNovo) > 0) {
-                    echo '<h5>Os ' . count($textDocLinhasNovo) . '/' . (count($textDocLinhasNovo) + count($textCompara)) . ' parágrafos não correspondentes<br>no Documento são:</h5><br>';
-                    sort($textDocLinhasNovo);
-                    foreach ($textDocLinhasNovo as $textResult) {
-                        echo "<div class='col'>" . str_replace($replaceChars[1], $replaceChars[2], $textResult) . '</div><br><br>';
-                    }
+
+
+        <?php
+        if ((isset($textDocLinhasNovo) && count($textDocLinhasNovo) > 0) || (isset($textArteLinhasNovo) && count($textArteLinhasNovo) > 0) || max(count($textDocPalavras), count($textArtePalavras)) > 0) {
+            echo '<div class="row p-3 m-0">';
+            echo '<div class="col-md-6">';
+            echo '<h5>Os ' . count($textDocLinhasNovo) + count($textDocPalavras) . '/' . (count($textDocLinhasNovo) + count($textCompara) + count($textDocPalavras)) . ' parágrafos não correspondentes<br>no Documento são:</h5><br>';
+            echo '</div>';
+            echo '<div class="col-md-6">';
+            echo '<h5>Os ' . count($textArteLinhasNovo) + count($textArtePalavras) . '/' . (count($textArteLinhasNovo) + count($textCompara) + count($textArtePalavras)) .  ' parágrafos não correspondentes<br>na Arte são:</h5><br>';
+            echo '</div>';
+            echo '</div>';
+
+            // sort($textDocLinhasNovo);
+            // sort($textArteLinhasNovo);
+            for ($item = 0; $item < max(count($textDocLinhasNovo), count($textArteLinhasNovo)); $item++) {
+
+                if (count(array_filter($textDocLinhasNovo[$item])) > 0 && count(array_filter($textArteLinhasNovo[$item])) > 0) {
+                    echo '<div class="row p-3 m-0">';
+                    echo '<div class="col-md-6">';
+                    // echo $item .'/'. count($textDocLinhasNovo) . ' - ';
+                    foreach ($textDocLinhasNovo[$item] as $textResult) echo str_replace($replaceChars[1], $replaceChars[2], $textResult) . ' ';
+                    echo '</div>';
+                    echo '<div class="col-md-6">';
+                    // echo $item .'/'. count($textArteLinhasNovo). ' - ';
+                    foreach ($textArteLinhasNovo[$item] as $textResult) echo str_replace($replaceChars[1], $replaceChars[2], $textResult) . ' ';
+                    echo '</div>';
+                    echo '</div>';
                 }
-                ?>
-            </div>
-            <div class="col-6">
-                <?php
-                if (isset($textArteLinhasNovo) && count($textArteLinhasNovo) > 0) {
-                    echo '<h5>Os ' . count($textArteLinhasNovo) . '/' . (count($textArteLinhasNovo) + count($textCompara)) .  ' parágrafos não correspondentes<br>na Arte são:</h5><br>';
-                    sort($textArteLinhasNovo);
-                    foreach ($textArteLinhasNovo as $textResult) {
-                        echo "<div class='col'>" . str_replace($replaceChars[1], $replaceChars[2], $textResult) . '</div><br><br>';
-                    }
-                }
+            }
+        }
+        while (count($textDocPalavras) > count($textArtePalavras)) array_push($textArtePalavras, array(''));
+        while (count($textArtePalavras) > count($textDocPalavras)) array_push($textDocPalavras, array(''));
 
-                ?>
-            </div>
-        </div>
-        <div class="row p-3"></div>
-
+        for ($item = 0; $item < max(count($textDocPalavras), count($textArtePalavras)); $item++) {
+            echo '<div class="row p-3 m-0">';
+            echo '<div class="col-md-6">';
+            // echo $item .'/'. count($textDocLinhasNovo) . ' - ';
+            if (isset($textDocPalavras[$item])) foreach ($textDocPalavras[$item] as $textResult) echo str_replace($replaceChars[1], $replaceChars[2], $textResult) . ' ';
+            echo '</div>';
+            echo '<div class="col-md-6">';
+            // echo $item .'/'. count($textArteLinhasNovo). ' - ';
+            if (isset($textArtePalavras[$item])) foreach ($textArtePalavras[$item] as $textResult) echo str_replace($replaceChars[1], $replaceChars[2], $textResult) . ' ';
+            echo '</div>';
+            echo '</div>';
+        }
+        ?>
     </div>
+
 </div>
-    <?php include_once 'partials/footer.php'; ?>
+</div>
+<?php include_once 'partials/footer.php'; ?>
+
 </html>
