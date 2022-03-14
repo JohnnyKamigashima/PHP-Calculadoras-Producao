@@ -16,6 +16,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $sessionDoc = (isset($_POST['textDoc'])) ? $_POST['textDoc'] : '';
     $sessionArte = (isset($_POST['textArte'])) ? $_POST['textArte'] : '';
 } else {
+    $sessionDoc =  '';
+    $sessionArte = '';
     $sessionEDuplo = 'checked';
     $sessionECaixa =  'checked';
 }
@@ -206,6 +208,90 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             while (count($textDocLinhasNovo) < count($textArteLinhasNovo)) {
                 array_push($textDocLinhasNovo, array(''));
             }
+
+            echo ' <div class="container p-6 m-0">';
+            echo '<hr style="width:100%;text-align:center;margin-left:auto">';
+            if (isset($unidadeMedidaEspaco) && count($unidadeMedidaEspaco) > 0) {
+                echo "<h5>Unidades de medida sem espaço: </h5>";
+                echo "<strong style=$atencao>";
+                foreach ($unidadeMedidaEspaco as $erro) echo "<br><h7>" . str_replace($replaceChars[1], $replaceChars[2], $erro) . "</h7><br>";
+                echo "</strong>";
+            }
+            if (isset($unidadeMedidaCaixa) && count($unidadeMedidaCaixa) > 0) {
+                echo "<br><h6>Unidades de medida com escrita errada: </h6>";
+                echo "<strong style=$atencao>";
+                foreach ($unidadeMedidaCaixa as $erro) echo "<br><h7>" . str_replace($replaceChars[1], $replaceChars[2], $erro) . "</h7><br>";
+                echo "</strong>";
+            }
+            echo '<hr style="width:100%;text-align:center;margin-left:auto">';
+            if (isset($textCompara)) echo '<br><h5>' . count($textCompara) . ' parágrafos correspondem.</h5><br>';
+            echo '</div>';
+            if ((isset($textDocLinhasNovo) && count($textDocLinhasNovo) > 0) || (isset($textArteLinhasNovo) && count($textArteLinhasNovo) > 0) || max(count($textDocPalavras), count($textArtePalavras)) > 0) {
+                echo '<div class="row p-3 m-0">';
+                echo '<div class="col-md-6">';
+                echo '<h5>Os ' . (count_valid($textDocLinhasNovo) + count_valid($textDocPalavras)) . '/' . (count_valid($textDocLinhasNovo) + count_valid($textCompara) + count_valid($textDocPalavras)) . ' parágrafos não correspondentes<br>no Documento são:</h5><br>';
+                echo '</div>';
+                echo '<div class="col-md-6">';
+                echo '<h5>Os ' . (count_valid($textArteLinhasNovo) + count_valid($textArtePalavras))  . '/' . (count_valid($textArteLinhasNovo) + count_valid($textCompara) + count_valid($textArtePalavras)) .  ' parágrafos não correspondentes<br>na Arte são:</h5><br>';
+                echo '</div>';
+                echo '</div>';
+
+                // sort($textDocLinhasNovo);
+                // sort($textArteLinhasNovo);
+                for ($item = 0; $item < max(count_valid($textDocLinhasNovo), count_valid($textArteLinhasNovo)); $item++) { {
+                        echo '<div class="row p-3 m-0">';
+                        echo '<div class="col-md-6">';
+                        foreach ($textDocLinhasNovo[$item] as $textResult) echo str_replace($replaceChars[1], $replaceChars[2], $textResult) . ' ';
+                        echo '</div>';
+                        echo '<div class="col-md-6">';
+                        foreach ($textArteLinhasNovo[$item] as $textResult) echo str_replace($replaceChars[1], $replaceChars[2], $textResult) . ' ';
+                        echo '</div>';
+                        echo '</div>';
+                    }
+                }
+            }
+            while (count($textDocPalavras) > count($textArtePalavras)) array_push($textArtePalavras, array(''));
+            while (count($textArtePalavras) > count($textDocPalavras)) array_push($textDocPalavras, array(''));
+            for ($item = 0; $item < max(count_valid($textDocPalavras), count_valid($textArtePalavras)); $item++) {
+                echo '<div class="row p-3 m-0">';
+                echo '<div class="col-md-6">';
+                $reind = array_values($textDocPalavras);
+                echo "<strong style=$atencao>";
+                if (isset($reind[$item])) foreach ($reind[$item] as $textResult) echo str_replace($replaceChars[1], $replaceChars[2], $textResult) . ' ';
+                "</strong>";
+                echo '</div>';
+                echo '<div class="col-md-6">';
+                $reind = array_values($textArtePalavras);
+                echo "<strong style=$atencao>";
+                if (isset($reind[$item])) foreach ($reind[$item] as $textResult) echo str_replace($replaceChars[1], $replaceChars[2], $textResult) . ' ';
+                echo "</strong>";
+                echo '</div>';
+                echo '</div>';
+            }
+        }
+        function debug($array)
+        {
+            echo '<br>Debug: ';
+            foreach ($array as $index => $arr) {
+                echo "$index -> ";
+                if (gettype($arr) == 'array') foreach ($arr as $x) echo $x . ' ';
+                else echo $arr . ' ';
+                echo '<br>';
+            }
+        }
+        function count_valid($array)
+        {
+            $conta = 0;
+            $array = array_filter($array);
+            foreach ($array as $ind => $arr) {
+                if (gettype($arr) == 'array') {
+                    foreach ($arr as $x) if ($x != "") {
+                        $conta++;
+                        break;
+                    }
+                } else if ($arr != "") $conta++;
+            }
+            return $conta;
         }
         function comparaArrays($arr1, $arr2, $case)
         {
@@ -245,95 +331,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 }
             }
             return $result;
-        }
-        ?>
-
-        <div class="container p-6 m-0">
-            <?php
-            echo '<hr style="width:100%;text-align:center;margin-left:auto">';
-            if (isset($unidadeMedidaEspaco) && count($unidadeMedidaEspaco) > 0) {
-                echo "<h5>Unidades de medida sem espaço: </h5>";
-                echo "<strong style=$atencao>";
-                foreach ($unidadeMedidaEspaco as $erro) echo "<br><h7>" . str_replace($replaceChars[1], $replaceChars[2], $erro) . "</h7><br>";
-                echo "</strong>";
-            }
-            if (isset($unidadeMedidaCaixa) && count($unidadeMedidaCaixa) > 0) {
-                echo "<br><h6>Unidades de medida com escrita errada: </h6>";
-                echo "<strong style=$atencao>";
-                foreach ($unidadeMedidaCaixa as $erro) echo "<br><h7>" . str_replace($replaceChars[1], $replaceChars[2], $erro) . "</h7><br>";
-                echo "</strong>";
-            }
-            echo '<hr style="width:100%;text-align:center;margin-left:auto">';
-            if (isset($textCompara)) echo '<br><h5>' . count($textCompara) . ' parágrafos correspondem.</h5><br>';
-            ?>
-        </div>
-        <?php
-        if ((isset($textDocLinhasNovo) && count($textDocLinhasNovo) > 0) || (isset($textArteLinhasNovo) && count($textArteLinhasNovo) > 0) || max(count($textDocPalavras), count($textArtePalavras)) > 0) {
-            echo '<div class="row p-3 m-0">';
-            echo '<div class="col-md-6">';
-            echo '<h5>Os ' . (count_valid($textDocLinhasNovo) + count_valid($textDocPalavras)) . '/' . (count_valid($textDocLinhasNovo) + count_valid($textCompara) + count_valid($textDocPalavras)) . ' parágrafos não correspondentes<br>no Documento são:</h5><br>';
-            echo '</div>';
-            echo '<div class="col-md-6">';
-            echo '<h5>Os ' . (count_valid($textArteLinhasNovo) + count_valid($textArtePalavras))  . '/' . (count_valid($textArteLinhasNovo) + count_valid($textCompara) + count_valid($textArtePalavras)) .  ' parágrafos não correspondentes<br>na Arte são:</h5><br>';
-            echo '</div>';
-            echo '</div>';
-
-            // sort($textDocLinhasNovo);
-            // sort($textArteLinhasNovo);
-            for ($item = 0; $item < max(count_valid($textDocLinhasNovo), count_valid($textArteLinhasNovo)); $item++) { {
-                    echo '<div class="row p-3 m-0">';
-                    echo '<div class="col-md-6">';
-                    foreach ($textDocLinhasNovo[$item] as $textResult) echo str_replace($replaceChars[1], $replaceChars[2], $textResult) . ' ';
-                    echo '</div>';
-                    echo '<div class="col-md-6">';
-                    foreach ($textArteLinhasNovo[$item] as $textResult) echo str_replace($replaceChars[1], $replaceChars[2], $textResult) . ' ';
-                    echo '</div>';
-                    echo '</div>';
-                }
-            }
-        }
-        while (count($textDocPalavras) > count($textArtePalavras)) array_push($textArtePalavras, array(''));
-        while (count($textArtePalavras) > count($textDocPalavras)) array_push($textDocPalavras, array(''));
-        for ($item = 0; $item < max(count_valid($textDocPalavras), count_valid($textArtePalavras)); $item++) {
-            echo '<div class="row p-3 m-0">';
-            echo '<div class="col-md-6">';
-            $reind = array_values($textDocPalavras);
-            echo "<strong style=$atencao>";
-            if (isset($reind[$item])) foreach ($reind[$item] as $textResult) echo str_replace($replaceChars[1], $replaceChars[2], $textResult) . ' ';
-            "</strong>";
-            echo '</div>';
-            echo '<div class="col-md-6">';
-            $reind = array_values($textArtePalavras);
-            echo "<strong style=$atencao>";
-            if (isset($reind[$item])) foreach ($reind[$item] as $textResult) echo str_replace($replaceChars[1], $replaceChars[2], $textResult) . ' ';
-            echo "</strong>";
-            echo '</div>';
-            echo '</div>';
-        }
-
-        function debug($array)
-        {
-            echo '<br>Debug: ';
-            foreach ($array as $index => $arr) {
-                echo "$index -> ";
-                if (gettype($arr) == 'array') foreach ($arr as $x) echo $x . ' ';
-                else echo $arr . ' ';
-                echo '<br>';
-            }
-        }
-        function count_valid($array)
-        {
-            $conta = 0;
-            $array = array_filter($array);
-            foreach ($array as $ind => $arr) {
-                if (gettype($arr) == 'array') {
-                    foreach ($arr as $x) if ($x != "") {
-                        $conta++;
-                        break;
-                    }
-                } else if ($arr != "") $conta++;
-            }
-            return $conta;
         }
         ?>
     </div>
