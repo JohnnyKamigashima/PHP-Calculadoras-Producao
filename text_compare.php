@@ -156,10 +156,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     }
                 }
             }
-            echo '<br>textodoclinhas:';
-            debug($textDocLinhas);
-            echo '<br>texto arte linhas';
-            debug($textArteLinhas);
 
             // compara palavra por palavra
             $textDocPalavras = array();
