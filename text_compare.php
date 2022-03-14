@@ -8,16 +8,17 @@
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
-session_start();
-if (isset($_POST['espacoDuplo'])) {
-    $sessionEDuplo = ($_POST['espacoDuplo'] == 'checked') ? 'checked' : '';
-} else $sessionEDuplo = 'checked';
-if (isset($_POST['caixaAlta'])) {
-    $sessionECaixa =  ($_POST['caixaAlta'] == 'checked') ? 'checked' : '';
-} else $sessionECaixa =  'checked';
-$sessionDoc = (isset($_POST['textDoc'])) ? $_POST['textDoc'] : '';
-$sessionArte = (isset($_POST['textArte'])) ? $_POST['textArte'] : '';
 
+session_start();
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    $sessionEDuplo = (isset($_POST['espacoDuplo'])) ? 'checked' : '';
+    $sessionECaixa =  (isset($_POST['caixaAlta'])) ? 'checked' : '';
+    $sessionDoc = (isset($_POST['textDoc'])) ? $_POST['textDoc'] : '';
+    $sessionArte = (isset($_POST['textArte'])) ? $_POST['textArte'] : '';
+} else {
+    $sessionEDuplo = 'checked';
+    $sessionECaixa =  'checked';
+}
 ?>
 <html>
 <!-- Latest compiled and minified CSS -->
@@ -53,12 +54,12 @@ $sessionArte = (isset($_POST['textArte'])) ? $_POST['textArte'] : '';
                         <textarea rows="30" cols="50" name="textArte" style="width:100%"><?php echo $sessionArte; ?></textarea>
                     </div>
                 </div>
-                <div class="form-check ml-3">
-                    <input class="form-check-input" type="checkbox" id="espacoDuplo" name="espacoDuplo" value="checked" <?php echo $sessionEDuplo; ?>>
+                <div class="form-check m-3 p-1">
+                    <input class="form-check-input" type="checkbox" id="espacoDuplo" name="espacoDuplo" value="<?php echo $sessionEDuplo; ?>" <?php echo $sessionEDuplo; ?>>
                     <label class="form-check-label" for="espacoDuplo">Ignorar espaços duplos</label>
                 </div>
-                <div class="form-check ml-3">
-                    <input class="form-check-input" type="checkbox" id="caixaAlta" name="caixaAlta" value="checked" <?php echo $sessionECaixa; ?>>
+                <div class="form-check m-3 p-1">
+                    <input class="form-check-input" type="checkbox" id="caixaAlta" name="caixaAlta" value="<?php echo $sessionECaixa; ?>" <?php echo $sessionECaixa; ?>>
                     <label class="form-check-label" for="caixaAlta">Ignorar Maiúsculas</label>
                 </div>
                 <!-- <div class="form-check ml-3">
@@ -87,6 +88,7 @@ $sessionArte = (isset($_POST['textArte'])) ? $_POST['textArte'] : '';
             $textArte = $_POST['textArte'];
             $textDoc = preg_replace("/\t/", " ", $textDoc);
             $textArte = preg_replace("/\t/", " ", $textArte);
+            $encoding = 'UTF-8';
 
             if (isset($_POST['espacoDuplo'])) $espacoDuplo = ($_POST['espacoDuplo'] == 'checked') ? true : false;
             else $espacoDuplo = false;
@@ -145,7 +147,7 @@ $sessionArte = (isset($_POST['textArte'])) ? $_POST['textArte'] : '';
             foreach ($textDocLinhas as $indiceDoc => $docLinha) {
                 foreach ($textArteLinhas as $indiceArte => $arteLinha) {
                     $pattern = ($caixaAlta) ? '/i' : '/';
-                    if (($caixaAlta) ? (strtoupper($arteLinha) == strtoupper($docLinha)) : ($arteLinha == $docLinha)) {
+                    if (($caixaAlta) ? (mb_strtoupper($arteLinha, $encoding) == mb_strtoupper($docLinha, $encoding)) : ($arteLinha == $docLinha)) {
                         if ($docLinha != '') array_push($textCompara, $arteLinha);
                         unset($textDocLinhas[$indiceDoc]);
                         unset($textArteLinhas[$indiceArte]);
@@ -160,7 +162,6 @@ $sessionArte = (isset($_POST['textArte'])) ? $_POST['textArte'] : '';
 
             foreach ($textDocLinhas as $cadalinha)      array_push($textDocPalavras, explode(' ', $cadalinha));
             foreach ($textArteLinhas as $cadalinha)        array_push($textArtePalavras, explode(' ', $cadalinha));
-
             foreach ($textDocPalavras as $indicePalavraDoc => $palavrasDoc) {
                 $palavrasIguais = array();
 
@@ -168,9 +169,10 @@ $sessionArte = (isset($_POST['textArte'])) ? $_POST['textArte'] : '';
                 foreach ($textArtePalavras as $indicePalavraArte => $palavrasArte) {
                     $difNumPalavras = 9999 - abs(count($palavrasDoc) - count($palavrasArte));
                     $correspond = true;
-                    if (abs(count($palavrasDoc) - count($palavrasArte)) > count($palavrasDoc) / 3) $correspond = false;
-                    if ($caixaAlta) array_push($palavrasIguais, [$difNumPalavras, count(array_uintersect($palavrasDoc, $palavrasArte, "strcasecmp")), $indicePalavraDoc, $indicePalavraArte, $correspond]);
-                    else array_push($palavrasIguais, [$difNumPalavras, count(array_uintersect($palavrasDoc, $palavrasArte, "strcmp")), $indicePalavraDoc, $indicePalavraArte, $correspond]);
+                    if (abs(count($palavrasDoc) - count($palavrasArte)) > (count($palavrasDoc) / 3)) $correspond = false;
+
+                    if ($caixaAlta) array_push($palavrasIguais, [$difNumPalavras, count(descomparaArrays($palavrasDoc, $palavrasArte, $caixaAlta)), $indicePalavraDoc, $indicePalavraArte, $correspond]);
+                    else array_push($palavrasIguais, [$difNumPalavras, count(descomparaArrays($palavrasDoc, $palavrasArte, $caixaAlta)), $indicePalavraDoc, $indicePalavraArte, $correspond]);
                 }
                 rsort($palavrasIguais); //coloca em ordem decrescente para que a linha com mais repeticoes seja a primeira
 
@@ -197,11 +199,8 @@ $sessionArte = (isset($_POST['textArte'])) ? $_POST['textArte'] : '';
                     }
                     array_push($textDocLinhasNovo, $textDocPalavras[$palavrasIguais[0][2]]);
                     array_push($textArteLinhasNovo, $textArtePalavras[$palavrasIguais[0][3]]);
-                    unset($textArtePalavras[$palavrasIguais[0][3]]);
                     unset($textDocPalavras[$palavrasIguais[0][2]]);
-                } else {
-                    if (isset($palavrasIguais[0][2])) array_push($textDocLinhasNovo, $textDocPalavras[$palavrasIguais[0][2]]);
-                    array_push($textArteLinhasNovo, array(''));
+                    unset($textArtePalavras[$palavrasIguais[0][3]]);
                 }
             }
             while (count($textDocLinhasNovo) < count($textArteLinhasNovo)) {
@@ -212,11 +211,12 @@ $sessionArte = (isset($_POST['textArte'])) ? $_POST['textArte'] : '';
         {
             $result = array();
             $resTemp = '';
+            $encoding = 'UTF-8';
             foreach ($arr1 as $ind1 => $uniq1) {
                 $resTemp = $uniq1;
                 foreach ($arr2 as $ind2 => $uniq2) {
                     $doIt = false;
-                    if ($case && strtoupper($uniq1) == strtoupper($uniq2)) $doIt = true;
+                    if ($case && mb_strtoupper($uniq1, $encoding) == mb_strtoupper($uniq2, $encoding)) $doIt = true;
                     else if (!$case && $uniq1 == $uniq2) $doIt = true;
                     if ($doIt) {
                         unset($arr2[$ind2]);
@@ -228,38 +228,59 @@ $sessionArte = (isset($_POST['textArte'])) ? $_POST['textArte'] : '';
             }
             return $result;
         }
+        function descomparaArrays($arr1, $arr2, $case)
+        {
+            $result = array();
+            $encoding = 'UTF-8';
+            foreach ($arr1 as $ind1 => $uniq1) {
+                foreach ($arr2 as $ind2 => $uniq2) {
+                    $doIt = false;
+                    if ($case && mb_strtoupper($uniq1, $encoding) == mb_strtoupper($uniq2, $encoding)) $doIt = true;
+                    else if (!$case && $uniq1 == $uniq2) $doIt = true;
+                    if ($doIt) {
+                        unset($arr2[$ind2]);
+                        if ($uniq1 != '') array_push($result, $uniq1);
+                        break;
+                    }
+                }
+            }
+            return $result;
+        }
         ?>
 
-        <div class="container p-3 m-0">
+        <div class="container p-6 m-0">
             <?php
+            echo '<hr style="width:100%;text-align:center;margin-left:auto">';
             if (isset($unidadeMedidaEspaco) && count($unidadeMedidaEspaco) > 0) {
-                echo "<h6>Unidades de medida sem espaço: </h6>";
+                echo "<h5>Unidades de medida sem espaço: </h5>";
+                echo "<strong style=$atencao>";
                 foreach ($unidadeMedidaEspaco as $erro) echo "<br><h7>" . str_replace($replaceChars[1], $replaceChars[2], $erro) . "</h7><br>";
+                echo "</strong>";
             }
             if (isset($unidadeMedidaCaixa) && count($unidadeMedidaCaixa) > 0) {
                 echo "<br><h6>Unidades de medida com escrita errada: </h6>";
+                echo "<strong style=$atencao>";
                 foreach ($unidadeMedidaCaixa as $erro) echo "<br><h7>" . str_replace($replaceChars[1], $replaceChars[2], $erro) . "</h7><br>";
+                echo "</strong>";
             }
+            echo '<hr style="width:100%;text-align:center;margin-left:auto">';
             if (isset($textCompara)) echo '<br><h5>' . count($textCompara) . ' parágrafos correspondem.</h5><br>';
             ?>
         </div>
-
         <?php
         if ((isset($textDocLinhasNovo) && count($textDocLinhasNovo) > 0) || (isset($textArteLinhasNovo) && count($textArteLinhasNovo) > 0) || max(count($textDocPalavras), count($textArtePalavras)) > 0) {
             echo '<div class="row p-3 m-0">';
             echo '<div class="col-md-6">';
-            echo '<h5>Os ' . count_valid($textDocLinhasNovo) . '/' . (count_valid($textDocLinhasNovo) + count_valid($textCompara) + count_valid($textDocPalavras)) . ' parágrafos não correspondentes<br>no Documento são:</h5><br>';
+            echo '<h5>Os ' . (count_valid($textDocLinhasNovo) + count_valid($textDocPalavras)) . '/' . (count_valid($textDocLinhasNovo) + count_valid($textCompara) + count_valid($textDocPalavras)) . ' parágrafos não correspondentes<br>no Documento são:</h5><br>';
             echo '</div>';
             echo '<div class="col-md-6">';
-            echo '<h5>Os ' . count_valid($textArteLinhasNovo)  . '/' . (count_valid($textArteLinhasNovo) + count_valid($textCompara) + count_valid($textArtePalavras)) .  ' parágrafos não correspondentes<br>na Arte são:</h5><br>';
+            echo '<h5>Os ' . (count_valid($textArteLinhasNovo) + count_valid($textArtePalavras))  . '/' . (count_valid($textArteLinhasNovo) + count_valid($textCompara) + count_valid($textArtePalavras)) .  ' parágrafos não correspondentes<br>na Arte são:</h5><br>';
             echo '</div>';
             echo '</div>';
 
             // sort($textDocLinhasNovo);
             // sort($textArteLinhasNovo);
-            for ($item = 0; $item < max(count($textDocLinhasNovo), count($textArteLinhasNovo)); $item++) {
-
-                if (count(array_filter($textDocLinhasNovo[$item])) > 0 && count(array_filter($textArteLinhasNovo[$item])) > 0) {
+            for ($item = 0; $item < max(count_valid($textDocLinhasNovo), count_valid($textArteLinhasNovo)); $item++) { {
                     echo '<div class="row p-3 m-0">';
                     echo '<div class="col-md-6">';
                     foreach ($textDocLinhasNovo[$item] as $textResult) echo str_replace($replaceChars[1], $replaceChars[2], $textResult) . ' ';
@@ -273,18 +294,33 @@ $sessionArte = (isset($_POST['textArte'])) ? $_POST['textArte'] : '';
         }
         while (count($textDocPalavras) > count($textArtePalavras)) array_push($textArtePalavras, array(''));
         while (count($textArtePalavras) > count($textDocPalavras)) array_push($textDocPalavras, array(''));
-
-        for ($item = 0; $item <= max(count($textDocPalavras), count($textArtePalavras)); $item++) {
+        for ($item = 0; $item < max(count_valid($textDocPalavras), count_valid($textArtePalavras)); $item++) {
             echo '<div class="row p-3 m-0">';
             echo '<div class="col-md-6">';
-            if (isset($textDocPalavras[$item])) foreach ($textDocPalavras[$item] as $textResult) echo str_replace($replaceChars[1], $replaceChars[2], $textResult) . ' ';
+            $reind = array_values($textDocPalavras);
+            echo "<strong style=$atencao>";
+            if (isset($reind[$item])) foreach ($reind[$item] as $textResult) echo str_replace($replaceChars[1], $replaceChars[2], $textResult) . ' ';
+            "</strong>";
             echo '</div>';
             echo '<div class="col-md-6">';
-            if (isset($textArtePalavras[$item])) foreach ($textArtePalavras[$item] as $textResult) echo str_replace($replaceChars[1], $replaceChars[2], $textResult) . ' ';
+            $reind = array_values($textArtePalavras);
+            echo "<strong style=$atencao>";
+            if (isset($reind[$item])) foreach ($reind[$item] as $textResult) echo str_replace($replaceChars[1], $replaceChars[2], $textResult) . ' ';
+            echo "</strong>";
             echo '</div>';
             echo '</div>';
         }
 
+        function debug($array)
+        {
+            echo '<br>Debug: ';
+            foreach ($array as $index => $arr) {
+                echo "$index -> ";
+                if (gettype($arr) == 'array') foreach ($arr as $x) echo $x . ' ';
+                else echo $arr . ' ';
+                echo '<br>';
+            }
+        }
         function count_valid($array)
         {
             $conta = 0;
