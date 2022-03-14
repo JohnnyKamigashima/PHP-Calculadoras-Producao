@@ -148,14 +148,19 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             // Compara linha por linha
             foreach ($textDocLinhas as $indiceDoc => $docLinha) {
                 foreach ($textArteLinhas as $indiceArte => $arteLinha) {
-                    $pattern = ($caixaAlta) ? '/i' : '/';
                     if (($caixaAlta) ? (mb_strtoupper($arteLinha, $encoding) == mb_strtoupper($docLinha, $encoding)) : ($arteLinha == $docLinha)) {
                         if ($docLinha != '') array_push($textCompara, $arteLinha);
                         unset($textDocLinhas[$indiceDoc]);
                         unset($textArteLinhas[$indiceArte]);
+                        break;
                     }
                 }
             }
+            echo '<br>textodoclinhas:';
+            debug($textDocLinhas);
+            echo '<br>texto arte linhas';
+            debug($textArteLinhas);
+
             // compara palavra por palavra
             $textDocPalavras = array();
             $textArtePalavras = array();
