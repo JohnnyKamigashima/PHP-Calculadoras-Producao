@@ -95,8 +95,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
         $totalArq = count($textDocLinhas);
 
-        $textDocLinhas = array_filter($textDocLinhas);
-        $textArteLinhas = array_filter($textArteLinhas);
+        $textDocLinhas = array_filter(array_unique($textDocLinhas));
+        $textArteLinhas = array_filter(array_unique($textArteLinhas));
         $textRefLinhas = array_filter(array_unique($textRefLinhas));
 
         // sort($textDocLinhas);
