@@ -6,20 +6,20 @@
     ?>
 </div>
 
-<?php 
+<?php
 session_start();
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $sessionDoc = isset($_POST['textDoc']) ? $_POST['textDoc'] : '';
     $sessionArte = isset($_POST['textArte']) ? $_POST['textArte'] : '';
     $sessionRef = isset($_POST['textRef']) ? $_POST['textRef'] : '';
-    $textDoc = '';
-    $textArte = '';
-    $textRef = '';
+    $textDoc =
+        $textArte =
+        $textRef = '';
 } else {
-    $sessionDoc = '';
-    $sessionArte =  '';
-    $sessionRef = '';
+    $sessionDoc =
+        $sessionArte =
+        $sessionRef = '';
 } ?>
 <html>
 <title>QC Compare Lista de Arquivos/CT Docs</title>
@@ -75,11 +75,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     <?php
 
     if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-       
+
         $textDoc = $_POST['textDoc'];
         $textArte = $_POST['textArte'];
         $textRef = $_POST['textRef'];
-        $extensoes = array('psd', 'tif','jpg','png');
+        $extensoes = array('psd', 'tif', 'jpg', 'png');
+        $textCompara =
+            $textRefCompara = array();
 
         foreach ($extensoes as $ext) {
             $textDoc = str_replace("." . $ext, "", $textDoc);
@@ -100,9 +102,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
         $totalArq = count($textDocLinhas);
 
-        $textDocLinhas = array_map('trim',$textDocLinhas);
-        $textArteLinhas = array_map('trim',$textArteLinhas);
-        $textRefLinhas = array_map('trim',$textRefLinhas);
+        $textDocLinhas = array_map('trim', $textDocLinhas);
+        $textArteLinhas = array_map('trim', $textArteLinhas);
+        $textRefLinhas = array_map('trim', $textRefLinhas);
 
         $textDocLinhas = array_filter(array_unique($textDocLinhas));
         $textArteLinhas = array_filter(array_unique($textArteLinhas));
@@ -111,10 +113,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         // sort($textDocLinhas);
         // sort($textArteLinhas);
         // sort($textRefLinhas);
-
-        $textCompara = array();
-        $textRefCompara = array();
-        
 
         // Compara Mysgs com Finais
         foreach ($textDocLinhas as $docLinha) {
@@ -129,21 +127,19 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         }
 
         //compara Sobra do Mysgs com Refs
-        $textDocLinhas=array_filter(array_unique($textDocLinhas));
+        $textDocLinhas = array_filter(array_unique($textDocLinhas));
         foreach ($textDocLinhas as $docLinha) {
             foreach ($textRefLinhas as $refLinha) {
                 // if(preg_match('/' . $docLinha . '$/i',$refLinha)){
-                    if (doublePreg(strtoupper($docLinha)) == doublePreg(strtoupper($refLinha)))  {
+                if (doublePreg(strtoupper($docLinha)) == doublePreg(strtoupper($refLinha))) {
                     array_push($textRefCompara, $docLinha);
                     array_splice($textDocLinhas, array_search($docLinha, $textDocLinhas, true), 1);
                     array_splice($textRefLinhas, array_search($refLinha, $textRefLinhas, true), 1);
                 }
             }
         }
-
-      
     }
-   
+
     ?>
 
     <!-- echo '<br><br><h5>Os ' . count($textCompara) . ' arquivos iguais são:</h5><br>';
@@ -184,4 +180,5 @@ foreach($textCompara as $textResult){
     <div class="row p-3"></div>
 </div>
 <?php include_once 'partials/footer.php'; ?>
+
 </html>
