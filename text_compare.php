@@ -17,9 +17,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $sessionDoc = (isset($_POST['textDoc'])) ? $_POST['textDoc'] : '';
     $sessionArte = (isset($_POST['textArte'])) ? $_POST['textArte'] : '';
 } else {
-    $sessionDoc =  '';
+    $sessionDoc =
     $sessionArte = '';
-    $sessionEDuplo = 'checked';
+    $sessionEDuplo =
     $sessionECaixa =  'checked';
 }
 
@@ -95,10 +95,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $textArte = $_POST['textArte'];
             $textDoc = preg_replace("/\t/", " ", $textDoc);
             $textArte = preg_replace("/\t/", " ", $textArte);
-            $textCompara = array();
-            $textDocPalavras = array();
-            $textArtePalavras = array();
-            $textArteLinhasNovo = array();
+            $textCompara =
+            $textDocPalavras =
+            $textArtePalavras =
+            $textArteLinhasNovo =
             $textDocLinhasNovo = array();
 
             //Constants
