@@ -2,11 +2,13 @@
 <div class="row">
     <?php
     include_once 'partials/header.php';
+    require('partials/functions.php');
     ?>
 </div>
 
-<?php
+<?php 
 session_start();
+
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $sessionDoc = isset($_POST['textDoc']) ? $_POST['textDoc'] : '';
     $sessionArte = isset($_POST['textArte']) ? $_POST['textArte'] : '';
@@ -14,8 +16,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $textDoc = '';
     $textArte = '';
     $textRef = '';
-}
-?>
+} else {
+    $sessionDoc = '';
+    $sessionArte =  '';
+    $sessionRef = '';
+} ?>
 <html>
 <title>QC Compare Lista de Arquivos/CT Docs</title>
 <!-- Latest compiled and minified CSS -->
@@ -70,7 +75,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     <?php
 
     if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-
+       
         $textDoc = $_POST['textDoc'];
         $textArte = $_POST['textArte'];
         $textRef = $_POST['textRef'];
@@ -94,6 +99,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $textRefLinhas = explode(',', $textRef, 9999);
 
         $totalArq = count($textDocLinhas);
+
+        $textDocLinhas = array_map('trim',$textDocLinhas);
+        $textArteLinhas = array_map('trim',$textArteLinhas);
+        $textRefLinhas = array_map('trim',$textRefLinhas);
 
         $textDocLinhas = array_filter(array_unique($textDocLinhas));
         $textArteLinhas = array_filter(array_unique($textArteLinhas));
@@ -134,10 +143,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
       
     }
-    function doublePreg($palavra){
-        $invalidChars = '/ +|\-+|\_+/';
-        return preg_replace($invalidChars, '_', preg_replace($invalidChars, '_', $palavra));
-    } 
+   
     ?>
 
     <!-- echo '<br><br><h5>Os ' . count($textCompara) . ' arquivos iguais são:</h5><br>';

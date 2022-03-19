@@ -5,6 +5,8 @@
     ?>
 </div>
 <?php
+
+
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
@@ -21,9 +23,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $sessionEDuplo = 'checked';
     $sessionECaixa =  'checked';
 }
+
 ?>
 <html>
-    <title>QC Text Compare</title>
+<title>QC Text Compare</title>
 <!-- Latest compiled and minified CSS -->
 <!-- CSS only -->
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
@@ -86,7 +89,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         <?php
 
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-
+            require('partials/functions.php');
             $textDoc = $_POST['textDoc'];
             $textArte = $_POST['textArte'];
             $textDoc = preg_replace("/\t/", " ", $textDoc);
@@ -142,6 +145,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $textDocLinhas = array_filter($textDocLinhas);
             $textArteLinhas = array_filter($textArteLinhas);
 
+            // remove linhas repetidas no array
+            $textDocLinhas = array_unique($textDocLinhas);
+            $textArteLinhas = array_unique($textArteLinhas);
+
             $textCompara = array();
             $atencao = 'color:#880000';
             $alerta = 'color:#FF0000';
@@ -180,29 +187,31 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 }
                 rsort($palavrasIguais); //coloca em ordem decrescente para que a linha com mais repeticoes seja a primeira
 
-                if (isset($palavrasIguais[0][1]) && $palavrasIguais[0][1] > 0 && $palavrasIguais[0][4] == true) {
+                if (isset($palavrasIguais[0][1]) && $palavrasIguais[0][1] > 1 && $palavrasIguais[0][4] == true) {
 
                     $difdeDoc = comparaArrays($textDocPalavras[$palavrasIguais[0][2]], $textArtePalavras[$palavrasIguais[0][3]], $caixaAlta);
                     $difdeArte = comparaArrays($textArtePalavras[$palavrasIguais[0][3]], $textDocPalavras[$palavrasIguais[0][2]], $caixaAlta);
 
-                    foreach ($difdeDoc as $palavra) {
-                        foreach ($textDocPalavras[$palavrasIguais[0][2]] as $indexDocPalavra => $docPalavra) {
-                            if ($palavra == $docPalavra) {
-                                $textDocPalavras[$palavrasIguais[0][2]][$indexDocPalavra] = "<strong style=$alerta>" . $textDocPalavras[$palavrasIguais[0][2]][$indexDocPalavra] . '</strong>';
-                                break;
-                            }
-                        }
-                    }
-                    foreach ($difdeArte as $palavra) {
-                        foreach ($textArtePalavras[$palavrasIguais[0][3]] as $indexDocArte => $docArte) {
-                            if ($palavra == $docArte) {
-                                $textArtePalavras[$palavrasIguais[0][3]][$indexDocArte] = "<strong style=$alerta>" . $textArtePalavras[$palavrasIguais[0][3]][$indexDocArte] . '</strong>';
-                                break;
-                            }
-                        }
-                    }
-                    array_push($textDocLinhasNovo, $textDocPalavras[$palavrasIguais[0][2]]);
-                    array_push($textArteLinhasNovo, $textArtePalavras[$palavrasIguais[0][3]]);
+                    // foreach ($difdeDoc as $palavra) {
+                    //     foreach ($textDocPalavras[$palavrasIguais[0][2]] as $indexDocPalavra => $docPalavra) {
+                    //         if ($palavra == $docPalavra) {
+                    //             $textDocPalavras[$palavrasIguais[0][2]][$indexDocPalavra] = "<strong style=$alerta>" . $textDocPalavras[$palavrasIguais[0][2]][$indexDocPalavra] . '</strong>';
+                    //             break;
+                    //         }
+                    //     }
+                    // }
+                    // foreach ($difdeArte as $palavra) {
+                    //     foreach ($textArtePalavras[$palavrasIguais[0][3]] as $indexDocArte => $docArte) {
+                    //         if ($palavra == $docArte) {
+                    //             $textArtePalavras[$palavrasIguais[0][3]][$indexDocArte] = "<strong style=$alerta>" . $textArtePalavras[$palavrasIguais[0][3]][$indexDocArte] . '</strong>';
+                    //             break;
+                    //         }
+                    //     }
+                    // }
+                    // array_push($textDocLinhasNovo, $textDocPalavras[$palavrasIguais[0][2]]);
+                    // array_push($textArteLinhasNovo, $textArtePalavras[$palavrasIguais[0][3]]);
+                    array_push($textDocLinhasNovo, frasesDiff($textDocPalavras[$palavrasIguais[0][2]], $textArtePalavras[$palavrasIguais[0][3]], $caixaAlta, 'ff0000', '880000'));
+                    array_push($textArteLinhasNovo, frasesDiff($textArtePalavras[$palavrasIguais[0][3]], $textDocPalavras[$palavrasIguais[0][2]], $caixaAlta, 'ff0000', '880000'));
                     unset($textDocPalavras[$palavrasIguais[0][2]]);
                     unset($textArtePalavras[$palavrasIguais[0][3]]);
                 }
@@ -271,69 +280,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 echo '</div>';
             }
         }
-        function debug($array)
-        {
-            echo '<br>Debug: ';
-            foreach ($array as $index => $arr) {
-                echo "$index -> ";
-                if (gettype($arr) == 'array') foreach ($arr as $x) echo $x . ' ';
-                else echo $arr . ' ';
-                echo '<br>';
-            }
-        }
-        function count_valid($array)
-        {
-            $conta = 0;
-            $array = array_filter($array);
-            foreach ($array as $ind => $arr) {
-                if (gettype($arr) == 'array') {
-                    foreach ($arr as $x) if ($x != "") {
-                        $conta++;
-                        break;
-                    }
-                } else if ($arr != "") $conta++;
-            }
-            return $conta;
-        }
-        function comparaArrays($arr1, $arr2, $case)
-        {
-            $result = array();
-            $resTemp = '';
-            $encoding = 'UTF-8';
-            foreach ($arr1 as $ind1 => $uniq1) {
-                $resTemp = $uniq1;
-                foreach ($arr2 as $ind2 => $uniq2) {
-                    $doIt = false;
-                    if ($case && mb_strtoupper($uniq1, $encoding) == mb_strtoupper($uniq2, $encoding)) $doIt = true;
-                    else if (!$case && $uniq1 == $uniq2) $doIt = true;
-                    if ($doIt) {
-                        unset($arr2[$ind2]);
-                        $resTemp = '';
-                        break;
-                    }
-                }
-                if ($resTemp != '') array_push($result, $resTemp);
-            }
-            return $result;
-        }
-        function descomparaArrays($arr1, $arr2, $case)
-        {
-            $result = array();
-            $encoding = 'UTF-8';
-            foreach ($arr1 as $ind1 => $uniq1) {
-                foreach ($arr2 as $ind2 => $uniq2) {
-                    $doIt = false;
-                    if ($case && mb_strtoupper($uniq1, $encoding) == mb_strtoupper($uniq2, $encoding)) $doIt = true;
-                    else if (!$case && $uniq1 == $uniq2) $doIt = true;
-                    if ($doIt) {
-                        unset($arr2[$ind2]);
-                        if ($uniq1 != '') array_push($result, $uniq1);
-                        break;
-                    }
-                }
-            }
-            return $result;
-        }
+
         ?>
     </div>
 
