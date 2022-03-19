@@ -6,7 +6,6 @@
 </div>
 <?php
 
-
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
@@ -90,11 +89,24 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             require('partials/functions.php');
+
+            //Variables
             $textDoc = $_POST['textDoc'];
             $textArte = $_POST['textArte'];
             $textDoc = preg_replace("/\t/", " ", $textDoc);
             $textArte = preg_replace("/\t/", " ", $textArte);
-            $encoding = 'UTF-8';
+            $textCompara = array();
+            $textDocPalavras = array();
+            $textArtePalavras = array();
+            $textArteLinhasNovo = array();
+            $textDocLinhasNovo = array();
+
+            //Constants
+            define('ENCODING', 'UTF-8');
+            define("ATENCAO", 'color:#880000');
+            define("ALERTA", 'color:#FF0000');
+            define('UNIDADEMEDIDA', '/\d+(cm|m|km|mcg|mg|g|kg|ml|l|cal|kcal)/i');
+            define('TERMOSINVALIDOS', '/(\d+ |\d+)(CM|cM|Cm|mt|M|Mt|mT|KM|kM|MCG|Mcg|McG|mcG|MGc|MG|Mg|mG|G|GR|Gr|KG|Kg|kG|ML|Ml|CAL|Cal|CaL|cAL|caL|KCAL|Kcal|kCAL|kcAL|kcaL|KcaL|KCal|KcAL) /');
 
             if (isset($_POST['espacoDuplo'])) $espacoDuplo = ($_POST['espacoDuplo'] == 'checked') ? true : false;
             else $espacoDuplo = false;
@@ -112,17 +124,26 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $replaceChars[0] = [
                 "/(\r+|\n+| \n+|\|+)/",
                 "/\|+/",
-                "/\//", "/\*/", "/\(/", "/\)/"
+                "/\//",
+                "/\*/",
+                "/\(/",
+                "/\)/"
             ];
             $replaceChars[1] = [
                 "|",
                 "|",
-                "\/", "\*", "\(", "\)"
+                "\/",
+                "\*",
+                "\(",
+                "\)"
             ];
             $replaceChars[2] = [
                 "\n",
                 "\n",
-                "/", "*", "(", ")"
+                "/",
+                "*",
+                "(",
+                ")"
             ];
             $textDoc = preg_replace($replaceChars[0], $replaceChars[1], $textDoc);
             $textArte = preg_replace($replaceChars[0], $replaceChars[1], $textArte);
@@ -132,10 +153,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $textArteLinhas = explode('|', $textArte);
 
             // Verifica possiveis erros
-            $unidadeMedida = '/\d+(cm|m|km|mcg|mg|g|kg|ml|l|cal|kcal)/i';
-            $termosInvalidos = '/(\d+ |\d+)(CM|cM|Cm|mt|M|Mt|mT|KM|kM|MCG|Mcg|McG|mcG|MGc|MG|Mg|mG|G|GR|Gr|KG|Kg|kG|ML|Ml|CAL|Cal|CaL|cAL|caL|KCAL|Kcal|kCAL|kcAL|kcaL|KcaL|KCal|KcAL) /';
-            $unidadeMedidaEspaco = preg_grep($unidadeMedida, $textArteLinhas);
-            $unidadeMedidaCaixa = preg_grep($termosInvalidos, $textArteLinhas);
+            $unidadeMedidaEspaco = preg_grep(UNIDADEMEDIDA, $textArteLinhas);
+            $unidadeMedidaCaixa = preg_grep(TERMOSINVALIDOS, $textArteLinhas);
 
             // remove sapaço em branco antes e depois de cada linha
             $textDocLinhas = array_map('trim', $textDocLinhas);
@@ -149,14 +168,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $textDocLinhas = array_unique($textDocLinhas);
             $textArteLinhas = array_unique($textArteLinhas);
 
-            $textCompara = array();
-            $atencao = 'color:#880000';
-            $alerta = 'color:#FF0000';
-
             // Compara linha por linha
             foreach ($textDocLinhas as $indiceDoc => $docLinha) {
                 foreach ($textArteLinhas as $indiceArte => $arteLinha) {
-                    if (($caixaAlta) ? (mb_strtoupper($arteLinha, $encoding) == mb_strtoupper($docLinha, $encoding)) : ($arteLinha == $docLinha)) {
+                    if (($caixaAlta) ? (mb_strtoupper($arteLinha, ENCODING) == mb_strtoupper($docLinha, ENCODING)) : ($arteLinha == $docLinha)) {
                         if ($docLinha != '') array_push($textCompara, $arteLinha);
                         unset($textDocLinhas[$indiceDoc]);
                         unset($textArteLinhas[$indiceArte]);
@@ -166,11 +181,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             }
 
             // compara palavra por palavra
-            $textDocPalavras = array();
-            $textArtePalavras = array();
-            $textArteLinhasNovo = array();
-            $textDocLinhasNovo = array();
-
             foreach ($textDocLinhas as $cadalinha)      array_push($textDocPalavras, explode(' ', $cadalinha));
             foreach ($textArteLinhas as $cadalinha)        array_push($textArtePalavras, explode(' ', $cadalinha));
             foreach ($textDocPalavras as $indicePalavraDoc => $palavrasDoc) {
@@ -181,21 +191,18 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     $difNumPalavras = 9999 - abs(count($palavrasDoc) - count($palavrasArte));
                     $correspond = true;
                     if (abs(count($palavrasDoc) - count($palavrasArte)) > (count($palavrasDoc) / 3)) $correspond = false;
-
                     if ($caixaAlta) array_push($palavrasIguais, [$difNumPalavras, count(descomparaArrays($palavrasDoc, $palavrasArte, $caixaAlta)), $indicePalavraDoc, $indicePalavraArte, $correspond]);
                     else array_push($palavrasIguais, [$difNumPalavras, count(descomparaArrays($palavrasDoc, $palavrasArte, $caixaAlta)), $indicePalavraDoc, $indicePalavraArte, $correspond]);
                 }
                 rsort($palavrasIguais); //coloca em ordem decrescente para que a linha com mais repeticoes seja a primeira
 
                 if (isset($palavrasIguais[0][1]) && $palavrasIguais[0][1] > 1 && $palavrasIguais[0][4] == true) {
-
                     $difdeDoc = comparaArrays($textDocPalavras[$palavrasIguais[0][2]], $textArtePalavras[$palavrasIguais[0][3]], $caixaAlta);
                     $difdeArte = comparaArrays($textArtePalavras[$palavrasIguais[0][3]], $textDocPalavras[$palavrasIguais[0][2]], $caixaAlta);
-
                     // foreach ($difdeDoc as $palavra) {
                     //     foreach ($textDocPalavras[$palavrasIguais[0][2]] as $indexDocPalavra => $docPalavra) {
                     //         if ($palavra == $docPalavra) {
-                    //             $textDocPalavras[$palavrasIguais[0][2]][$indexDocPalavra] = "<strong style=$alerta>" . $textDocPalavras[$palavrasIguais[0][2]][$indexDocPalavra] . '</strong>';
+                    //             $textDocPalavras[$palavrasIguais[0][2]][$indexDocPalavra] = "<strong style="ALERTA">" . $textDocPalavras[$palavrasIguais[0][2]][$indexDocPalavra] . '</strong>';
                     //             break;
                     //         }
                     //     }
@@ -203,15 +210,15 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     // foreach ($difdeArte as $palavra) {
                     //     foreach ($textArtePalavras[$palavrasIguais[0][3]] as $indexDocArte => $docArte) {
                     //         if ($palavra == $docArte) {
-                    //             $textArtePalavras[$palavrasIguais[0][3]][$indexDocArte] = "<strong style=$alerta>" . $textArtePalavras[$palavrasIguais[0][3]][$indexDocArte] . '</strong>';
+                    //             $textArtePalavras[$palavrasIguais[0][3]][$indexDocArte] = "<strong style="ALERTA">" . $textArtePalavras[$palavrasIguais[0][3]][$indexDocArte] . '</strong>';
                     //             break;
                     //         }
                     //     }
                     // }
                     // array_push($textDocLinhasNovo, $textDocPalavras[$palavrasIguais[0][2]]);
                     // array_push($textArteLinhasNovo, $textArtePalavras[$palavrasIguais[0][3]]);
-                    array_push($textDocLinhasNovo, frasesDiff($textDocPalavras[$palavrasIguais[0][2]], $textArtePalavras[$palavrasIguais[0][3]], $caixaAlta, 'ff0000', '880000'));
-                    array_push($textArteLinhasNovo, frasesDiff($textArtePalavras[$palavrasIguais[0][3]], $textDocPalavras[$palavrasIguais[0][2]], $caixaAlta, 'ff0000', '880000'));
+                    array_push($textDocLinhasNovo, frasesDiff($textDocPalavras[$palavrasIguais[0][2]], $textArtePalavras[$palavrasIguais[0][3]], $caixaAlta, ALERTA, ATENCAO));
+                    array_push($textArteLinhasNovo, frasesDiff($textArtePalavras[$palavrasIguais[0][3]], $textDocPalavras[$palavrasIguais[0][2]], $caixaAlta, ALERTA, ATENCAO));
                     unset($textDocPalavras[$palavrasIguais[0][2]]);
                     unset($textArtePalavras[$palavrasIguais[0][3]]);
                 }
@@ -280,7 +287,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 echo '</div>';
             }
         }
-
         ?>
     </div>
 

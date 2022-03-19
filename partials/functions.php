@@ -94,19 +94,21 @@ function frasesDiff($master, $copy, $caixa, $corDif, $corAtencao)
 function hilight($frase1, $frase2, $case, $corDif, $corAtencao)
 {
     $result = array();
+    define("ENCODING", 'UTF-8');
+
     foreach ($frase1 as $indice => $palavra1) {
         $indMatch = array();
         foreach ($frase2 as $cIndex => $palavra2) {
             $match = 0;
             for ($index = 0; $index < 3; $index++) {
                 if ($case) {
-                    $palavra1Comp = mb_strtoupper($palavra1[$index], 'UTF-8');
-                    $palavra2Comp = mb_strtoupper($palavra2[$index], 'UTF-8');
+                    $palavra1Comp = mb_strtoupper($palavra1[$index], ENCODING);
+                    $palavra2Comp = mb_strtoupper($palavra2[$index], ENCODING);
                 } else {
                     $palavra1Comp = $palavra1[$index];
                     $palavra2Comp = $palavra2[$index];
                 }
-                if ($palavra1Comp == $palavra2Comp && $index == 1) $match = $match + 10; //10 is most important word match 
+                if ($palavra1Comp == $palavra2Comp && $index == 1) $match = $match + 10; //10 is most important word match
                 elseif ($palavra1Comp == $palavra2Comp) $match++; //10-11 is partial match / 12 is perfect match
             }
             array_push($indMatch, [$match, $indice]);
@@ -118,7 +120,6 @@ function hilight($frase1, $frase2, $case, $corDif, $corAtencao)
     }
     return $result;
 }
-
 
 function diffuse($wordArray)
 {
