@@ -74,8 +74,8 @@ function descomparaArrays($arr1, $arr2, $case)
 
 function frasesDiff($master, $copy, $caixa, $corDif, $corAtencao)
 {
-    $corDif = (ctype_xdigit($corDif)) ? $corDif : '880000';
-    $corAtencao = (ctype_xdigit($corAtencao)) ? $corAtencao : 'FF0000';
+    $corDif = (ctype_xdigit($corDif)) ? $corDif : 'FF0000';
+    $corAtencao = (ctype_xdigit($corAtencao)) ? $corAtencao : '880000';
     $caixa = (gettype($caixa) == 'boolean') ? $caixa : true;
     // $frase1 = trim($frase1);
     // $frase2 = trim($frase2);
@@ -94,7 +94,6 @@ function frasesDiff($master, $copy, $caixa, $corDif, $corAtencao)
 function hilight($frase1, $frase2, $case, $corDif, $corAtencao)
 {
     $result = array();
-    define("ENCODING", 'UTF-8');
 
     foreach ($frase1 as $indice => $palavra1) {
         $indMatch = array();

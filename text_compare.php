@@ -103,8 +103,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
             //Constants
             define('ENCODING', 'UTF-8');
-            define("ATENCAO", 'color:#880000');
-            define("ALERTA", 'color:#FF0000');
+            define("ATENCAO", '880000');
+            define("ALERTA", 'FF0000');
             define('UNIDADEMEDIDA', '/\d+(cm|m|km|mcg|mg|g|kg|ml|l|cal|kcal)/i');
             define('TERMOSINVALIDOS', '/(\d+ |\d+)(CM|cM|Cm|mt|M|Mt|mT|KM|kM|MCG|Mcg|McG|mcG|MGc|MG|Mg|mG|G|GR|Gr|KG|Kg|kG|ML|Ml|CAL|Cal|CaL|cAL|caL|KCAL|Kcal|kCAL|kcAL|kcaL|KcaL|KCal|KcAL) /');
 
@@ -231,13 +231,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             echo '<hr style="width:100%;text-align:center;margin-left:auto">';
             if (isset($unidadeMedidaEspaco) && count($unidadeMedidaEspaco) > 0) {
                 echo "<h5>Unidades de medida sem espaço: </h5>";
-                echo "<strong style=$atencao>";
+                echo "<strong style='color:#".ATENCAO."'>";
                 foreach ($unidadeMedidaEspaco as $erro) echo "<br><h7>" . str_replace($replaceChars[1], $replaceChars[2], $erro) . "</h7><br>";
                 echo "</strong>";
             }
             if (isset($unidadeMedidaCaixa) && count($unidadeMedidaCaixa) > 0) {
                 echo "<br><h6>Unidades de medida com escrita errada: </h6>";
-                echo "<strong style=$atencao>";
+                echo "<strong style='color:#".ATENCAO."'>";
                 foreach ($unidadeMedidaCaixa as $erro) echo "<br><h7>" . str_replace($replaceChars[1], $replaceChars[2], $erro) . "</h7><br>";
                 echo "</strong>";
             }
@@ -274,13 +274,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 echo '<div class="row p-3 m-0">';
                 echo '<div class="col-md-6">';
                 $reind = array_values($textDocPalavras);
-                echo "<strong style=$atencao>";
+                echo "<strong style='color:#".ALERTA."'>";
                 if (isset($reind[$item])) foreach ($reind[$item] as $textResult) echo str_replace($replaceChars[1], $replaceChars[2], $textResult) . ' ';
                 "</strong>";
                 echo '</div>';
                 echo '<div class="col-md-6">';
                 $reind = array_values($textArtePalavras);
-                echo "<strong style=$atencao>";
+                echo "<strong style='color:#".ALERTA."'>";
                 if (isset($reind[$item])) foreach ($reind[$item] as $textResult) echo str_replace($replaceChars[1], $replaceChars[2], $textResult) . ' ';
                 echo "</strong>";
                 echo '</div>';
