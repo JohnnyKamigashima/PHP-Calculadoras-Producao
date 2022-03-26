@@ -1,4 +1,7 @@
 <?php
+
+use function PHPSTORM_META\type;
+
 function doublePreg($palavra)
 {
     $invalidChars = '/ +|\-+|\_+/';
@@ -8,12 +11,15 @@ function doublePreg($palavra)
 function debug($array)
 {
     echo '<br>Debug: ';
-    foreach ($array as $index => $arr) {
-        echo "$index -> ";
-        if (gettype($arr) == 'array') foreach ($arr as $x) echo $x . ' ';
-        else echo $arr . ' ';
-        echo '<br>';
-    }
+    if (gettype($array) == "array") {
+
+        foreach ($array as $index => $arr) {
+            echo "$index -> ";
+            if (gettype($arr) == 'array') foreach ($arr as $x) echo $x . ' ';
+            else echo $arr . ' ';
+            echo '<br>';
+        }
+    } else var_dump($array);
 }
 
 function count_valid($array)
@@ -130,4 +136,17 @@ function diffuse($wordArray)
         }
     }
     return $wArea;
+}
+
+function removeTags($str)
+{
+    if (($str === null) || ($str === ''))  return false;
+
+    // Regular expression to identify HTML tags in
+    // the input string. Replacing the identified
+    // HTML tag with a null string.
+    $cleantext = preg_replace('/(<(\/?(p|div|h|a|style|span|code|table|tr|td|tbody).*?)>)/i', '<br>', $str);
+    $cleantext = preg_replace('/( ?\&nbsp;|\n|\r)+/i', ' ', $cleantext);
+    $cleantext = preg_replace('/(( ?(\n)?<br ?\/?> ?)+)/mi', "<br>", $cleantext);
+    return $cleantext;
 }
