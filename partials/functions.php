@@ -77,18 +77,11 @@ function frasesDiff($master, $copy, $caixa, $corDif, $corAtencao)
     $corDif = (ctype_xdigit($corDif)) ? $corDif : 'FF0000';
     $corAtencao = (ctype_xdigit($corAtencao)) ? $corAtencao : '880000';
     $caixa = (gettype($caixa) == 'boolean') ? $caixa : true;
-    // $frase1 = trim($frase1);
-    // $frase2 = trim($frase2);
-    // $master = explode(' ', $frase1);
-    // $copy = explode(' ', $frase2);
     $mArea = array();
     $cArea = array();
     $mArea = diffuse($master);
     $cArea = diffuse($copy);
-    // $cFim = '';
-    // $mFim = '';
     return hilight($mArea, $cArea, $caixa, $corDif, $corAtencao);
-    // $cFim = hilight($cArea, $mArea, $caixa, $corDif, $corAtencao);
 }
 
 function hilight($frase1, $frase2, $case, $corDif, $corAtencao)
@@ -114,8 +107,8 @@ function hilight($frase1, $frase2, $case, $corDif, $corAtencao)
         }
         rsort($indMatch);
         if ($indMatch[0][0] == 12) array_push($result, "$palavra1[1]");
-        elseif ($indMatch[0][0] >= 10) array_push($result, "<text style='color:$corAtencao'>$palavra1[1]</text>");
-        else array_push($result, "<text style='color:$corDif'>$palavra1[1]</text>");
+        elseif ($indMatch[0][0] >= 10) array_push($result, "<text style='color:#$corAtencao'>$palavra1[1]</text>");
+        else array_push($result, "<text style='color:#$corDif'>$palavra1[1]</text>");
     }
     return $result;
 }
