@@ -79,7 +79,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $textDoc = $_POST['textDoc'];
         $textArte = $_POST['textArte'];
         $textRef = $_POST['textRef'];
-        $extensoes = array('psd', 'tif', 'jpg', 'png');
+        $extensoes = array('psd', 'tif', 'jpg', 'png', 'ai');
         $textCompara =
             $textRefCompara = array();
 

@@ -114,8 +114,8 @@ function hilight($frase1, $frase2, $case, $corDif, $corAtencao)
         }
         rsort($indMatch);
         if ($indMatch[0][0] == 12) array_push($result, "$palavra1[1]");
-        elseif ($indMatch[0][0] >= 10) array_push($result, "<strong style='color:$corAtencao'>$palavra1[1]</strong>");
-        else array_push($result, "<strong style='color:$corDif'>$palavra1[1]</strong>");
+        elseif ($indMatch[0][0] >= 10) array_push($result, "<text style='color:$corAtencao'>$palavra1[1]</text>");
+        else array_push($result, "<text style='color:$corDif'>$palavra1[1]</text>");
     }
     return $result;
 }
