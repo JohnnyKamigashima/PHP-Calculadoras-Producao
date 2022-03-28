@@ -103,10 +103,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             </form>
 
             <script>
-                document.addEventListener("keydown", e => {console.log(e)})
+                document.addEventListener("keydown", e => {
+                    console.log(e)
+                })
                 document.addEventListener("keydown", e => {
                     if ((e.key.toLowerCase() === "enter" &&
-                        e.ctrlKey) || e.key.toLowerCase() === "f12") {
+                            e.ctrlKey) || e.key.toLowerCase() === "f12") {
                         document.getElementById("submit").click();
                     }
                 })
@@ -162,8 +164,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 $textArte = preg_replace("/\t/", " ", $textArte);
                 $textDoc = preg_replace("/(<(\/?(p|br).*?)>)/i", "\n", $textDoc);
                 $textArte = preg_replace("/(<(\/?(p|br).*?)>)/i", "\n", $textArte);
-
-                // var_dump($textArte);
+                $faltaBOLD = $faltaItalic = $faltaCAIXA = array();
                 $textCompara =
                     $textDocPalavras =
                     $textArtePalavras =
@@ -185,6 +186,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 else $bold = false;
                 if (isset($sessionEitalico)) $italico = ($sessionEitalico == 'checked') ? true : false;
                 else $italico = false;
+
+                if (!$bold) foreach (isBold('fabricado', 'ltda', $textArte) as $result) array_push($faltaBOLD, $result);
+                if (!$bold) foreach (isBold('(contém glúten|ingredientes|ingred|ingr)', '', $textArte) as $result) array_push($faltaBOLD, $result);
+                if (!$italico) foreach (isItalic('trans', '', $textArte) as $result) array_push($faltaItalic, $result);
+                foreach (isCaixa('contém','(glúten|lactose)', $textArte) as $result) array_push($faltaCAIXA, $result);
 
                 // Remove Bolds
                 if ($bold) {
@@ -290,8 +296,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 }
 
                 echo ' <div class="container p-6 m-0">';
-                echo '<hr style="width:100%;text-align:center;margin-left:auto">';
                 if (isset($unidadeMedidaEspaco) && count($unidadeMedidaEspaco) > 0) {
+                    echo '<hr style="width:100%;text-align:center;margin-left:auto">';
                     echo "<h5>Unidades de medida sem espaço: </h5>";
                     echo "<strong style='color:#" . ATENCAO . "'>";
                     foreach ($unidadeMedidaEspaco as $erro) echo "<br><h7>" . str_replace($replaceChars[1], $replaceChars[2], $erro) . "</h7><br>";
@@ -302,6 +308,21 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     echo "<strong style='color:#" . ATENCAO . "'>";
                     foreach ($unidadeMedidaCaixa as $erro) echo "<br><h7>" . str_replace($replaceChars[1], $replaceChars[2], $erro) . "</h7><br>";
                     echo "</strong>";
+                }
+                if (count($faltaBOLD) > 0) {
+                    echo '<hr style="width:100%;text-align:center;margin-left:auto">';
+                    echo '<h5>Atenção a estas frases que não estão em BOLD:</h5><br>';
+                    foreach ($faltaBOLD as $lin) echo "<br><h7>$lin</h7>";
+                }
+                if (count($faltaItalic) > 0) {
+                    echo '<hr style="width:100%;text-align:center;margin-left:auto">';
+                    echo '<h5>Atenção a estas palavras que não estão em Itálico:</h5><br>';
+                    foreach ($faltaItalic as $lin) echo "<br><h7>$lin</h7>";
+                }
+                if (count($faltaCAIXA) > 0) {
+                    echo '<hr style="width:100%;text-align:center;margin-left:auto">';
+                    echo '<h5>Atenção a estas palavras que não estão em CAIXA ALTA:</h5><br>';
+                    foreach ($faltaCAIXA as $lin) echo "<br><h7>$lin</h7>";
                 }
                 echo '<hr style="width:100%;text-align:center;margin-left:auto">';
                 if (isset($textCompara)) echo '<br><h5>' . count($textCompara) . ' parágrafos correspondem.</h5><br>';

@@ -1,6 +1,8 @@
 
-<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1547916377215738"
-     crossorigin="anonymous"></script>
+<head>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1547916377215738"
+       crossorigin="anonymous"></script>
+</head>
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
   <div class="container-fluid">
     <a class="navbar-brand" href="#">Utilitários</a>

@@ -150,3 +150,74 @@ function removeTags($str)
     $cleantext = preg_replace('/(( ?(\n)?<br ?\/?> ?)+)/mi', "<br>", $cleantext);
     return $cleantext;
 }
+function isBold($start, $end, $haystack)
+{
+    $correto = $geral = $geralN = $corretoN = $incorreto = array();
+    $haystack =  html_entity_decode($haystack);
+    preg_match_all("/(&lt;|<).*strong.*(>|&gt;).*\K$start.*$end/imU", $haystack, $correto, PREG_SET_ORDER);
+    preg_match_all("/$start.*$end/imU", $haystack, $geral, PREG_SET_ORDER);
+    foreach( $geral as $unitario) array_push($geralN, $unitario[0]);
+    foreach( $correto as $unitario) array_push($corretoN, $unitario[0]);
+    if((count($corretoN)==0)) return $geralN;
+    if (count($geralN) === count($corretoN)) return array();
+    else {
+        foreach($geralN as $g => $unG){
+            foreach($corretoN as $c => $unN){
+                if (trim($unG) == trim($unN)) {
+                    unset($corretoN[$c]);
+                    unset($geralN[$g]);
+                    break;
+                } else $incorretoTEMP = $unN;
+            }
+        }
+    }
+    return $geralN;
+}
+function isItalic($start, $end, $haystack)
+{
+    $correto = $geral = $geralN = $corretoN = $incorreto = array();
+    $haystack =  html_entity_decode($haystack);
+    preg_match_all("/(&lt;|<).*em.*(>|&gt;).*\K$start.*$end/imU", $haystack, $correto, PREG_SET_ORDER);
+    preg_match_all("/$start.*$end/imU", $haystack, $geral, PREG_SET_ORDER);
+    foreach( $geral as $unitario) array_push($geralN, $unitario[0]);
+    foreach( $correto as $unitario) array_push($corretoN, $unitario[0]);
+    if((count($corretoN)==0)) return $geralN;
+    if (count($geralN) === count($corretoN)) return array();
+    else {
+        foreach($geralN as $g => $unG){
+            foreach($corretoN as $c => $unN){
+                if (trim($unG) == trim($unN)) {
+                    unset($corretoN[$c]);
+                    unset($geralN[$g]);
+                    break;
+                } else $incorretoTEMP = $unN;
+            }
+        }
+    }
+    return $geralN;
+}
+function isCaixa($start, $end, $haystack)
+{
+    $correto = $geral = $geralN = $corretoN = $incorreto = array();
+    $haystack =  html_entity_decode($haystack);
+    $upperstart = mb_strtoupper($start);
+    $upperend = mb_strtoupper($end);
+    preg_match_all("/$upperstart.*$upperend/muU", $haystack, $correto, PREG_SET_ORDER);
+    preg_match_all("/$start.*$end/imuU", $haystack, $geral, PREG_SET_ORDER);
+    foreach( $geral as $unitario) array_push($geralN, $unitario[0]);
+    foreach( $correto as $unitario) array_push($corretoN, $unitario[0]);
+    if((count($corretoN)==0)) return $geralN;
+    if (count($geralN) === count($corretoN)) return array();
+    else {
+        foreach($geralN as $g => $unG){
+            foreach($corretoN as $c => $unN){
+                if (trim($unG) == trim($unN)) {
+                    unset($corretoN[$c]);
+                    unset($geralN[$g]);
+                    break;
+                } else $incorretoTEMP = $unN;
+            }
+        }
+    }
+    return $geralN;
+}
