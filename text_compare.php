@@ -4,7 +4,6 @@
     <?php include_once 'partials/header.php'; ?>
 </div>
 
-
 <?php
 
 ini_set('display_errors', 1);
@@ -30,7 +29,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 <head>
 
 </head>
-
 
 <html>
 
@@ -160,10 +158,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 //Variables
                 $textDoc = removeTags($_POST['textDoc']);
                 $textArte = removeTags($_POST['textArte']);
-                $textDoc = preg_replace("/\t/", " ", $textDoc);
-                $textArte = preg_replace("/\t/", " ", $textArte);
-                $textDoc = preg_replace("/(<(\/?(p|br).*?)>)/i", "\n", $textDoc);
-                $textArte = preg_replace("/(<(\/?(p|br).*?)>)/i", "\n", $textArte);
                 $faltaBOLD = $faltaItalic = $faltaCAIXA = array();
                 $textCompara =
                     $textDocPalavras =
@@ -178,6 +172,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 define('UNIDADEMEDIDA', '/\d+(cm|m|km|mcg|mg|g|kg|ml|l|cal|kcal)/i');
                 define('TERMOSINVALIDOS', '/(\d+ |\d+)(CM|cM|Cm|mt|M|Mt|mT|KM|kM|MCG|Mcg|McG|mcG|MGc|MG|Mg|mG|G|GR|Gr|KG|Kg|kG|ML|Ml|CAL|Cal|CaL|cAL|caL|KCAL|Kcal|kCAL|kcAL|kcaL|KcaL|KCal|KcAL) /');
 
+                //Checa opçoes selecionadas
                 if (isset($sessionEDuplo)) $espacoDuplo = ($sessionEDuplo == 'checked') ? true : false;
                 else $espacoDuplo = false;
                 if (isset($sessionECaixa)) $caixaAlta = ($sessionECaixa == 'checked') ? true : false;
@@ -187,21 +182,31 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 if (isset($sessionEitalico)) $italico = ($sessionEitalico == 'checked') ? true : false;
                 else $italico = false;
 
-                if (!$bold) foreach (isBold('fabricado', 'ltda', $textArte) as $result) array_push($faltaBOLD, $result);
-                if (!$bold) foreach (isBold('(contém glúten|ingredientes|ingred|ingr)', '', $textArte) as $result) array_push($faltaBOLD, $result);
-                if (!$italico) foreach (isItalic('trans', '', $textArte) as $result) array_push($faltaItalic, $result);
-                foreach (isCaixa('contém', '(glúten|lactose)', $textArte) as $result) array_push($faltaCAIXA, $result);
-
-                //converte para Encoding
+                //converte para Decodifica HTML
                 $textDoc = html_entity_decode($textDoc);
                 $textArte = html_entity_decode($textArte);
 
-                // Remove Bolds
+                // Limpeza inicial de Tags HTML
+                $textDoc = preg_replace("/\t/", " ", $textDoc);
+                $textArte = preg_replace("/\t/", " ", $textArte);
+                $textDoc = preg_replace("/(<(\/?(p|br).*?)>)/i", "\n", $textDoc);
+                $textArte = preg_replace("/(<(\/?(p|br).*?)>)/i", "\n", $textArte);
+
+                //Verifica textos obrigatorios BOLD/Italic/Caixa alta
+                if (!$bold) foreach (isBold('fabricado', 'ltda', $textArte) as $result) array_push($faltaBOLD, $result);
+                if (!$bold) foreach (isBold('fabricado', 's.a.', $textArte) as $result) array_push($faltaBOLD, $result);
+                if (!$bold) foreach (isBold('importado', 'ltda', $textArte) as $result) array_push($faltaBOLD, $result);
+                if (!$bold) foreach (isBold('importado', 's.a.', $textArte) as $result) array_push($faltaBOLD, $result);
+                if (!$bold) foreach (isBold('(contém lactose|contém glúten|ingredientes|ingred|ingr)', '', $textArte) as $result) array_push($faltaBOLD, $result);
+                if (!$italico) foreach (isItalic('trans', '', $textArte) as $result) array_push($faltaItalic, $result);
+                foreach (isCaixa('contém', '(glúten|lactose)', $textArte) as $result) array_push($faltaCAIXA, $result);
+
+                // Remove Bolds antes de checar
                 if ($bold) {
                     $textDoc = preg_replace("/(<(\/?(strong).*?)>)/i", "", $textDoc);
                     $textArte = preg_replace("/(<(\/?(strong).*?)>)/i", "", $textArte);
                 }
-                // Remove Italico
+                // Remove Italico antes de checar
                 if ($italico) {
                     $textDoc = preg_replace("/(<(\/?(em).*?)>)/i", "", $textDoc);
                     $textArte = preg_replace("/(<(\/?(em).*?)>)/i", "", $textArte);
@@ -212,14 +217,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     $textArte = preg_replace("/ +/", " ", $textArte);
                 }
 
-                // troca quebras de linha, quebras de linha dupla e espaço no final da linha por pipes
+                // troca quebras de linha, e limpeza de tags com espaços antes ou depois ou bolds italicos de espaços vazios
                 $replaceChars = array();
                 $replaceChars[0] = [
                     "/(\r+|<br>|\n+| \n+|\|+)/",
-                    "/\|+ ?\|+/",
-                    "/\*/",
-                    "/\(/",
-                    "/\)/",
+                    // "/\|+ ?\|+/",
+                    // "/\*/",
+                    // "/\(/",
+                    // "/\)/",
                     "/ ?<em> ?/",
                     "/ ?<\/em> ?/",
                     "/ ?<strong> ?/",
@@ -228,10 +233,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 ];
                 $replaceChars[1] = [
                     "|",
-                    "|",
-                    "*",
-                    "(",
-                    ")",
+                    // "|",
+                    // "*",
+                    // "(",
+                    // ")",
                     " <em>",
                     "</em> ",
                     " <strong>",
@@ -240,10 +245,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 ];
                 $replaceChars[2] = [
                     "\n",
-                    "\n",
-                    "*",
-                    "(",
-                    ")",
+                    // "\n",
+                    // "*",
+                    // "(",
+                    // ")",
                     " <em>",
                     "</em> ",
                     " <strong>",
@@ -328,6 +333,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     array_push($textDocLinhasNovo, array(''));
                 }
 
+                // Mostra Resultados de textos legais
                 echo ' <div class="container p-6 m-0">';
                 if (isset($unidadeMedidaEspaco) && count($unidadeMedidaEspaco) > 0) {
                     echo '<hr style="width:100%;text-align:center;margin-left:auto">';
@@ -357,9 +363,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     echo '<h5>Atenção a estas palavras que não estão em CAIXA ALTA:</h5><br>';
                     foreach ($faltaCAIXA as $lin) echo "<br><h7>$lin</h7>";
                 }
+
+                // Mostra resultados da comparação de paragrafos
                 echo '<hr style="width:100%;text-align:center;margin-left:auto">';
                 if (isset($textCompara)) echo '<br><h5>' . count($textCompara) . ' parágrafos correspondem.</h5><br>';
                 echo '</div>';
+
+                //Mostra resultados que parecem que estão errados
                 if ((isset($textDocLinhasNovo) && count($textDocLinhasNovo) > 0) || (isset($textArteLinhasNovo) && count($textArteLinhasNovo) > 0) || max(count($textDocPalavras), count($textArtePalavras)) > 0) {
                     echo '<div class="row p-3 m-0">';
                     echo '<div class="col-md-6">';
@@ -370,7 +380,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     echo '</div>';
                     echo '</div>';
                     echo '<br>';
-
 
                     for ($item = 0; $item < max(count_valid($textDocLinhasNovo), count_valid($textArteLinhasNovo)); $item++) { {
                             echo '<div class="row p-3 m-0">';
@@ -383,6 +392,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                         }
                     }
                 }
+
+                // Mostra resultados não encontrados
                 while (count($textDocPalavras) > count($textArtePalavras)) array_push($textArtePalavras, array(''));
                 while (count($textArtePalavras) > count($textDocPalavras)) array_push($textDocPalavras, array(''));
                 for ($item = 0; $item < max(count_valid($textDocPalavras), count_valid($textArtePalavras)); $item++) {
