@@ -93,21 +93,20 @@ function frasesDiff($master, $copy, $caixa, $corDif, $corAtencao)
 function hilight($frase1, $frase2, $case, $corDif, $corAtencao)
 {
     $result = array();
-
     foreach ($frase1 as $indice => $palavra1) {
         $indMatch = array();
         foreach ($frase2 as $cIndex => $palavra2) {
             $match = 0;
             for ($index = 0; $index < 3; $index++) {
                 if ($case) {
-                    $palavra1Comp = mb_strtoupper($palavra1[$index], ENCODING);
-                    $palavra2Comp = mb_strtoupper($palavra2[$index], ENCODING);
+                    $palavra1Comp = mb_strtoupper(($palavra1[$index]), ENCODING);
+                    $palavra2Comp = mb_strtoupper(($palavra2[$index]), ENCODING);
                 } else {
-                    $palavra1Comp = $palavra1[$index];
-                    $palavra2Comp = $palavra2[$index];
+                    $palavra1Comp = ($palavra1[$index]);
+                    $palavra2Comp = ($palavra2[$index]);
                 }
-                if ($palavra1Comp == $palavra2Comp && $index == 1) $match = $match + 10; //10 is most important word match
-                elseif ($palavra1Comp == $palavra2Comp) $match++; //10-11 is partial match / 12 is perfect match
+                if (preg_replace('/(\.|\,|\)|\(|\;|\:|\?|\!|\#|\$|\@|\&|\+|\-| )/', '', $palavra1Comp) == preg_replace('/(\.|\,|\)|\(|\;|\:|\?|\!|\#|\$|\@|\&|\+|\-| )/', '', $palavra2Comp) && $index == 1) $match = $match + 10; //10 is most important word match
+                elseif (preg_replace('/(\.|\,|\)|\(|\;|\:|\?|\!|\#|\$|\@|\&|\+|\-| )/', '', $palavra1Comp) == preg_replace('/(\.|\,|\)|\(|\;|\:|\?|\!|\#|\$|\@|\&|\+|\-| )/', '', $palavra2Comp)) $match++; //10-11 is partial match / 12 is perfect match
             }
             array_push($indMatch, [$match, $indice]);
         }
@@ -154,15 +153,15 @@ function isBold($start, $end, $haystack)
 {
     $correto = $geral = $geralN = $corretoN = $incorreto = array();
     $haystack =  html_entity_decode($haystack);
-    preg_match_all("/(&lt;|<).*strong.*(>|&gt;).*\K$start.*$end/imU", $haystack, $correto, PREG_SET_ORDER);
-    preg_match_all("/$start.*$end/imU", $haystack, $geral, PREG_SET_ORDER);
-    foreach( $geral as $unitario) array_push($geralN, $unitario[0]);
-    foreach( $correto as $unitario) array_push($corretoN, $unitario[0]);
-    if((count($corretoN)==0)) return $geralN;
+    preg_match_all("/(&lt;|<).*strong.*(>|&gt;).*\K$start\W.*$end\W/imU", $haystack, $correto, PREG_SET_ORDER);
+    preg_match_all("/$start\W.*$end\W/imU", $haystack, $geral, PREG_SET_ORDER);
+    foreach ($geral as $unitario) array_push($geralN, $unitario[0]);
+    foreach ($correto as $unitario) array_push($corretoN, $unitario[0]);
+    if ((count($corretoN) == 0)) return $geralN;
     if (count($geralN) === count($corretoN)) return array();
     else {
-        foreach($geralN as $g => $unG){
-            foreach($corretoN as $c => $unN){
+        foreach ($geralN as $g => $unG) {
+            foreach ($corretoN as $c => $unN) {
                 if (trim($unG) == trim($unN)) {
                     unset($corretoN[$c]);
                     unset($geralN[$g]);
@@ -177,15 +176,15 @@ function isItalic($start, $end, $haystack)
 {
     $correto = $geral = $geralN = $corretoN = $incorreto = array();
     $haystack =  html_entity_decode($haystack);
-    preg_match_all("/(&lt;|<).*em.*(>|&gt;).*\K$start.*$end/imU", $haystack, $correto, PREG_SET_ORDER);
-    preg_match_all("/$start.*$end/imU", $haystack, $geral, PREG_SET_ORDER);
-    foreach( $geral as $unitario) array_push($geralN, $unitario[0]);
-    foreach( $correto as $unitario) array_push($corretoN, $unitario[0]);
-    if((count($corretoN)==0)) return $geralN;
+    preg_match_all("/(&lt;|<).*em.*(>|&gt;).*\K$start\W.*$end\W/imU", $haystack, $correto, PREG_SET_ORDER);
+    preg_match_all("/$start\W.*$end\W/imU", $haystack, $geral, PREG_SET_ORDER);
+    foreach ($geral as $unitario) array_push($geralN, $unitario[0]);
+    foreach ($correto as $unitario) array_push($corretoN, $unitario[0]);
+    if ((count($corretoN) == 0)) return $geralN;
     if (count($geralN) === count($corretoN)) return array();
     else {
-        foreach($geralN as $g => $unG){
-            foreach($corretoN as $c => $unN){
+        foreach ($geralN as $g => $unG) {
+            foreach ($corretoN as $c => $unN) {
                 if (trim($unG) == trim($unN)) {
                     unset($corretoN[$c]);
                     unset($geralN[$g]);
@@ -202,15 +201,15 @@ function isCaixa($start, $end, $haystack)
     $haystack =  html_entity_decode($haystack);
     $upperstart = mb_strtoupper($start);
     $upperend = mb_strtoupper($end);
-    preg_match_all("/$upperstart.*$upperend/muU", $haystack, $correto, PREG_SET_ORDER);
-    preg_match_all("/$start.*$end/imuU", $haystack, $geral, PREG_SET_ORDER);
-    foreach( $geral as $unitario) array_push($geralN, $unitario[0]);
-    foreach( $correto as $unitario) array_push($corretoN, $unitario[0]);
-    if((count($corretoN)==0)) return $geralN;
+    preg_match_all("/$upperstart\W.*$upperend\W/muU", $haystack, $correto, PREG_SET_ORDER);
+    preg_match_all("/$start\W.*$end\W/imuU", $haystack, $geral, PREG_SET_ORDER);
+    foreach ($geral as $unitario) array_push($geralN, $unitario[0]);
+    foreach ($correto as $unitario) array_push($corretoN, $unitario[0]);
+    if ((count($corretoN) == 0)) return $geralN;
     if (count($geralN) === count($corretoN)) return array();
     else {
-        foreach($geralN as $g => $unG){
-            foreach($corretoN as $c => $unN){
+        foreach ($geralN as $g => $unG) {
+            foreach ($corretoN as $c => $unN) {
                 if (trim($unG) == trim($unN)) {
                     unset($corretoN[$c]);
                     unset($geralN[$g]);

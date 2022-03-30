@@ -190,7 +190,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 if (!$bold) foreach (isBold('fabricado', 'ltda', $textArte) as $result) array_push($faltaBOLD, $result);
                 if (!$bold) foreach (isBold('(contém glúten|ingredientes|ingred|ingr)', '', $textArte) as $result) array_push($faltaBOLD, $result);
                 if (!$italico) foreach (isItalic('trans', '', $textArte) as $result) array_push($faltaItalic, $result);
-                foreach (isCaixa('contém','(glúten|lactose)', $textArte) as $result) array_push($faltaCAIXA, $result);
+                foreach (isCaixa('contém', '(glúten|lactose)', $textArte) as $result) array_push($faltaCAIXA, $result);
+
+                //converte para Encoding
+                $textDoc = html_entity_decode($textDoc);
+                $textArte = html_entity_decode($textArte);
 
                 // Remove Bolds
                 if ($bold) {
@@ -212,27 +216,49 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 $replaceChars = array();
                 $replaceChars[0] = [
                     "/(\r+|<br>|\n+| \n+|\|+)/",
-                    "/\|+/",
+                    "/\|+ ?\|+/",
                     "/\*/",
                     "/\(/",
-                    "/\)/"
+                    "/\)/",
+                    "/ ?<em> ?/",
+                    "/ ?<\/em> ?/",
+                    "/ ?<strong> ?/",
+                    "/ ?<\/strong> ?/",
+                    "/(<strong>(\s?)+<\/strong>|<em>(\s?)+<\/em>|<\/strong>(\s?)+<strong>|<\/em>(\s?)+<em>)/"
                 ];
                 $replaceChars[1] = [
                     "|",
                     "|",
-                    "\*",
-                    "\(",
-                    "\)"
+                    "*",
+                    "(",
+                    ")",
+                    " <em>",
+                    "</em> ",
+                    " <strong>",
+                    "</strong> ",
+                    " "
                 ];
                 $replaceChars[2] = [
                     "\n",
                     "\n",
                     "*",
                     "(",
-                    ")"
+                    ")",
+                    " <em>",
+                    "</em> ",
+                    " <strong>",
+                    "</strong> ",
+                    " "
+
                 ];
                 $textDoc = preg_replace($replaceChars[0], $replaceChars[1], $textDoc);
                 $textArte = preg_replace($replaceChars[0], $replaceChars[1], $textArte);
+                $textDoc = preg_replace("/<em>([[:punct:]])+<\/em>/", "$1", $textDoc);
+                $textArte = preg_replace("/<em>([[:punct:]])+<\/em>/", "$1", $textArte);
+                $textDoc = preg_replace("/<strong>([[:punct:]])+<\/strong>/", "$1", $textDoc);
+                $textArte = preg_replace("/<strong>([[:punct:]])+<\/strong>/", "$1", $textArte);
+                $textDoc = preg_replace("/\|+ ?\|+/", "|", $textDoc);
+                $textArte = preg_replace("/\|+ ?\|+/", "|", $textArte);
 
                 // converte texto para array dividido por linhas
                 $textDocLinhas = explode('|', $textDoc);
@@ -257,8 +283,15 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 // Compara linha por linha
                 foreach ($textDocLinhas as $indiceDoc => $docLinha) {
                     foreach ($textArteLinhas as $indiceArte => $arteLinha) {
-                        if (($caixaAlta) ? (mb_strtoupper($arteLinha, ENCODING) == mb_strtoupper($docLinha, ENCODING)) : ($arteLinha == $docLinha)) {
-                            if ($docLinha != '') array_push($textCompara, $arteLinha);
+                        if ($caixaAlta) {
+                            $caixaArte = mb_strtoupper($arteLinha, ENCODING);
+                            $caixaDoc = mb_strtoupper($docLinha, ENCODING);
+                        } else {
+                            $caixaArte = $arteLinha;
+                            $caixaDoc = $docLinha;
+                        }
+                        if ($caixaArte == $caixaDoc) {
+                            if ($caixaDoc != '') array_push($textCompara, $caixaArte);
                             unset($textDocLinhas[$indiceDoc]);
                             unset($textArteLinhas[$indiceArte]);
                             break;
@@ -336,6 +369,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     echo '<h5>Os ' . (count_valid($textArteLinhasNovo) + count_valid($textArtePalavras))  . '/' . (count_valid($textArteLinhasNovo) + count_valid($textCompara) + count_valid($textArtePalavras)) .  ' parágrafos não correspondentes<br>na Arte são:</h5><br>';
                     echo '</div>';
                     echo '</div>';
+                    echo '<br>';
+
 
                     for ($item = 0; $item < max(count_valid($textDocLinhasNovo), count_valid($textArteLinhasNovo)); $item++) { {
                             echo '<div class="row p-3 m-0">';
@@ -344,8 +379,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                             echo '</div>';
                             echo '<div class="col-md-6">';
                             foreach ($textArteLinhasNovo[$item] as $textResult) echo str_replace($replaceChars[1], $replaceChars[2], $textResult) . ' ';
-                            echo '</div>';
-                            echo '</div>';
+                            echo '</div></div>';
                         }
                     }
                 }
