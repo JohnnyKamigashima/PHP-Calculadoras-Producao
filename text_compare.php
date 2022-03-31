@@ -121,7 +121,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     tinycomments_author: 'Author name',
                     height: 300,
                     init_instance_callback: function(editor) {
-                        editor.on('paste', function(e) {
+                        editor.on('blur', function(e) {
                             tinymce.get("textDoc").setContent(removeTags(tinymce.get("textDoc").getContent()));;
                         });
                     }
@@ -136,7 +136,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     tinycomments_author: 'Author name',
                     height: 300,
                     init_instance_callback: function(editor) {
-                        editor.on('paste', function(e) {
+                        editor.on('blur', function(e) {
                             tinymce.get("textArte").setContent(removeTags(tinymce.get("textArte").getContent()));;
                         });
                     }
