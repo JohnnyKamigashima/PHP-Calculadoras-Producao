@@ -227,8 +227,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     // "/\)/",
                     "/ ?<em> ?/",
                     "/ ?<\/em> ?/",
-                    "/ ?<strong> ?/",
-                    "/ ?<\/strong> ?/",
+                    "/( ?|\s?)<strong> ?/",
+                    "/( ?|\s?)<\/strong> ?/",
                     "/(<strong>(\s?)+<\/strong>|<em>(\s?)+<\/em>|<\/strong>(\s?)+<strong>|<\/em>(\s?)+<em>)/"
                 ];
                 $replaceChars[1] = [
@@ -262,8 +262,16 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 $textArte = preg_replace("/<em>([[:punct:]])+<\/em>/", "$1", $textArte);
                 $textDoc = preg_replace("/<strong>([[:punct:]])+<\/strong>/", "$1", $textDoc);
                 $textArte = preg_replace("/<strong>([[:punct:]])+<\/strong>/", "$1", $textArte);
+                $textDoc = preg_replace("/\|\<\/strong>/", "</strong>", $textDoc);
+                $textArte = preg_replace("/\|\<\/strong>/", "</strong>", $textArte);
                 $textDoc = preg_replace("/\|+ ?\|+/", "|", $textDoc);
                 $textArte = preg_replace("/\|+ ?\|+/", "|", $textArte);
+                $textDoc = preg_replace("/\<strong\>(.*)\|/", "<strong>$1</strong>|<strong>", $textDoc);
+                $textArte = preg_replace("/\<strong\>(.*)\|/", "<strong>$1</strong>|<strong>", $textArte);
+
+                var_dump(preg_replace("/\</", "&lt;", $textDoc));
+                echo "<br><br>";
+                var_dump(preg_replace("/\</", "&lt;", $textArte));
 
                 // converte texto para array dividido por linhas
                 $textDocLinhas = explode('|', $textDoc);

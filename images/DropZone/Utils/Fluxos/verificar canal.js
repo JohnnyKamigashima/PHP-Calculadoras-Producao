@@ -12,7 +12,7 @@ for (var y = 0; y < Ncanais; y++) {
         docRef.channels[y].visible = true;
        if(y!=0){ docRef.channels[y-1].visible = false;}
         app.refresh();
-        wait(1000);
+        wait(500);
         if(y+1 < Ncanais){
             docRef.channels[y+1].visible = true;
             docRef.channels[y].visible = false;}}
