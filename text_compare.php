@@ -15,13 +15,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $sessionEDuplo = (isset($_POST['espacoDuplo'])) ? 'checked' : '';
     $sessionECaixa =  (isset($_POST['caixaAlta'])) ? 'checked' : '';
     $sessionEbold =  (isset($_POST['bold'])) ? 'checked' : '';
+    $sessionEponto =  (isset($_POST['pontofinal'])) ? 'checked' : '';
     $sessionEitalico =  (isset($_POST['italico'])) ? 'checked' : '';
     $sessionDoc = (isset($_POST['textDoc'])) ? $_POST['textDoc'] : '';
     $sessionArte = (isset($_POST['textArte'])) ? $_POST['textArte'] : '';
     $sessionRascunho = (isset($_POST['rascunho'])) ? $_POST['rascunho'] : '';
 } else {
     $sessionDoc = $sessionArte = $sessionRascunho = $sessionEbold = $sessionEitalico = '';
-    $sessionEDuplo = $sessionECaixa =  'checked';
+    $sessionEDuplo = $sessionECaixa = $sessionEponto =  'checked';
 }
 
 ?>
@@ -92,6 +93,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     <div class="form-check m-3 p-1">
                         <input class="form-check-input" type="checkbox" id="italico" name="italico" value="<?php echo $sessionEitalico; ?>" <?php echo $sessionEitalico; ?>>
                         <label class="form-check-label" for="italico">Ignorar Itálico</label>
+                    </div>
+                    <div class="form-check m-3 p-1">
+                        <input class="form-check-input" type="checkbox" id="pontofinal" name="pontofinal" value="<?php echo $sessionEponto; ?>" <?php echo $sessionEponto; ?>>
+                        <label class="form-check-label" for="pontofinal">Ignorar Pontos Finais</label>
                     </div>
                 </div>
                 <div class="container p-3">
@@ -181,6 +186,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 else $bold = false;
                 if (isset($sessionEitalico)) $italico = ($sessionEitalico == 'checked') ? true : false;
                 else $italico = false;
+                if (isset($sessionEponto)) $pontoFinal = ($sessionEponto == 'checked') ? true : false;
+                else $pontoFinal = false;
 
                 //converte para Decodifica HTML
                 $textDoc = html_entity_decode($textDoc);
@@ -225,10 +232,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     // "/\*/",
                     // "/\(/",
                     // "/\)/",
-                    "/ ?<em> ?/",
-                    "/ ?<\/em> ?/",
-                    "/( ?|\s?)<strong> ?/",
-                    "/( ?|\s?)<\/strong> ?/",
+                    "/\s?<em>\s+/",
+                    "/\s+<\/em>\s?/",
+                    "/\s?<strong>\s+/",
+                    "/\s+<\/strong>\s?/",
                     "/(<strong>(\s?)+<\/strong>|<em>(\s?)+<\/em>|<\/strong>(\s?)+<strong>|<\/em>(\s?)+<em>)/"
                 ];
                 $replaceChars[1] = [
@@ -266,12 +273,21 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 $textArte = preg_replace("/\|\<\/strong>/", "</strong>", $textArte);
                 $textDoc = preg_replace("/\|+ ?\|+/", "|", $textDoc);
                 $textArte = preg_replace("/\|+ ?\|+/", "|", $textArte);
-                $textDoc = preg_replace("/\<strong\>(.*)\|/", "<strong>$1</strong>|<strong>", $textDoc);
-                $textArte = preg_replace("/\<strong\>(.*)\|/", "<strong>$1</strong>|<strong>", $textArte);
+                $textDoc = preg_replace("/<strong>((?:(?!<\/strong>).)*)(?:\s+)?\|/mUi", "<strong>$1</strong>|<strong>", $textDoc);
+                $textArte = preg_replace("/<strong>((?:(?!<\/strong>).)*)(?:\s+)?\|/mUi", "<strong>$1</strong>|<strong>", $textArte);
 
-                var_dump(preg_replace("/\</", "&lt;", $textDoc));
-                echo "<br><br>";
-                var_dump(preg_replace("/\</", "&lt;", $textArte));
+                //ignora pontos finais
+                if ($pontoFinal) {
+
+                    $textDoc = preg_replace("/\.(\s+)?\|/", "|", $textDoc);
+                    $textArte = preg_replace("/\.(\s+)?\|/", "|", $textArte);
+                    $textDoc = preg_replace("/\.( +)?<\/strong\>(\s)?\|/i", "</strong>|", $textDoc);
+                    $textArte = preg_replace("/\.( +)?<\/strong\>(\s)?\|/i", "</strong>|", $textArte);
+                }
+
+                // var_dump(preg_replace("/\</", "&lt;", $textDoc));
+                // echo "<br><br>";
+                // var_dump(preg_replace("/\</", "&lt;", $textArte));
 
                 // converte texto para array dividido por linhas
                 $textDocLinhas = explode('|', $textDoc);
