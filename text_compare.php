@@ -54,14 +54,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             </div>
             <form action="text_compare.php" method="post">
                 <div class="input-group">
-                    <!-- <div class="col-md-12">
-                        <span class="input-group-text textwrapper" id="inputGroup-sizing-default">
-                        Rascunho (texto Simples):
-                        </span>
-                        <div class="textwrapper">
-                            <textarea rows="8" cols="50" id='rascunho' name='rascunho' style="width:100%"><?php echo $sessionRascunho; ?></textarea>
-                        </div>
-                    </div> -->
                     <div class="col-md-6">
                         <span class="input-group-text textwrapper" id="inputGroup-sizing-default">
                             Textos do Documento:
@@ -101,7 +93,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 </div>
                 <div class="container p-3">
 
-                    <input type="submit" id="submit" value="Comparar" class="btn btn-success" />
+                    <input type="submit" id="submit" value="Comparar (F5)" class="btn btn-success" />
                 </div>
             </form>
 
@@ -111,7 +103,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 })
                 document.addEventListener("keydown", e => {
                     if ((e.key.toLowerCase() === "enter" &&
-                            e.ctrlKey) || e.key.toLowerCase() === "f12") {
+                            e.ctrlKey) || e.key.toLowerCase() === "f5") {
                         document.getElementById("submit").click();
                     }
                 })
@@ -169,6 +161,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     $textArtePalavras =
                     $textArteLinhasNovo =
                     $textDocLinhasNovo = array();
+                $alterna = true;
 
                 //Constants
                 define('ENCODING', 'UTF-8');
@@ -176,6 +169,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 define("ALERTA", 'FF0000');
                 define('UNIDADEMEDIDA', '/\d+(cm|m|km|mcg|mg|g|kg|ml|l|cal|kcal)/i');
                 define('TERMOSINVALIDOS', '/(\d+ |\d+)(CM|cM|Cm|mt|M|Mt|mT|KM|kM|MCG|Mcg|McG|mcG|MGc|MG|Mg|mG|G|GR|Gr|KG|Kg|kG|ML|Ml|CAL|Cal|CaL|cAL|caL|KCAL|Kcal|kCAL|kcAL|kcaL|KcaL|KCal|KcAL) /');
+                define('BGCOLOR1', '#faebd7');
+                define('BGCOLOR2', '#eddcc5');
 
                 //Checa opçoes selecionadas
                 if (isset($sessionEDuplo)) $espacoDuplo = ($sessionEDuplo == 'checked') ? true : false;
@@ -194,10 +189,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 $textArte = html_entity_decode($textArte);
 
                 // Limpeza inicial de Tags HTML
-                $textDoc = preg_replace("/\t/", " ", $textDoc);
-                $textArte = preg_replace("/\t/", " ", $textArte);
-                $textDoc = preg_replace("/(<(\/?(p|br).*?)>)/i", "\n", $textDoc);
-                $textArte = preg_replace("/(<(\/?(p|br).*?)>)/i", "\n", $textArte);
+                $textDoc = limpaHtmlSpaceBreak($textDoc);
+                $textArte = limpaHtmlSpaceBreak($textArte);
 
                 //Verifica textos obrigatorios BOLD/Italic/Caixa alta
                 if (!$bold) foreach (isBold('fabricado', 'ltda', $textArte) as $result) array_push($faltaBOLD, $result);
@@ -209,85 +202,24 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 foreach (isCaixa('contém', '(glúten|lactose)', $textArte) as $result) array_push($faltaCAIXA, $result);
 
                 // Remove Bolds antes de checar
-                if ($bold) {
-                    $textDoc = preg_replace("/(<(\/?(strong).*?)>)/i", "", $textDoc);
-                    $textArte = preg_replace("/(<(\/?(strong).*?)>)/i", "", $textArte);
-                }
+                $textDoc = ($bold) ? removeBold($textDoc) : $textDoc;
+                $textArte = ($bold) ? removebold($textArte) : $textArte;
+
                 // Remove Italico antes de checar
-                if ($italico) {
-                    $textDoc = preg_replace("/(<(\/?(em).*?)>)/i", "", $textDoc);
-                    $textArte = preg_replace("/(<(\/?(em).*?)>)/i", "", $textArte);
-                }
+                $textDoc = ($italico) ? removeItalico($textDoc) : $textDoc;
+                $textArte = ($italico) ? removeItalico($textArte) : $textArte;
+
                 // Substitui espaços duplos por espaços simples
-                if ($espacoDuplo) {
-                    $textDoc = preg_replace("/ +/", " ", $textDoc);
-                    $textArte = preg_replace("/ +/", " ", $textArte);
-                }
+                $textDoc = ($espacoDuplo) ? removeEspacoduplo($textDoc) : $textDoc;
+                $textArte = ($espacoDuplo) ? removeEspacoduplo($textArte) : $textArte;
 
-                // troca quebras de linha, e limpeza de tags com espaços antes ou depois ou bolds italicos de espaços vazios
-                $replaceChars = array();
-                $replaceChars[0] = [
-                    "/(\r+|<br>|\n+| \n+|\|+)/",
-                    // "/\|+ ?\|+/",
-                    // "/\*/",
-                    // "/\(/",
-                    // "/\)/",
-                    "/\s?<em>\s+/",
-                    "/\s+<\/em>\s?/",
-                    "/\s?<strong>\s+/",
-                    "/\s+<\/strong>\s?/",
-                    "/(<strong>(\s?)+<\/strong>|<em>(\s?)+<\/em>|<\/strong>(\s?)+<strong>|<\/em>(\s?)+<em>)/"
-                ];
-                $replaceChars[1] = [
-                    "|",
-                    // "|",
-                    // "*",
-                    // "(",
-                    // ")",
-                    " <em>",
-                    "</em> ",
-                    " <strong>",
-                    "</strong> ",
-                    " "
-                ];
-                $replaceChars[2] = [
-                    "\n",
-                    // "\n",
-                    // "*",
-                    // "(",
-                    // ")",
-                    " <em>",
-                    "</em> ",
-                    " <strong>",
-                    "</strong> ",
-                    " "
-
-                ];
-                $textDoc = preg_replace($replaceChars[0], $replaceChars[1], $textDoc);
-                $textArte = preg_replace($replaceChars[0], $replaceChars[1], $textArte);
-                $textDoc = preg_replace("/<em>([[:punct:]])+<\/em>/", "$1", $textDoc);
-                $textArte = preg_replace("/<em>([[:punct:]])+<\/em>/", "$1", $textArte);
-                $textDoc = preg_replace("/<strong>([[:punct:]])+<\/strong>/", "$1", $textDoc);
-                $textArte = preg_replace("/<strong>([[:punct:]])+<\/strong>/", "$1", $textArte);
-                $textDoc = preg_replace("/\|\<\/strong>/", "</strong>", $textDoc);
-                $textArte = preg_replace("/\|\<\/strong>/", "</strong>", $textArte);
-                $textDoc = preg_replace("/\|+ ?\|+/", "|", $textDoc);
-                $textArte = preg_replace("/\|+ ?\|+/", "|", $textArte);
-                $textDoc = preg_replace("/<strong>((?:(?!<\/strong>).)*)(?:\s+)?\|/mUi", "<strong>$1</strong>|<strong>", $textDoc);
-                $textArte = preg_replace("/<strong>((?:(?!<\/strong>).)*)(?:\s+)?\|/mUi", "<strong>$1</strong>|<strong>", $textArte);
+                // Limpa sobras de formatação Html
+                $textDoc = limpaSujeiraHtml($textDoc);
+                $textArte = limpaSujeiraHtml($textArte);
 
                 //ignora pontos finais
-                if ($pontoFinal) {
-
-                    $textDoc = preg_replace("/\.(\s+)?\|/", "|", $textDoc);
-                    $textArte = preg_replace("/\.(\s+)?\|/", "|", $textArte);
-                    $textDoc = preg_replace("/\.( +)?<\/strong\>(\s)?\|/i", "</strong>|", $textDoc);
-                    $textArte = preg_replace("/\.( +)?<\/strong\>(\s)?\|/i", "</strong>|", $textArte);
-                }
-
-                // var_dump(preg_replace("/\</", "&lt;", $textDoc));
-                // echo "<br><br>";
-                // var_dump(preg_replace("/\</", "&lt;", $textArte));
+                $textDoc = ($pontoFinal) ? limpaPontofinal($textDoc) : $textDoc;
+                $textArte = ($pontoFinal) ? limpaPontofinal($textArte) : $textArte;
 
                 // converte texto para array dividido por linhas
                 $textDocLinhas = explode('|', $textDoc);
@@ -329,8 +261,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 }
 
                 // compara palavra por palavra
-                foreach ($textDocLinhas as $cadalinha)      array_push($textDocPalavras, explode(' ', $cadalinha));
-                foreach ($textArteLinhas as $cadalinha)        array_push($textArtePalavras, explode(' ', $cadalinha));
+                foreach ($textDocLinhas as $cadalinha) array_push($textDocPalavras, explode(' ', $cadalinha));
+                foreach ($textArteLinhas as $cadalinha) array_push($textArtePalavras, explode(' ', $cadalinha));
                 foreach ($textDocPalavras as $indicePalavraDoc => $palavrasDoc) {
                     $palavrasIguais = array();
 
@@ -406,7 +338,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     echo '<br>';
 
                     for ($item = 0; $item < max(count_valid($textDocLinhasNovo), count_valid($textArteLinhasNovo)); $item++) { {
-                            echo '<div class="row p-3 m-0">';
+                            if ($alterna) echo '<div class="row p-3 m-0" style="background-color:' . BGCOLOR1 . '">';
+                            else echo '<div class="row p-3 m-0" style="background-color:' . BGCOLOR2 . '">';
+                            $alterna = !$alterna;
                             echo '<div class="col-md-6">';
                             foreach ($textDocLinhasNovo[$item] as $textResult) echo str_replace($replaceChars[1], $replaceChars[2], $textResult) . ' ';
                             echo '</div>';
@@ -418,23 +352,24 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 }
 
                 // Mostra resultados não encontrados
-                while (count($textDocPalavras) > count($textArtePalavras)) array_push($textArtePalavras, array(''));
-                while (count($textArtePalavras) > count($textDocPalavras)) array_push($textDocPalavras, array(''));
-                for ($item = 0; $item < max(count_valid($textDocPalavras), count_valid($textArtePalavras)); $item++) {
-                    echo '<div class="row p-3 m-0">';
-                    echo '<div class="col-md-6">';
-                    $reind = array_values($textDocPalavras);
-                    echo "<text style='color:#" . ALERTA . "'>";
-                    if (isset($reind[$item])) foreach ($reind[$item] as $textResult) echo str_replace($replaceChars[1], $replaceChars[2], $textResult) . ' ';
-                    "</text>";
-                    echo '</div>';
-                    echo '<div class="col-md-6">';
-                    $reind = array_values($textArtePalavras);
-                    echo "<text style='color:#" . ALERTA . "'>";
-                    if (isset($reind[$item])) foreach ($reind[$item] as $textResult) echo str_replace($replaceChars[1], $replaceChars[2], $textResult) . ' ';
-                    echo "</text>";
-                    echo '</div>';
-                    echo '</div>';
+                for ($coincidencias = 5; $coincidencias >= 0; $coincidencias--) {
+
+                    foreach (frasesMaisSemelhantes($textDocPalavras, $textArtePalavras, $coincidencias) as $result) {
+                        if ($alterna) echo '<div class="row p-3 m-0" style="background-color:' . BGCOLOR1 . '">';
+                        else echo '<div class="row p-3 m-0" style="background-color:' . BGCOLOR2 . '">';
+                        $alterna = !$alterna;
+                        echo '<div class="col-md-6">';
+                        echo "<text style='color:#" . ALERTA . "'>";
+                        echo $result[0] . ' ';
+                        echo "</text>";
+                        echo '</div>';
+                        echo '<div class="col-md-6">';
+                        echo "<text style='color:#" . ALERTA . "'>";
+                        echo $result[1] . ' ';
+                        echo "</text>";
+                        echo '</div>';
+                        echo '</div>';
+                    }
                 }
             }
             ?>

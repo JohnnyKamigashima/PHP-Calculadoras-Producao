@@ -90,12 +90,12 @@ function frasesDiff($master, $copy, $caixa, $corDif, $corAtencao)
     return hilight($mArea, $cArea, $caixa, $corDif, $corAtencao);
 }
 
-function hilight($frase1, $frase2, $case, $corDif, $corAtencao)
+function hilight($frase1, $frase2, $case, $corDif, $corAtencao) //verifica duas arrays de pelavras e marca as diferencas
 {
     $result = array();
     foreach ($frase1 as $indice => $palavra1) {
         $indMatch = array();
-        foreach ($frase2 as $cIndex => $palavra2) {
+        foreach ($frase2 as $palavra2) {
             $match = 0;
             for ($index = 0; $index < 3; $index++) {
                 if ($case) {
@@ -118,7 +118,7 @@ function hilight($frase1, $frase2, $case, $corDif, $corAtencao)
     return $result;
 }
 
-function diffuse($wordArray)
+function diffuse($wordArray) //converte uma array de palavras para uma array de 3 elementos com [antes, palavra, depois]
 {
     $wArea = array();
 
@@ -219,4 +219,110 @@ function isCaixa($start, $end, $haystack)
         }
     }
     return $geralN;
+}
+function mostraHTML($str)
+{
+    echo "<br>" . preg_replace("/\</", "&lt;", $str);
+}
+function removeBold($str)
+{
+    return preg_replace("/(?:<(?:\/?(?:strong).*?)>)/i", "", $str);
+}
+function removeSinais($str)
+{
+    return preg_replace("/(\(|\)|\"|\'|\;|\,|\?|\*|\&|\%|\#|\+|\.)/", "", $str);
+}
+function removeItalico($str)
+{
+    return preg_replace("/(<(\/?(em).*?)>)/i", "", $str);
+}
+function removeEspacoduplo($str)
+{
+    return preg_replace("/ +/", " ", $str);
+}
+function limpaHtmlSpaceBreak($str)
+{
+    return preg_replace("/(<(\/?(p|br).*?)>)/i", "\n", preg_replace("/\t/", " ", $str));
+} // Troca tab por espacos e quebras por \n
+function limpaPontofinal($str)
+{
+    return preg_replace("/\.(\s+)?\|/", "|", preg_replace("/\.( +)?<\/strong\>(\s)?\|/i", "</strong>|", $str));
+} //Limpa pontos finais antes de quebra de linha
+function limpaSujeiraHtml($str)
+{
+    // troca quebras de linha, e limpeza de tags com espaços antes ou depois ou bolds italicos de espaços vazios
+    $replaceChars = array();
+    $replaceChars[0] = [
+        "/(\r+|<br>|\n+| \n+|\|+)/",
+        "/\s?<em>\s+/",
+        "/\s+<\/em>\s?/",
+        "/\s?<strong>\s+/",
+        "/\s+<\/strong>\s?/",
+        "/(<strong>(\s?)+<\/strong>|<em>(\s?)+<\/em>|<\/strong>(\s?)+<strong>|<\/em>(\s?)+<em>)/"
+    ];
+    $replaceChars[1] = [
+        "|",
+        " <em>",
+        "</em> ",
+        " <strong>",
+        "</strong> ",
+        " "
+    ];
+    $replaceChars[2] = [
+        "\n",
+        " <em>",
+        "</em> ",
+        " <strong>",
+        "</strong> ",
+        " "
+
+    ];
+    $str = preg_replace($replaceChars[0], $replaceChars[1], $str);
+    $str = preg_replace("/<em>((\.|\?|\!|\,|\;|\:)+)<\/em>/", "$1", $str); //limpa estilos italico de pontuaçao
+    $str = preg_replace("/<strong>((\.|\?|\!|\,|\;|\:)+)<\/strong>/", "$1", $str); //limpa estilos bold de pontuaçao
+    $str = preg_replace("/\|\<\/strong>/", "</strong>", $str);
+    $str = preg_replace("/\|+ ?\|+/", "|", $str);
+    $str = preg_replace("/<strong>((?:(?!<\/strong>).)*)(?:\s+)?\|/mUi", "<strong>$1</strong>|<strong>", $str);
+    return $str;
+}
+
+function frasesMaisSemelhantes($arr1, $arr2, $intHit)
+{ //Compara duas arrays 2D (linha e palavra) e retorna uma array ordenada com [Quantidade de semelhancas, array1, array2] 
+    $result = array();
+    $frasetmp = '';
+
+    foreach ($arr1 as $ind1 => $a1) {
+        $ftemp = array();
+        $indHit = $hits = 0;
+
+        foreach ($a1 as $pal1) {
+            foreach ($arr2 as $ind2 => $a2) {
+                foreach ($a2 as $indpal2 => $pal2) {
+                    if (removeBold(removeItalico(removeSinais($pal1))) == removeBold(removeItalico(removeSinais($pal2))) && $pal1 != '' && $pal2 != '') {
+                        $hits++;
+                        $indHit = $ind2;
+                        $frasetmp = '';
+                        foreach ($a2 as $pal) $frasetmp = $frasetmp . ' ' . $pal; //constroi frase com array de palavras
+                        break;
+                    }
+                }
+            }
+            array_push($ftemp, [$hits, $indHit, $frasetmp]);
+        }
+        rsort($ftemp);
+        $frasetmp = '';
+        if ($ftemp[0][0] > 0) unset($arr2[$ftemp[0][1]]);
+        foreach ($arr1[$ind1] as $frase) $frasetmp = $frasetmp . ' ' . $frase;
+        if ($ftemp[0][0] == $intHit && $intHit > 0) array_push($result, [$frasetmp, $ftemp[0][2]]);
+        elseif ($ftemp[0][0] == 0 && $intHit == 0)  array_push($result, [$frasetmp, '']); // adiciona resultados do aray 1 que não tiveram hits
+    }
+    if ($intHit == 0) // adiciona sobras do array 2
+    {
+        foreach ($arr2 as $sobra) {
+            $frasetmp = '';
+            foreach ($sobra as $frase) $frasetmp = $frasetmp . ' ' . $frase;
+            array_push($result, ['', $frasetmp]);
+        }
+    }
+    return $result;
 }
