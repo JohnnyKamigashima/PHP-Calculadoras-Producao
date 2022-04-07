@@ -11,7 +11,7 @@
 <link rel="stylesheet" href="css/style.css">
 <script src="./js/library.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1.0" charset="utf-8" />
-
+<meta name="description" content="This page has a toolset for Quality Control for use for packaging, such as Net content and text compare.">
 <body>
     <title>
         Calculadoras de Produção

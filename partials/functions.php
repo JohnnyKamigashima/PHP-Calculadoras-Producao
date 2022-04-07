@@ -174,30 +174,30 @@ function isBold($start, $end, $haystack)
 }
 function isItalic($start, $end, $haystack)
 {
-    $correto = $geral = $geralN = $corretoN = $incorreto = array();
+    $correto = $geral = $geralN = $corretoN  = $result = array();
     $haystack =  html_entity_decode($haystack);
-    preg_match_all("/(&lt;|<).*em.*(>|&gt;).*\K$start\W.*$end\W/imU", $haystack, $correto, PREG_SET_ORDER);
-    preg_match_all("/$start\W.*$end\W/imU", $haystack, $geral, PREG_SET_ORDER);
-    foreach ($geral as $unitario) array_push($geralN, $unitario[0]);
-    foreach ($correto as $unitario) array_push($corretoN, $unitario[0]);
-    if ((count($corretoN) == 0)) return $geralN;
-    if (count($geralN) === count($corretoN)) return array();
+    if ($end != '') preg_match_all("/<.*em.*>$start.*$end<\/?em.*>/imU", $haystack, $correto, PREG_SET_ORDER);
+    else preg_match_all("/<.*em.*>$start<\/?em.*>/imU", $haystack, $correto, PREG_SET_ORDER);
+    preg_match_all("/$start.*$end/imU", $haystack, $geral, PREG_SET_ORDER);
+    foreach ($correto as $index => $corr) $correto[$index] = removeItalico($corr);
+    if (count($geral) === count($correto)) return array();
     else {
-        foreach ($geralN as $g => $unG) {
-            foreach ($corretoN as $c => $unN) {
-                if (trim($unG) == trim($unN)) {
-                    unset($corretoN[$c]);
-                    unset($geralN[$g]);
+        foreach ($geral as $g => $unG) {
+            foreach ($correto as $c => $unN) {
+                if (trim($unG[0]) == trim($unN[0])) {
+                    unset($correto[$c]);
+                    unset($geral[$g]);
                     break;
-                } else $incorretoTEMP = $unN;
+                }
             }
         }
     }
-    return $geralN;
+    foreach ($geral as $g) array_push($result, $g);
+    return $g;
 }
 function isCaixa($start, $end, $haystack)
 {
-    $correto = $geral = $geralN = $corretoN = $incorreto = array();
+    $correto = $geral = $geralN = $corretoN  = array();
     $haystack =  html_entity_decode($haystack);
     $upperstart = mb_strtoupper($start);
     $upperend = mb_strtoupper($end);

@@ -118,9 +118,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     tinycomments_author: 'Author name',
                     height: 300,
                     init_instance_callback: function(editor) {
-                        editor.on('blur', function(e) {
-                            tinymce.get("textDoc").setContent(removeTags(tinymce.get("textDoc").getContent()));;
-                        });
+                        // editor.on('blur', function(e) {
+                        //     tinymce.get("textDoc").setContent(removeTags(tinymce.get("textDoc").getContent()));;
+                        // });
                     }
                 });
                 tinymce.init({
@@ -133,9 +133,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     tinycomments_author: 'Author name',
                     height: 300,
                     init_instance_callback: function(editor) {
-                        editor.on('blur', function(e) {
-                            tinymce.get("textArte").setContent(removeTags(tinymce.get("textArte").getContent()));;
-                        });
+                        // editor.on('blur', function(e) {
+                        //     tinymce.get("textArte").setContent(removeTags(tinymce.get("textArte").getContent()));;
+                        // });
                     }
                 });
 
@@ -252,7 +252,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                             $caixaDoc = $docLinha;
                         }
                         if ($caixaArte == $caixaDoc) {
-                            if ($caixaDoc != '') array_push($textCompara, $caixaArte);
+                            if ($caixaDoc != '') array_push($textCompara, $arteLinha);
                             unset($textDocLinhas[$indiceDoc]);
                             unset($textArteLinhas[$indiceArte]);
                             break;
@@ -285,6 +285,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                         unset($textArtePalavras[$palavrasIguais[0][3]]);
                     }
                 }
+                
                 while (count($textDocLinhasNovo) < count($textArteLinhasNovo)) {
                     array_push($textDocLinhasNovo, array(''));
                 }
@@ -295,13 +296,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     echo '<hr style="width:100%;text-align:center;margin-left:auto">';
                     echo "<h5>Unidades de medida sem espaço: </h5>";
                     echo "<strong style='color:#" . ATENCAO . "'>";
-                    foreach ($unidadeMedidaEspaco as $erro) echo "<br><h7>" . str_replace($replaceChars[1], $replaceChars[2], $erro) . "</h7><br>";
+                    foreach ($unidadeMedidaEspaco as $erro) echo "<br><h7>" .  $erro . "</h7><br>";
                     echo "</strong>";
                 }
                 if (isset($unidadeMedidaCaixa) && count($unidadeMedidaCaixa) > 0) {
                     echo "<br><h6>Unidades de medida com escrita errada: </h6>";
                     echo "<strong style='color:#" . ATENCAO . "'>";
-                    foreach ($unidadeMedidaCaixa as $erro) echo "<br><h7>" . str_replace($replaceChars[1], $replaceChars[2], $erro) . "</h7><br>";
+                    foreach ($unidadeMedidaCaixa as $erro) echo "<br><h7>" .  $erro . "</h7><br>";
                     echo "</strong>";
                 }
                 if (count($faltaBOLD) > 0) {
@@ -322,8 +323,15 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
                 // Mostra resultados da comparação de paragrafos
                 echo '<hr style="width:100%;text-align:center;margin-left:auto">';
-                if (isset($textCompara)) echo '<br><h5>' . count($textCompara) . ' parágrafos correspondem.</h5><br>';
-                echo '</div>';
+                if (isset($textCompara)) 
+                {
+                    echo '<br><h5>' . count($textCompara) . ' parágrafos correspondem.</h5><br>';
+                    echo '</div>';
+                    echo '<div class="row p-3 m-0">';
+                    echo '<div class="col-md-12">';
+                    foreach($textCompara as $showtextOK) echo "<br>$showtextOK";
+                    echo '</div></div>';
+                }
 
                 //Mostra resultados que parecem que estão errados
                 if ((isset($textDocLinhasNovo) && count($textDocLinhasNovo) > 0) || (isset($textArteLinhasNovo) && count($textArteLinhasNovo) > 0) || max(count($textDocPalavras), count($textArtePalavras)) > 0) {
@@ -342,17 +350,16 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                             else echo '<div class="row p-3 m-0" style="background-color:' . BGCOLOR2 . '">';
                             $alterna = !$alterna;
                             echo '<div class="col-md-6">';
-                            foreach ($textDocLinhasNovo[$item] as $textResult) echo str_replace($replaceChars[1], $replaceChars[2], $textResult) . ' ';
+                            foreach ($textDocLinhasNovo[$item] as $textResult) echo $textResult . ' ';
                             echo '</div>';
                             echo '<div class="col-md-6">';
-                            foreach ($textArteLinhasNovo[$item] as $textResult) echo str_replace($replaceChars[1], $replaceChars[2], $textResult) . ' ';
+                            foreach ($textArteLinhasNovo[$item] as $textResult) echo $textResult . ' ';
                             echo '</div></div>';
                         }
                     }
                 }
-
                 // Mostra resultados não encontrados
-                for ($coincidencias = 5; $coincidencias >= 0; $coincidencias--) {
+                for ($coincidencias = 100; $coincidencias >= 0; $coincidencias--) {
 
                     foreach (frasesMaisSemelhantes($textDocPalavras, $textArtePalavras, $coincidencias) as $result) {
                         if ($alterna) echo '<div class="row p-3 m-0" style="background-color:' . BGCOLOR1 . '">';

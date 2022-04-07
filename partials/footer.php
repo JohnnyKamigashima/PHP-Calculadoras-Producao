@@ -7,5 +7,6 @@
             silêncio é
             igual ao
             círculo que circunscreve as três pontas do triângulo. <a href="./images/Dropzone.zip">Dropzone Toolkit</a></span>
+            Copyright 2019-2022 Johnny H. Kamigashima
   </div>
 </footer>
