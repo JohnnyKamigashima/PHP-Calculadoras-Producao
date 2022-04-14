@@ -1,4 +1,5 @@
-<!-- calculadora AltoEm -->
+  <script type="text/javascript" src="./partials/library.js"></script>
+  <!-- calculadora AltoEm -->
 <div class="col-md-4 cells">
     <div class="titulo">
         Alto Em (Farol Brasil) <img src="./images/altoembr.png" class="icon" >

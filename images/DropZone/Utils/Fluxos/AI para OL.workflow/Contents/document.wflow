@@ -1,146 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
-<plist version="1.0">
-<dict>
-	<key>AMApplicationBuild</key>
-	<string>444.42</string>
-	<key>AMApplicationVersion</key>
-	<string>2.9</string>
-	<key>AMDocumentVersion</key>
-	<string>2</string>
-	<key>actions</key>
-	<array>
-		<dict>
-			<key>action</key>
-			<dict>
-				<key>AMAccepts</key>
-				<dict>
-					<key>Container</key>
-					<string>List</string>
-					<key>Optional</key>
-					<true/>
-					<key>Types</key>
-					<array>
-						<string>com.apple.applescript.object</string>
-					</array>
-				</dict>
-				<key>AMActionVersion</key>
-				<string>1.0.2</string>
-				<key>AMApplication</key>
-				<array>
-					<string>Automator</string>
-				</array>
-				<key>AMParameterProperties</key>
-				<dict>
-					<key>source</key>
-					<dict/>
-				</dict>
-				<key>AMProvides</key>
-				<dict>
-					<key>Container</key>
-					<string>List</string>
-					<key>Types</key>
-					<array>
-						<string>com.apple.applescript.object</string>
-					</array>
-				</dict>
-				<key>ActionBundlePath</key>
-				<string>/System/Library/Automator/Run AppleScript.action</string>
-				<key>ActionName</key>
-				<string>Run AppleScript</string>
-				<key>ActionParameters</key>
-				<dict>
-					<key>source</key>
-					<string>-- Returns a file paths parent directory as stringon getParentFolder(fpath)	tell application "Finder"		set parentFolder to container of fpath as string	end tell	return parentFolderend getParentFolder-- Returns the document name without extension (if present)on getBaseName(fName)	set Basename to fName	repeat with idx from 1 to (length of fName)		if (item idx of fName = ".") then			set Basename to (items 1 thru (idx - 1) of fName) as string			exit repeat		end if	end repeat	return Basenameend getBaseNameon trim_line(this_text, trim_chars, trim_indicator)	-- 0 = beginning, 1 = end, 2 = both	set x to the length of the trim_chars	-- TRIM BEGINNING	if the trim_indicator is in {0, 2} then		repeat while this_text begins with the trim_chars			try				set this_text to characters (x + 1) thru -1 of this_text as string			on error				-- the text contains nothing but the trim characters				return ""			end try		end repeat	end if	-- TRIM ENDING	if the trim_indicator is in {1, 2} then		repeat while this_text ends with the trim_chars			try				set this_text to characters 1 thru -(x + 1) of this_text as string			on error				-- the text contains nothing but the trim characters				return ""			end try		end repeat	end if	return this_textend trim_lineon run {FileList, parameters}		repeat with ThisFile in FileList		-- get file and path		tell application "Finder"			set parentpath to POSIX path of (parent of (ThisFile) as string)			set mparentpath to (parent of (ThisFile) as string)			set filename to name of (ThisFile)		end tell				set newfolder to "Approved File"		set filename to trim_line(filename, ".ai", 1)						try			tell application "Finder" to if not (exists POSIX path of (mparentpath &amp; quoted form of newfolder)) then make new folder at mparentpath with properties {name:newfolder}		end try						--set polname to (parentpath &amp; newfolder &amp; "/" &amp; filename &amp; ".pdf")				set polname to (parentpath &amp; filename &amp; ".pdf")		set olname to POSIX file polname		tell application "Finder" to if exists olname then delete the file olname				--set polname to parentpath &amp; newfolder &amp; "/" &amp; filename &amp; "_OL.ai"				set polname to parentpath &amp; filename &amp; "_OL.ai"		set olname to POSIX file polname		tell application "Finder" to if exists olname then delete the file olname				set polname to parentpath &amp; newfolder &amp; "/" &amp; filename &amp; ".jpg"		set olname to POSIX file polname		tell application "Finder" to if exists olname then delete the file olname				tell application "Adobe Illustrator"			open ThisFile			set docRef to the current document			tell docRef				set docName to name of docRef				set docPath to file path				set docParent to my getParentFolder(docPath)				set docBaseName to my getBaseName(docName)				set newFileName to docParent &amp; newfolder &amp; ":" &amp; docBaseName &amp; ".pdf"				--		save in file newFileName as pdf with options ¬				--			{class:PDF save options, PDF preset:"CMYK Preview"}				activate								--unlock layers and save OL				set the properties of every layer to {locked:false}				convert to paths every text frame				set newFileName to docParent &amp; docBaseName &amp; "_OL.ai"				-- set newFileName to docParent &amp; newfolder &amp; ":" &amp; docBaseName &amp; "_OL.ai"						set the properties of every layer to {locked:true}				save in file newFileName								--save JPG				--		ignoring case				--			if (exists layer "Varnish") then set visible of layer "Varnish" to false				--			if (exists layer "Verniz") then set visible of layer "Verniz" to false				--			if (exists layer "Branco") then set visible of layer "Branco" to false				--			if (exists layer "White") then set visible of layer "White" to false				--			if (exists layer "White Plate") then set visible of layer "White Plate" to false				--			if (exists layer "Emboss") then set visible of layer "Emboss" to false				--			if (exists layer "Varnish Semimat") then set visible of layer "Varnish Semimat" to false				--		end ignoring								--		set jpgFileName to docParent &amp; newfolder &amp; ":" &amp; docBaseName &amp; ".jpg"				--		set poljpgFileName to POSIX path of jpgFileName				--		export docRef to file (poljpgFileName) as JPEG with options {class:JPEG export options, artboard clipping:true, quality:90, horizontal scaling:300, vertical scaling:300}								close saving no			end tell		end tell	end repeatend run</string>
-				</dict>
-				<key>BundleIdentifier</key>
-				<string>com.apple.Automator.RunScript</string>
-				<key>CFBundleVersion</key>
-				<string>1.0.2</string>
-				<key>CanShowSelectedItemsWhenRun</key>
-				<false/>
-				<key>CanShowWhenRun</key>
-				<true/>
-				<key>Category</key>
-				<array>
-					<string>AMCategoryUtilities</string>
-				</array>
-				<key>Class Name</key>
-				<string>RunScriptAction</string>
-				<key>InputUUID</key>
-				<string>201E9182-3203-46F1-8EC1-B45FF5B82C21</string>
-				<key>Keywords</key>
-				<array>
-					<string>Run</string>
-				</array>
-				<key>OutputUUID</key>
-				<string>D7ED058F-3A39-4F90-BF07-87354C4AC9CF</string>
-				<key>UUID</key>
-				<string>D8FAF2D9-3310-4F35-B785-BEF2AB165D15</string>
-				<key>UnlocalizedApplications</key>
-				<array>
-					<string>Automator</string>
-				</array>
-				<key>arguments</key>
-				<dict>
-					<key>0</key>
-					<dict>
-						<key>default value</key>
-						<string>on run {input, parameters}
-	
-	(* Your script goes here *)
-	
-	return input
-end run</string>
-						<key>name</key>
-						<string>source</string>
-						<key>required</key>
-						<string>0</string>
-						<key>type</key>
-						<string>0</string>
-						<key>uuid</key>
-						<string>0</string>
-					</dict>
-				</dict>
-				<key>isViewVisible</key>
-				<true/>
-				<key>location</key>
-				<string>496.000000:368.000000</string>
-				<key>nibPath</key>
-				<string>/System/Library/Automator/Run AppleScript.action/Contents/Resources/Base.lproj/main.nib</string>
-			</dict>
-			<key>isViewVisible</key>
-			<true/>
-		</dict>
-	</array>
-	<key>connectors</key>
-	<dict/>
-	<key>workflowMetaData</key>
-	<dict>
-		<key>applicationBundleIDsByPath</key>
-		<dict/>
-		<key>applicationPaths</key>
-		<array/>
-		<key>inputTypeIdentifier</key>
-		<string>com.apple.Automator.fileSystemObject</string>
-		<key>outputTypeIdentifier</key>
-		<string>com.apple.Automator.nothing</string>
-		<key>presentationMode</key>
-		<integer>15</integer>
-		<key>processesInput</key>
-		<integer>0</integer>
-		<key>serviceInputTypeIdentifier</key>
-		<string>com.apple.Automator.fileSystemObject</string>
-		<key>serviceOutputTypeIdentifier</key>
-		<string>com.apple.Automator.nothing</string>
-		<key>serviceProcessesInput</key>
-		<integer>0</integer>
-		<key>systemImageName</key>
-		<string>NSActionTemplate</string>
-		<key>useAutomaticInputType</key>
-		<integer>0</integer>
-		<key>workflowTypeIdentifier</key>
-		<string>com.apple.Automator.servicesMenu</string>
-	</dict>
-</dict>
-</plist>

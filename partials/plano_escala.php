@@ -1,4 +1,5 @@
 <!-- calc plano escala -->
+<script type="text/javascript" src="./partials/library.js"></script>
 <div class="col-md-4 cells">
     <div class="titulo">
         Escala de Plano
