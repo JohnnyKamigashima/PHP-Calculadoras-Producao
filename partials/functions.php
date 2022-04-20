@@ -19,7 +19,7 @@ function debug($array)
             else echo $arr . ' ';
             echo '<br>';
         }
-    } else var_dump($array);
+    } else var_dump(preg_replace('/</', '&lt;', $array));
 }
 
 function count_valid($array)
@@ -144,9 +144,11 @@ function removeTags($str)
     // Regular expression to identify HTML tags in
     // the input string. Replacing the identified
     // HTML tag with a null string.
-    $cleantext = preg_replace('/(<(\/?(p|div|h|a|style|span|code|table|tr|td|tbody).*?)>)/i', '<br>', $str);
-    $cleantext = preg_replace('/( ?\&nbsp;|\n|\r)+/i', ' ', $cleantext);
-    $cleantext = preg_replace('/(( ?(\n)?<br ?\/?> ?)+)/mi', "<br>", $cleantext);
+    $cleantext = preg_replace("/(<td.*>(\s+)?<p>|<\/p>(\s+)?<\/td>)/iU", ' ', $str); // converte colunas td para espaço
+    $cleantext = preg_replace('/(<(\/?(p|div|h|a|style|span|code|table|tr|tbody).*?)>)/i', '<br>', $cleantext);
+    $cleantext = preg_replace('/(\s| ?\&nbsp;|\n|\r)+/i', ' ', $cleantext);
+    $cleantext = preg_replace('/(( ?(\n)?<br ?\/?> ?)+)/mi', "<br>", $cleantext); 
+    
     return $cleantext;
 }
 function isBold($start, $end, $haystack)

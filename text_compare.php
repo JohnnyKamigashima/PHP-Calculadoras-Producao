@@ -153,6 +153,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 require('partials/functions.php');
 
                 //Variables
+                // var_dump($_POST['textDoc']);
                 $textDoc = removeTags($_POST['textDoc']);
                 $textArte = removeTags($_POST['textArte']);
                 $faltaBOLD = $faltaItalic = $faltaCAIXA = array();
@@ -220,6 +221,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 //ignora pontos finais
                 $textDoc = ($pontoFinal) ? limpaPontofinal($textDoc) : $textDoc;
                 $textArte = ($pontoFinal) ? limpaPontofinal($textArte) : $textArte;
+                // echo '<br>Doc: ';
+                // debug($textDoc);
+                // echo '<br>Arte: ';
+                // debug($textArte);
 
                 // converte texto para array dividido por linhas
                 $textDocLinhas = explode('|', $textDoc);
@@ -240,7 +245,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 // remove linhas repetidas no array
                 $textDocLinhas = array_unique($textDocLinhas);
                 $textArteLinhas = array_unique($textArteLinhas);
-
+                // echo '<br>Doclinhas: ';
+                // debug($textDocLinhas);
+                // echo '<br>Artelinhas: ';
+                // debug($textArteLinhas);
                 // Compara linha por linha
                 foreach ($textDocLinhas as $indiceDoc => $docLinha) {
                     foreach ($textArteLinhas as $indiceArte => $arteLinha) {

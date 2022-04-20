@@ -58,9 +58,22 @@
             <option value="0">[ ]</option>
             <option value="L">L</option>
             <option value="q">˥</option>
-            <option value="p">r</option>
+            <option value="r">r</option>
         </select>
 
+    </div>
+    <div class="input-group mb-3">
+        <div class="row bg-light py-2">
+            <div class="col-7 align-self-center">
+                A área do alto EM deve ser de:
+            </div>
+            <div class="col-3 align-self-center">
+                <input type="text" class="form-control" id="altoemA" value="0" style="height:66px; margin:auto">
+            </div>
+            <div class="col-2 align-self-center pl-5">
+                <img src="https://cdn4.iconfinder.com/data/icons/ionicons/512/icon-clipboard-512.png" alt="" class="icon" onclick="copyToClipboard(document.getElementById('altoemA').value+' mm2')">
+            </div>
+        </div>
     </div>
     <div class="input-group mb-3">
         <div class="row bg-light py-2">
@@ -80,15 +93,17 @@
         $(document).ready(function() {
             $('#altFOP').change(function() {
                 $("#largF").val(altoEm($("#altFOP"), $("#largFOP"), $("#areaFOP"), $("#nutrientes"), $("#tipo")));
-                $("#altFOP1").val($("#altFOP").val());
-                $("#altFOP2").val($("#altFOP").val());
-                $("#altFOP3").val($("#altFOP").val());
+                $("#areaFOP").val($("#altFOP").val() * $("#largFOP").val());
+                // $("#altFOP1").val($("#altFOP").val());
+                // $("#altFOP2").val($("#altFOP").val());
+                // $("#altFOP3").val($("#altFOP").val());
             })
             $('#largFOP').change(function() {
                 $("#largF").val(altoEm($("#altFOP"), $("#largFOP"), $("#areaFOP"), $("#nutrientes"), $("#tipo")));
-                $("#largFOP1").val($("#largFOP").val());
-                $("#largFOP2").val($("#largFOP").val());
-                $("#largFOP3").val($("#largFOP").val());
+                $("#areaFOP").val($("#altFOP").val() * $("#largFOP").val());
+                // $("#largFOP1").val($("#largFOP").val());
+                // $("#largFOP2").val($("#largFOP").val());
+                // $("#largFOP3").val($("#largFOP").val());
             })
             $('#areaFOP').change(function() {
                 $("#largF").val(altoEm($("#altFOP"), $("#largFOP"), $("#areaFOP"), $("#nutrientes"), $("#tipo")));

@@ -65,32 +65,40 @@ function altoEm(altura, largura, area, nutrientes, tipo) {
     console.log(areaNutri1);
     console.log(areaNutri2);
     console.log(areaNutri3);
-    console.log(tipo);
-    console.log(nutrientes);
+    // console.log(tipo);
+    // console.log(nutrientes);
+if(nutrientes == 1) $("#altoemA").val(areaNutri1);
+else if (nutrientes == 2) $("#altoemA").val(areaNutri2);
+else if (nutrientes == 3) $("#altoemA").val(areaNutri3);
+
     if (tipo == "--" && nutrientes == 1) {
-      larguraFinal = ladoGrid(areaNutri1, 2) * 2;
+      larguraFinal = ladoGrid(areaNutri1, 2, tipo) * 2;
     } else if (tipo == "I" && nutrientes == 1) {
-      larguraFinal = ladoGrid(areaNutri1, 2);
+      larguraFinal = ladoGrid(areaNutri1, 2, tipo);
     } else if (tipo == "--" && nutrientes == 2) {
-      larguraFinal = ladoGrid(areaNutri2, 3) * 3;
+      larguraFinal = ladoGrid(areaNutri2, 3, tipo) * 3;
     } else if (tipo == "I" && nutrientes == 2) {
-      larguraFinal = ladoGrid(areaNutri2, 3);
+      larguraFinal = ladoGrid(areaNutri2, 3, tipo);
     } else if (tipo == "L" && nutrientes == 2) {
-      larguraFinal = ladoGrid(areaNutri2, 3) * 2;
-    } else if (tipo == "p" && nutrientes == 2) {
-      larguraFinal = ladoGrid(areaNutri2, 3) * 2;
+      larguraFinal = ladoGrid(areaNutri2, 3, tipo) * 2;
+    } else if (tipo == "r" && nutrientes == 2) {
+      larguraFinal = ladoGrid(areaNutri2, 3, tipo) * 2;
     } else if (tipo == "q" && nutrientes == 2) {
-      larguraFinal = ladoGrid(areaNutri2, 3) * 2;
+      larguraFinal = ladoGrid(areaNutri2, 3, tipo) * 2;
+    } else if (tipo == "r" && nutrientes == 2) {
+      larguraFinal = ladoGrid(areaNutri2, 3, tipo) * 2;
+    } else if (tipo == "r" && nutrientes == 3) {
+      larguraFinal = ladoGrid(areaNutri3, 4, tipo) * 2;
     } else if (tipo == "0" && nutrientes == 3) {
-      larguraFinal = ladoGrid(areaNutri3, 4) * 2;
+      larguraFinal = ladoGrid(areaNutri3, 4, tipo) * 2;
     } else if (tipo == "I" && nutrientes == 3) {
-      larguraFinal = ladoGrid(areaNutri3, 4);
+      larguraFinal = ladoGrid(areaNutri3, 4, tipo);
     } else if (tipo == "--" && nutrientes == 3) {
-      larguraFinal = ladoGrid(areaNutri3, 4) * 4;
+      larguraFinal = ladoGrid(areaNutri3, 4, tipo) * 4;
     } else if (tipo == "q" && nutrientes == 3) {
-      larguraFinal = ladoGrid(areaNutri3, 4) * 2;
+      larguraFinal = ladoGrid(areaNutri3, 4, tipo) * 2;
     } else if (tipo == "L" && nutrientes == 3) {
-      larguraFinal = ladoGrid(areaNutri3, 4) * 3;
+      larguraFinal = ladoGrid(areaNutri3, 4, tipo) * 3;
     } else {
       larguraFinal = 0;
     }
@@ -252,10 +260,25 @@ function verificaoctagono(array, valor) {
     }
   }
 }
-function ladoGrid(area, blocos) {
+function ladoGrid(area, blocos, tipo) {
   // retorna lado maior de um  bloco
   // return (Math.sqrt((area / blocos) / 126)) * 18;
-  return Math.sqrt(2.55 * (area / blocos));
+  // return Math.sqrt(2.38099584 * (area / blocos));
+  var escala = 2.5;
+if (blocos == 4 && tipo == "I") escala = 2.5705;
+else if (blocos == 3 && tipo == "I") escala = 2.5323;
+else if (blocos == 2 && tipo == "I") escala = 2.4701;
+else if (blocos == 4 && tipo == "0") escala = 2.3660;
+else if (blocos == 3 && tipo == "q") escala = 2.3660;
+else if (blocos == 3 && tipo == "q") escala = 2.3660;
+else if (blocos == 4 && tipo == "q") escala = 2.4393;
+else if (blocos == 3 && tipo == "r") escala = 2.3660;
+else if (blocos == 3 && tipo == "L") escala = 2.3660;
+else if (blocos == 4 && tipo == "L") escala = 2.3360;
+else if (blocos == 4 && tipo == "--") escala = 2.1289;
+else if (blocos == 3 && tipo == "--") escala = 2.1427;
+else if (blocos == 2 && tipo == "--") escala = 2.1703;
+return Math.sqrt(escala * (area / blocos));
 }
 
 function farolEq(largura, altura, area) {

@@ -80,17 +80,17 @@
         $(document).ready(function() {
             $('#altFOP5').change(function() {
                 $("#largF5").val(faroloctagono($("#altFOP5"), $("#largFOP5"), $("#areaFOP5"), $("#pais5")));
-                $("#altFOP").val($("#altFOP5").val());
-                $("#altFOP1").val($("#altFOP5").val());
-                $("#altFOP2").val($("#altFOP5").val());
-                $("#altFOP3").val($("#altFOP5").val());
+                // $("#altFOP").val($("#altFOP5").val());
+                // $("#altFOP1").val($("#altFOP5").val());
+                // $("#altFOP2").val($("#altFOP5").val());
+                // $("#altFOP3").val($("#altFOP5").val());
             })
             $('#largFOP5').change(function() {
                 $("#largF5").val(faroloctagono($("#altFOP5"), $("#largFOP5"), $("#areaFOP5"), $("#pais5")));
-                $("#largFOP").val($("#largFOP5").val());
-                $("#largFOP1").val($("#largFOP5").val());
-                $("#largFOP2").val($("#largFOP5").val());
-                $("#largFOP3").val($("#largFOP5").val());
+                // $("#largFOP").val($("#largFOP5").val());
+                // $("#largFOP1").val($("#largFOP5").val());
+                // $("#largFOP2").val($("#largFOP5").val());
+                // $("#largFOP3").val($("#largFOP5").val());
             })
             $('#areaFOP5').change(function() {
                 $("#largF5").val(faroloctagono($("#altFOP5"), $("#largFOP5"), $("#areaFOP5"), $("#pais5")));
