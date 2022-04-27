@@ -78,7 +78,7 @@
     <div class="input-group mb-3">
         <div class="row bg-light py-2">
             <div class="col-7 align-self-center">
-                A largura de<br>ALTO EM deve ser:
+                A largura mínima de<br>ALTO EM deve ser:
             </div>
             <div class="col-3 align-self-center">
                 <input type="text" class="form-control" id="largF" value="0" style="height:66px; margin:auto">
@@ -88,31 +88,47 @@
             </div>
         </div>
     </div>
+    <div class="input-group mb-3">
+        <div class="row bg-light py-2">
+            <div class="col-7 align-self-center">
+                A largura máxima de<br>ALTO EM deve ser:
+            </div>
+            <div class="col-3 align-self-center">
+                <input type="text" class="form-control" id="largMx" value="0" style="height:66px; margin:auto">
+            </div>
+            <div class="col-2 align-self-center pl-5">
+                <img src="https://cdn4.iconfinder.com/data/icons/ionicons/512/icon-clipboard-512.png" alt="" class="icon" onclick="copyToClipboard(document.getElementById('largMx').value+' mm')">
+            </div>
+        </div>
+    </div>
 
     <script>
         $(document).ready(function() {
             $('#altFOP').change(function() {
-                $("#largF").val(altoEm($("#altFOP"), $("#largFOP"), $("#areaFOP"), $("#nutrientes"), $("#tipo")));
                 $("#areaFOP").val($("#altFOP").val() * $("#largFOP").val());
-                // $("#altFOP1").val($("#altFOP").val());
-                // $("#altFOP2").val($("#altFOP").val());
-                // $("#altFOP3").val($("#altFOP").val());
+                $("#largF").val(altoEm($("#altFOP"), $("#largFOP"), $("#areaFOP"), $("#nutrientes"), $("#tipo"))[0]);
+                $("#largMx").val(altoEm($("#altFOP"), $("#largFOP"), $("#areaFOP"), $("#nutrientes"), $("#tipo"))[1]);
+                
+
             })
             $('#largFOP').change(function() {
-                $("#largF").val(altoEm($("#altFOP"), $("#largFOP"), $("#areaFOP"), $("#nutrientes"), $("#tipo")));
                 $("#areaFOP").val($("#altFOP").val() * $("#largFOP").val());
-                // $("#largFOP1").val($("#largFOP").val());
-                // $("#largFOP2").val($("#largFOP").val());
-                // $("#largFOP3").val($("#largFOP").val());
+                $("#largF").val(altoEm($("#altFOP"), $("#largFOP"), $("#areaFOP"), $("#nutrientes"), $("#tipo"))[0]);
+                $("#largMx").val(altoEm($("#altFOP"), $("#largFOP"), $("#areaFOP"), $("#nutrientes"), $("#tipo"))[1]);
+                
+
             })
             $('#areaFOP').change(function() {
-                $("#largF").val(altoEm($("#altFOP"), $("#largFOP"), $("#areaFOP"), $("#nutrientes"), $("#tipo")));
+                $("#largF").val(altoEm($("#altFOP"), $("#largFOP"), $("#areaFOP"), $("#nutrientes"), $("#tipo"))[0]);
+                $("#largMx").val(altoEm($("#altFOP"), $("#largFOP"), $("#areaFOP"), $("#nutrientes"), $("#tipo"))[1]);
             })
             $('#nutrientes').change(function() {
-                $("#largF").val(altoEm($("#altFOP"), $("#largFOP"), $("#areaFOP"), $("#nutrientes"), $("#tipo")));
+                $("#largF").val(altoEm($("#altFOP"), $("#largFOP"), $("#areaFOP"), $("#nutrientes"), $("#tipo"))[0]);
+                $("#largMx").val(altoEm($("#altFOP"), $("#largFOP"), $("#areaFOP"), $("#nutrientes"), $("#tipo"))[1]);
             })
             $('#tipo').change(function() {
-                $("#largF").val(altoEm($("#altFOP"), $("#largFOP"), $("#areaFOP"), $("#nutrientes"), $("#tipo")));
+                $("#largF").val(altoEm($("#altFOP"), $("#largFOP"), $("#areaFOP"), $("#nutrientes"), $("#tipo"))[0]);
+                $("#largMx").val(altoEm($("#altFOP"), $("#largFOP"), $("#areaFOP"), $("#nutrientes"), $("#tipo"))[1]);
             })
         })
     </script>

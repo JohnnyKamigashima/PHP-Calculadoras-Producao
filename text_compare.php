@@ -3,7 +3,6 @@
 <div class="row">
     <?php include_once 'partials/header.php'; ?>
 </div>
-
 <?php
 
 ini_set('display_errors', 1);
@@ -26,11 +25,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 }
 
 ?>
-
 <head>
-
 </head>
-
 <html>
 
 <body>
@@ -110,9 +106,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
                 tinymce.init({
                     selector: 'textarea#textDoc',
-                    plugins: ' casechange searchreplace fullscreen wordcount visualchars  tinymcespellchecker  powerpaste',
+                    plugins: 'searchreplace fullscreen wordcount visualchars autosave paste save table textpattern visualblocks',
                     menubar: false,
-                    toolbar: 'bold italic paste pastetext searchreplace visualchars spellchecker fullscreen',
+                    toolbar: 'bold italic fontsizeselect  paste pastetext searchreplace visualchars visualblocks spellchecker fullscreen table tabledelete | tableprops tablerowprops tablecellprops | tableinsertrowbefore tableinsertrowafter tabledeleterow | tableinsertcolbefore tableinsertcolafter tabledeletecol',
                     toolbar_mode: 'floating',
                     tinycomments_mode: 'embedded',
                     tinycomments_author: 'Author name',
@@ -125,9 +121,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 });
                 tinymce.init({
                     selector: 'textarea#textArte',
-                    plugins: ' casechange searchreplace fullscreen wordcount visualchars  tinymcespellchecker  powerpaste',
+                    plugins: 'searchreplace fullscreen wordcount visualchars autosave paste save table textpattern visualblocks',
                     menubar: false,
-                    toolbar: 'bold italic paste pastetext searchreplace visualchars spellchecker fullscreen',
+                    toolbar: 'bold italic fontsizeselect  paste pastetext searchreplace visualchars visualblocks spellchecker fullscreen table tabledelete | tableprops tablerowprops tablecellprops | tableinsertrowbefore tableinsertrowafter tabledeleterow | tableinsertcolbefore tableinsertcolafter tabledeletecol',
                     toolbar_mode: 'floating',
                     tinycomments_mode: 'embedded',
                     tinycomments_author: 'Author name',
@@ -293,7 +289,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                         unset($textArtePalavras[$palavrasIguais[0][3]]);
                     }
                 }
-                
+
                 while (count($textDocLinhasNovo) < count($textArteLinhasNovo)) {
                     array_push($textDocLinhasNovo, array(''));
                 }
@@ -331,13 +327,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
                 // Mostra resultados da comparação de paragrafos
                 echo '<hr style="width:100%;text-align:center;margin-left:auto">';
-                if (isset($textCompara)) 
-                {
+                if (isset($textCompara)) {
                     echo '<br><h5>' . count($textCompara) . ' parágrafos correspondem.</h5><br>';
                     echo '</div>';
                     echo '<div class="row p-3 m-0">';
                     echo '<div class="col-md-12">';
-                    foreach($textCompara as $showtextOK) echo "<br>$showtextOK";
+                    foreach ($textCompara as $showtextOK) echo "<br>$showtextOK";
                     echo '</div></div>';
                 }
 
