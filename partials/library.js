@@ -59,7 +59,7 @@ function altoEm(altura, largura, area, nutrientes, tipo) {
       var areaNutri1 = areaPDP * 0.035,
         areaNutri2 = areaPDP * 0.0525,
         areaNutri3 = areaPDP * 0.07,
-        minFont = 1,
+        minFont = 4,
         maxFont = 9;
     } else {
       var areaNutri1 = areaPDP * 0.02,

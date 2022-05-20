@@ -15,7 +15,7 @@ function debug($array)
 
         foreach ($array as $index => $arr) {
             echo "$index -> ";
-            if (gettype($arr) == 'array') foreach ($arr as $x) echo $x . ' ';
+            if (gettype($arr) == 'array') foreach ($arr as $x) echo preg_replace('/</', '&lt;', $x) . ' ';
             else echo $arr . ' ';
             echo '<br>';
         }
@@ -144,9 +144,10 @@ function removeTags($str)
     // Regular expression to identify HTML tags in
     // the input string. Replacing the identified
     // HTML tag with a null string.
-    $cleantext = preg_replace("/(<td.*>(\s+)?<p>|<\/p>(\s+)?<\/td>)/iU", ' ', $str); // converte colunas td para espaço
-    $cleantext = preg_replace('/(<(\/?(p|div|h|a|style|span|code|table|tr|tbody).*?)>)/i', '<br>', $cleantext);
-    $cleantext = preg_replace('/(\s| ?\&nbsp;|\n|\r)+/i', ' ', $cleantext);
+    $cleantext = preg_replace("/(<td.*>(\s+)?<p>|<\/p>(\s+)?<\/td>|\h|\xc2\xa0)/iU", ' ', $str); // converte colunas td para espaço
+    $cleantext = preg_replace('/(\s| ?\&nbsp;|\n|\r|\h|\xc2\xa0)+/i', ' ', $cleantext);
+    $cleantext = preg_replace('/(<(\/?(span|table|code|col|td|colgroup).*?)>)/i', ' ', $cleantext);
+    $cleantext = preg_replace('/(<(\/?(p|div|h|a|style|tr|tbody).*?)>)/i', '<br>', $cleantext);
     $cleantext = preg_replace('/(( ?(\n)?<br ?\/?> ?)+)/mi', "<br>", $cleantext); 
     
     return $cleantext;
@@ -240,11 +241,11 @@ function removeItalico($str)
 }
 function removeEspacoduplo($str)
 {
-    return preg_replace("/ +/", " ", $str);
+    return preg_replace("/( +|\t+|\h+)/", " ", $str);
 }
 function limpaHtmlSpaceBreak($str)
 {
-    return preg_replace("/(<(\/?(p|br).*?)>)/i", "\n", preg_replace("/\t/", " ", $str));
+    return preg_replace("/(<(\/?(p|br).*?)>)/i", "\n", preg_replace("/(\t+|<\/strong>(\h|\xc2\xa0| +)?<strong>)/u", " ", $str));
 } // Troca tab por espacos e quebras por \n
 function limpaPontofinal($str)
 {

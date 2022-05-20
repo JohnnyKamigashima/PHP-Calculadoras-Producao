@@ -181,13 +181,19 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 if (isset($sessionEponto)) $pontoFinal = ($sessionEponto == 'checked') ? true : false;
                 else $pontoFinal = false;
 
+                // Limpeza inicial de Tags HTML
+                $textDoc = limpaHtmlSpaceBreak($textDoc);
+                $textArte = limpaHtmlSpaceBreak($textArte);
+                
+                // echo '<br>Doc: ';
+                // debug($textDoc);
+                // echo '<br>Arte: ';
+                // debug($textArte);
+
                 //converte para Decodifica HTML
                 $textDoc = html_entity_decode($textDoc);
                 $textArte = html_entity_decode($textArte);
 
-                // Limpeza inicial de Tags HTML
-                $textDoc = limpaHtmlSpaceBreak($textDoc);
-                $textArte = limpaHtmlSpaceBreak($textArte);
 
                 //Verifica textos obrigatorios BOLD/Italic/Caixa alta
                 if (!$bold) foreach (isBold('fabricado', 'ltda', $textArte) as $result) array_push($faltaBOLD, $result);
@@ -243,8 +249,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 $textArteLinhas = array_unique($textArteLinhas);
                 // echo '<br>Doclinhas: ';
                 // debug($textDocLinhas);
-                // echo '<br>Artelinhas: ';
-                // debug($textArteLinhas);
+                //  echo '<br>Artelinhas: ';
+                //  debug($textArteLinhas);
                 // Compara linha por linha
                 foreach ($textDocLinhas as $indiceDoc => $docLinha) {
                     foreach ($textArteLinhas as $indiceArte => $arteLinha) {
