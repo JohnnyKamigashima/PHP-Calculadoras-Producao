@@ -146,7 +146,7 @@ function removeTags($str)
     // HTML tag with a null string.
     $cleantext = preg_replace("/(<td.*>(\s+)?<p>|<\/p>(\s+)?<\/td>|\h|\xc2\xa0)/iU", ' ', $str); // converte colunas td para espaço
     $cleantext = preg_replace('/(\s| ?\&nbsp;|\n|\r|\h|\xc2\xa0)+/i', ' ', $cleantext);
-    $cleantext = preg_replace('/(<(\/?(span|table|code|col|td|colgroup).*?)>)/i', ' ', $cleantext);
+    $cleantext = preg_replace('/(<(\/?(span|table|code|col|td|colgroup|ul|li).*?)>)/i', ' ', $cleantext);
     $cleantext = preg_replace('/(<(\/?(p|div|h|a|style|tr|tbody).*?)>)/i', '<br>', $cleantext);
     $cleantext = preg_replace('/(( ?(\n)?<br ?\/?> ?)+)/mi', "<br>", $cleantext); 
     

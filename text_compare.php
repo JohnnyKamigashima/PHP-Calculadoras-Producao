@@ -185,10 +185,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 $textDoc = limpaHtmlSpaceBreak($textDoc);
                 $textArte = limpaHtmlSpaceBreak($textArte);
                 
-                // echo '<br>Doc: ';
-                // debug($textDoc);
-                // echo '<br>Arte: ';
-                // debug($textArte);
+                //  echo '<br>Doc: ';
+                //  debug($textDoc);
+                //  echo '<br>Arte: ';
+                //  debug($textArte);
 
                 //converte para Decodifica HTML
                 $textDoc = html_entity_decode($textDoc);

@@ -83,8 +83,15 @@ for (var reruns=0; reruns<rerunValue;reruns++){ // roda automaticamente n vezes
     randOffH= randOffH+" "+unitType;
     randOffV=randOffV+" "+unitType;
 
-    refLayer = docRef.artLayers.getByName("Background");
-    theChannels = new Array(docRef.channels[i]); //select current channel
+    var upperName = docRef.channels[i].name.toUpperCase(), channelRef = docRef.channels[i];
+    
+    if(upperName.indexOf("DIE") != -1 || upperName.indexOf("TECH") != -1) 
+      {
+      channelRef.remove();
+    }
+    
+      refLayer = docRef.artLayers.getByName("Background");
+      theChannels = new Array(docRef.channels[i]); //select current channel    
     docRef.activeChannels=theChannels;
         
     refLayer.applyOffset(randOffH,randOffV,OffsetUndefinedAreas.SETTOBACKGROUND); //filter current layer of current document using offset filter
