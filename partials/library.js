@@ -31,13 +31,13 @@ function handleClick(myRadio) {
   );
 }
 
-function altoemFpL(larg, blocos, pontos){
+function altoemFpL(larg, blocos, pontos) {
   let coeficiente = 0;
   if (blocos == 1) coeficiente = 2.27;
-  else  if (blocos==2) coeficiente = 2.19;
-  else if (blocos==3) coeficiente = 2.16;
+  else if (blocos == 2) coeficiente = 2.19;
+  else if (blocos == 3) coeficiente = 2.16;
   else coeficiente = 2.15;
-  return (pontos*coeficiente)*blocos; // retorna largura necessaria para obter esses pontos
+  return (pontos * coeficiente) * blocos; // retorna largura necessaria para obter esses pontos
 }
 
 function altoEm(altura, largura, area, nutrientes, tipo) {
@@ -50,10 +50,10 @@ function altoEm(altura, largura, area, nutrientes, tipo) {
   nutrientes = Number(nutrientes.val());
   tipo = tipo.val();
 
-  if (area == 0)  areaPDP = altura * largura;
-  
-  if ((altura > 0 && largura > 0 && nutrientes != undefined && tipo != undefined) || areaPDP > 0) 
-    {
+  if (area == 0) areaPDP = altura * largura;
+
+  // verifica tabela legal
+  if ((altura > 0 && largura > 0 && nutrientes != undefined && tipo != undefined) || areaPDP > 0) {
     $("#areaPDP").val(altura * largura);
     if (areaPDP < 10000) {
       var areaNutri1 = areaPDP * 0.035,
@@ -68,166 +68,127 @@ function altoEm(altura, largura, area, nutrientes, tipo) {
         minFont = 9,
         maxFont = 15;
     }
-//  console.log(areaNutri1);
-//  console.log(areaNutri2);
-//  console.log(areaNutri3);
-    console.log("PDP:" +areaPDP);
-    // console.log(tipo);
-    // console.log(nutrientes);
-if(nutrientes == 1) $("#altoemA").val(areaNutri1);
-else if (nutrientes == 2) $("#altoemA").val(areaNutri2);
-else if (nutrientes == 3) $("#altoemA").val(areaNutri3);
+    console.log("PDP:" + areaPDP);
+    if (nutrientes == 1) $("#altoemA").val(areaNutri1);
+    else if (nutrientes == 2) $("#altoemA").val(areaNutri2);
+    else if (nutrientes == 3) $("#altoemA").val(areaNutri3);
 
     if (tipo == "--" && nutrientes == 1) {
       blocos = 2;
       blocos_hor = 2;
       larguraFinal = ladoGrid(areaNutri1, blocos, tipo) * blocos;
       fonte = altoEmLpF(larguraFinal, blocos_hor);
-      if (fonte < minFont) larguraFinal = altoemFpL(larguraFinal, blocos_hor, minFont)
-      else if (fonte > maxFont) larguraFinal = altoemFpL(larguraFinal, blocos_hor, maxFont)
-      larguramax = altoemFpL(larguraFinal, blocos_hor, maxFont)
+
     } else if (tipo == "I" && nutrientes == 1) {
       blocos = 2;
       blocos_hor = 1;
       larguraFinal = ladoGrid(areaNutri1, blocos, tipo);
       fonte = altoEmLpF(larguraFinal, blocos_hor);
-      if (fonte < minFont) larguraFinal = altoemFpL(larguraFinal, blocos_hor, minFont)
-      else if (fonte > maxFont) larguraFinal = altoemFpL(larguraFinal, blocos_hor, maxFont)
-      larguramax = altoemFpL(larguraFinal, blocos_hor, maxFont)
-      
-      
-      
+
+
+
     } else if (tipo == "--" && nutrientes == 2) {
       blocos = 3;
       blocos_hor = 3;
       larguraFinal = ladoGrid(areaNutri2, blocos, tipo) * blocos;
       fonte = altoEmLpF(larguraFinal, blocos_hor);
-      if (fonte < minFont) larguraFinal = altoemFpL(larguraFinal, blocos_hor, minFont)
-      else if (fonte > maxFont) larguraFinal = altoemFpL(larguraFinal, blocos_hor, maxFont)
-      larguramax = altoemFpL(larguraFinal, blocos_hor, maxFont)
-      
+
     } else if (tipo == "I" && nutrientes == 2) {
       blocos = 3;
       blocos_hor = 1;
       larguraFinal = ladoGrid(areaNutri2, blocos, tipo);
       fonte = altoEmLpF(larguraFinal, blocos_hor);
-      if (fonte < minFont) larguraFinal = altoemFpL(larguraFinal, blocos_hor, minFont)
-      else if (fonte > maxFont) larguraFinal = altoemFpL(larguraFinal, blocos_hor, maxFont)
-      larguramax = altoemFpL(larguraFinal, blocos_hor, maxFont)
-      
+
     } else if (tipo == "L" && nutrientes == 2) {
       blocos = 3;
       blocos_hor = 2;
       larguraFinal = ladoGrid(areaNutri2, blocos, tipo) * blocos_hor;
       fonte = altoEmLpF(larguraFinal, blocos_hor);
-      if (fonte < minFont) larguraFinal = altoemFpL(larguraFinal, blocos_hor, minFont)
-      else if (fonte > maxFont) larguraFinal = altoemFpL(larguraFinal, blocos_hor, maxFont)
-      larguramax = altoemFpL(larguraFinal, blocos_hor, maxFont)
-      
+
     } else if (tipo == "r" && nutrientes == 2) {
       blocos = 3;
       blocos_hor = 2;
       larguraFinal = ladoGrid(areaNutri2, blocos, tipo) * blocos;
       fonte = altoEmLpF(larguraFinal, blocos_hor);
-      if (fonte < minFont) larguraFinal = altoemFpL(larguraFinal, blocos_hor, minFont)
-      else if (fonte > maxFont) larguraFinal = altoemFpL(larguraFinal, blocos_hor, maxFont)
-      larguramax = altoemFpL(larguraFinal, blocos_hor, maxFont)
-      
+
     } else if (tipo == "q" && nutrientes == 2) {
       blocos = 3;
       blocos_hor = 2;
       larguraFinal = ladoGrid(areaNutri2, blocos, tipo) * blocos_hor;
       fonte = altoEmLpF(larguraFinal, blocos_hor);
-      if (fonte < minFont) larguraFinal = altoemFpL(larguraFinal, blocos_hor, minFont)
-      else if (fonte > maxFont) larguraFinal = altoemFpL(larguraFinal, blocos_hor, maxFont)
-      larguramax = altoemFpL(larguraFinal, blocos_hor, maxFont)
-      
-      
+
+
     } else if (tipo == "r" && nutrientes == 2) {
       blocos = 3;
       blocos_hor = 2;
       larguraFinal = ladoGrid(areaNutri2, blocos, tipo) * blocos_hor;
       fonte = altoEmLpF(larguraFinal, blocos_hor);
-      if (fonte < minFont) larguraFinal = altoemFpL(larguraFinal, blocos_hor, minFont)
-      else if (fonte > maxFont) larguraFinal = altoemFpL(larguraFinal, blocos_hor, maxFont)
-      larguramax = altoemFpL(larguraFinal, blocos_hor, maxFont)
-      
-      
+
+
     } else if (tipo == "r" && nutrientes == 3) {
       blocos = 4;
       blocos_hor = 2;
       larguraFinal = ladoGrid(areaNutri3, blocos, tipo) * blocos_hor;
       fonte = altoEmLpF(larguraFinal, blocos_hor);
-      if (fonte < minFont) larguraFinal = altoemFpL(larguraFinal, blocos_hor, minFont)
-      else if (fonte > maxFont) larguraFinal = altoemFpL(larguraFinal, blocos_hor, maxFont)
-      larguramax = altoemFpL(larguraFinal, blocos_hor, maxFont)
-      
-      
+
+
     } else if (tipo == "0" && nutrientes == 3) {
       blocos = 4;
       blocos_hor = 2;
       larguraFinal = ladoGrid(areaNutri3, blocos, tipo) * blocos_hor;
       fonte = altoEmLpF(larguraFinal, blocos_hor);
-      if (fonte < minFont) larguraFinal = altoemFpL(larguraFinal, blocos_hor, minFont)
-      else if (fonte > maxFont) larguraFinal = altoemFpL(larguraFinal, blocos_hor, maxFont)
-      larguramax = altoemFpL(larguraFinal, blocos_hor, maxFont)
-      
-      
+
+
     } else if (tipo == "I" && nutrientes == 3) {
       blocos = 4;
       blocos_hor = 1;
       larguraFinal = ladoGrid(areaNutri3, blocos, tipo);
       fonte = altoEmLpF(larguraFinal, blocos_hor);
-      if (fonte < minFont) larguraFinal = altoemFpL(larguraFinal, blocos_hor, minFont)
-      else if (fonte > maxFont) larguraFinal = altoemFpL(larguraFinal, blocos_hor, maxFont)
-      larguramax = altoemFpL(larguraFinal, blocos_hor, maxFont)
-      
-      
+
+
     } else if (tipo == "--" && nutrientes == 3) {
       blocos = 4;
       blocos_hor = 4;
       larguraFinal = ladoGrid(areaNutri3, blocos, tipo) * blocos_hor;
       fonte = altoEmLpF(larguraFinal, blocos_hor);
-      if (fonte < minFont) larguraFinal = altoemFpL(larguraFinal, blocos_hor, minFont)
-      else if (fonte > maxFont) larguraFinal = altoemFpL(larguraFinal, blocos_hor, maxFont)
-      larguramax = altoemFpL(larguraFinal, blocos_hor, maxFont)
-      
-      
+
+
     } else if (tipo == "q" && nutrientes == 3) {
       blocos = 4;
       blocos_hor = 2;
       larguraFinal = ladoGrid(areaNutri3, blocos, tipo) * blocos_hor;
       fonte = altoEmLpF(larguraFinal, blocos_hor);
-      if (fonte < minFont) larguraFinal = altoemFpL(larguraFinal, blocos_hor, minFont)
-      else if (fonte > maxFont) larguraFinal = altoemFpL(larguraFinal, blocos_hor, maxFont)
-      larguramax = altoemFpL(larguraFinal, blocos_hor, maxFont)
-      
-      
+
+
     } else if (tipo == "L" && nutrientes == 3) {
       blocos = 4;
       blocos_hor = 3;
       larguraFinal = ladoGrid(areaNutri3, blocos, tipo) * blocos;
       fonte = altoEmLpF(larguraFinal, blocos_hor);
-      if (fonte < minFont) larguraFinal = altoemFpL(larguraFinal, blocos_hor, minFont)
-      else if (fonte > maxFont) larguraFinal = altoemFpL(larguraFinal, blocos_hor, maxFont)
-      larguramax = altoemFpL(larguraFinal, blocos_hor, maxFont)
-      
-      
-      
+
+
+
     } else {
       larguraFinal = 0;
     }
-//  console.log(larguraFinal);
-    larguraFinal = larguraFinal.toFixed(2);
-    
-    return [larguraFinal,larguramax];
+
+
+    // Verifica se a largura não está impondo fonte acima ou abaixo da legislação
+    if (larguraFinal != 0) {
+      if (fonte < minFont) larguraFinal = altoemFpL(larguraFinal, blocos_hor, minFont)
+      else if (fonte > maxFont) larguraFinal = altoemFpL(larguraFinal, blocos_hor, maxFont)
+      larguramax = altoemFpL(larguraFinal, blocos_hor, maxFont)
+      larguraFinal = larguraFinal.toFixed(2);
+    }
+
+    return [larguraFinal, larguramax];
   }
 }
 
 function faroloctagono(alt, larg, area, pais) {
   let menorX = Math.sqrt(
-      (0.15 * mmarea2cm(parseFloat(alt.val() * larg.val()))) / 4680
-    ),
+    (0.15 * mmarea2cm(parseFloat(alt.val() * larg.val()))) / 4680
+  ),
     MX = [
       [5, menorX, 65, 72, "SECRETARÌA DE SALUD", 3.07],
       [30, 0.016, 65, 72, "SECRETARÌA DE SALUD", 3.07],
@@ -290,21 +251,21 @@ function faroloctagono(alt, larg, area, pais) {
       " altura mínima de " +
       cm2mm(
         MX[verifica_octagono(MX, areaFOP5)][5] *
-          MX[verifica_octagono(MX, areaFOP5)][1]
+        MX[verifica_octagono(MX, areaFOP5)][1]
       ).toFixed(2) +
       " mm";
     console.log(
       MX[verificaoctagono(MX, areaFOP5)][4] +
-        " altura mínima de " +
-        cm2mm(
-          MX[verificaoctagono(MX, areaFOP5)][5] *
-            MX[verificaoctagono(MX, areaFOP5)][1]
-        ) +
-        " mm"
+      " altura mínima de " +
+      cm2mm(
+        MX[verificaoctagono(MX, areaFOP5)][5] *
+        MX[verificaoctagono(MX, areaFOP5)][1]
+      ) +
+      " mm"
     );
     return cm2mm(
       MX[verificaoctagono(MX, areaFOP5)][1] *
-        MX[verificaoctagono(MX, areaFOP5)][2]
+      MX[verificaoctagono(MX, areaFOP5)][2]
     ).toFixed(2);
   } else if (pais == "PE") {
     document.getElementById("descricao_farol").innerHTML =
@@ -312,19 +273,19 @@ function faroloctagono(alt, larg, area, pais) {
       " altura mínima de " +
       cm2mm(
         PE[verificaoctagono(PE, areaFOP5)][5] *
-          PE[verificaoctagono(PE, areaFOP5)][1]
+        PE[verificaoctagono(PE, areaFOP5)][1]
       ).toFixed(2) +
       " mm";
     return cm2mm(
       PE[verificaoctagono(PE, areaFOP5)][1] *
-        PE[verificaoctagono(PE, areaFOP5)][2]
+      PE[verificaoctagono(PE, areaFOP5)][2]
     ).toFixed(2);
   } else if (pais == "UY") {
     document.getElementById("descricao_farol").innerHTML =
       UY[verificaoctagono(UY, areaFOP5)][4];
     return cm2mm(
       UY[verificaoctagono(UY, areaFOP5)][1] *
-        UY[verificaoctagono(UY, areaFOP5)][2]
+      UY[verificaoctagono(UY, areaFOP5)][2]
     ).toFixed(2);
   } else if (pais == "CH") {
     document.getElementById("descricao_farol").innerHTML =
@@ -332,12 +293,12 @@ function faroloctagono(alt, larg, area, pais) {
       " altura mínima de " +
       cm2mm(
         CH[verificaoctagono(CH, areaFOP5)][5] *
-          CH[verificaoctagono(CH, areaFOP5)][1]
+        CH[verificaoctagono(CH, areaFOP5)][1]
       ).toFixed(2) +
       " mm";
     return cm2mm(
       CH[verificaoctagono(CH, areaFOP5)][1] *
-        CH[verificaoctagono(CH, areaFOP5)][2]
+      CH[verificaoctagono(CH, areaFOP5)][2]
     ).toFixed(2);
   }
 }
@@ -381,20 +342,20 @@ function ladoGrid(area, blocos, tipo) {
   // return (Math.sqrt((area / blocos) / 126)) * 18;
   // return Math.sqrt(2.38099584 * (area / blocos));
   var escala = 2.5;
-if (blocos == 4 && tipo == "I") escala = 2.5705;
-else if (blocos == 3 && tipo == "I") escala = 2.5323;
-else if (blocos == 2 && tipo == "I") escala = 2.4701;
-else if (blocos == 4 && tipo == "0") escala = 2.3660;
-else if (blocos == 3 && tipo == "q") escala = 2.3660;
-else if (blocos == 3 && tipo == "q") escala = 2.3660;
-else if (blocos == 4 && tipo == "q") escala = 2.4393;
-else if (blocos == 3 && tipo == "r") escala = 2.3660;
-else if (blocos == 3 && tipo == "L") escala = 2.3660;
-else if (blocos == 4 && tipo == "L") escala = 2.3360;
-else if (blocos == 4 && tipo == "--") escala = 2.1289;
-else if (blocos == 3 && tipo == "--") escala = 2.1427;
-else if (blocos == 2 && tipo == "--") escala = 2.1703;
-return Math.sqrt(escala * (area / blocos));
+  if (blocos == 4 && tipo == "I") escala = 2.5705;
+  else if (blocos == 3 && tipo == "I") escala = 2.5323;
+  else if (blocos == 2 && tipo == "I") escala = 2.4701;
+  else if (blocos == 4 && tipo == "0") escala = 2.3660;
+  else if (blocos == 3 && tipo == "q") escala = 2.3660;
+  else if (blocos == 3 && tipo == "q") escala = 2.3660;
+  else if (blocos == 4 && tipo == "q") escala = 2.4393;
+  else if (blocos == 3 && tipo == "r") escala = 2.3660;
+  else if (blocos == 3 && tipo == "L") escala = 2.3660;
+  else if (blocos == 4 && tipo == "L") escala = 2.3360;
+  else if (blocos == 4 && tipo == "--") escala = 2.1289;
+  else if (blocos == 3 && tipo == "--") escala = 2.1427;
+  else if (blocos == 2 && tipo == "--") escala = 2.1703;
+  return Math.sqrt(escala * (area / blocos));
 }
 
 function farolEq(largura, altura, area) {
@@ -440,16 +401,16 @@ function farolEq(largura, altura, area) {
   }
 }
 
-function altoEmLpF(largura,blocos){
-  
+function altoEmLpF(largura, blocos) {
+
   let coeficiente = 0;
-  
+
   if (blocos == 1) coeficiente = 2.27;
-  else  if (blocos==2) coeficiente = 2.19;
-  else if (blocos==3) coeficiente = 2.16;
+  else if (blocos == 2) coeficiente = 2.19;
+  else if (blocos == 3) coeficiente = 2.16;
   else coeficiente = 2.15;
-  
-  return ((largura/blocos)/coeficiente); // retorna qtos pontos tem essa largura
+
+  return ((largura / blocos) / coeficiente); // retorna qtos pontos tem essa largura
 }
 
 function pt2mm(pt, mm) {

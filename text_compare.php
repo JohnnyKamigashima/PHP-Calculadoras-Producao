@@ -1,14 +1,21 @@
+<!-- List compare versao 1.0 Por Johnny H. Kamigashima -->
+<!-- Copyright 2021 -->
+
 <!DOCTYPE html>
 <link rel="icon" type="image/png" href="./images/favicon.svg" />
-<div class="row">
-    <?php include_once 'partials/header.php'; ?>
-</div>
-<?php
+<title>QC Text Compare</title>
 
+<!-- Latest compiled and minified CSS -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+<script src="https://cdn.tiny.cloud/1/1hwzefvhux0zaed3wgjhtj8xrid32be83jl71noha1gb803t/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
+<script type='text/javascript' src='partials/functions.js'></script>
+
+<link rel="stylesheet" href="css/style.css">
+<?php
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
-
 session_start();
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $sessionEDuplo = (isset($_POST['espacoDuplo'])) ? 'checked' : '';
@@ -23,26 +30,19 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $sessionDoc = $sessionArte = $sessionRascunho = $sessionEbold = $sessionEitalico = '';
     $sessionEDuplo = $sessionECaixa = $sessionEponto =  'checked';
 }
-
 ?>
+
 <head>
+    <div class="row">
+        <?php include_once 'partials/header.php'; ?>
+    </div>
 </head>
 <html>
 
 <body>
-    <title>QC Text Compare</title>
-    <!-- Latest compiled and minified CSS -->
-    <!-- CSS only -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
-    <script src="https://cdn.tiny.cloud/1/1hwzefvhux0zaed3wgjhtj8xrid32be83jl71noha1gb803t/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
-    <script type='text/javascript' src='partials/functions.js'></script>
-
-    <link rel="stylesheet" href="css/style.css">
     <meta name="viewport" content="width=device-width, initial-scale=1.0" charset="utf-8" />
 
-    <!--  List compare -->
+    <!--  List compare HTML-->
     <div id="main" class="container-md">
         <div class="container p-3">
             <div class="titulo p-3">
@@ -88,22 +88,19 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     </div>
                 </div>
                 <div class="container p-3">
-
-                    <input type="submit" id="submit" value="Comparar (F5)" class="btn btn-success" />
+                    <input type="submit" id="comparar" value="Comparar (F5)" class="btn btn-success" />
                 </div>
             </form>
 
             <script>
-                document.addEventListener("keydown", e => {
-                    console.log(e)
-                })
-                document.addEventListener("keydown", e => {
-                    if ((e.key.toLowerCase() === "enter" &&
-                            e.ctrlKey) || e.key.toLowerCase() === "f5") {
-                        document.getElementById("submit").click();
+                // Roda a comparação com Ctrl-Enter ou F5
+                document.addEventListener("keydown", comparar => {
+                    if ((comparar.key.toLowerCase() === "enter" && comparar.ctrlKey) || comparar.key.toLowerCase() === "f5") {
+                        document.getElementById("comparar").click();
                     }
                 })
 
+                // inicia o pkugin TinyMCE Documento
                 tinymce.init({
                     selector: 'textarea#textDoc',
                     plugins: 'searchreplace fullscreen wordcount visualchars autosave paste save table textpattern visualblocks',
@@ -114,11 +111,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     tinycomments_author: 'Author name',
                     height: 300,
                     init_instance_callback: function(editor) {
-                        // editor.on('blur', function(e) {
-                        //     tinymce.get("textDoc").setContent(removeTags(tinymce.get("textDoc").getContent()));;
-                        // });
                     }
                 });
+                // Inicia o plugin TinyMCE da Arte
                 tinymce.init({
                     selector: 'textarea#textArte',
                     plugins: 'searchreplace fullscreen wordcount visualchars autosave paste save table textpattern visualblocks',
@@ -129,18 +124,15 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     tinycomments_author: 'Author name',
                     height: 300,
                     init_instance_callback: function(editor) {
-                        // editor.on('blur', function(e) {
-                        //     tinymce.get("textArte").setContent(removeTags(tinymce.get("textArte").getContent()));;
-                        // });
                     }
                 });
 
-                function updateValues() {
-                    <?php
-                    $sessionDoc = "<script>master.html.get()</script>";
-                    $sessionArte = "<script>copy.html.get()</script>";
-                    ?>
-                }
+                // function updateValues() {
+                //     <?php
+                //     $sessionDoc = "<script>master.html.get()</script>";
+                //     $sessionArte = "<script>copy.html.get()</script>";
+                //     ?>
+                // }
             </script>
 
             <?php
@@ -161,13 +153,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 $alterna = true;
 
                 //Constants
-                define('ENCODING', 'UTF-8');
-                define("ATENCAO", '880000');
-                define("ALERTA", 'FF0000');
-                define('UNIDADEMEDIDA', '/\d+(cm|m|km|mcg|mg|g|kg|ml|l|cal|kcal)/i');
+                define('ENCODING',        'UTF-8');
+                define("ATENCAO",         '880000');
+                define("ALERTA",          'FF0000');
+                define('UNIDADEMEDIDA',   '/\d+(cm|m|km|mcg|mg|g|kg|ml|l|cal|kcal)/i');
                 define('TERMOSINVALIDOS', '/(\d+ |\d+)(CM|cM|Cm|mt|M|Mt|mT|KM|kM|MCG|Mcg|McG|mcG|MGc|MG|Mg|mG|G|GR|Gr|KG|Kg|kG|ML|Ml|CAL|Cal|CaL|cAL|caL|KCAL|Kcal|kCAL|kcAL|kcaL|KcaL|KCal|KcAL) /');
-                define('BGCOLOR1', '#faebd7');
-                define('BGCOLOR2', '#eddcc5');
+                define('BGCOLOR1',        '#faebd7');
+                define('BGCOLOR2',        '#eddcc5');
 
                 //Checa opçoes selecionadas
                 if (isset($sessionEDuplo)) $espacoDuplo = ($sessionEDuplo == 'checked') ? true : false;
@@ -184,11 +176,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 // Limpeza inicial de Tags HTML
                 $textDoc = limpaHtmlSpaceBreak($textDoc);
                 $textArte = limpaHtmlSpaceBreak($textArte);
-                
-                //  echo '<br>Doc: ';
-                //  debug($textDoc);
-                //  echo '<br>Arte: ';
-                //  debug($textArte);
 
                 //converte para Decodifica HTML
                 $textDoc = html_entity_decode($textDoc);
@@ -196,13 +183,18 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
 
                 //Verifica textos obrigatorios BOLD/Italic/Caixa alta
-                if (!$bold) foreach (isBold('fabricado', 'ltda', $textArte) as $result) array_push($faltaBOLD, $result);
-                if (!$bold) foreach (isBold('fabricado', 's.a.', $textArte) as $result) array_push($faltaBOLD, $result);
-                if (!$bold) foreach (isBold('importado', 'ltda', $textArte) as $result) array_push($faltaBOLD, $result);
-                if (!$bold) foreach (isBold('importado', 's.a.', $textArte) as $result) array_push($faltaBOLD, $result);
-                if (!$bold) foreach (isBold('(contém lactose|contém glúten|ingredientes|ingred|ingr)', '', $textArte) as $result) array_push($faltaBOLD, $result);
-                if (!$italico) foreach (isItalic('trans', '', $textArte) as $result) array_push($faltaItalic, $result);
-                foreach (isCaixa('contém', '(glúten|lactose)', $textArte) as $result) array_push($faltaCAIXA, $result);
+                if (!$bold) array_push($faltaBOLD, isNotTagged('fabricado', 'ltda','strong', $textArte));
+                if (!$bold) array_push($faltaBOLD, isNotTagged('fabricado', 's.a.','strong', $textArte));
+                if (!$bold) array_push($faltaBOLD, isNotTagged('importado', 'ltda','strong', $textArte));
+                if (!$bold) array_push($faltaBOLD, isNotTagged('importado', 's.a.','strong', $textArte));
+                if (!$bold) array_push($faltaBOLD, isNotTagged('(contém lactose|contém glúten|^ingredientes|^ingred|^ingr)', '','strong', $textArte));
+                if (!$italico) array_push($faltaItalic, isNotTagged('trans', '','em', $textArte) );
+                array_push($faltaCAIXA, isCaixa('contém', '(glúten|lactose)', $textArte));
+
+                // Limpa arrays vazios
+                $faltaBOLD = array_filter($faltaBOLD);
+                $faltaItalic = array_filter($faltaItalic);
+                $faltaCAIXA = array_filter($faltaCAIXA);
 
                 // Remove Bolds antes de checar
                 $textDoc = ($bold) ? removeBold($textDoc) : $textDoc;
@@ -223,10 +215,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 //ignora pontos finais
                 $textDoc = ($pontoFinal) ? limpaPontofinal($textDoc) : $textDoc;
                 $textArte = ($pontoFinal) ? limpaPontofinal($textArte) : $textArte;
-                // echo '<br>Doc: ';
-                // debug($textDoc);
-                // echo '<br>Arte: ';
-                // debug($textArte);
+     
 
                 // converte texto para array dividido por linhas
                 $textDocLinhas = explode('|', $textDoc);
@@ -247,10 +236,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 // remove linhas repetidas no array
                 $textDocLinhas = array_unique($textDocLinhas);
                 $textArteLinhas = array_unique($textArteLinhas);
-                // echo '<br>Doclinhas: ';
-                // debug($textDocLinhas);
-                //  echo '<br>Artelinhas: ';
-                //  debug($textArteLinhas);
+
                 // Compara linha por linha
                 foreach ($textDocLinhas as $indiceDoc => $docLinha) {
                     foreach ($textArteLinhas as $indiceArte => $arteLinha) {

@@ -1,12 +1,12 @@
 <?php
 
-use function PHPSTORM_META\type;
+// use function PHPSTORM_META\type;
 
-function doublePreg($palavra)
-{
-    $invalidChars = '/ +|\-+|\_+/';
-    return preg_replace($invalidChars, '_', preg_replace($invalidChars, '_', $palavra));
-}
+// function doublePreg($palavra)
+// {
+//     $invalidChars = '/ +|\-+|\_+/';
+//     return preg_replace($invalidChars, '_', preg_replace($invalidChars, '_', $palavra));
+// }
 
 function debug($array)
 {
@@ -41,12 +41,11 @@ function comparaArrays($arr1, $arr2, $case)
 {
     $result = array();
     $resTemp = '';
-    $encoding = 'UTF-8';
     foreach ($arr1 as $ind1 => $uniq1) {
         $resTemp = $uniq1;
         foreach ($arr2 as $ind2 => $uniq2) {
             $doIt = false;
-            if ($case && mb_strtoupper($uniq1, $encoding) == mb_strtoupper($uniq2, $encoding)) $doIt = true;
+            if ($case && mb_strtoupper($uniq1, ENCODING) == mb_strtoupper($uniq2, ENCODING)) $doIt = true;
             else if (!$case && $uniq1 == $uniq2) $doIt = true;
             if ($doIt) {
                 unset($arr2[$ind2]);
@@ -62,11 +61,10 @@ function comparaArrays($arr1, $arr2, $case)
 function descomparaArrays($arr1, $arr2, $case)
 {
     $result = array();
-    $encoding = 'UTF-8';
     foreach ($arr1 as $ind1 => $uniq1) {
         foreach ($arr2 as $ind2 => $uniq2) {
             $doIt = false;
-            if ($case && mb_strtoupper($uniq1, $encoding) == mb_strtoupper($uniq2, $encoding)) $doIt = true;
+            if ($case && mb_strtoupper($uniq1, ENCODING) == mb_strtoupper($uniq2, ENCODING)) $doIt = true;
             else if (!$case && $uniq1 == $uniq2) $doIt = true;
             if ($doIt) {
                 unset($arr2[$ind2]);
@@ -93,6 +91,7 @@ function frasesDiff($master, $copy, $caixa, $corDif, $corAtencao)
 function hilight($frase1, $frase2, $case, $corDif, $corAtencao) //verifica duas arrays de pelavras e marca as diferencas
 {
     $result = array();
+    $caracteres = '/(\.|\,|\)|\(|\;|\:|\?|\!|\#|\$|\@|\&|\+|\-| )/';
     foreach ($frase1 as $indice => $palavra1) {
         $indMatch = array();
         foreach ($frase2 as $palavra2) {
@@ -105,8 +104,8 @@ function hilight($frase1, $frase2, $case, $corDif, $corAtencao) //verifica duas 
                     $palavra1Comp = ($palavra1[$index]);
                     $palavra2Comp = ($palavra2[$index]);
                 }
-                if (preg_replace('/(\.|\,|\)|\(|\;|\:|\?|\!|\#|\$|\@|\&|\+|\-| )/', '', $palavra1Comp) == preg_replace('/(\.|\,|\)|\(|\;|\:|\?|\!|\#|\$|\@|\&|\+|\-| )/', '', $palavra2Comp) && $index == 1) $match = $match + 10; //10 is most important word match
-                elseif (preg_replace('/(\.|\,|\)|\(|\;|\:|\?|\!|\#|\$|\@|\&|\+|\-| )/', '', $palavra1Comp) == preg_replace('/(\.|\,|\)|\(|\;|\:|\?|\!|\#|\$|\@|\&|\+|\-| )/', '', $palavra2Comp)) $match++; //10-11 is partial match / 12 is perfect match
+                if (preg_replace($caracteres, '', $palavra1Comp) == preg_replace($caracteres, '', $palavra2Comp) && $index == 1) $match = $match + 10; //10 is most important word match
+                elseif (preg_replace($caracteres, '', $palavra1Comp) == preg_replace($caracteres, '', $palavra2Comp)) $match++; //10-11 is partial match / 12 is perfect match
             }
             array_push($indMatch, [$match, $indice]);
         }
@@ -141,87 +140,34 @@ function removeTags($str)
 {
     if (($str === null) || ($str === ''))  return false;
 
-    // Regular expression to identify HTML tags in
-    // the input string. Replacing the identified
-    // HTML tag with a null string.
     $cleantext = preg_replace("/(<td.*>(\s+)?<p>|<\/p>(\s+)?<\/td>|\h|\xc2\xa0)/iU", ' ', $str); // converte colunas td para espaço
-    $cleantext = preg_replace('/(\s| ?\&nbsp;|\n|\r|\h|\xc2\xa0)+/i', ' ', $cleantext);
-    $cleantext = preg_replace('/(<(\/?(span|table|code|col|td|colgroup|ul|li).*?)>)/i', ' ', $cleantext);
-    $cleantext = preg_replace('/(<(\/?(p|div|h|a|style|tr|tbody).*?)>)/i', '<br>', $cleantext);
-    $cleantext = preg_replace('/(( ?(\n)?<br ?\/?> ?)+)/mi', "<br>", $cleantext); 
-    
+    $cleantext = preg_replace('/((\s| ?\&nbsp;|\n|\r|\h|\xc2\xa0)+|(<(\/?(span|table|code|col|td|colgroup|ul|li).*?)>))/i', ' ', $cleantext); //Converte caracteres de espaço para espaço e remove tags
+    // $cleantext = preg_replace('/(<(\/?(span|table|code|col|td|colgroup|ul|li).*?)>)/i', ' ', $cleantext); //Remove tags
+    $cleantext = preg_replace('/((<(\/?(p|div|h|a|style|tr|tbody).*?)>)|(( ?(\n)?<br ?\/?> ?)+))/i', '<br>', $cleantext); //Transforma tags para quebras de linhas
+
     return $cleantext;
 }
-function isBold($start, $end, $haystack)
+
+function isNotTagged($start, $end,$tag, $string)
 {
-    $correto = $geral = $geralN = $corretoN = $incorreto = array();
-    $haystack =  html_entity_decode($haystack);
-    preg_match_all("/(&lt;|<).*strong.*(>|&gt;).*\K$start\W.*$end\W/imU", $haystack, $correto, PREG_SET_ORDER);
-    preg_match_all("/$start\W.*$end\W/imU", $haystack, $geral, PREG_SET_ORDER);
-    foreach ($geral as $unitario) array_push($geralN, $unitario[0]);
-    foreach ($correto as $unitario) array_push($corretoN, $unitario[0]);
-    if ((count($corretoN) == 0)) return $geralN;
-    if (count($geralN) === count($corretoN)) return array();
-    else {
-        foreach ($geralN as $g => $unG) {
-            foreach ($corretoN as $c => $unN) {
-                if (trim($unG) == trim($unN)) {
-                    unset($corretoN[$c]);
-                    unset($geralN[$g]);
-                    break;
-                } else $incorretoTEMP = $unN;
-            }
-        }
-    }
-    return $geralN;
+    $result = array();
+    $string =  html_entity_decode($string);
+
+    // Limpa texto entre tag
+    $semTag = preg_replace("/(<$tag.*>(.*|.*\n.*)<\/$tag>)/imU",'',$string,PREG_SET_ORDER);
+    
+    // Adiciona resultados na array
+    preg_match("/($start.*?$end)/imU", $semTag, $result);
+    if ($result != NULL) return $result[1];
 }
-function isItalic($start, $end, $haystack)
+
+function isCaixa($start, $end, $string)
 {
-    $correto = $geral = $geralN = $corretoN  = $result = array();
-    $haystack =  html_entity_decode($haystack);
-    if ($end != '') preg_match_all("/<.*em.*>$start.*$end<\/?em.*>/imU", $haystack, $correto, PREG_SET_ORDER);
-    else preg_match_all("/<.*em.*>$start<\/?em.*>/imU", $haystack, $correto, PREG_SET_ORDER);
-    preg_match_all("/$start.*$end/imU", $haystack, $geral, PREG_SET_ORDER);
-    foreach ($correto as $index => $corr) $correto[$index] = removeItalico($corr);
-    if (count($geral) === count($correto)) return array();
-    else {
-        foreach ($geral as $g => $unG) {
-            foreach ($correto as $c => $unN) {
-                if (trim($unG[0]) == trim($unN[0])) {
-                    unset($correto[$c]);
-                    unset($geral[$g]);
-                    break;
-                }
-            }
-        }
-    }
-    foreach ($geral as $g) array_push($result, $g);
-    return $g;
-}
-function isCaixa($start, $end, $haystack)
-{
-    $correto = $geral = $geralN = $corretoN  = array();
-    $haystack =  html_entity_decode($haystack);
-    $upperstart = mb_strtoupper($start);
-    $upperend = mb_strtoupper($end);
-    preg_match_all("/$upperstart\W.*$upperend\W/muU", $haystack, $correto, PREG_SET_ORDER);
-    preg_match_all("/$start\W.*$end\W/imuU", $haystack, $geral, PREG_SET_ORDER);
-    foreach ($geral as $unitario) array_push($geralN, $unitario[0]);
-    foreach ($correto as $unitario) array_push($corretoN, $unitario[0]);
-    if ((count($corretoN) == 0)) return $geralN;
-    if (count($geralN) === count($corretoN)) return array();
-    else {
-        foreach ($geralN as $g => $unG) {
-            foreach ($corretoN as $c => $unN) {
-                if (trim($unG) == trim($unN)) {
-                    unset($corretoN[$c]);
-                    unset($geralN[$g]);
-                    break;
-                } else $incorretoTEMP = $unN;
-            }
-        }
-    }
-    return $geralN;
+    $start = mb_strtoupper($start, ENCODING);
+    $end = mb_strtoupper($end, ENCODING);
+    $removeCorreto = preg_replace("/($start.*?$end)/m",'',$string);
+    preg_match("/($start.*?$end)/im", $removeCorreto, $result);
+    return array_filter($result) != NULL ? $result[1] : false;
 }
 function mostraHTML($str)
 {
