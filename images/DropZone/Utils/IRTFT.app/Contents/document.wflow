@@ -1,135 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
-<plist version="1.0">
-<dict>
-	<key>AMApplicationBuild</key>
-	<string>509</string>
-	<key>AMApplicationVersion</key>
-	<string>2.10</string>
-	<key>AMDocumentVersion</key>
-	<string>2</string>
-	<key>actions</key>
-	<array>
-		<dict>
-			<key>action</key>
-			<dict>
-				<key>AMAccepts</key>
-				<dict>
-					<key>Container</key>
-					<string>List</string>
-					<key>Optional</key>
-					<true/>
-					<key>Types</key>
-					<array>
-						<string>com.apple.applescript.object</string>
-					</array>
-				</dict>
-				<key>AMActionVersion</key>
-				<string>1.0.2</string>
-				<key>AMApplication</key>
-				<array>
-					<string>Automator</string>
-				</array>
-				<key>AMParameterProperties</key>
-				<dict>
-					<key>source</key>
-					<dict/>
-				</dict>
-				<key>AMProvides</key>
-				<dict>
-					<key>Container</key>
-					<string>List</string>
-					<key>Types</key>
-					<array>
-						<string>com.apple.applescript.object</string>
-					</array>
-				</dict>
-				<key>ActionBundlePath</key>
-				<string>/System/Library/Automator/Run AppleScript.action</string>
-				<key>ActionName</key>
-				<string>Executar AppleScript</string>
-				<key>ActionParameters</key>
-				<dict>
-					<key>source</key>
-					<string>use AppleScript version "2.4" -- Yosemite (10.10) or lateruse scripting additionson process(input)		set s to text 1 thru 7 of input	--set the clipboard to input	return s	end processon write_to_file(this_data, target_file, append_data)	try		set the target_file to the target_file as string		set the open_target_file to open for access file target_file with write permission		write this_data to the open_target_file starting at eof		close access the open_target_file		return true	on error		try			close access file target_file		end try		return false	end tryend write_to_fileon run {}		(* Your script goes here *)	-- pede Conta			set Slistaconta to {"Mondelez", "Pepsico", "Unilever ARG", "Unilever BRA", "Unilever COL", "Unilever MX", "Heineken", "Ferrero", "Henkel", "Royal Canin"}		tell application "IRTFT"		activate window 1	end tell		set Sconta to choose from list Slistaconta with prompt "Selecione a Conta:" default items {"Unilever Brazil"}		if the result is false then return		-- pergunta qual a ODT	tell application "SystemUIServer"		set ODT to display dialog "Qual a ODT/JOB?" default answer the clipboard as string	end tell	set ODT to text returned of ODT	set ODT to process(ODT)		-- remove linha em branco da ODT	set AppleScript's text item delimiters to {return &amp; linefeed, return, linefeed, character id 8233, character id 8232}	set ODT to text items of ODT	set AppleScript's text item delimiters to {" "}	set ODT to ODT as text		tell application "IRTFT"		activate window 1	end tell		set Sqc to "Johnny Kamigashima"		-- pede Processo	set Slistaprocesso to {"Colour Retouch", "Pre-Press", "Production Art"}	set Sprocesso to choose from list Slistaprocesso with prompt "Selecione o processo:" default items {"Production Art"}	if the result is false then return		-- pede operador	if Sprocesso = "Pre-Press" then		set Soperadores to {"Agilson Alves", "Bruno Costa", "Douglas Nogueira", "Jessé Lima", "Leandro Silva", "Pedro Souza", "Vlamir Januario"}	else if Sprocesso = "Color Retouch" then		set Soperadores to {"Andrea Melhado", "Bruno Costa", "Leandro Silva", "Pedro Souza", "Vlamir Januario"}	else		set Soperadores to {"Agilson Alves", "Andrea Melhado", "Bruno Costa", "Bruno Cardoso", "Daniel Zonta", "Douglas Nogueira", "Edson Souza", "Jessé Lima", "Leandro Silva", "Luzia Gomes", "Pedro Souza", "Priscilla Barbosa ", "Rafael Alcantara", "Ricardo Souza", "Vlamir Januario"}	end if		set Soperador to choose from list Soperadores with prompt "Selecione o Operador:" default items {"Adriano Faustino"}	Soperador	if the result is false then return		-- pede tipo	set Slistatipo to {"Amend", "Color Amend", "Final File", "New", "Pre-Press Amend", "Text Amend"}	set Stipo to choose from list Slistatipo with prompt "Selecione o Tipo:" default items {"Novo"}	Stipo	if the result is false then return		-- pede complexidade	set Slistacomplex to {"Alta", "Media", "Baja"}	set Scomplex to choose from list Slistacomplex with prompt "Selecione a complexidade:" default items {"Media"}	Scomplex	if the result is false then return		-- pede RTFT	set Slistartft to {"Sim", "Não"}	set Srtft to choose from list Slistartft with prompt "Right First Time?" default items {"Sim"}	Srtft	set Srtft to Srtft as text	set Samendreason to ""	set Somissionb to ""	set Scomment to "" &amp; tab		if Srtft = "Sim" then		set Srtft to "1" &amp; tab &amp; tab &amp; tab			else if Srtft = "Não" then				set SLloop to {"1", "2", "3"}		set Sloop to choose from list SLloop with prompt "Quantas vezes retornou para correção?" default items {"1"}		Sloop		if the result is false then return				set Sloop to Sloop as integer				if Sloop = 1 then			set Srtft to tab &amp; "1" &amp; tab &amp; tab					else if Sloop = 2 then			set Srtft to tab &amp; tab &amp; "1" &amp; tab					else if Sloop = 3 then			set Srtft to tab &amp; tab &amp; tab &amp; "1"					end if				-- pede quantidade de amend		set Slistaqtdamend to {"1", "2", "3", "4", "5", "6"}		set Sqtdamend to choose from list Slistaqtdamend with prompt "Quantos erros?" default items {"1"}		Sqtdamend		if the result is false then return				set Sqtdamend to Sqtdamend as integer				set amendloop to 0		repeat while amendloop &lt; Sqtdamend			-- pede Amend reason			set Slistamend to {"Códigos de Barras - Especificação Incorreta", "Códigos de Barras - Valor Incorreto", "Códigos de Barras - Colocação", "Código (não-scannable alfa-numérico) - especificação incorreta", "Código (não-scannable alfanumérico) - Valor incorreto", "Código (alfanumérico não digitalizável) - Posicionamento", "Cor - cor (s) incorreta no trabalho", "Cor - valores de separação incorretos", "Cor - Modo / Espaço", "Cor - texto / elementos na cor errada", "Gráficos - Consistência da Marca", "Gráficos - Tamanho / Posição Incorreta", "Gráficos - Mascaramento, Recorte", "Gráficos - Imagem / ícone / símbolo ausente ou não solicitado", "Gráficos - imagem errada / ícone / símbolo", "Legenda - conteúdo incorreto", "Outro - erro de administrador", "Outros - arquivos reaprovados pelo cliente durante o QC", "Outros - arquivos ausentes da saída do fluxo de trabalho", "Outros - Erro de retoque de imagem", "Outros - Erro Herdado", "Outro - Instrução / Brief Não Seguido", "Outro - problema conhecido não corrigido", "Outros - registros não disponíveis", "Outros - Erro de controle de versão", "PM - Instrução / Informação incorreta", "PM - Informação em falta", "Prepress - Bleed", "Prepress - Dispro", "Prepress - Grips / Traps", "Prepress - Holdbacks / Keepaways / Cut Backs", "Pré-impressão - Falhas de impressão / sobreposição", "Pré-impressão - Lead Edge", "Pré-impressão - espessura da linha abaixo das especificações", "Prepress - Ponto Mínimo / Máximo", "Prepress - Orientação", "Prepress - Prepress Profile / Dot Shape", "Prepress - Print Card", "Pré-impressão - Marcas de impressão / sistemas de registro", "Pré-impressão - ângulos de tela / decisão", "Pré-impressão - etapa e repetição", "Prepress - Stray / Scum Dot", "Regulatório - não texto", "Regulatório - Texto", "Técnico - Posicionamento Braille", "Técnico - Área de codificação / Áreas livres de impressão não respeitadas", "Técnico - Problemas com marcas olhadas", "Técnico - Emissão de nome de arquivo", "Técnico - Erro final no formato de arquivo", "Técnico - Estrutura de Camadas", "Technical - Panel crossmatches não alinhados", "Técnico - problema de resolução", "Técnico - Desenho Técnico - Falhas de Dimensão", "Técnico - Desenho Técnico - Desenho Técnico Incorreto Usado", "Técnico - Desenho Técnico - Orientação", "Technical - Trim / Media Boxes", "Técnico - Visualizando o problema com a visualização de impressão sobreposta", "Texto - Conteúdo em Braille", "Texto - Problemas de formatação", "Texto - Emissão ao vivo / esboço", "Texto - Posição / Orientação", "Texto - O conteúdo de texto não corresponde ao texto mestre", "Texto - texto ausente", "Texto - Presente de texto não requerido"}						set Samend to choose from list Slistamend with prompt "Escolha o erro:" default items {"OUTROS"}			Samend			if the result is false then return						set Samendreason to Samendreason &amp; tab &amp; Samend			set amendloop to amendloop + 1		end repeat				-- pergunta comentario		set Scomment to display dialog "Comentários:" default answer "" as string				set Scomment to text returned of Scomment	end if		-- gera data		set today to short date string of (current date)	set t to (time string of (current date))	set [_day, _month, _year] to [day, month, year] of date today		set _month to _month * 1 --&gt; 3	set _month to text -1 thru -2 of ("0" &amp; _month) --&gt; "03"	set the text item delimiters to "/"	set today to {_year, _month, _day} as string	set fullDateToday to today as string		-- gera string		set QC to ""	set QC to (((tab &amp; (fullDateToday as text) &amp; tab &amp; tab &amp; Sconta as text) &amp; tab &amp; Sqc as text) &amp; tab &amp; Sprocesso &amp; tab &amp; Soperador &amp; tab &amp; ODT &amp; tab &amp; "1" &amp; tab &amp; Stipo &amp; tab &amp; Scomplex &amp; tab &amp; Srtft as text) &amp; tab &amp; Scomment &amp; Samendreason		-- tira tabs sobrando	set theText to QC	set AppleScript's text item delimiters to space	set textItems to every text item of theText	repeat with x from 1 to count my textItems		if item x of my textItems = "" then set item x of my textItems to missing value	end repeat	set theText to text of my textItems as string	set AppleScript's text item delimiters to ""	set QC to theText		set this_story to QC &amp; return	set this_file to (((path to desktop folder) as string) &amp; "DropZone:Utils:QC_erros.txt")	my write_to_file(this_story, this_file, true)	set the clipboard to this_story	returnend runto getCurrentApp()	return (path to frontmost application as text)end getCurrentApp</string>
-				</dict>
-				<key>BundleIdentifier</key>
-				<string>com.apple.Automator.RunScript</string>
-				<key>CFBundleVersion</key>
-				<string>1.0.2</string>
-				<key>CanShowSelectedItemsWhenRun</key>
-				<false/>
-				<key>CanShowWhenRun</key>
-				<true/>
-				<key>Category</key>
-				<array>
-					<string>AMCategoryUtilities</string>
-				</array>
-				<key>Class Name</key>
-				<string>RunScriptAction</string>
-				<key>InputUUID</key>
-				<string>649DE899-134A-407C-AB0D-79BAE5AE3F3C</string>
-				<key>Keywords</key>
-				<array>
-					<string>Executar</string>
-				</array>
-				<key>OutputUUID</key>
-				<string>DD17E547-8A0E-43EC-B336-A63E78C6A6A4</string>
-				<key>UUID</key>
-				<string>888BB611-E42E-4DFA-A282-EB66A0A958AB</string>
-				<key>UnlocalizedApplications</key>
-				<array>
-					<string>Automator</string>
-				</array>
-				<key>arguments</key>
-				<dict>
-					<key>0</key>
-					<dict>
-						<key>default value</key>
-						<string>on run {input, parameters}
-	
-	(* Your script goes here *)
-	
-	return input
-end run</string>
-						<key>name</key>
-						<string>source</string>
-						<key>required</key>
-						<string>0</string>
-						<key>type</key>
-						<string>0</string>
-						<key>uuid</key>
-						<string>0</string>
-					</dict>
-				</dict>
-				<key>isViewVisible</key>
-				<true/>
-				<key>location</key>
-				<string>524.000000:941.000000</string>
-				<key>nibPath</key>
-				<string>/System/Library/Automator/Run AppleScript.action/Contents/Resources/Base.lproj/main.nib</string>
-			</dict>
-			<key>isViewVisible</key>
-			<true/>
-		</dict>
-	</array>
-	<key>connectors</key>
-	<dict/>
-	<key>variables</key>
-	<array>
-		<dict>
-			<key>UUID</key>
-			<string>D46B0BE3-FEC6-4338-8F90-DE173D24D237</string>
-			<key>identifier</key>
-			<string>com.apple.Automator.Variable.Storage</string>
-			<key>name</key>
-			<string>Caminho</string>
-		</dict>
-	</array>
-	<key>workflowMetaData</key>
-	<dict>
-		<key>workflowTypeIdentifier</key>
-		<string>com.apple.Automator.application</string>
-	</dict>
-</dict>
-</plist>
