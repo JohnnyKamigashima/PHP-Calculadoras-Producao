@@ -2,8 +2,8 @@
 
 <!-- calculadora Farol Octagono-->
 <script type="text/javascript" src="./partials/library.js"></script>
-<div class="col-md-4 cells">
-    <div class="titulo">
+<div class="col-md-4 cells p-3">
+    <div class="titulo mt-0 rounded-2">
         Tamanho do Farol Octagono <img src="./images/altoenoctagono.png" class="icon">
     </div>
     <div class="entrada mb-3">
@@ -32,31 +32,6 @@
         <input type="text" class="form-control" id="largFOP5" value="">
     </div>
 
-    <!-- <div class="input-group mb-3">
-        <div class="input-group-prepend">
-            <span class="input-group-text" id="inputGroup-sizing-default">
-                Area FOP (mm2):
-            </span>
-        </div>
-        <input type="text" class="form-control" id="areaFOP5" value="">
-    </div> -->
-
-    <!-- <div class="input-group mb-3 align-items-center">
-        <div class="input-group-prepend">
-            <span class="input-group-text" id="inputGroup-sizing-default">
-                Cilindrico:
-            </span>
-        </div>
-        <div class="form-check form-check-inline">
-            <input class="form-check-input" type="radio" id="cilindroYes1" name="cilindro" value="true" style="margin-left: 15px;">
-            <label class="form-check-label" for="inlineCheckbox1">Sim</label>
-        </div>
-        <div class="form-check form-check-inline">
-            <input class="form-check-input" type="radio" id="cilindroNo1" name="cilindro" value="false" checked>
-            <label class="form-check-label" for="inlineCheckbox2">Não</label>
-        </div>
-    </div> -->
-
     <div class="input-group mb-3">
         <div class="row bg-light py-2">
             <div class="col-7 align-self-center">
@@ -80,17 +55,9 @@
         $(document).ready(function() {
             $('#altFOP5').change(function() {
                 $("#largF5").val(faroloctagono($("#altFOP5"), $("#largFOP5"), $("#areaFOP5"), $("#pais5")));
-                // $("#altFOP").val($("#altFOP5").val());
-                // $("#altFOP1").val($("#altFOP5").val());
-                // $("#altFOP2").val($("#altFOP5").val());
-                // $("#altFOP3").val($("#altFOP5").val());
             })
             $('#largFOP5').change(function() {
                 $("#largF5").val(faroloctagono($("#altFOP5"), $("#largFOP5"), $("#areaFOP5"), $("#pais5")));
-                // $("#largFOP").val($("#largFOP5").val());
-                // $("#largFOP1").val($("#largFOP5").val());
-                // $("#largFOP2").val($("#largFOP5").val());
-                // $("#largFOP3").val($("#largFOP5").val());
             })
             $('#areaFOP5').change(function() {
                 $("#largF5").val(faroloctagono($("#altFOP5"), $("#largFOP5"), $("#areaFOP5"), $("#pais5")));

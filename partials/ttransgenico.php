@@ -1,7 +1,7 @@
  <!-- calculadora T Transgenico -->
  <script type="text/javascript" src="./partials/library.js"></script>
-  <div class="col-md-4 cells">
-     <div class="titulo">
+  <div class="col-md-4 cells p-3">
+     <div class="titulo mt-0 rounded-2">
          Calculo do Triângulo de Transgênico
      </div>
 
@@ -23,7 +23,7 @@
          <input type="text" class="form-control" id="largFOP2" value="">
      </div>
 
-     <div class="input-group mb-3">
+     <div class="input-group ">
          <div class="row bg-light py-2">
              <div class="col-7 align-self-center">
                  A largura mínima do <br>triângulo de transg. <br>deve ser (mm):
@@ -35,9 +35,7 @@
              </div>
          </div>
 
-
      </div>
-
 
      <script>
          $(document).ready(function() {

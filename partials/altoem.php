@@ -1,7 +1,7 @@
   <script type="text/javascript" src="./partials/library.js"></script>
   <!-- calculadora AltoEm -->
-<div class="col-md-4 cells">
-    <div class="titulo">
+<div class="col-md-4 cells p-3">
+    <div class="titulo rounded-2 mt-0">
         Alto Em (Farol Brasil) <img src="./images/altoembr.png" class="icon" >
     </div>
 
@@ -88,7 +88,7 @@
             </div>
         </div>
     </div>
-    <div class="input-group mb-3">
+    <div class="input-group ">
         <div class="row bg-light py-2">
             <div class="col-7 align-self-center">
                 A largura máxima de<br>ALTO EM deve ser:
@@ -109,14 +109,12 @@
                 $("#largF").val(altoEm($("#altFOP"), $("#largFOP"), $("#areaFOP"), $("#nutrientes"), $("#tipo"))[0]);
                 $("#largMx").val(altoEm($("#altFOP"), $("#largFOP"), $("#areaFOP"), $("#nutrientes"), $("#tipo"))[1]);
                 
-
             })
             $('#largFOP').change(function() {
                 $("#areaFOP").val($("#altFOP").val() * $("#largFOP").val());
                 $("#largF").val(altoEm($("#altFOP"), $("#largFOP"), $("#areaFOP"), $("#nutrientes"), $("#tipo"))[0]);
                 $("#largMx").val(altoEm($("#altFOP"), $("#largFOP"), $("#areaFOP"), $("#nutrientes"), $("#tipo"))[1]);
                 
-
             })
             $('#areaFOP').change(function() {
                 $("#largF").val(altoEm($("#altFOP"), $("#largFOP"), $("#areaFOP"), $("#nutrientes"), $("#tipo"))[0]);

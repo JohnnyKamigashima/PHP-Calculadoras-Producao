@@ -1,7 +1,7 @@
 <!-- calculadora Farol EQ-->
 <script type="text/javascript" src="./partials/library.js"></script>
-<div class="col-md-4 cells">
-    <div class="titulo">
+<div class="col-md-4 cells p-3">
+    <div class="titulo rounded-2 mt-0">
         Tamanho do Farol do Equador <img src="./images/farolequador.png" class="icon" >
     </div>
 

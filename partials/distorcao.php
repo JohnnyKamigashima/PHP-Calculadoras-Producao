@@ -1,7 +1,7 @@
   <!-- calc distorçao -->
   <script type="text/javascript" src="./partials/library.js"></script>
-  <div class="col-md-4 cells">
-      <div class="titulo">
+  <div class="col-md-4 cells p-3 ">
+      <div class="titulo mt-0 rounded-2">
           Distorção de Cilindro
       </div>
       <div class="input-group mb-3">
@@ -45,12 +45,12 @@
           </div>
       </div>
 
-      <div class="input-group mb-3">
+      <div class="input-group">
           <div class="row bg-light py-2">
-              <div class="col-7 align-self-center">
+              <div class="col-5 align-self-center">
                   Escala (%):
               </div>
-              <div class="col-3 align-self-center">
+              <div class="col-5 align-self-center">
                   <input type="text" class="form-control" id="distorc" value="0">
               </div>
               <div class="col-2 align-self-center pl-5">

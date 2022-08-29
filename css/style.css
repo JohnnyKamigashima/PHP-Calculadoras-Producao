@@ -1,37 +1,22 @@
+#main {
+  font-family: Georgia, "Times New Roman", Times, serif;
+  font-size: small;
+  background-color: antiquewhite;
+  padding: 5px;
+  display: flex;
+  flex-direction: row;
+}
+
 .cells {
-  background-color: #d8d8d8;
-  border-radius: 1rem;
+  background-color: rgb(216, 216, 216);
   border: solid antiquewhite 5px;
 }
 
 .titulo {
   text-align: center;
-  margin-top: 10px;
-  margin-bottom: 10px;
-  padding: 10px;
   background-color: aquamarine;
   color: black;
-  border-radius: 1rem;
   font-weight: 600;
-}
-
-.row {
-  margin-left: 0%;
-  margin-right: 0%;
-  width: 100%;
-}
-
-#main {
-  font-family: Georgia, 'Times New Roman', Times, serif;
-  font-size: small;
-  background-color: antiquewhite;
-  margin: auto;
-  border-radius: 2px;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
-  text-align: center;
-  padding: 5px;
 }
 
 .icon {
@@ -44,5 +29,4 @@
   margin: 5px 0;
   padding: 3px;
   width: 100%;
-}
-/*# sourceMappingURL=style.css.map */
+}/*# sourceMappingURL=style.css.map */

@@ -1,7 +1,7 @@
 <!-- Calculadora Px2mm -->
 <script type="text/javascript" src="./partials/library.js"></script>
-<div class="col-md-4 cells">
-    <div class="titulo">
+<div class="col-md-4 cells p-3">
+    <div class="titulo rounded-2 mt-0">
         Pixel para mm
     </div>
 
@@ -13,7 +13,6 @@
         </div>
         <input type="text" class="form-control" id="resolucao" value="300">
     </div>
-
 
     <div class="input-group mb-3">
         <div class="input-group-prepend">
@@ -29,8 +28,7 @@
         </div>
     </div>
 
-
-    <div class="input-group mb-3">
+    <div class="input-group ">
         <div class="input-group-prepend">
             <span class="input-group-text">
                 Pixeis:
