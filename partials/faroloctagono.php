@@ -2,11 +2,11 @@
 
 <!-- calculadora Farol Octagono-->
 <script type="text/javascript" src="./partials/library.js"></script>
-<div class="col-md-4 cells p-3">
-    <div class="titulo mt-0 rounded-2">
+<div class="cells p-3">
+    <div class="titulo">
         Tamanho do Farol Octagono <img src="./images/altoenoctagono.png" class="icon">
     </div>
-    <div class="entrada mb-3">
+    <div class="entrada_normal">
         <select name="pais" id="pais5" value="PE" class="form-control">
             <option value="PE">Peru</option>
             <option value="CH">Chile</option>
@@ -14,7 +14,7 @@
             <option value="MX">México</option>
         </select>
     </div>
-    <div class="input-group mb-3">
+    <div class="entrada_normal">
         <div class="input-group-prepend">
             <span class="input-group-text" id="inputGroup-sizing-default">
                 Altura FOP (mm):
@@ -23,7 +23,7 @@
         <input type="text" class="form-control" id="altFOP5" value="">
     </div>
 
-    <div class="input-group mb-3">
+    <div class="entrada_normal">
         <div class="input-group-prepend">
             <span class="input-group-text" id="inputGroup-sizing-default">
                 Largura FOP (mm):
@@ -32,22 +32,20 @@
         <input type="text" class="form-control" id="largFOP5" value="">
     </div>
 
-    <div class="input-group mb-3">
-        <div class="row bg-light py-2">
-            <div class="col-7 align-self-center">
-                A largura do Farol <br> deve ser de:
-            </div>
-            <div class="col-3 align-self-center">
-                <input type="text" class="form-control" id="largF5" value="0" style="height:66px; margin:auto">
-            </div>
+    <div class="linha_resposta">
+        <div class="col-7 align-self-center">
+            A largura do Farol <br> deve ser de:
+        </div>
+        <div class="col-3 align-self-center">
+            <input type="text" class="form-control" id="largF5" value="0" style="height:66px; margin:auto">
+        </div>
 
-            <div class="col-2 align-self-center pl-5">
-                <img src="https://cdn4.iconfinder.com/data/icons/ionicons/512/icon-clipboard-512.png" alt="" class="icon" onclick="copyToClipboard(document.getElementById('largF5').value+' mm')">
-            </div>
-            <div class="col align-self-center">
-                <p id="descricao_farol">
-                </p>
-            </div>
+        <div class="col-2 align-self-center pl-5">
+            <img src="https://cdn4.iconfinder.com/data/icons/ionicons/512/icon-clipboard-512.png" alt="" class="icon" onclick="copyToClipboard(document.getElementById('largF5').value+' mm')">
+        </div>
+        <div class="col align-self-center">
+            <p id="descricao_farol">
+            </p>
         </div>
     </div>
 

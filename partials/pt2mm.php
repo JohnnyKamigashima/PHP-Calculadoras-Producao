@@ -1,11 +1,11 @@
 <!-- calc plano pt2mm -->
 <script type="text/javascript" src="./partials/library.js"></script>
-<div class="col-md-4 cells p-3">
-    <div class="titulo mt-0 rounded-2">
+<div class="cells">
+    <div class="titulo">
         Pontos para mm
     </div>
 
-    <div class="input-group mb-3">
+    <div class="entrada_normal">
         <div class="input-group-prepend">
             <span class="input-group-text">
                 Pontos (pt):

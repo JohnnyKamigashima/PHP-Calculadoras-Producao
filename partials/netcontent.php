@@ -1,8 +1,8 @@
  <!-- Tabela Net Content -->
  <script type="text/javascript" src="./partials/library.js"></script>
 
- <div class="col-md-4 cells p-3">
-     <div class="titulo mt-0 rounded-2">
+ <div class="cells">
+     <div class="titulo">
          Tabela de Peso Neto
      </div>
      <div class="rotulo">
@@ -28,7 +28,7 @@
          </p>
      </div>
 
-     <div class="input-group mb-3">
+     <div class="entrada_normal">
          <div class="input-group-prepend">
              <span class="input-group-text" id="inputGroup-sizing-default">
                  Altura FOP (mm):
@@ -37,7 +37,7 @@
          <input type="text" class="form-control" id="altFOP3" name="altFOP3">
      </div>
 
-     <div class="input-group mb-3">
+     <div class="entrada_normal">
          <div class="input-group-prepend">
              <span class="input-group-text" id="inputGroup-sizing-default">
                  Largura FOP (mm):
@@ -46,7 +46,7 @@
          <input type="text" class="form-control" name="largFOP3" id="largFOP3">
      </div>
 
-     <div class="input-group mb-3">
+     <div class="entrada_normal">
          <div class="input-group-prepend">
              <span class="input-group-text" id="inputGroup-sizing-default">
                  Peso (em g):
@@ -56,7 +56,7 @@
      </div>
 
      <div class="input-group ">
-         <div class="row bg-light py-2">
+         <div class="linha_resposta">
              <div class="col-7 align-self-center">
                  Tam. min (mm):
              </div>

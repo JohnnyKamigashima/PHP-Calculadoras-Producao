@@ -1,4 +1,5 @@
-// @import "bootstrap.css";
+@import "./bootstrap";
+
 #main {
     font-family: Georgia, 'Times New Roman', Times, serif;
     font-size: small;
@@ -9,11 +10,29 @@
 }
 
 .cells {
+    @extend .p-3;
     background-color: rgb(216, 216, 216);
     border: solid antiquewhite 5px;
 }
 
+.linha_resposta{
+    @extend .row;
+    @extend .bg-light;
+    @extend .p-2;
+    @extend .m-auto;
+
+}
+
+.entrada_normal{
+    @extend .input-group;
+    @extend .mb-3;
+}
+
 .titulo {
+    @extend .rounded;
+    @extend .mt-0;
+    @extend .mb-3;
+    @extend .p-2;
     text-align: center;
     background-color: aquamarine;
     color: black;

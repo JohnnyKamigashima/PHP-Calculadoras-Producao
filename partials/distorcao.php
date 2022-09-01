@@ -1,27 +1,27 @@
   <!-- calc distorçao -->
   <script type="text/javascript" src="./partials/library.js"></script>
-  <div class="col-md-4 cells p-3 ">
-      <div class="titulo mt-0 rounded-2">
+  <div class="cells">
+      <div class="titulo">
           Distorção de Cilindro
       </div>
-      <div class="input-group mb-3">
+      <div class="entrada_normal">
           <div class="input-group-prepend">
               <span class="input-group-text" id="inputGroup-sizing-default">Cilindro:</span>
           </div>
           <input type="text" class="form-control" id="cilindro" value="0">
       </div>
 
-      <div class="input-group mb-3">
+      <div class="entrada_normal">
           <div class="input-group-prepend">
               <span class="input-group-text" id="inputGroup-sizing-default">Altura da arte:</span>
           </div>
           <input type="text" class="form-control" id="arteA" value="0">
       </div>
       <div>
-          <div class="row ml-3 px-3">
-              Número de repetições
+          <div class="row m-auto p-0">
+                 Número de repetições
           </div>
-          <div class="container-flex mb-3 pr-3">
+          <div class="container-flex p-0">
               <div class="form-check form-check-inline">
                   <input class="form-check-input" onclick="handleClick(this);" type="radio" name="repetition" id="repeat1" value=1>
                   <label class="form-check-label" for="repeat1">1</label>
@@ -46,7 +46,7 @@
       </div>
 
       <div class="input-group">
-          <div class="row bg-light py-2">
+          <div class="linha_resposta">
               <div class="col-5 align-self-center">
                   Escala (%):
               </div>

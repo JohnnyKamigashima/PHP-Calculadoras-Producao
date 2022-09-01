@@ -1,11 +1,11 @@
 <!-- Calculadora Px2mm -->
 <script type="text/javascript" src="./partials/library.js"></script>
-<div class="col-md-4 cells p-3">
-    <div class="titulo rounded-2 mt-0">
+<div class="cells">
+    <div class="titulo">
         Pixel para mm
     </div>
 
-    <div class="input-group mb-3">
+    <div class="entrada_normal">
         <div class="input-group-prepend">
             <span class="input-group-text" id="inputGroup-sizing-default">
                 Resolução (dpi):

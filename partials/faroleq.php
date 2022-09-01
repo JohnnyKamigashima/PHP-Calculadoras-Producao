@@ -1,11 +1,11 @@
 <!-- calculadora Farol EQ-->
 <script type="text/javascript" src="./partials/library.js"></script>
-<div class="col-md-4 cells p-3">
-    <div class="titulo rounded-2 mt-0">
+<div class="cells">
+    <div class="titulo">
         Tamanho do Farol do Equador <img src="./images/farolequador.png" class="icon" >
     </div>
 
-    <div class="input-group mb-3">
+    <div class="entrada_normal">
         <div class="input-group-prepend">
             <span class="input-group-text" id="inputGroup-sizing-default">
                 Altura FOP (mm):
@@ -14,7 +14,7 @@
         <input type="text" class="form-control" id="altFOP1" value="">
     </div>
 
-    <div class="input-group mb-3">
+    <div class="entrada_normal">
         <div class="input-group-prepend">
             <span class="input-group-text" id="inputGroup-sizing-default">
                 Largura FOP (mm):
@@ -23,7 +23,7 @@
         <input type="text" class="form-control" id="largFOP1" value="">
     </div>
 
-    <div class="input-group mb-3">
+    <div class="entrada_normal">
         <div class="input-group-prepend">
             <span class="input-group-text" id="inputGroup-sizing-default">
                 Area FOP (mm2):
@@ -32,23 +32,22 @@
         <input type="text" class="form-control" id="areaFOP1" value="">
     </div>
 
-    <div class="input-group mb-3 align-items-center">
+    <div class="entrada_normal align-items-center">
         <div class="input-group-prepend">
             <span class="input-group-text" id="inputGroup-sizing-default">
                 Cilindrico:
             </span>
         </div>
-        <div class="form-check form-check-inline">
-            <input class="form-check-input" type="radio" id="cilindroYes" name="cilindro" value="true" style="margin-left: 15px;">
+        <div class="form-check form-check-inline m-3">
+            <input class="form-check-input" type="radio" id="cilindroYes" name="cilindro" value="true">
             <label class="form-check-label" for="inlineCheckbox1">Sim</label>
         </div>
-        <div class="form-check form-check-inline">
+        <div class="form-check form-check-inline m-3">
             <input class="form-check-input" type="radio" id="cilindroNo" name="cilindro" value="false" checked>
             <label class="form-check-label" for="inlineCheckbox2">Não</label>
         </div>
     </div>
-    <div class="input-group mb-3">
-        <div class="row bg-light py-2">
+        <div class="linha_resposta">
             <div class="col-7 align-self-center">
                 A largura do Farol <br> deve ser de:
             </div>
@@ -58,7 +57,6 @@
             <div class="col-2 align-self-center pl-5">
                 <img src="https://cdn4.iconfinder.com/data/icons/ionicons/512/icon-clipboard-512.png" alt="" class="icon" onclick="copyToClipboard(document.getElementById('largF1').value+' mm')">
             </div>
-        </div>
     </div>
 
     <script>
