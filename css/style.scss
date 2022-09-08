@@ -1,52 +1,50 @@
 @import "./bootstrap";
 
 #main {
-    font-family: Georgia, 'Times New Roman', Times, serif;
-    font-size: small;
-    background-color: antiquewhite;
-    padding: 5px;
-    display: flex;
-    flex-direction: row;
+  font-family: Georgia, "Times New Roman", Times, serif;
+  font-size: small;
+  background-color: antiquewhite;
+  padding: 5px;
+  display: block;
 }
 
 .cells {
-    @extend .p-3;
-    background-color: rgb(216, 216, 216);
-    border: solid antiquewhite 5px;
+  @extend .p-3;
+  background-color: rgb(216, 216, 216);
+  border: solid antiquewhite 5px;
 }
 
-.linha_resposta{
-    @extend .row;
-    @extend .bg-light;
-    @extend .p-2;
-    @extend .m-auto;
-
+.linha_resposta {
+  @extend .row;
+  @extend .bg-light;
+  @extend .p-2;
+  @extend .m-auto;
 }
 
-.entrada_normal{
-    @extend .input-group;
-    @extend .mb-3;
+.entrada_normal {
+  @extend .input-group;
+  @extend .mb-3;
 }
 
 .titulo {
-    @extend .rounded;
-    @extend .mt-0;
-    @extend .mb-3;
-    @extend .p-2;
-    text-align: center;
-    background-color: aquamarine;
-    color: black;
-    font-weight: 600;
+  @extend .rounded;
+  @extend .mt-0;
+  @extend .mb-3;
+  @extend .p-2;
+  text-align: center;
+  background-color: aquamarine;
+  color: black;
+  font-weight: 600;
 }
 
-.icon{
-    width: 25px;
-    height: 25px;
+.icon {
+  width: 25px;
+  height: 25px;
 }
 
- .textwrapper {
-   border:1px solid #999999;
-   margin:5px 0;
-   padding:3px;
-   width:100%
- }
+.textwrapper {
+  border: 1px solid #999999;
+  margin: 5px 0;
+  padding: 3px;
+  text-align: center;
+}

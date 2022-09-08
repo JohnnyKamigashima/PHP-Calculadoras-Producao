@@ -1,12 +1,10 @@
 <?php
 
-// use function PHPSTORM_META\type;
-
-// function doublePreg($palavra)
-// {
-//     $invalidChars = '/ +|\-+|\_+/';
-//     return preg_replace($invalidChars, '_', preg_replace($invalidChars, '_', $palavra));
-// }
+function doublePreg($palavra)
+{
+    $invalidChars = '/ +|\-+|\_+/';
+    return preg_replace($invalidChars, '_', preg_replace($invalidChars, '_', $palavra));
+}
 
 function debug($array)
 {

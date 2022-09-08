@@ -45,11 +45,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     <!--  List compare HTML-->
     <div id="main" class="container-md">
         <div class="container p-3">
-            <div class="titulo p-3">
+            <div class="titulo p-2 m-2">
                 Compara Textos
             </div>
             <form action="text_compare.php" method="post">
-                <div class="input-group">
+                <div class="row p-2">
                     <div class="col-md-6">
                         <span class="input-group-text textwrapper" id="inputGroup-sizing-default">
                             Textos do Documento:
@@ -66,28 +66,40 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                             <textarea id="textArte" name='textArte' style="width:100%"><?php echo $sessionArte; ?></textarea>
                         </div>
                     </div>
-                    <div class="form-check m-3 p-1">
-                        <input class="form-check-input" type="checkbox" id="espacoDuplo" name="espacoDuplo" value="<?php echo $sessionEDuplo; ?>" <?php echo $sessionEDuplo; ?>>
-                        <label class="form-check-label" for="espacoDuplo">Ignorar espaços duplos</label>
-                    </div>
-                    <div class="form-check m-3 p-1">
-                        <input class="form-check-input" type="checkbox" id="caixaAlta" name="caixaAlta" value="<?php echo $sessionECaixa; ?>" <?php echo $sessionECaixa; ?>>
-                        <label class="form-check-label" for="caixaAlta">Ignorar Maiúsculas</label>
-                    </div>
-                    <div class="form-check m-3 p-1">
-                        <input class="form-check-input" type="checkbox" id="bold" name="bold" value="<?php echo $sessionEbold; ?>" <?php echo $sessionEbold; ?>>
-                        <label class="form-check-label" for="bold">Ignorar Bold</label>
-                    </div>
-                    <div class="form-check m-3 p-1">
-                        <input class="form-check-input" type="checkbox" id="italico" name="italico" value="<?php echo $sessionEitalico; ?>" <?php echo $sessionEitalico; ?>>
-                        <label class="form-check-label" for="italico">Ignorar Itálico</label>
-                    </div>
-                    <div class="form-check m-3 p-1">
-                        <input class="form-check-input" type="checkbox" id="pontofinal" name="pontofinal" value="<?php echo $sessionEponto; ?>" <?php echo $sessionEponto; ?>>
-                        <label class="form-check-label" for="pontofinal">Ignorar Pontos Finais</label>
-                    </div>
                 </div>
-                <div class="container p-3">
+                    <div class="row p-2">
+                        <div class="col-2">
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="espacoDuplo" name="espacoDuplo" value="<?php echo $sessionEDuplo; ?>" <?php echo $sessionEDuplo; ?>>
+                                <label class="form-check-label" for="espacoDuplo">Ignorar espaços duplos</label>
+                            </div>
+                        </div>
+                        <div class="col-2">
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="caixaAlta" name="caixaAlta" value="<?php echo $sessionECaixa; ?>" <?php echo $sessionECaixa; ?>>
+                                <label class="form-check-label" for="caixaAlta">Ignorar Maiúsculas</label>
+                            </div>
+                        </div>
+                        <div class="col-2">
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="bold" name="bold" value="<?php echo $sessionEbold; ?>" <?php echo $sessionEbold; ?>>
+                                <label class="form-check-label" for="bold">Ignorar Bold</label>
+                            </div>
+                        </div>
+                        <div class="col-2">
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="italico" name="italico" value="<?php echo $sessionEitalico; ?>" <?php echo $sessionEitalico; ?>>
+                                <label class="form-check-label" for="italico">Ignorar Itálico</label>
+                            </div>
+                        </div>
+                        <div class="col-2">
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="pontofinal" name="pontofinal" value="<?php echo $sessionEponto; ?>" <?php echo $sessionEponto; ?>>
+                                <label class="form-check-label" for="pontofinal">Ignorar Pontos Finais</label>
+                            </div>
+                        </div>
+                    </div>
+                <div class="row p-3">
                     <input type="submit" id="comparar" value="Comparar (F5)" class="btn btn-success" />
                 </div>
             </form>
@@ -110,8 +122,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     tinycomments_mode: 'embedded',
                     tinycomments_author: 'Author name',
                     height: 300,
-                    init_instance_callback: function(editor) {
-                    }
+                    init_instance_callback: function(editor) {}
                 });
                 // Inicia o plugin TinyMCE da Arte
                 tinymce.init({
@@ -123,15 +134,15 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     tinycomments_mode: 'embedded',
                     tinycomments_author: 'Author name',
                     height: 300,
-                    init_instance_callback: function(editor) {
-                    }
+                    init_instance_callback: function(editor) {}
                 });
 
                 // function updateValues() {
                 //     <?php
-                //     $sessionDoc = "<script>master.html.get()</script>";
-                //     $sessionArte = "<script>copy.html.get()</script>";
-                //     ?>
+                        //     $sessionDoc = "<script>master.html.get()</script>";
+                        //     $sessionArte = "<script>copy.html.get()</script>";
+                        //     
+                        ?>
                 // }
             </script>
 
@@ -181,14 +192,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 $textDoc = html_entity_decode($textDoc);
                 $textArte = html_entity_decode($textArte);
 
-
                 //Verifica textos obrigatorios BOLD/Italic/Caixa alta
-                if (!$bold) array_push($faltaBOLD, isNotTagged('fabricado', 'ltda','strong', $textArte));
-                if (!$bold) array_push($faltaBOLD, isNotTagged('fabricado', 's.a.','strong', $textArte));
-                if (!$bold) array_push($faltaBOLD, isNotTagged('importado', 'ltda','strong', $textArte));
-                if (!$bold) array_push($faltaBOLD, isNotTagged('importado', 's.a.','strong', $textArte));
-                if (!$bold) array_push($faltaBOLD, isNotTagged('(contém lactose|contém glúten|^ingredientes|^ingred|^ingr)', '','strong', $textArte));
-                if (!$italico) array_push($faltaItalic, isNotTagged('trans', '','em', $textArte) );
+                if (!$bold) array_push($faltaBOLD, isNotTagged('fabricado', 'ltda', 'strong', $textArte));
+                if (!$bold) array_push($faltaBOLD, isNotTagged('fabricado', 's.a.', 'strong', $textArte));
+                if (!$bold) array_push($faltaBOLD, isNotTagged('importado', 'ltda', 'strong', $textArte));
+                if (!$bold) array_push($faltaBOLD, isNotTagged('importado', 's.a.', 'strong', $textArte));
+                if (!$bold) array_push($faltaBOLD, isNotTagged('(contém lactose|contém glúten|^ingredientes|^ingred|^ingr)', '', 'strong', $textArte));
+                if (!$italico) array_push($faltaItalic, isNotTagged('trans', '', 'em', $textArte));
                 array_push($faltaCAIXA, isCaixa('contém', '(glúten|lactose)', $textArte));
 
                 // Limpa arrays vazios
@@ -215,7 +225,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 //ignora pontos finais
                 $textDoc = ($pontoFinal) ? limpaPontofinal($textDoc) : $textDoc;
                 $textArte = ($pontoFinal) ? limpaPontofinal($textArte) : $textArte;
-     
 
                 // converte texto para array dividido por linhas
                 $textDocLinhas = explode('|', $textDoc);

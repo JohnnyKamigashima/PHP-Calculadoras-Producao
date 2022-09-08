@@ -10303,8 +10303,7 @@ textarea.form-control-lg {
   font-size: small;
   background-color: antiquewhite;
   padding: 5px;
-  display: flex;
-  flex-direction: row;
+  display: block;
 }
 
 .cells {
@@ -10328,5 +10327,5 @@ textarea.form-control-lg {
   border: 1px solid #999999;
   margin: 5px 0;
   padding: 3px;
-  width: 100%;
+  text-align: center;
 }/*# sourceMappingURL=style.css.map */
