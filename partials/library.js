@@ -9,6 +9,7 @@ function px2mm(resolucao, px) {
     ? 0
     : (px.val() / (resolucao.val() / 25.4)).toFixed(2);
 }
+
 function escalaPlano(medA, medR) {
   return isNaN((medR.val() * 100) / medA.val())
     ? 0
@@ -85,8 +86,6 @@ function altoEm(altura, largura, area, nutrientes, tipo) {
       larguraFinal = ladoGrid(areaNutri1, blocos, tipo);
       fonte = altoEmLpF(larguraFinal, blocos_hor);
 
-
-
     } else if (tipo == "--" && nutrientes == 2) {
       blocos = 3;
       blocos_hor = 3;
@@ -117,13 +116,11 @@ function altoEm(altura, largura, area, nutrientes, tipo) {
       larguraFinal = ladoGrid(areaNutri2, blocos, tipo) * blocos_hor;
       fonte = altoEmLpF(larguraFinal, blocos_hor);
 
-
     } else if (tipo == "r" && nutrientes == 2) {
       blocos = 3;
       blocos_hor = 2;
       larguraFinal = ladoGrid(areaNutri2, blocos, tipo) * blocos_hor;
       fonte = altoEmLpF(larguraFinal, blocos_hor);
-
 
     } else if (tipo == "r" && nutrientes == 3) {
       blocos = 4;
@@ -131,13 +128,11 @@ function altoEm(altura, largura, area, nutrientes, tipo) {
       larguraFinal = ladoGrid(areaNutri3, blocos, tipo) * blocos_hor;
       fonte = altoEmLpF(larguraFinal, blocos_hor);
 
-
     } else if (tipo == "0" && nutrientes == 3) {
       blocos = 4;
       blocos_hor = 2;
       larguraFinal = ladoGrid(areaNutri3, blocos, tipo) * blocos_hor;
       fonte = altoEmLpF(larguraFinal, blocos_hor);
-
 
     } else if (tipo == "I" && nutrientes == 3) {
       blocos = 4;
@@ -145,13 +140,11 @@ function altoEm(altura, largura, area, nutrientes, tipo) {
       larguraFinal = ladoGrid(areaNutri3, blocos, tipo);
       fonte = altoEmLpF(larguraFinal, blocos_hor);
 
-
     } else if (tipo == "--" && nutrientes == 3) {
       blocos = 4;
       blocos_hor = 4;
       larguraFinal = ladoGrid(areaNutri3, blocos, tipo) * blocos_hor;
       fonte = altoEmLpF(larguraFinal, blocos_hor);
-
 
     } else if (tipo == "q" && nutrientes == 3) {
       blocos = 4;
@@ -159,19 +152,15 @@ function altoEm(altura, largura, area, nutrientes, tipo) {
       larguraFinal = ladoGrid(areaNutri3, blocos, tipo) * blocos_hor;
       fonte = altoEmLpF(larguraFinal, blocos_hor);
 
-
     } else if (tipo == "L" && nutrientes == 3) {
       blocos = 4;
       blocos_hor = 3;
       larguraFinal = ladoGrid(areaNutri3, blocos, tipo) * blocos;
       fonte = altoEmLpF(larguraFinal, blocos_hor);
 
-
-
     } else {
       larguraFinal = 0;
     }
-
 
     // Verifica se a largura não está impondo fonte acima ou abaixo da legislação
     if (larguraFinal != 0) {
