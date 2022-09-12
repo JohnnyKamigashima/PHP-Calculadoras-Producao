@@ -1,17 +1,7 @@
 <!-- List compare versao 1.0 Por Johnny H. Kamigashima -->
 <!-- Copyright 2021 -->
-
 <!DOCTYPE html>
-<link rel="icon" type="image/png" href="./images/favicon.svg" />
-<title>QC Text Compare</title>
-
-<!-- Latest compiled and minified CSS -->
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
-<script src="https://cdn.tiny.cloud/1/1hwzefvhux0zaed3wgjhtj8xrid32be83jl71noha1gb803t/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
-<script type='text/javascript' src='partials/functions.js'></script>
-
-<link rel="stylesheet" href="css/style.css">
+<html lang="pt-br">
 <?php
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
@@ -33,15 +23,23 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 ?>
 
 <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" charset="utf-8">
+    <link rel="icon" type="image/png" href="./images/favicon.svg" />
+    <!-- Latest compiled and minified CSS -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.tiny.cloud/1/1hwzefvhux0zaed3wgjhtj8xrid32be83jl71noha1gb803t/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
+    <script type='text/javascript' src='partials/functions.js'></script>
+    <link rel="stylesheet" href="css/style.css">
+    <title>QC Text Compare</title>
+
     <div class="row">
         <?php include_once 'partials/header.php'; ?>
     </div>
 </head>
-<html>
 
 <body>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" charset="utf-8" />
-
     <!--  List compare HTML-->
     <div id="main" class="container-md">
         <div class="container p-3">
@@ -67,38 +65,38 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                         </div>
                     </div>
                 </div>
-                    <div class="row p-2">
-                        <div class="col-2">
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" id="espacoDuplo" name="espacoDuplo" value="<?php echo $sessionEDuplo; ?>" <?php echo $sessionEDuplo; ?>>
-                                <label class="form-check-label" for="espacoDuplo">Ignorar espaços duplos</label>
-                            </div>
-                        </div>
-                        <div class="col-2">
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" id="caixaAlta" name="caixaAlta" value="<?php echo $sessionECaixa; ?>" <?php echo $sessionECaixa; ?>>
-                                <label class="form-check-label" for="caixaAlta">Ignorar Maiúsculas</label>
-                            </div>
-                        </div>
-                        <div class="col-2">
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" id="bold" name="bold" value="<?php echo $sessionEbold; ?>" <?php echo $sessionEbold; ?>>
-                                <label class="form-check-label" for="bold">Ignorar Bold</label>
-                            </div>
-                        </div>
-                        <div class="col-2">
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" id="italico" name="italico" value="<?php echo $sessionEitalico; ?>" <?php echo $sessionEitalico; ?>>
-                                <label class="form-check-label" for="italico">Ignorar Itálico</label>
-                            </div>
-                        </div>
-                        <div class="col-2">
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" id="pontofinal" name="pontofinal" value="<?php echo $sessionEponto; ?>" <?php echo $sessionEponto; ?>>
-                                <label class="form-check-label" for="pontofinal">Ignorar Pontos Finais</label>
-                            </div>
+                <div class="row p-2">
+                    <div class="col-2">
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="espacoDuplo" name="espacoDuplo" value="<?php echo $sessionEDuplo; ?>" <?php echo $sessionEDuplo; ?>>
+                            <label class="form-check-label" for="espacoDuplo">Ignorar espaços duplos</label>
                         </div>
                     </div>
+                    <div class="col-2">
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="caixaAlta" name="caixaAlta" value="<?php echo $sessionECaixa; ?>" <?php echo $sessionECaixa; ?>>
+                            <label class="form-check-label" for="caixaAlta">Ignorar Maiúsculas</label>
+                        </div>
+                    </div>
+                    <div class="col-2">
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="bold" name="bold" value="<?php echo $sessionEbold; ?>" <?php echo $sessionEbold; ?>>
+                            <label class="form-check-label" for="bold">Ignorar Bold</label>
+                        </div>
+                    </div>
+                    <div class="col-2">
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="italico" name="italico" value="<?php echo $sessionEitalico; ?>" <?php echo $sessionEitalico; ?>>
+                            <label class="form-check-label" for="italico">Ignorar Itálico</label>
+                        </div>
+                    </div>
+                    <div class="col-2">
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="pontofinal" name="pontofinal" value="<?php echo $sessionEponto; ?>" <?php echo $sessionEponto; ?>>
+                            <label class="form-check-label" for="pontofinal">Ignorar Pontos Finais</label>
+                        </div>
+                    </div>
+                </div>
                 <div class="row p-3">
                     <input type="submit" id="comparar" value="Comparar (F5)" class="btn btn-success" />
                 </div>
@@ -389,6 +387,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     </div>
     </div>
 </body>
-<?php include_once 'partials/footer.php'; ?>
+<footer>
+    <?php include_once 'partials/footer.php'; ?>
+</footer>
 
 </html>

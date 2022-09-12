@@ -3,6 +3,7 @@
 
 var docRef = app.activeDocument,
     Ncanais = docRef.channels.length;
+    allChannelsVisible();
     allChannelsInvisible();
     app.refresh();
 for (var y = 0; y < Ncanais; y++) {
