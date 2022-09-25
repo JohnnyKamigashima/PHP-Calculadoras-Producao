@@ -64,16 +64,10 @@
             $('#altFOP1').change(function() {
                 $("#largF1").val(farolEq($("#altFOP1"), $("#largFOP1"), $("#areaFOP1")));
                 $("#areaFOP1").val($("#altFOP1").val() * $("#largFOP1").val() )
-                // $("#altFOP").val($("#altFOP1").val());
-                // $("#altFOP2").val($("#altFOP1").val());
-                // $("#altFOP3").val($("#altFOP1").val());
             })
             $('#largFOP1').change(function() {
                 $("#largF1").val(farolEq($("#altFOP1"), $("#largFOP1"), $("#areaFOP1")));
                 $("#areaFOP1").val($("#altFOP1").val() * $("#largFOP1").val() )
-                // $("#largFOP").val($("#largFOP1").val());
-                // $("#largFOP2").val($("#largFOP1").val());
-                // $("#largFOP3").val($("#largFOP1").val());
             })
             $('#areaFOP1').change(function() {
                 $("#largF1").val(farolEq($("#altFOP1"), $("#largFOP1"), $("#areaFOP1")));
