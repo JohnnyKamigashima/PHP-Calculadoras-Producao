@@ -1,8 +1,8 @@
 <!-- calculadora Farol EQ-->
-<script type="text/javascript" src="./partials/library.js"></script>
+
 <div class="cells">
     <div class="titulo">
-        Tamanho do Farol do Equador <img src="./images/farolequador.png" class="icon" >
+        Tamanho do Farol do Equador <img src="./images/farolequador.png" class="icon">
     </div>
 
     <div class="entrada_normal">
@@ -11,7 +11,7 @@
                 Altura FOP (mm):
             </span>
         </div>
-        <input type="text" class="form-control" id="altFOP1" value="">
+        <input type="text" class="form-control" id="altura_farol_eq" value="">
     </div>
 
     <div class="entrada_normal">
@@ -20,7 +20,7 @@
                 Largura FOP (mm):
             </span>
         </div>
-        <input type="text" class="form-control" id="largFOP1" value="">
+        <input type="text" class="form-control" id="largura_farol_eq" value="">
     </div>
 
     <div class="entrada_normal">
@@ -29,7 +29,7 @@
                 Area FOP (mm2):
             </span>
         </div>
-        <input type="text" class="form-control" id="areaFOP1" value="">
+        <input type="text" class="form-control" id="area_farol_eq" value="">
     </div>
 
     <div class="entrada_normal align-items-center">
@@ -47,37 +47,48 @@
             <label class="form-check-label" for="inlineCheckbox2">Não</label>
         </div>
     </div>
-        <div class="linha_resposta">
-            <div class="col-7 align-self-center">
-                A largura do Farol <br> deve ser de:
-            </div>
-            <div class="col-3 align-self-center">
-                <input type="text" class="form-control" id="largF1" value="0" style="height:66px; margin:auto">
-            </div>
-            <div class="col-2 align-self-center pl-5">
-                <img src="https://cdn4.iconfinder.com/data/icons/ionicons/512/icon-clipboard-512.png" alt="" class="icon" onclick="copyToClipboard(document.getElementById('largF1').value+' mm')">
-            </div>
+    <div class="linha_resposta">
+        <div class="col-7 align-self-center">
+            A largura do Farol <br> deve ser de:
+        </div>
+        <div class="col-3 align-self-center">
+            <input type="text" class="form-control" id="largura_final" value="0" style="height:66px; margin:auto">
+        </div>
+        <div class="col-2 align-self-center pl-5">
+            <img src="https://cdn4.iconfinder.com/data/icons/ionicons/512/icon-clipboard-512.png" alt="" class="icon" onclick="copyToClipboard(document.getElementById('largura_final').value+' mm')">
+        </div>
     </div>
-
+    <script src="./partials/functions/faroleq.function.js"></script>
     <script>
-        $(document).ready(function() {
-            $('#altFOP1').change(function() {
-                $("#largF1").val(farolEq($("#altFOP1"), $("#largFOP1"), $("#areaFOP1")));
-                $("#areaFOP1").val($("#altFOP1").val() * $("#largFOP1").val() )
+        $(document).ready(() => {
+
+            $('#altura_farol_eq').change(() => {
+                areaFop1();
+                largF1();
             })
-            $('#largFOP1').change(function() {
-                $("#largF1").val(farolEq($("#altFOP1"), $("#largFOP1"), $("#areaFOP1")));
-                $("#areaFOP1").val($("#altFOP1").val() * $("#largFOP1").val() )
+            $('#largura_farol_eq').change(() => {
+                areaFop1();
+                largF1();
             })
-            $('#areaFOP1').change(function() {
-                $("#largF1").val(farolEq($("#altFOP1"), $("#largFOP1"), $("#areaFOP1")));
-            })
-            $('#cilindroYes').change(function() {
-                $("#largF1").val(farolEq($("#altFOP1"), $("#largFOP1"), $("#areaFOP1")));
-            })
-            $('#cilindroNo').change(function() {
-                $("#largF1").val(farolEq($("#altFOP1"), $("#largFOP1"), $("#areaFOP1")));
-            })
+            $('#area_farol_eq').change(() => largF1())
+            $('#cilindroYes').change(() => largF1())
+            $('#cilindroNo').change(() => largF1())
         })
+
+        function areaFop1() {
+            $("#area_farol_eq").val(
+                $("#altura_farol_eq").val() * $("#largura_farol_eq").val()
+            );
+        }
+
+        function largF1() {
+            var cilindro = $("input[type='radio']:checked").val();
+            $("#largura_final").val(
+                farolEq($("#largura_farol_eq").val(),
+                    $("#altura_farol_eq").val(),
+                    $("#area_farol_eq").val(),
+                    cilindro)
+            );
+        }
     </script>
 </div>

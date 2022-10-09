@@ -1,7 +1,7 @@
 <html>
 
 <!-- calculadora Farol Octagono-->
-<script type="text/javascript" src="./partials/library.js"></script>
+
 <div class="cells p-3">
     <div class="titulo">
         Tamanho do Farol Octagono <img src="./images/altoenoctagono.png" class="icon">
@@ -48,27 +48,26 @@
             </p>
         </div>
     </div>
-
+    <script type="text/javascript" src="./partials/functions/faroloctagono.function.js"></script>
     <script>
-        $(document).ready(function() {
-            $('#altFOP5').change(function() {
-                $("#largF5").val(faroloctagono($("#altFOP5"), $("#largFOP5"), $("#areaFOP5"), $("#pais5")));
-            })
-            $('#largFOP5').change(function() {
-                $("#largF5").val(faroloctagono($("#altFOP5"), $("#largFOP5"), $("#areaFOP5"), $("#pais5")));
-            })
-            $('#areaFOP5').change(function() {
-                $("#largF5").val(faroloctagono($("#altFOP5"), $("#largFOP5"), $("#areaFOP5"), $("#pais5")));
-            })
-            $('#cilindroYes').change(function() {
-                $("#largF5").val(faroloctagono($("#altFOP5"), $("#largFOP5"), $("#areaFOP5"), $("#pais5")));
-            })
-            $('#cilindroNo').change(function() {
-                $("#largF5").val(faroloctagono($("#altFOP5"), $("#largFOP5"), $("#areaFOP5"), $("#pais5")));
-            })
+        $(document).ready(() => {
+            $('#pais5').change(() => largura_final());
+            $('#altFOP5').change(() => largura_final())
+            $('#largFOP5').change(() => largura_final())
+            $('#areaFOP5').change(() => largura_final())
+            $('#cilindroYes').change(() => largura_final())
+            $('#cilindroNo').change(() => largura_final())
         });
 
-        
+        function largura_final() {
+            $("#largF5").val(
+                faroloctagono($("#altFOP5").val(),
+                    $("#largFOP5").val(),
+                    $("#areaFOP5").val(),
+                    $("#pais5").val(),
+                    "descricao_farol")
+            );
+        }
     </script>
 </div>
 

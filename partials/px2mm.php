@@ -1,5 +1,5 @@
 <!-- Calculadora Px2mm -->
-<script type="text/javascript" src="./partials/library.js"></script>
+
 <div class="cells">
     <div class="titulo">
         Pixel para mm
@@ -41,15 +41,12 @@
             </span>
         </div>
     </div>
-
+    <script type="text/javascript" src="./partials/functions/px2mm.function.js"></script>
+    <script type="text/javascript" src="./partials/functions/mm2px.function.js"></script>
     <script>
-        $(document).ready(function() {
-            $('#mm').keyup(function() { //calculate when Milimetros is filled
-                $("#pixel").val(mm2px($("#resolucao"), $("#mm")));
-            })
-            $('#pixel').keyup(function() { //Calculate when Pixels is filled
-                $("#mm").val(px2mm($("#resolucao"), $("#pixel")));
-            })
+        $(document).ready(() => {
+            $('#mm').keyup(() => $("#pixel").val(mm2px($("#resolucao").val(), $("#mm").val())))
+            $('#pixel').keyup(() => $("#mm").val(px2mm($("#resolucao").val(), $("#pixel").val())))
         })
     </script>
 </div>

@@ -1,5 +1,5 @@
   <!-- calc distorçao -->
-  <script type="text/javascript" src="./partials/library.js"></script>
+
   <div class="cells">
       <div class="titulo">
           Distorção de Cilindro
@@ -19,7 +19,7 @@
       </div>
       <div>
           <div class="row m-auto p-0">
-                 Número de repetições
+              Número de repetições
           </div>
           <div class="container-flex p-0">
               <div class="form-check form-check-inline">
@@ -58,16 +58,28 @@
               </div>
           </div>
       </div>
-
+      <script type="text/javascript" src="./partials/functions/distorC.function.js"></script>
       <script>
-          $(document).ready(function() {
-              $('#cilindro').keyup(function() { //calculate scale
-                  $("#distorc").val(distorC($("#arteA"), $("#cilindro"), $("input[type='radio'][name='repetition']:checked").val()));
-              })
-              $('#arteA').keyup(function() { //calculate scale
-                  $("#distorc").val(distorC($("#arteA"), $("#cilindro"), $("input[type='radio'][name='repetition']:checked").val()));
-              })
-
+          $(document).ready(() => {
+              $('#cilindro').keyup(() => atualizaDistorc())
+              $('#arteA').keyup(() => atualizaDistorc())
           })
+
+          function atualizaDistorc() {
+              $("#distorc").val(distorC(
+                  $("#arteA").val(),
+                  $("#cilindro").val(),
+                  $("input[type='radio'][name='repetition']:checked").val()
+              ));
+          }
+
+          function handleClick(myRadio) {
+              $("#distorc").val(
+                  distorC(
+                      $("#arteA").val(),
+                      $("#cilindro").val(),
+                      $("input[type='radio'][name='repetition']:checked").val()
+                  ));
+          }
       </script>
   </div>

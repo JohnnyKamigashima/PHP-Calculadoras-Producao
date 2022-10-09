@@ -1,5 +1,5 @@
 <!-- calc plano escala -->
-<script type="text/javascript" src="./partials/library.js"></script>
+
 <div class="cells">
     <div class="titulo">
         Escala de Plano
@@ -31,15 +31,16 @@
             </div>
         </div>
     </div>
-
+    <script type="text/javascript" src="./partials/functions/escalaPlano.function.js"></script>
     <script>
-        $(document).ready(function() {
-            $('#medA').keyup(function() { //calculate scale
-                $("#escalaC").val(escalaPlano($("#medA"), $("#medR")));
-            })
-            $('#medR').keyup(function() { //calculate scale
-                $("#escalaC").val(escalaPlano($("#medA"), $("#medR")));
-            })
+        $(document).ready(() => {
+            $('#medA').keyup(() => calcula_escala())
+            $('#medR').keyup(() => calcula_escala())
         })
+
+        function calcula_escala() {
+            $("#escalaC").val(
+                escalaPlano($("#medA").val(), $("#medR").val()));
+        }
     </script>
 </div>

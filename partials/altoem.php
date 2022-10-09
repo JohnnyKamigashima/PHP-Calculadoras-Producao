@@ -1,4 +1,3 @@
-  <script type="text/javascript" src="./partials/library.js"></script>
   <!-- calculadora AltoEm -->
   <div class="cells">
       <div class="titulo">
@@ -97,33 +96,63 @@
               </div>
           </div>
       </div>
-
+      <script src="./partials/functions/altoem.function.js"></script>
+      <script src="./partials/functions/copytoclipboard.function.js"></script>
       <script>
-          $(document).ready(function() {
-              $('#altFOP').change(function() {
-                  $("#areaFOP").val($("#altFOP").val() * $("#largFOP").val());
-                  $("#largF").val(altoEm($("#altFOP"), $("#largFOP"), $("#areaFOP"), $("#nutrientes"), $("#tipo"))[0]);
-                  $("#largMx").val(altoEm($("#altFOP"), $("#largFOP"), $("#areaFOP"), $("#nutrientes"), $("#tipo"))[1]);
+          $(document).ready(() => {
+              $('#altFOP').change(() => {
+                  areaFop();
+                  largF();
+                  largMx();
 
               })
-              $('#largFOP').change(function() {
-                  $("#areaFOP").val($("#altFOP").val() * $("#largFOP").val());
-                  $("#largF").val(altoEm($("#altFOP"), $("#largFOP"), $("#areaFOP"), $("#nutrientes"), $("#tipo"))[0]);
-                  $("#largMx").val(altoEm($("#altFOP"), $("#largFOP"), $("#areaFOP"), $("#nutrientes"), $("#tipo"))[1]);
+              $('#largFOP').change(() => {
+                  areaFop();
+                  largF();
+                  largMx();
 
               })
-              $('#areaFOP').change(function() {
-                  $("#largF").val(altoEm($("#altFOP"), $("#largFOP"), $("#areaFOP"), $("#nutrientes"), $("#tipo"))[0]);
-                  $("#largMx").val(altoEm($("#altFOP"), $("#largFOP"), $("#areaFOP"), $("#nutrientes"), $("#tipo"))[1]);
+              $('#areaFOP').change(() => {
+                  largF();
+                  largMx();
               })
-              $('#nutrientes').change(function() {
-                  $("#largF").val(altoEm($("#altFOP"), $("#largFOP"), $("#areaFOP"), $("#nutrientes"), $("#tipo"))[0]);
-                  $("#largMx").val(altoEm($("#altFOP"), $("#largFOP"), $("#areaFOP"), $("#nutrientes"), $("#tipo"))[1]);
+              $('#nutrientes').change(() => {
+                  largF();
+                  largMx();
               })
-              $('#tipo').change(function() {
-                  $("#largF").val(altoEm($("#altFOP"), $("#largFOP"), $("#areaFOP"), $("#nutrientes"), $("#tipo"))[0]);
-                  $("#largMx").val(altoEm($("#altFOP"), $("#largFOP"), $("#areaFOP"), $("#nutrientes"), $("#tipo"))[1]);
+              $('#tipo').change(() => {
+                  largF();
+                  largMx();
               })
           })
+
+          function largF() {
+              $("#largF").val(
+                  altoEm($("#altFOP").val(),
+                      $("#largFOP").val(),
+                      $("#areaFOP").val(),
+                      $("#nutrientes").val(),
+                      $("#tipo").val(),
+                      "#areaFOP",
+                      "#altoemA")[0]
+              );
+          }
+
+          function areaFop() {
+              $("#areaFOP").val($("#altFOP").val() * $("#largFOP").val());
+          }
+
+          function largMx() {
+              $("#largMx").val(
+                  altoEm(
+                      $("#altFOP").val(),
+                      $("#largFOP").val(),
+                      $("#areaFOP").val(),
+                      $("#nutrientes").val(),
+                      $("#tipo").val(),
+                      "#areaFOP",
+                      "#altoemA")[1]
+              );
+          }
       </script>
   </div>

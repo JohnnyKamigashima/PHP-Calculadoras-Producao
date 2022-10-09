@@ -1,5 +1,5 @@
 <!-- calc plano pt2mm -->
-<script type="text/javascript" src="./partials/library.js"></script>
+
 <div class="cells">
     <div class="titulo">
         Pontos para mm
@@ -32,16 +32,12 @@
             </span>
         </div>
     </div>
-
+    <script type="text/javascript" src="./partials/functions/pt2mm.function.js"></script>
+    <script type="text/javascript" src="./partials/functions/mm2pt.function.js"></script>
     <script>
-        $(document).ready(function() {
-            $('#pt').keyup(function() { //calculate points
-                $("#resultmm").val(pt2mm($("#pt"), 0));
-            })
-            $('#resultmm').keyup(function() { //calculate mm
-                $("#pt").val(pt2mm(0, $("#resultmm")));
-            })
-
+        $(document).ready(() => {
+            $('#pt').keyup(() => $("#resultmm").val(pt2mm($("#pt").val())))
+            $('#resultmm').keyup(() => $("#pt").val(mm2pt($("#resultmm").val())))
         })
     </script>
 </div>

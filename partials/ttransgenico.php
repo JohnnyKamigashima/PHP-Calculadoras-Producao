@@ -1,6 +1,6 @@
  <!-- calculadora T Transgenico -->
- <script type="text/javascript" src="./partials/library.js"></script>
-  <div class="cells">
+
+ <div class="cells">
      <div class="titulo">
          Calculo do Triângulo de Transgênico
      </div>
@@ -36,24 +36,27 @@
          </div>
 
      </div>
-
+     <script type="text/javascript" src="./partials/functions/transgenico.function.js"></script>
      <script>
-         $(document).ready(function() {
-             $('#altFOP2').keyup(function() { //calculate points
+         $(document).ready(() => {
+             $('#altFOP2').keyup(() => { //calculate points
                  $("#altFOP").val($("#altFOP2").val());
                  $("#altFOP1").val($("#altFOP2").val());
                  $("#altFOP3").val($("#altFOP2").val());
-                 $("#largT1").val(Transgenico($("#altFOP2"), $("#largFOP2")));
+                 calcula();
              })
 
-             $('#largFOP2').keyup(function() { //calculate points
+             $('#largFOP2').keyup(() => { //calculate points
                  $("#largFOP").val($("#largFOP2").val());
                  $("#largFOP1").val($("#largFOP2").val());
                  $("#largFOP3").val($("#largFOP2").val());
-                 $("#largT1").val(Transgenico($("#altFOP2"), $("#largFOP2")));
-
+                 calcula();
              })
 
          })
+
+         function calcula() {
+             $("#largT1").val(Transgenico($("#altFOP2").val(), $("#largFOP2").val()));
+         }
      </script>
  </div>

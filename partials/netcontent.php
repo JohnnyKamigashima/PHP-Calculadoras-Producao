@@ -1,5 +1,4 @@
  <!-- Tabela Net Content -->
- <script type="text/javascript" src="./partials/library.js"></script>
 
  <div class="cells">
      <div class="titulo">
@@ -68,33 +67,42 @@
              </div>
          </div>
      </div>
-
+     <script type="text/javascript" src="./partials/functions/pesoneto.function.js"></script>
+     <script type="text/javascript" src="./partials/functions/sort.function.js"></script>
      <script>
          sort("pais");
          $("#pais").val("MC");
-         $(document).ready(function() {
-             $('#largFOP3').keyup(function() {
+         $(document).ready(() => {
+             $('#largFOP3').keyup(() => {
                  $("#peso").val("");
                  $("#largFOP").val($("#largFOP3").val());
                  $("#largFOP1").val($("#largFOP3").val());
                  $("#largFOP2").val($("#largFOP3").val());
-                 $("#resultmm1").val(pesoNeto($("#altFOP3"), $("#largFOP3"), $("#peso"), $("#pais")));
+                 resultado_mm();
              })
-             $('#altFOP3').keyup(function() {
+             $('#altFOP3').keyup(() => {
                  $("#peso").val("");
                  $("#altFOP").val($("#altFOP3").val());
                  $("#altFOP1").val($("#altFOP3").val());
                  $("#altFOP2").val($("#altFOP3").val());
-                 $("#resultmm1").val(pesoNeto($("#altFOP3"), $("#largFOP3"), $("#peso"), $("#pais")));
+                 resultado_mm();
              })
-             $('#pais').change(function() {
-                 $("#resultmm1").val(pesoNeto($("#altFOP3"), $("#largFOP3"), $("#peso"), $("#pais")));
-             })
-             $("#peso").keyup(function() {
+             $('#pais').change(() => resultado_mm())
+             $("#peso").keyup(() => {
                  $("#altFOP3").val("");
                  $("#largFOP3").val("");
-                 $("#resultmm1").val(pesoNeto($("#altFOP3"), $("#largFOP3"), $("#peso"), $("#pais")));
+                 resultado_mm();
              })
          })
+
+         function resultado_mm() {
+             $("#resultmm1").val(
+                 pesoNeto($("#altFOP3").val(),
+                     $("#largFOP3").val(),
+                     $("#peso").val(),
+                     $("#pais").val(),
+                     "descricao")
+             );
+         }
      </script>
  </div>
