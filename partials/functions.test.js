@@ -1,44 +1,4 @@
 
-test("Converts milimeter to pixel", () => {
-
-    // Define variables
-    const mm2px = require('./functions/mm2px.function');
-    const milimeter = 100;
-    const resolution = 300;
-    const inch_2_mm = 25.4;
-    const result = Math.ceil((resolution / inch_2_mm) * milimeter);
-
-    //run
-    expect(mm2px(resolution, milimeter)).toBe(result);
-});
-
-test("Converts centimeter to milimeter", () => {
-    // Define variables
-    const cm2mm = require('./functions/cm2mm.function');
-    const centimeter = 5;
-    const result = 10 * centimeter;
-
-    //test
-    expect(cm2mm(centimeter)).toBe(result);
-});
-
-test("Converts mm to cm", () => {
-    const mm2cm = require('./functions/mm2cm.function');
-    const mm = 10;
-    const result = mm / 10;
-
-    expect(mm2cm(mm)).toBe(result);
-
-})
-
-test("Converts cm2 to mm2", () => {
-    const cmarea2mm = require('./functions/cmarea2mm.function');
-    const cm = 20;
-    const result = cm * 100;
-
-    expect(cmarea2mm(cm)).toBe(result);
-})
-
 test("Calculate distortion", () => {
     const distorC = require('./functions/distorC.function');
     const x = 300;
@@ -56,14 +16,6 @@ test("Calcula escala de plano", () => {
     const result = ((y * 100) / x).toFixed(2);
 
     expect(escala(x, y)).toBe(result);
-})
-
-test("Converte mm2 para cm2", () => {
-    const mmarea2cm = require('./functions/mmarea2cm.function');
-    const mm = 300;
-    const result = mm / 100;
-
-    expect(mmarea2cm(mm)).toBe(result);
 })
 
 test("Converte pt para mm", () => {
@@ -89,16 +41,4 @@ test("Converte pixel para mm", () => {
     const result = (pixel / (resolucao / 25.4)).toFixed(2);
 
     expect(px2mm(resolucao, pixel)).toBe(result);
-})
-
-test("Calcula tamanho do icone de Altoem", () => {
-    const altoEm = require('./functions/altoem.function');
-    const altFOP = 200;
-    const largFOP = 200;
-    const nutrientes = 1;
-    const areaFOP = 0;
-    const tipo = "I";
-    const result = [31.43, 34.05];
-
-    expect(altoEm(altFOP, largFOP, areaFOP, nutrientes, tipo, "", "")).toBe(result);
 })
