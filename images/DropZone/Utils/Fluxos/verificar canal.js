@@ -3,21 +3,23 @@
 
 var docRef = app.activeDocument,
     Ncanais = docRef.channels.length;
-    allChannelsVisible();
-    allChannelsInvisible();
-    app.refresh();
+allChannelsVisible();
+allChannelsInvisible();
+app.refresh();
 for (var y = 0; y < Ncanais; y++) {
     var upperName = docRef.channels[y].name.toUpperCase(),
         channelRef = docRef.channels[y];
-        if(upperName.indexOf("SUBSTRATO") == -1 && upperName.indexOf("TECH") == -1 && upperName.indexOf("DIE") == -1 &&upperName.indexOf("REGUA") == -1 && upperName.indexOf("COLOR") == -1 &&upperName.indexOf("VARNISH") == -1 ){
+    if (upperName.indexOf("SUBSTRATO") == -1 && upperName.indexOf("TECH") == -1 && upperName.indexOf("DIE") == -1 && upperName.indexOf("REGUA") == -1 && upperName.indexOf("COLOR") == -1 && upperName.indexOf("VARNISH") == -1) {
         docRef.channels[y].visible = true;
-       if(y!=0){ docRef.channels[y-1].visible = false;}
+        if (y != 0) { docRef.channels[y - 1].visible = false; }
         app.refresh();
         wait(500);
-        if(y+1 < Ncanais){
-            docRef.channels[y+1].visible = true;
-            docRef.channels[y].visible = false;}}
-   // }
+        if (y + 1 < Ncanais) {
+            docRef.channels[y + 1].visible = true;
+            docRef.channels[y].visible = false;
+        }
+    }
+    // }
 }
 allChannelsVisible();
 
@@ -37,14 +39,9 @@ function wait(ms) {
     var d = new Date();
     var d2 = null;
     do { d2 = new Date(); }
-    while(d2-d < ms);
+    while (d2 - d < ms);
 }
-function wait(ms) {
-    var d = new Date();
-    var d2 = null;
-    do { d2 = new Date(); }
-    while(d2-d < ms);
-}
+
 function newChannel(chanName) {
     var docc = app.activeDocument;
     var nc = docc.channels.add();
@@ -59,14 +56,14 @@ function newChannel(chanName) {
 
 function newRuler(chanName) {
     var docc = app.activeDocument,
-    nc = docc.channels.add();
+        nc = docc.channels.add();
     white = new SolidColor,
-    newColor = new SolidColor;
-    
+        newColor = new SolidColor;
+
     white.gray.gray = 0;
     nc.kind = ChannelType.SPOTCOLOR;
     nc.opacity = 33;
-        
+
     newColor.cmyk.cyan = 100;
     newColor.cmyk.magenta = 10;
     newColor.cmyk.yellow = 70;
@@ -113,42 +110,40 @@ function allChannelsInvisible() {
 
     for (var i = 1; i < docRef.channels.length; i++) {
         docRef.channels[i].visible = false;
-        
+
     }
 }
 
-function ajustaEscala(){
-    var milimetro=10; //relaçao pixel polegada
+function ajustaEscala() {
+    var milimetro = 10; //relaçao pixel polegada
     var resolucao = app.activeDocument.resolution;
-    var relacao = resolucao/2.54;
-    
+    var relacao = resolucao / 2.54;
+
     app.activeDocument.measurementScale.pixelLength = Math.round(relacao);
     app.activeDocument.measurementScale.logicalLength = milimetro;
     app.activeDocument.measurementScale.logicalUnits = "mm";
-    
+
 }
 
-function warn(str, del)
-    {
+function warn(str, del) {
     try {
-        var msg = new Window("palette", "", undefined, {resizeable: false, minimizeButton:false, maximizeButton: false, closeButton: false, closeOnKey: false} );
+        var msg = new Window("palette", "", undefined, { resizeable: false, minimizeButton: false, maximizeButton: false, closeButton: false, closeOnKey: false });
         msg.margins = [0, 10, 0, 10];
         msg.orientation = "column";
         msg.alignChildren = "center";
         msg.txt = msg.add("statictext", undefined, str);
         msg.txt.justify = "center";
-        msg.onShow = function()
-            {
+        msg.onShow = function () {
             var min_len = 132;
             var off = 2;
-            var xx = 60 +2*off;
+            var xx = 60 + 2 * off;
             msg.layout.layout(true);
             var txt_width = msg.txt.size.width;
             msg.txt.bounds[0] = off;
-            msg.txt.bounds[2] = txt_width + xx - 2*off;
+            msg.txt.bounds[2] = txt_width + xx - 2 * off;
             if (msg.txt.bounds[2] < min_len) msg.txt.bounds[2] = min_len;
             msg.layout.layout(true);
-            }
+        }
         msg.show();
 
         if (del == undefined) del = 1000;
@@ -159,37 +154,37 @@ function warn(str, del)
 
         msg.close();
         msg = null;
-        }
-    catch (e) { alert(e); throw(e); }
     }
-    
+    catch (e) { alert(e); throw (e); }
+}
+
 
 
 function scriptAlert(alertTitle, alertString1, alertString2) {
-    var alertWindow = new Window("dialog", undefined, undefined, {resizeable: false});
-        alertWindow.text = alertTitle;
-        alertWindow.preferredSize.width = 200;
-        alertWindow.preferredSize.height = 10;
-        alertWindow.orientation = "column";
-        alertWindow.alignChildren = ["center", "top"];
-        alertWindow.spacing = 25;
-        alertWindow.margins = 20;
-        alertWindow.frameLocation = [50,50];
-        alertWindow.opacity = 0.5;
+    var alertWindow = new Window("dialog", undefined, undefined, { resizeable: false });
+    alertWindow.text = alertTitle;
+    alertWindow.preferredSize.width = 200;
+    alertWindow.preferredSize.height = 10;
+    alertWindow.orientation = "column";
+    alertWindow.alignChildren = ["center", "top"];
+    alertWindow.spacing = 25;
+    alertWindow.margins = 20;
+    alertWindow.frameLocation = [50, 50];
+    alertWindow.opacity = 0.5;
     var alertText = alertWindow.add("group");
-        alertText.orientation = "column";
-        
-        alertText.alignChildren = ["left", "center"];
-        alertText.spacing = 0;
-        alertText.alignment = ["left", "top"];
-         alertStringSize1 = alertText.add("statictext", undefined, alertString1, {name: "alertText", multiline: true});
-         alertStringSize1.graphics.font = ScriptUI.newFont ("dialog", "BOLD", 13);
-        // alertStringSize2 = alertText.add("statictext", undefined, alertString2, {name: "alertText", multiline: true});
-        // alertStringSize2.graphics.font = "dialog:13";
-    var okButton = alertWindow.add("button", undefined, undefined, {name: "okButton"});
-        okButton.text = "OK";
-        okButton.alignment = ["center", "top"];
-        okButton.graphics.font = "dialog:13";
-    
+    alertText.orientation = "column";
+
+    alertText.alignChildren = ["left", "center"];
+    alertText.spacing = 0;
+    alertText.alignment = ["left", "top"];
+    alertStringSize1 = alertText.add("statictext", undefined, alertString1, { name: "alertText", multiline: true });
+    alertStringSize1.graphics.font = ScriptUI.newFont("dialog", "BOLD", 13);
+    // alertStringSize2 = alertText.add("statictext", undefined, alertString2, {name: "alertText", multiline: true});
+    // alertStringSize2.graphics.font = "dialog:13";
+    var okButton = alertWindow.add("button", undefined, undefined, { name: "okButton" });
+    okButton.text = "OK";
+    okButton.alignment = ["center", "top"];
+    okButton.graphics.font = "dialog:13";
+
     alertWindow.show();
 }

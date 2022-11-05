@@ -1,6 +1,7 @@
 <!-- List compare versao 1.0 Por Johnny H. Kamigashima -->
 <!-- Copyright 2021 -->
 <!DOCTYPE html>
+
 <html lang="pt-br">
 <?php
 ini_set('display_errors', 1);
@@ -12,17 +13,19 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $sessionECaixa =  (isset($_POST['caixaAlta'])) ? 'checked' : '';
     $sessionEbold =  (isset($_POST['bold'])) ? 'checked' : '';
     $sessionEponto =  (isset($_POST['pontofinal'])) ? 'checked' : '';
+    $sessionDebug =  (isset($_POST['debug'])) ? 'checked' : '';
     $sessionEitalico =  (isset($_POST['italico'])) ? 'checked' : '';
     $sessionDoc = (isset($_POST['textDoc'])) ? $_POST['textDoc'] : '';
     $sessionArte = (isset($_POST['textArte'])) ? $_POST['textArte'] : '';
     $sessionRascunho = (isset($_POST['rascunho'])) ? $_POST['rascunho'] : '';
 } else {
-    $sessionDoc = $sessionArte = $sessionRascunho = $sessionEbold = $sessionEitalico = '';
+    $sessionDoc = $sessionArte = $sessionDebug = $sessionRascunho = $sessionEbold = $sessionEitalico = '';
     $sessionEDuplo = $sessionECaixa = $sessionEponto =  'checked';
 }
 ?>
 
 <head>
+
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0" charset="utf-8">
@@ -94,6 +97,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                         <div class="form-check">
                             <input class="form-check-input" type="checkbox" id="pontofinal" name="pontofinal" value="<?php echo $sessionEponto; ?>" <?php echo $sessionEponto; ?>>
                             <label class="form-check-label" for="pontofinal">Ignorar Pontos Finais</label>
+                        </div>
+                    </div>
+                    <div class="col-2">
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="debug" name="debug" value="<?php echo $sessionDebug; ?>" <?php echo $sessionDebug; ?>>
+                            <label class="form-check-label" for="debug">Modo debug (dev)</label>
                         </div>
                     </div>
                 </div>
@@ -181,6 +190,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 else $italico = false;
                 if (isset($sessionEponto)) $pontoFinal = ($sessionEponto == 'checked') ? true : false;
                 else $pontoFinal = false;
+                if (isset($sessionDebug)) $debugMode = ($sessionDebug == 'checked') ? true : false;
+                else $debugMode = false;
 
                 // Limpeza inicial de Tags HTML
                 $textDoc = limpaHtmlSpaceBreak($textDoc);
@@ -244,6 +255,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 $textDocLinhas = array_unique($textDocLinhas);
                 $textArteLinhas = array_unique($textArteLinhas);
 
+                // Mostra no Console os textos para encontrar falhas na conversao
+                if ($debugMode) {
+                    echo 'Texto documento:\n';
+                    debug($textDoc);
+                    echo '\nTexto arte:\n';
+                    debug($textArte);
+                }
+
                 // Compara linha por linha
                 foreach ($textDocLinhas as $indiceDoc => $docLinha) {
                     foreach ($textArteLinhas as $indiceArte => $arteLinha) {
@@ -296,41 +315,41 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 // Mostra Resultados de textos legais
                 echo ' <div class="container p-6 m-0">';
                 if (isset($unidadeMedidaEspaco) && count($unidadeMedidaEspaco) > 0) {
-                    echo '<hr style="width:100%;text-align:center;margin-left:auto">';
-                    echo "<h5>Unidades de medida sem espaço: </h5>";
+                    echo '<hr>';
+                    echo "<h5 style='width: 100%;display: flex;margin: auto;justify-content: center'>Unidades de medida sem espaço: </h5>";
                     echo "<strong style='color:#" . ATENCAO . "'>";
                     foreach ($unidadeMedidaEspaco as $erro) echo "<br><h7>" .  $erro . "</h7><br>";
                     echo "</strong>";
                 }
                 if (isset($unidadeMedidaCaixa) && count($unidadeMedidaCaixa) > 0) {
-                    echo "<br><h6>Unidades de medida com escrita errada: </h6>";
+                    echo "<br><h6 style='width: 100%;display: flex;margin: auto;justify-content: center'>Unidades de medida com escrita errada: </h6>";
                     echo "<strong style='color:#" . ATENCAO . "'>";
                     foreach ($unidadeMedidaCaixa as $erro) echo "<br><h7>" .  $erro . "</h7><br>";
                     echo "</strong>";
                 }
                 if (count($faltaBOLD) > 0) {
                     echo '<hr style="width:100%;text-align:center;margin-left:auto">';
-                    echo '<h5>Atenção a estas frases que não estão em BOLD:</h5><br>';
+                    echo '<h5 style="width: 100%;display: flex;margin: auto;justify-content: center">Atenção a estas frases que não estão em BOLD:</h5><br>';
                     foreach ($faltaBOLD as $lin) echo "<br><h7>$lin</h7>";
                 }
                 if (count($faltaItalic) > 0) {
                     echo '<hr style="width:100%;text-align:center;margin-left:auto">';
-                    echo '<h5>Atenção a estas palavras que não estão em Itálico:</h5><br>';
+                    echo '<h5 style="width: 100%;display: flex;margin: auto;justify-content: center">Atenção a estas palavras que não estão em Itálico:</h5><br>';
                     foreach ($faltaItalic as $lin) echo "<br><h7>$lin</h7>";
                 }
                 if (count($faltaCAIXA) > 0) {
                     echo '<hr style="width:100%;text-align:center;margin-left:auto">';
-                    echo '<h5>Atenção a estas palavras que não estão em CAIXA ALTA:</h5><br>';
+                    echo '<h5 style="width: 100%;display: flex;margin: auto;justify-content: center">Atenção a estas palavras que não estão em CAIXA ALTA:</h5><br>';
                     foreach ($faltaCAIXA as $lin) echo "<br><h7>$lin</h7>";
                 }
 
                 // Mostra resultados da comparação de paragrafos
-                echo '<hr style="width:100%;text-align:center;margin-left:auto">';
+                echo '<hr>';
                 if (isset($textCompara)) {
-                    echo '<br><h5>' . count($textCompara) . ' parágrafos correspondem.</h5><br>';
+                    echo '<br><h5 style="width: 100%;display: flex;margin: auto;justify-content: center">' . count($textCompara) . ' parágrafos correspondem.</h5><br>';
                     echo '</div>';
                     echo '<div class="row p-3 m-0">';
-                    echo '<div class="col-md-12">';
+                    echo '<div class="col-md-12 m-0">';
                     foreach ($textCompara as $showtextOK) echo "<br>$showtextOK";
                     echo '</div></div>';
                 }

@@ -31,13 +31,15 @@
              <div class="col-3 align-self-center">
                  <input type="text" class="form-control" id="largT1" value="0">
              </div>
-             <div class="col-2 align-self-center pl-5"><img src="https://cdn4.iconfinder.com/data/icons/ionicons/512/icon-clipboard-512.png" alt="" class="icon" onclick="copyToClipboard(document.getElementById('largT1').value+' mm')">
+             <div class="col-2 align-self-center pl-5"><img src="https://cdn4.iconfinder.com/data/icons/ionicons/512/icon-clipboard-512.png" alt="" class="icon" onclick="clip_trans.copyToClipboard(document.getElementById('largT1').value+' mm')">
              </div>
          </div>
 
      </div>
-     <script type="text/javascript" src="./partials/functions/transgenico.function.js"></script>
+     <script type="text/javascript" src="./partials/functions/transgenico_lib.js"></script>
+     <script type="text/javascript" src="./partials/functions/copytoclipboard_lib.js"></script>
      <script>
+         clip_trans = new Clipboard
          $(document).ready(() => {
              $('#altFOP2').keyup(() => { //calculate points
                  $("#altFOP").val($("#altFOP2").val());
@@ -56,7 +58,8 @@
          })
 
          function calcula() {
-             $("#largT1").val(Transgenico($("#altFOP2").val(), $("#largFOP2").val()));
+             calc_trans = new Transgen
+             $("#largT1").val(calc_trans.Transgenico($("#altFOP2").val(), $("#largFOP2").val()));
          }
      </script>
  </div>

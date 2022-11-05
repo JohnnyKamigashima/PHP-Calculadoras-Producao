@@ -1,4 +1,4 @@
-<!-- calc plano pt2mm -->
+<!-- calc_pt_mm plano pt2mm -->
 
 <div class="cells">
     <div class="titulo">
@@ -14,7 +14,7 @@
         <input type="text" class="form-control" id="pt" value="">
         <div class="input-group-append">
             <span class="input-group-text">
-                <img src="https://cdn4.iconfinder.com/data/icons/ionicons/512/icon-clipboard-512.png" alt="" class="icon" onclick="copyToClipboard(document.getElementById('pt').value+' pt')">
+                <img src="https://cdn4.iconfinder.com/data/icons/ionicons/512/icon-clipboard-512.png" alt="" class="icon" onclick="clip_pt_mm.copyToClipboard(document.getElementById('pt').value+' pt')">
             </span>
         </div>
     </div>
@@ -28,16 +28,20 @@
         <input type="text" class="form-control" id="resultmm" value="">
         <div class="input-group-append">
             <span class="input-group-text">
-                <img src="https://cdn4.iconfinder.com/data/icons/ionicons/512/icon-clipboard-512.png" alt="" class="icon" onclick="copyToClipboard(document.getElementById('resultmm').value+' mm')">
+                <img src="https://cdn4.iconfinder.com/data/icons/ionicons/512/icon-clipboard-512.png" alt="" class="icon" onclick="clip_pt_mm.copyToClipboard(document.getElementById('resultmm').value+' mm')">
             </span>
         </div>
     </div>
-    <script type="text/javascript" src="./partials/functions/pt2mm.function.js"></script>
-    <script type="text/javascript" src="./partials/functions/mm2pt.function.js"></script>
+    <!-- <script type="text/javascript" src="./partials/functions/convert_mm_lib.js"></script> -->
+
+    <script type="text/javascript" src="./partials/functions/convert_mm_lib.js"></script>
+    <script type="text/javascript" src="./partials/functions/copytoclipboard_lib.js"></script>
     <script>
+        clip_pt_mm = new Clipboard
+        calc_pt_mm = new Convert_mm
         $(document).ready(() => {
-            $('#pt').keyup(() => $("#resultmm").val(pt2mm($("#pt").val())))
-            $('#resultmm').keyup(() => $("#pt").val(mm2pt($("#resultmm").val())))
+            $('#pt').keyup(() => $("#resultmm").val(calc_pt_mm.pt2mm($("#pt").val())))
+            $('#resultmm').keyup(() => $("#pt").val(calc_pt_mm.mm2pt($("#resultmm").val())))
         })
     </script>
 </div>

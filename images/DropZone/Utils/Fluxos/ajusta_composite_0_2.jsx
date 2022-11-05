@@ -5,41 +5,45 @@ var docRef = app.activeDocument,
     Ncanais = docRef.channels.length,
     firstWhite = false,
     firstSubstrato = 0,
-    guides=0,
+    guides = 0,
     fgColor = new SolidColor;
-        fgColor.cmyk.cyan = 0;
-        fgColor.cmyk.magenta = 0;
-        fgColor.cmyk.yellow = 0;
-        fgColor.cmyk.black = 100;
+fgColor.cmyk.cyan = 0;
+fgColor.cmyk.magenta = 0;
+fgColor.cmyk.yellow = 0;
+fgColor.cmyk.black = 100;
+const technical_colors = ["DIE", "TECH", "GUIDE", "DIMEN", "AREA", "CODE"];
 
 docRef.changeMode(ChangeMode.MULTICHANNEL);
 
 for (var y = 0; y < Ncanais; y++) {
     var upperName = docRef.channels[y].name.toUpperCase(),
         channelRef = docRef.channels[y];
-        
+
     //alert(y+"/"+Ncanais+" "+upperName);
-    
-    if (upperName.indexOf("SUBSTRATO") != -1) {channelRef.remove();}
-    else if (upperName.indexOf("VARNISH") != -1 || upperName.indexOf("PRIMER") != -1) { ChnlMove(channelRef.name, Ncanais);} //Push white to last Channel}
-    else if (upperName.indexOf("DIE") != -1 || upperName.indexOf("TECH") != -1 || upperName.indexOf("GUIDE") != -1 || upperName.indexOf("DIMEN") != -1) {
-        if (guides<=2) {
-            changeColor(channelRef.name, 0, 0, 0, 20, 0); 
-            ChnlMove(channelRef.name, Ncanais);
-            y--;
-            guides++;}        
+
+    for (var x = 0; x <= technical_colors.length; x++) {
+        if (upperName.indexOf(technical_colors[x]) != -1) {
+            changeColor(channelRef.name, 0, 0, 0, 20, 0);
+            // ChnlMove(channelRef.name, Ncanais);
+            // if (guides <= 2) {
+            //     y--;
+            //     guides++;
+
+            // }
         }
-    else if ((upperName.indexOf("WHITE") != -1 ||upperName.indexOf("BLANCO") != -1 ||upperName.indexOf("BRANCO") != -1) && firstWhite ==false) {
+    };
+    if (upperName.indexOf("SUBSTRATO") != -1) { channelRef.remove(); }
+    else if (upperName.indexOf("VARNISH") != -1 || upperName.indexOf("PRIMER") != -1) { ChnlMove(channelRef.name, Ncanais); } //Push white to last Channel}
+    else if ((upperName.indexOf("WHITE") != -1 || upperName.indexOf("BLANCO") != -1 || upperName.indexOf("BRANCO") != -1) && firstWhite == false) {
         ChnlMove(channelRef.name, 1); //Push white to first Channel
         changeColor(channelRef.name, 0, 0, 0, 0, 100); //Change white to white
         if (firstSubstrato < 1) {
             newChannel("SUBSTRATO"); //Create gray substrate
             ChnlMove("SUBSTRATO", 1); //Move substrate to first
-            firstSubstrato ++;
+            firstSubstrato++;
         }
-
-        //firstWhite = true;
     }
+
     Ncanais = docRef.channels.length;
 }
 changeColor("Black", 0, 0, 0, 80, 0); //Set black to 80%
@@ -73,14 +77,14 @@ function newChannel(chanName) {
 
 function newRuler(chanName) {
     var docc = app.activeDocument,
-    nc = docc.channels.add();
+        nc = docc.channels.add();
     white = new SolidColor,
-    newColor = new SolidColor;
-    
+        newColor = new SolidColor;
+
     white.gray.gray = 0;
     nc.kind = ChannelType.SPOTCOLOR;
     nc.opacity = 33;
-        
+
     newColor.cmyk.cyan = 100;
     newColor.cmyk.magenta = 10;
     newColor.cmyk.yellow = 70;
@@ -122,13 +126,13 @@ function allChannelsVisible() {
     }
 }
 
-function ajustaEscala(){
-    var milimetro=10; //relaçao pixel polegada
+function ajustaEscala() {
+    var milimetro = 10; //relaçao pixel polegada
     var resolucao = app.activeDocument.resolution;
-    var relacao = resolucao/2.54;
-    
+    var relacao = resolucao / 2.54;
+
     app.activeDocument.measurementScale.pixelLength = Math.round(relacao);
     app.activeDocument.measurementScale.logicalLength = milimetro;
     app.activeDocument.measurementScale.logicalUnits = "mm";
-    
+
 }

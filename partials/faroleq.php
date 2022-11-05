@@ -55,11 +55,14 @@
             <input type="text" class="form-control" id="largura_final" value="0" style="height:66px; margin:auto">
         </div>
         <div class="col-2 align-self-center pl-5">
-            <img src="https://cdn4.iconfinder.com/data/icons/ionicons/512/icon-clipboard-512.png" alt="" class="icon" onclick="copyToClipboard(document.getElementById('largura_final').value+' mm')">
+            <img src="https://cdn4.iconfinder.com/data/icons/ionicons/512/icon-clipboard-512.png" alt="" class="icon" onclick="clip_equador.copyToClipboard(document.getElementById('largura_final').value+' mm')">
         </div>
     </div>
-    <script src="./partials/functions/faroleq.function.js"></script>
+    <script src="./partials/functions/faroleq_lib.js"></script>
+    <script src="./partials/functions/copytoclipboard_lib.js"></script>
     <script>
+        clip_equador = new Clipboard
+
         $(document).ready(() => {
 
             $('#altura_farol_eq').change(() => {
@@ -82,9 +85,10 @@
         }
 
         function largF1() {
+            calc_farol = new Equador
             var cilindro = $("input[type='radio']:checked").val();
             $("#largura_final").val(
-                farolEq($("#largura_farol_eq").val(),
+                calc_farol.farolEq($("#largura_farol_eq").val(),
                     $("#altura_farol_eq").val(),
                     $("#area_farol_eq").val(),
                     cilindro)

@@ -23,7 +23,7 @@
         <input type="text" class="form-control" id="mm" value="0.015">
         <div class="input-group-append">
             <span class="input-group-text">
-                <img src="https://cdn4.iconfinder.com/data/icons/ionicons/512/icon-clipboard-512.png" alt="" class="icon" onclick="copyToClipboard(document.getElementById('mm').value+' mm')">
+                <img src="https://cdn4.iconfinder.com/data/icons/ionicons/512/icon-clipboard-512.png" alt="" class="icon" onclick="clip_pixel.copyToClipboard(document.getElementById('mm').value+' mm')">
             </span>
         </div>
     </div>
@@ -37,16 +37,18 @@
         <input type="text" class="form-control" id="pixel" value="">
         <div class="input-group-append">
             <span class="input-group-text">
-                <img src="https://cdn4.iconfinder.com/data/icons/ionicons/512/icon-clipboard-512.png" alt="" class="icon" onclick="copyToClipboard(document.getElementById('pixel').value+' px')">
+                <img src="https://cdn4.iconfinder.com/data/icons/ionicons/512/icon-clipboard-512.png" alt="" class="icon" onclick="clip_pixel.copyToClipboard(document.getElementById('pixel').value+' px')">
             </span>
         </div>
     </div>
-    <script type="text/javascript" src="./partials/functions/px2mm.function.js"></script>
-    <script type="text/javascript" src="./partials/functions/mm2px.function.js"></script>
+    <script type="text/javascript" src="./partials/functions/convert_mm_lib.js"></script>
+    <script type="text/javascript" src="./partials/functions/copytoclipboard_lib.js"></script>
     <script>
+        calc = new Convert_mm
+        clip_pixel = new Clipboard
         $(document).ready(() => {
-            $('#mm').keyup(() => $("#pixel").val(mm2px($("#resolucao").val(), $("#mm").val())))
-            $('#pixel').keyup(() => $("#mm").val(px2mm($("#resolucao").val(), $("#pixel").val())))
+            $('#mm').keyup(() => $("#pixel").val(calc.mm2px($("#resolucao").val(), $("#mm").val())))
+            $('#pixel').keyup(() => $("#mm").val(calc.px2mm($("#resolucao").val(), $("#pixel").val())))
         })
     </script>
 </div>

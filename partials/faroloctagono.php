@@ -41,15 +41,17 @@
         </div>
 
         <div class="col-2 align-self-center pl-5">
-            <img src="https://cdn4.iconfinder.com/data/icons/ionicons/512/icon-clipboard-512.png" alt="" class="icon" onclick="copyToClipboard(document.getElementById('largF5').value+' mm')">
+            <img src="https://cdn4.iconfinder.com/data/icons/ionicons/512/icon-clipboard-512.png" alt="" class="icon" onclick="clip_octagono.copyToClipboard(document.getElementById('largF5').value+' mm')">
         </div>
         <div class="col align-self-center">
             <p id="descricao_farol">
             </p>
         </div>
     </div>
-    <script type="text/javascript" src="./partials/functions/faroloctagono.function.js"></script>
+    <script type="text/javascript" src="./partials/functions/faroloctagono_lib.js"></script>
+    <script type="text/javascript" src="./partials/functions/copytoclipboard_lib.js"></script>
     <script>
+        clip_octagono = new Clipboard
         $(document).ready(() => {
             $('#pais5').change(() => largura_final());
             $('#altFOP5').change(() => largura_final())
@@ -60,8 +62,9 @@
         });
 
         function largura_final() {
+            calc_octagono = new Octagono
             $("#largF5").val(
-                faroloctagono($("#altFOP5").val(),
+                calc_octagono.faroloctagono($("#altFOP5").val(),
                     $("#largFOP5").val(),
                     $("#areaFOP5").val(),
                     $("#pais5").val(),

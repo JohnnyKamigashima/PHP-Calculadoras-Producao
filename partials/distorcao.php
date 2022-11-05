@@ -54,19 +54,22 @@
                   <input type="text" class="form-control" id="distorc" value="0">
               </div>
               <div class="col-2 align-self-center pl-5">
-                  <img src="https://cdn4.iconfinder.com/data/icons/ionicons/512/icon-clipboard-512.png" alt="" class="icon" onclick="copyToClipboard(document.getElementById('distorc').value+'%')">
+                  <img src="https://cdn4.iconfinder.com/data/icons/ionicons/512/icon-clipboard-512.png" alt="" class="icon" onclick="clip_distor.copyToClipboard(document.getElementById('distorc').value+'%')">
               </div>
           </div>
       </div>
-      <script type="text/javascript" src="./partials/functions/distorC.function.js"></script>
+      <script type="text/javascript" src="./partials/functions/distorC_lib.js"></script>
+      <script type="text/javascript" src="./partials/functions/copytoclipboard_lib.js"></script>
       <script>
+          clip_distor = new Clipboard
           $(document).ready(() => {
               $('#cilindro').keyup(() => atualizaDistorc())
               $('#arteA').keyup(() => atualizaDistorc())
           })
 
           function atualizaDistorc() {
-              $("#distorc").val(distorC(
+              calc_atualiza = new Distorcao
+              $("#distorc").val(calc_atualiza.distorC(
                   $("#arteA").val(),
                   $("#cilindro").val(),
                   $("input[type='radio'][name='repetition']:checked").val()
@@ -74,8 +77,9 @@
           }
 
           function handleClick(myRadio) {
+              calc_handle = new Distorcao
               $("#distorc").val(
-                  distorC(
+                  calc_handle.distorC(
                       $("#arteA").val(),
                       $("#cilindro").val(),
                       $("input[type='radio'][name='repetition']:checked").val()

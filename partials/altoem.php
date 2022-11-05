@@ -1,4 +1,4 @@
-  <!-- calculadora AltoEm -->
+  <!-- calc_alto_emuladora AltoEm -->
   <div class="cells">
       <div class="titulo">
           Alto Em (Farol Brasil) <img src="./images/altoembr.png" class="icon">
@@ -69,7 +69,7 @@
               <input type="text" class="form-control" id="altoemA" value="0" style="height:66px; margin:auto">
           </div>
           <div class="col-2 align-self-center pl-5">
-              <img src="https://cdn4.iconfinder.com/data/icons/ionicons/512/icon-clipboard-512.png" alt="" class="icon" onclick="copyToClipboard(document.getElementById('altoemA').value+' mm2')">
+              <img src="https://cdn4.iconfinder.com/data/icons/ionicons/512/icon-clipboard-512.png" alt="" class="icon" onclick="clip_altoem.copyToClipboard(document.getElementById('altoemA').value+' mm2')">
           </div>
       </div>
       <div class="linha_resposta">
@@ -80,7 +80,7 @@
               <input type="text" class="form-control" id="largF" value="0" style="height:66px; margin:auto">
           </div>
           <div class="col-2 align-self-center pl-5">
-              <img src="https://cdn4.iconfinder.com/data/icons/ionicons/512/icon-clipboard-512.png" alt="" class="icon" onclick="copyToClipboard(document.getElementById('largF').value+' mm')">
+              <img src="https://cdn4.iconfinder.com/data/icons/ionicons/512/icon-clipboard-512.png" alt="" class="icon" onclick="clip_altoem.copyToClipboard(document.getElementById('largF').value+' mm')">
           </div>
       </div>
       <div class="input-group ">
@@ -92,13 +92,14 @@
                   <input type="text" class="form-control" id="largMx" value="0" style="height:66px; margin:auto">
               </div>
               <div class="col-2 align-self-center pl-5">
-                  <img src="https://cdn4.iconfinder.com/data/icons/ionicons/512/icon-clipboard-512.png" alt="" class="icon" onclick="copyToClipboard(document.getElementById('largMx').value+' mm')">
+                  <img src="https://cdn4.iconfinder.com/data/icons/ionicons/512/icon-clipboard-512.png" alt="" class="icon" onclick="clip_altoem.copyToClipboard(document.getElementById('largMx').value+' mm')">
               </div>
           </div>
       </div>
-      <script src="./partials/functions/altoem.function.js"></script>
-      <script src="./partials/functions/copytoclipboard.function.js"></script>
+      <script src="./partials/functions/altoem_lib.js"></script>
+      <script src="./partials/functions/copytoclipboard_lib.js"></script>
       <script>
+          clip_altoem = new Clipboard
           $(document).ready(() => {
               $('#altFOP').change(() => {
                   areaFop();
@@ -127,8 +128,9 @@
           })
 
           function largF() {
+              calc_alto_em = new Alto_em
               $("#largF").val(
-                  altoEm($("#altFOP").val(),
+                  calc_alto_em.altoEm($("#altFOP").val(),
                       $("#largFOP").val(),
                       $("#areaFOP").val(),
                       $("#nutrientes").val(),
@@ -143,8 +145,9 @@
           }
 
           function largMx() {
+              calc_alto_em = new Alto_em
               $("#largMx").val(
-                  altoEm(
+                  calc_alto_em.altoEm(
                       $("#altFOP").val(),
                       $("#largFOP").val(),
                       $("#areaFOP").val(),

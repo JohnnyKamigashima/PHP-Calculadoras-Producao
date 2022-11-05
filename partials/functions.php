@@ -8,7 +8,7 @@ function doublePreg($palavra)
 
 function debug($array)
 {
-    echo '<br>Debug: ';
+
     if (gettype($array) == "array") {
 
         foreach ($array as $index => $arr) {
@@ -139,21 +139,22 @@ function removeTags($str)
     if (($str === null) || ($str === ''))  return false;
 
     $cleantext = preg_replace("/(<td.*>(\s+)?<p>|<\/p>(\s+)?<\/td>|\h|\xc2\xa0)/iU", ' ', $str); // converte colunas td para espaço
-    $cleantext = preg_replace('/((\s| ?\&nbsp;|\n|\r|\h|\xc2\xa0)+|(<(\/?(span|table|code|col|td|colgroup|ul|li).*?)>))/i', ' ', $cleantext); //Converte caracteres de espaço para espaço e remove tags
+    $cleantext = preg_replace("/[ \x{A0}\x{1680}\x{180e}\x{2000}\x{200a}\x{202f}\x{205f}\x{3000}]+/iuU", ' ', $cleantext); // remove unicode espaco em branco
+    $cleantext = preg_replace('/((\s| ?\&nbsp;|\n|\r|\h|\xc2\xa0)+|(<(\/?(span|table|code|col|td|colgroup|ul|li|form|label|img|input).*?)>))/i', ' ', $cleantext); //Converte caracteres de espaço para espaço e remove tags
     // $cleantext = preg_replace('/(<(\/?(span|table|code|col|td|colgroup|ul|li).*?)>)/i', ' ', $cleantext); //Remove tags
     $cleantext = preg_replace('/((<(\/?(p|div|h|a|style|tr|tbody).*?)>)|(( ?(\n)?<br ?\/?> ?)+))/i', '<br>', $cleantext); //Transforma tags para quebras de linhas
 
     return $cleantext;
 }
 
-function isNotTagged($start, $end,$tag, $string)
+function isNotTagged($start, $end, $tag, $string)
 {
     $result = array();
     $string =  html_entity_decode($string);
 
     // Limpa texto entre tag
-    $semTag = preg_replace("/(<$tag.*>(.*|.*\n.*)<\/$tag>)/imU",'',$string,PREG_SET_ORDER);
-    
+    $semTag = preg_replace("/(<$tag.*>(.*|.*\n.*)<\/$tag>)/imU", '', $string, PREG_SET_ORDER);
+
     // Adiciona resultados na array
     preg_match("/($start.*?$end)/imU", $semTag, $result);
     if ($result != NULL) return $result[1];
@@ -163,7 +164,7 @@ function isCaixa($start, $end, $string)
 {
     $start = mb_strtoupper($start, ENCODING);
     $end = mb_strtoupper($end, ENCODING);
-    $removeCorreto = preg_replace("/($start.*?$end)/m",'',$string);
+    $removeCorreto = preg_replace("/($start.*?$end)/m", '', $string);
     preg_match("/($start.*?$end)/im", $removeCorreto, $result);
     return array_filter($result) != NULL ? $result[1] : false;
 }
@@ -272,4 +273,4 @@ function frasesMaisSemelhantes($arr1, $arr2, $intHit)
         }
     }
     return $result;
-}
+};

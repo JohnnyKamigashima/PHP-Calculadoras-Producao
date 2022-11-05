@@ -63,14 +63,17 @@
                  <input type="text" class="form-control" id="resultmm1" value="">
              </div>
              <div class="col-2 align-self-center pl-5">
-                 <img src="https://cdn4.iconfinder.com/data/icons/ionicons/512/icon-clipboard-512.png" alt="" class="icon" onclick="copyToClipboard(document.getElementById('resultmm1').value+' mm')">
+                 <img src="https://cdn4.iconfinder.com/data/icons/ionicons/512/icon-clipboard-512.png" alt="" class="icon" onclick="clip_net.copyToClipboard(document.getElementById('resultmm1').value+' mm')">
              </div>
          </div>
      </div>
-     <script type="text/javascript" src="./partials/functions/pesoneto.function.js"></script>
-     <script type="text/javascript" src="./partials/functions/sort.function.js"></script>
+     <script type="text/javascript" src="./partials/functions/pesoneto_lib.js"></script>
+     <script type="text/javascript" src="./partials/functions/sort_lib.js"></script>
+     <script type="text/javascript" src="./partials/functions/copytoclipboard_lib.js"></script>
      <script>
-         sort("pais");
+         clip_net = new Clipboard
+         lista = new Sort
+         lista.sort("pais");
          $("#pais").val("MC");
          $(document).ready(() => {
              $('#largFOP3').keyup(() => {
@@ -96,8 +99,9 @@
          })
 
          function resultado_mm() {
+             calc_peso = new Peso
              $("#resultmm1").val(
-                 pesoNeto($("#altFOP3").val(),
+                 calc_peso.pesoNeto($("#altFOP3").val(),
                      $("#largFOP3").val(),
                      $("#peso").val(),
                      $("#pais").val(),
