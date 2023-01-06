@@ -75,7 +75,7 @@
                 <div class="col-4 p-3 text-center"><a href="https://t.me/JackLemon" target="_blank"><img
                             class="media-icon m-2 p-2 d-block m-auto"
                             src="https://logodownload.org/wp-content/uploads/2017/11/telegram-logo.png"
-                            alt="Logotipo Linkedin">t.me/JackLemon</a></div>
+                            alt="Logotipo Telegram">t.me/JackLemon</a></div>
             </div>
         </div>
     </div>

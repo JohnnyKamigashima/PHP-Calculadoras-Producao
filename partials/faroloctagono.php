@@ -4,8 +4,9 @@
 
 <div class="cells p-3">
     <div class="titulo">
-        Tamanho do Farol Octagono <img src="./images/altoenoctagono.png" class="icon">
+        Tamanho do Farol Octagono <img src="./images/altoenoctagono.png" alt="ícone do farol octagonal" class="icon">
     </div>
+    <label for="pais5" class="rotulo">Selecione o país</label>
     <div class="entrada_normal">
         <select name="pais" id="pais5" value="PE" class="form-control">
             <option value="PE">Peru</option>
@@ -16,7 +17,7 @@
     </div>
     <div class="entrada_normal">
         <div class="input-group-prepend">
-            <span class="input-group-text" id="inputGroup-sizing-default">
+            <label for="altFOP5" class="input-group-text" >
                 Altura FOP (mm):
             </span>
         </div>
@@ -25,23 +26,23 @@
 
     <div class="entrada_normal">
         <div class="input-group-prepend">
-            <span class="input-group-text" id="inputGroup-sizing-default">
+            <label for="largFOP5" class="input-group-text" >
                 Largura FOP (mm):
-            </span>
+            </label>
         </div>
         <input type="text" class="form-control" id="largFOP5" value="">
     </div>
 
     <div class="linha_resposta">
         <div class="col-7 align-self-center">
-            A largura do Farol <br> deve ser de:
+           <label for="largF5"> A largura do Farol <br> deve ser de:</label>
         </div>
         <div class="col-3 align-self-center">
             <input type="text" class="form-control" id="largF5" value="0" style="height:66px; margin:auto">
         </div>
 
         <div class="col-2 align-self-center pl-5">
-            <img src="https://cdn4.iconfinder.com/data/icons/ionicons/512/icon-clipboard-512.png" alt="" class="icon" onclick="clip_octagono.copyToClipboard(document.getElementById('largF5').value+' mm')">
+            <img src="https://cdn4.iconfinder.com/data/icons/ionicons/512/icon-clipboard-512.png" alt="Botão de copiar resultado para a Área de colagem" class="icon" onclick="clip_octagono.copyToClipboard(document.getElementById('largF5').value+' mm')">
         </div>
         <div class="col align-self-center">
             <p id="descricao_farol">

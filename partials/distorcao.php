@@ -4,22 +4,18 @@
       <div class="titulo">
           Distorção de Cilindro
       </div>
-      <div class="entrada_normal">
-          <div class="input-group-prepend">
-              <span class="input-group-text" id="inputGroup-sizing-default">Cilindro:</span>
-          </div>
+      <div class="entrada_normal input-group-prepend">
+              <label for="cilindro" class="input-group-text" >Cilindro:</label>
           <input type="text" class="form-control" id="cilindro" value="0">
       </div>
 
-      <div class="entrada_normal">
-          <div class="input-group-prepend">
-              <span class="input-group-text" id="inputGroup-sizing-default">Altura da arte:</span>
-          </div>
+      <div class="entrada_normal input-group-prepend">
+              <label for="arteA" class="input-group-text" >Altura da arte:</label>
           <input type="text" class="form-control" id="arteA" value="0">
       </div>
       <div>
           <div class="row m-auto p-0">
-              Número de repetições
+             <label for="repetition"> Número de repetições</label>
           </div>
           <div class="container-flex p-0">
               <div class="form-check form-check-inline">
@@ -48,13 +44,13 @@
       <div class="input-group">
           <div class="linha_resposta">
               <div class="col-5 align-self-center">
-                  Escala (%):
+                 <label for="distorc"> Escala (%):</label>
               </div>
               <div class="col-5 align-self-center">
                   <input type="text" class="form-control" id="distorc" value="0">
               </div>
               <div class="col-2 align-self-center pl-5">
-                  <img src="https://cdn4.iconfinder.com/data/icons/ionicons/512/icon-clipboard-512.png" alt="" class="icon" onclick="clip_distor.copyToClipboard(document.getElementById('distorc').value+'%')">
+                  <img src="https://cdn4.iconfinder.com/data/icons/ionicons/512/icon-clipboard-512.png" alt="Botão de copiar resultado para a Área de colagem" class="icon" onclick="clip_distor.copyToClipboard(document.getElementById('distorc').value+'%')">
               </div>
           </div>
       </div>

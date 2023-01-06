@@ -55,18 +55,18 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             <form action="text_compare.php" method="post">
                 <div class="row p-2">
                     <div class="col-lg-6 col-md-12">
-                        <span class="input-group-text textwrapper p-2" id="inputGroup-sizing-default">
+                        <label for="textDoc" class="input-group-text textwrapper p-2" >
                             Textos do Documento:
-                        </span>
+                        </label>
                         <div class="textwrapper">
                             <textarea id='textDoc' name='textDoc'
                                 style="width:100%"><?php echo $sessionDoc; ?></textarea>
                         </div>
                     </div>
                     <div class="col-lg-6 col-md-12">
-                        <span class="input-group-text textwrapper p-2" id="inputGroup-sizing-default">
+                        <label for="textArte" class="input-group-text textwrapper p-2" >
                             Textos da Arte:
-                        </span>
+                        </label>
                         <div class="textwrapper">
                             <textarea id="textArte" name='textArte'
                                 style="width:100%"><?php echo $sessionArte; ?></textarea>
@@ -90,26 +90,26 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     </div>
                     <div class="col-2">
                         <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="pontofinal" name="pontofinal"
+                                value="<?php echo $sessionEponto; ?>" <?php echo $sessionEponto; ?>>
+                            <label class="form-check-label" for="pontofinal">Ignorar Pontos Finais</label>
+                        </div>
+                    </div>
+                    <div class="col-1">
+                        <div class="form-check">
                             <input class="form-check-input" type="checkbox" id="bold" name="bold"
                                 value="<?php echo $sessionEbold; ?>" <?php echo $sessionEbold; ?>>
                             <label class="form-check-label" for="bold">Ignorar Bold</label>
                         </div>
                     </div>
-                    <div class="col-2">
+                    <div class="col-1">
                         <div class="form-check">
                             <input class="form-check-input" type="checkbox" id="italico" name="italico"
                                 value="<?php echo $sessionEitalico; ?>" <?php echo $sessionEitalico; ?>>
                             <label class="form-check-label" for="italico">Ignorar Itálico</label>
                         </div>
                     </div>
-                    <div class="col-2">
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" id="pontofinal" name="pontofinal"
-                                value="<?php echo $sessionEponto; ?>" <?php echo $sessionEponto; ?>>
-                            <label class="form-check-label" for="pontofinal">Ignorar Pontos Finais</label>
-                        </div>
-                    </div>
-                    <div class="col-2">
+                    <div class="col-1">
                         <div class="form-check">
                             <input class="form-check-input" type="checkbox" id="simbolos" name="simbolos"
                                 value="<?php echo $sessionESimbolos; ?>" <?php echo $sessionESimbolos; ?>>

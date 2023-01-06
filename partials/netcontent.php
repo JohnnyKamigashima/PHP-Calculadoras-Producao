@@ -4,9 +4,7 @@
      <div class="titulo">
          Tabela de Peso Neto
      </div>
-     <div class="rotulo">
-         País:
-     </div>
+        <label for="pais" class="rotulo"> Selecione o país:</label>
      <div class="entrada">
          <select name="pais" id="pais" value="MC" class="form-control">
              <option value="MC" selected>Mercosul (AR, BR, UY, PY)</option>
@@ -28,42 +26,36 @@
      </div>
 
      <div class="entrada_normal">
-         <div class="input-group-prepend">
-             <span class="input-group-text" id="inputGroup-sizing-default">
+             <label for="altFOP3" class="input-group-text input-group-prepend" >
                  Altura FOP (mm):
-             </span>
-         </div>
+             </label>
          <input type="text" class="form-control" id="altFOP3" name="altFOP3">
      </div>
 
      <div class="entrada_normal">
-         <div class="input-group-prepend">
-             <span class="input-group-text" id="inputGroup-sizing-default">
+             <label for="largFOP3" class="input-group-text input-group-prepend" >
                  Largura FOP (mm):
-             </span>
-         </div>
+             </label>
          <input type="text" class="form-control" name="largFOP3" id="largFOP3">
      </div>
 
-     <div class="entrada_normal">
-         <div class="input-group-prepend">
-             <span class="input-group-text" id="inputGroup-sizing-default">
+     <div class="entrada_normal ">
+             <label for="peso" class="input-group-text input-group-prepend" >
                  Peso (em g):
-             </span>
-         </div>
-         <input type="text" class="form-control" id="peso" value="">
+             </label>
+             <input type="text" class="form-control" id="peso" value="">
      </div>
 
      <div class="input-group ">
          <div class="linha_resposta">
              <div class="col-7 align-self-center">
-                 Tam. min (mm):
+               <label for="resultmm1">  Tam. min (mm):</label>
              </div>
              <div class="col-3 align-self-center">
                  <input type="text" class="form-control" id="resultmm1" value="">
              </div>
              <div class="col-2 align-self-center pl-5">
-                 <img src="https://cdn4.iconfinder.com/data/icons/ionicons/512/icon-clipboard-512.png" alt="" class="icon" onclick="clip_net.copyToClipboard(document.getElementById('resultmm1').value+' mm')">
+                 <img src="https://cdn4.iconfinder.com/data/icons/ionicons/512/icon-clipboard-512.png" alt="Botão de copiar resultado para a Área de colagem" class="icon" onclick="clip_net.copyToClipboard(document.getElementById('resultmm1').value+' mm')">
              </div>
          </div>
      </div>

@@ -10370,4 +10370,8 @@ textarea.form-control-lg {
   filter: blur(0);
   opacity: 1;
   z-index: 10;
+}
+
+a {
+  color: #000969;
 }/*# sourceMappingURL=style.css.map */

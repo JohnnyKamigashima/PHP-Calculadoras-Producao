@@ -4,30 +4,26 @@
     <div class="titulo">
         Escala de Plano
     </div>
-    <div class="entrada_normal">
-        <div class="input-group-prepend">
-            <span class="input-group-text" id="inputGroup-sizing-default">Medida real (cota):</span>
-        </div>
+    <div class="entrada_normal input-group-prepend">
+        <label for="medR" class="input-group-text" >Medida real (cota):</label>
         <input type="text" class="form-control" id="medR" value="0">
     </div>
 
-    <div class="entrada_normal">
-        <div class="input-group-prepend">
-            <span class="input-group-text" id="inputGroup-sizing-default">Medida atual:</span>
-        </div>
+    <div class="entrada_normal input-group-prepend">
+            <label for="medA" class="input-group-text" >Medida atual:</label>
         <input type="text" class="form-control" id="medA" value="0">
     </div>
 
     <div class="input-group">
         <div class="linha_resposta">
             <div class="col-5 align-self-center">
-                Escala (%):
+               <label for="escalaC"> Escala (%):</label>
             </div>
             <div class="col-5 align-self-center">
                 <input type="text" class="form-control" id="escalaC" value="0">
             </div>
             <div class="col-2 align-self-center pl-5">
-                <img src="https://cdn4.iconfinder.com/data/icons/ionicons/512/icon-clipboard-512.png" alt="" class="icon" onclick="clip_scala.copyToClipboard(document.getElementById('escalaC').value+'%')">
+                <img src="https://cdn4.iconfinder.com/data/icons/ionicons/512/icon-clipboard-512.png" alt="Botão de copiar resultado para a Área de colagem" class="icon" onclick="clip_scala.copyToClipboard(document.getElementById('escalaC').value+'%')">
             </div>
         </div>
     </div>

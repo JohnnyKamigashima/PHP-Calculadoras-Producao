@@ -58,27 +58,27 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             </div>
         <div class="row">
             <div class="col-md-12 col-lg-4">
-                <span class="input-group-text textwrapper text-center p-2 m-auto" id="inputGroup-sizing-default">
+                <label for="textDoc" class="input-group-text textwrapper text-center p-2 m-auto" >
                     Arquivos no MySGS:
-                </span>
+                </label>
                 <div class="textwrapper">
-                    <textarea rows="15" cols="50" name="textDoc" style="width:100%"><?php echo $sessionDoc; ?></textarea>
+                    <textarea rows="15" cols="50" name="textDoc" id="textDoc" style="width:100%"><?php echo $sessionDoc; ?></textarea>
                 </div>
             </div>
             <div class="col-md-12 col-lg-4">
-                <span class="input-group-text textwrapper text-center p-2 m-auto" id="inputGroup-sizing-default">
+                <label   for="textArte" class="input-group-text textwrapper text-center p-2 m-auto" >
                     Arquivos da pasta finais:
-                </span>
+                </label>
                 <div class="textwrapper">
-                    <textarea rows="15" cols="50" name="textArte" style="width:100%"><?php echo $sessionArte; ?></textarea>
+                    <textarea rows="15" cols="50" name="textArte" id="textArte" style="width:100%"><?php echo $sessionArte; ?></textarea>
                 </div>
             </div>
             <div class="col-md-12 col-lg-4">
-                <span class="input-group-text textwrapper text-center p-2 m-auto" id="inputGroup-sizing-default">
+                <label for="textRef" class="input-group-text textwrapper text-center p-2 m-auto" >
                     Arquivos de REFERÊNCIA:
-                </span>
+                </label>
                 <div class="textwrapper">
-                    <textarea rows="15" cols="50" name="textRef" style="width:100%"><?php echo $sessionRef; ?></textarea>
+                    <textarea rows="15" cols="50" name="textRef" id="textRef" style="width:100%"><?php echo $sessionRef; ?></textarea>
                 </div>
             </div>
         </div>
