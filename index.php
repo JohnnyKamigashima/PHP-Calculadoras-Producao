@@ -36,32 +36,35 @@
 
 <body>
     <main id="main" class="container-md p-3">
+        <div class="titulo p-2 m-2 pt-3">
+               <h2> Calculadoras de elementos de Embalagem</h2>
+            </div>
         <div class="row">
-            <div class="col-sm-12 col-md-4">
+            <div class="col-sm-12 col-md-6 col-lg-4 p-2">
                 <?php include_once 'partials/plano_escala.php'; ?>
             </div>
-            <div class="col-sm-12 col-md-4">
+            <div class="col-sm-12 col-md-6 col-lg-4 p-2">
                 <?php include_once 'partials/distorcao.php'; ?>
             </div>
-            <div class="col-sm-12 col-md-4">
+            <div class="col-sm-12 col-md-6 col-lg-4 p-2">
                 <?php include_once 'partials/netcontent.php'; ?>
             </div>
-            <div class="col-sm-12 col-md-4">
+            <div class="col-sm-12 col-md-6 col-lg-4 p-2">
                 <?php include_once 'partials/pt2mm.php'; ?>
             </div>
-            <div class="col-sm-12 col-md-4">
+            <div class="col-sm-12 col-md-6 col-lg-4 p-2">
                 <?php include_once 'partials/px2mm.php'; ?>
             </div>
-            <div class="col-sm-12 col-md-4">
+            <div class="col-sm-12 col-md-6 col-lg-4 p-2">
                 <?php include_once 'partials/ttransgenico.php'; ?>
             </div>
-            <div class="col-sm-12 col-md-4">
+            <div class="col-sm-12 col-md-6 col-lg-4 p-2">
                 <?php include_once 'partials/faroleq.php'; ?>
             </div>
-            <div class="col-sm-12 col-md-4">
+            <div class="col-sm-12 col-md-6 col-lg-4 p-2">
                 <?php include_once 'partials/faroloctagono.php'; ?>
             </div>
-            <div class="col-sm-12 col-md-4">
+            <div class="col-sm-12 col-md-6 col-lg-4 p-2">
                 <?php include_once 'partials/altoem.php'; ?>
             </div>
         </div>

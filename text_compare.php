@@ -49,13 +49,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     <!--  List compare HTML-->
     <div id="main" class="container-md">
         <div class="container p-3">
-            <div class="titulo p-2 m-2">
-                Compara Textos
+            <div class="titulo p-2 pt-3 m-2">
+               <h2> Compara Textos</h2>
             </div>
             <form action="text_compare.php" method="post">
                 <div class="row p-2">
-                    <div class="col-md-6">
-                        <span class="input-group-text textwrapper" id="inputGroup-sizing-default">
+                    <div class="col-lg-6 col-md-12">
+                        <span class="input-group-text textwrapper p-2" id="inputGroup-sizing-default">
                             Textos do Documento:
                         </span>
                         <div class="textwrapper">
@@ -63,8 +63,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                                 style="width:100%"><?php echo $sessionDoc; ?></textarea>
                         </div>
                     </div>
-                    <div class="col-md-6">
-                        <span class="input-group-text textwrapper" id="inputGroup-sizing-default">
+                    <div class="col-lg-6 col-md-12">
+                        <span class="input-group-text textwrapper p-2" id="inputGroup-sizing-default">
                             Textos da Arte:
                         </span>
                         <div class="textwrapper">
@@ -125,7 +125,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     </div>
                 </div>
                 <div class="row p-3">
-                    <input type="submit" id="comparar" value="Comparar (F5)" class="btn btn-success" />
+                    <input type="submit" id="comparar" value="Comparar (F5)" class="btn btn-success p-4" />
                 </div>
             </form>
 

@@ -15,12 +15,13 @@
 
 <body>
     <div id="main-image">
-        <div class="col-4 shadow-lg mt-5 mb-5 p-5 bg-white rounded m-auto ">
+        <div class="col-lg-6 col-md-8  col-xs-10 shadow-lg mt-5 mb-5 p-5 bg-white rounded m-auto ">
             <div class="row">
+
                 <img class="foto-autor-redondo" src="images/1516932944701.jpeg"
-                    alt="Fotografia de Johnny Kamigashima estilizado com boné">
-            </div>
-            <div class="row">
+                alt="Fotografia de Johnny Kamigashima estilizado com boné">
+                <div class="row">
+                </div>
                 <div class="m-auto w-auto text-center identificacao-do-autor">
                     <h3 class="pt-2 text-muted">Johnny Hikaru Kamigashima </h3>
                     <h5 class="text-secondary">Futuro Analista de Testes e Qualidade de Software (QA)</h5>

@@ -53,25 +53,28 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     <main id="main" class="container-md p-3">
         
         <form action="list_compare.php" method="post">
+            <div class="titulo p-2 m-2">
+               <h2> Compara lista de Arquivos do CT-Files</h2>
+            </div>
         <div class="row">
-            <div class="col-sm-12 col-md-4">
-                <span class="input-group-text textwrapper" id="inputGroup-sizing-default">
+            <div class="col-md-12 col-lg-4">
+                <span class="input-group-text textwrapper text-center p-2 m-auto" id="inputGroup-sizing-default">
                     Arquivos no MySGS:
                 </span>
                 <div class="textwrapper">
                     <textarea rows="15" cols="50" name="textDoc" style="width:100%"><?php echo $sessionDoc; ?></textarea>
                 </div>
             </div>
-            <div class="col-sm-12 col-md-4">
-                <span class="input-group-text textwrapper" id="inputGroup-sizing-default">
+            <div class="col-md-12 col-lg-4">
+                <span class="input-group-text textwrapper text-center p-2 m-auto" id="inputGroup-sizing-default">
                     Arquivos da pasta finais:
                 </span>
                 <div class="textwrapper">
                     <textarea rows="15" cols="50" name="textArte" style="width:100%"><?php echo $sessionArte; ?></textarea>
                 </div>
             </div>
-            <div class="col-sm-12 col-md-4">
-                <span class="input-group-text textwrapper" id="inputGroup-sizing-default">
+            <div class="col-md-12 col-lg-4">
+                <span class="input-group-text textwrapper text-center p-2 m-auto" id="inputGroup-sizing-default">
                     Arquivos de REFERÊNCIA:
                 </span>
                 <div class="textwrapper">
@@ -80,7 +83,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             </div>
         </div>
         <div class="row p-3">
-                    <input type="submit" value="Comparar" class="btn btn-success" />
+                    <input type="submit" value="Comparar" class="btn btn-success p-4" />
         </div>
 
         <?php

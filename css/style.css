@@ -10312,9 +10312,7 @@ textarea.form-control-lg {
   font-size: small;
   background-color: antiquewhite;
   padding: 5px;
-  display: block;
   z-index: 0;
-  background-color: antiquewhite;
   background-image: url("../images/20190706_092927.jpg");
   background-repeat: no-repeat;
   background-size: cover;
@@ -10352,9 +10350,8 @@ textarea.form-control-lg {
 .foto-autor-redondo {
   margin: auto;
   border-radius: 50%;
-  padding: 20px;
-  width: 350px;
-  height: 350px;
+  padding: 5px;
+  width: 50%;
 }
 
 .identificacao-do-autor {
