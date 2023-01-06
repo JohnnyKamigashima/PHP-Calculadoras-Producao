@@ -13,11 +13,15 @@ function debug($array)
 
         foreach ($array as $index => $arr) {
             echo "$index -> ";
-            if (gettype($arr) == 'array') foreach ($arr as $x) echo preg_replace('/</', '&lt;', $x) . ' ';
-            else echo $arr . ' ';
+            if (gettype($arr) == 'array')
+                foreach ($arr as $x)
+                    echo preg_replace('/</', '&lt;', $x) . ' ';
+            else
+                echo $arr . ' ';
             echo '<br>';
         }
-    } else var_dump(preg_replace('/</', '&lt;', $array));
+    } else
+        var_dump(preg_replace('/</', '&lt;', $array));
 }
 
 function count_valid($array)
@@ -26,11 +30,13 @@ function count_valid($array)
     $array = array_filter($array);
     foreach ($array as $ind => $arr) {
         if (gettype($arr) == 'array') {
-            foreach ($arr as $x) if ($x != "") {
-                $conta++;
-                break;
-            }
-        } else if ($arr != "") $conta++;
+            foreach ($arr as $x)
+                if ($x != "") {
+                    $conta++;
+                    break;
+                }
+        } else if ($arr != "")
+            $conta++;
     }
     return $conta;
 }
@@ -43,15 +49,18 @@ function comparaArrays($arr1, $arr2, $case)
         $resTemp = $uniq1;
         foreach ($arr2 as $ind2 => $uniq2) {
             $doIt = false;
-            if ($case && mb_strtoupper($uniq1, ENCODING) == mb_strtoupper($uniq2, ENCODING)) $doIt = true;
-            else if (!$case && $uniq1 == $uniq2) $doIt = true;
+            if ($case && mb_strtoupper($uniq1, ENCODING) == mb_strtoupper($uniq2, ENCODING))
+                $doIt = true;
+            else if (!$case && $uniq1 == $uniq2)
+                $doIt = true;
             if ($doIt) {
                 unset($arr2[$ind2]);
                 $resTemp = '';
                 break;
             }
         }
-        if ($resTemp != '') array_push($result, $resTemp);
+        if ($resTemp != '')
+            array_push($result, $resTemp);
     }
     return $result;
 }
@@ -62,11 +71,14 @@ function descomparaArrays($arr1, $arr2, $case)
     foreach ($arr1 as $ind1 => $uniq1) {
         foreach ($arr2 as $ind2 => $uniq2) {
             $doIt = false;
-            if ($case && mb_strtoupper($uniq1, ENCODING) == mb_strtoupper($uniq2, ENCODING)) $doIt = true;
-            else if (!$case && $uniq1 == $uniq2) $doIt = true;
+            if ($case && mb_strtoupper($uniq1, ENCODING) == mb_strtoupper($uniq2, ENCODING))
+                $doIt = true;
+            else if (!$case && $uniq1 == $uniq2)
+                $doIt = true;
             if ($doIt) {
                 unset($arr2[$ind2]);
-                if ($uniq1 != '') array_push($result, $uniq1);
+                if ($uniq1 != '')
+                    array_push($result, $uniq1);
                 break;
             }
         }
@@ -87,6 +99,7 @@ function frasesDiff($master, $copy, $caixa, $corDif, $corAtencao)
 }
 
 function hilight($frase1, $frase2, $case, $corDif, $corAtencao) //verifica duas arrays de pelavras e marca as diferencas
+
 {
     $result = array();
     $caracteres = '/(\.|\,|\)|\(|\;|\:|\?|\!|\#|\$|\@|\&|\+|\-| )/';
@@ -102,20 +115,26 @@ function hilight($frase1, $frase2, $case, $corDif, $corAtencao) //verifica duas 
                     $palavra1Comp = ($palavra1[$index]);
                     $palavra2Comp = ($palavra2[$index]);
                 }
-                if (preg_replace($caracteres, '', $palavra1Comp) == preg_replace($caracteres, '', $palavra2Comp) && $index == 1) $match = $match + 10; //10 is most important word match
-                elseif (preg_replace($caracteres, '', $palavra1Comp) == preg_replace($caracteres, '', $palavra2Comp)) $match++; //10-11 is partial match / 12 is perfect match
+                if (preg_replace($caracteres, '', $palavra1Comp) == preg_replace($caracteres, '', $palavra2Comp) && $index == 1)
+                    $match = $match + 10; //10 is most important word match
+                elseif (preg_replace($caracteres, '', $palavra1Comp) == preg_replace($caracteres, '', $palavra2Comp))
+                    $match++; //10-11 is partial match / 12 is perfect match
             }
             array_push($indMatch, [$match, $indice]);
         }
         rsort($indMatch);
-        if ($indMatch[0][0] == 12) array_push($result, "$palavra1[1]");
-        elseif ($indMatch[0][0] >= 10) array_push($result, "<text style='color:#$corAtencao'>$palavra1[1]</text>");
-        else array_push($result, "<text style='color:#$corDif'>$palavra1[1]</text>");
+        if ($indMatch[0][0] == 12)
+            array_push($result, "$palavra1[1]");
+        elseif ($indMatch[0][0] >= 10)
+            array_push($result, "<text style='color:#$corAtencao'>$palavra1[1]</text>");
+        else
+            array_push($result, "<text style='color:#$corDif'>$palavra1[1]</text>");
     }
     return $result;
 }
 
 function diffuse($wordArray) //converte uma array de palavras para uma array de 3 elementos com [antes, palavra, depois]
+
 {
     $wArea = array();
 
@@ -123,12 +142,17 @@ function diffuse($wordArray) //converte uma array de palavras para uma array de 
         if (count($wordArray) == 1) {
             array_push($wArea, ['', $wPal, '']);
         } elseif (count($wordArray) == 2) {
-            if ($wIndex == 0) array_push($wArea, ['', $wPal, $wordArray[$wIndex + 1]]);
-            else array_push($wArea, [$wordArray[$wIndex - 1], $wPal, '']);
+            if ($wIndex == 0)
+                array_push($wArea, ['', $wPal, $wordArray[$wIndex + 1]]);
+            else
+                array_push($wArea, [$wordArray[$wIndex - 1], $wPal, '']);
         } elseif (count($wordArray) > 2) {
-            if ($wIndex == 0) array_push($wArea, ['', $wPal, $wordArray[$wIndex + 1]]);
-            elseif ($wIndex < count($wordArray) - 1) array_push($wArea, [$wordArray[$wIndex - 1], $wPal, $wordArray[$wIndex + 1]]);
-            else array_push($wArea, [$wordArray[$wIndex - 1], $wPal, '']);
+            if ($wIndex == 0)
+                array_push($wArea, ['', $wPal, $wordArray[$wIndex + 1]]);
+            elseif ($wIndex < count($wordArray) - 1)
+                array_push($wArea, [$wordArray[$wIndex - 1], $wPal, $wordArray[$wIndex + 1]]);
+            else
+                array_push($wArea, [$wordArray[$wIndex - 1], $wPal, '']);
         }
     }
     return $wArea;
@@ -136,7 +160,8 @@ function diffuse($wordArray) //converte uma array de palavras para uma array de 
 
 function removeTags($str)
 {
-    if (($str === null) || ($str === ''))  return false;
+    if (($str === null) || ($str === ''))
+        return false;
 
     $cleantext = preg_replace("/(<td.*>(\s+)?<p>|<\/p>(\s+)?<\/td>|\h|\xc2\xa0)/iU", ' ', $str); // converte colunas td para espaço
     $cleantext = preg_replace("/[ \x{A0}\x{1680}\x{180e}\x{2000}\x{200a}\x{202f}\x{205f}\x{3000}]+/iuU", ' ', $cleantext); // remove unicode espaco em branco
@@ -150,14 +175,15 @@ function removeTags($str)
 function isNotTagged($start, $end, $tag, $string)
 {
     $result = array();
-    $string =  html_entity_decode($string);
+    $string = html_entity_decode($string);
 
     // Limpa texto entre tag
     $semTag = preg_replace("/(<$tag.*>(.*|.*\n.*)<\/$tag>)/imU", '', $string, PREG_SET_ORDER);
 
     // Adiciona resultados na array
     preg_match("/($start.*?$end)/imU", $semTag, $result);
-    if ($result != NULL) return $result[1];
+    if ($result != NULL)
+        return $result[1];
 }
 
 function isCaixa($start, $end, $string)
@@ -176,9 +202,9 @@ function removeBold($str)
 {
     return preg_replace("/(?:<(?:\/?(?:strong).*?)>)/i", "", $str);
 }
-function removeSinais($str)
+function limpaSimbolos($str)
 {
-    return preg_replace("/(\(|\)|\"|\'|\;|\,|\?|\*|\&|\%|\#|\+|\.)/", "", $str);
+    return preg_replace("/(\"|\'|\;|\,|\?|\*|\&|\%|\#|\+|\.|\©|\®|\™|\\\|\/|\:|\-)/", " ", $str);
 }
 function removeItalico($str)
 {
@@ -246,11 +272,12 @@ function frasesMaisSemelhantes($arr1, $arr2, $intHit)
         foreach ($a1 as $pal1) {
             foreach ($arr2 as $ind2 => $a2) {
                 foreach ($a2 as $indpal2 => $pal2) {
-                    if (removeBold(removeItalico(removeSinais($pal1))) == removeBold(removeItalico(removeSinais($pal2))) && $pal1 != '' && $pal2 != '') {
+                    if (removeBold(removeItalico(limpaSimbolos($pal1))) == removeBold(removeItalico(limpaSimbolos($pal2))) && $pal1 != '' && $pal2 != '') {
                         $hits++;
                         $indHit = $ind2;
                         $frasetmp = '';
-                        foreach ($a2 as $pal) $frasetmp = $frasetmp . ' ' . $pal; //constroi frase com array de palavras
+                        foreach ($a2 as $pal)
+                            $frasetmp = $frasetmp . ' ' . $pal; //constroi frase com array de palavras
                         break;
                     }
                 }
@@ -259,18 +286,23 @@ function frasesMaisSemelhantes($arr1, $arr2, $intHit)
         }
         rsort($ftemp);
         $frasetmp = '';
-        if ($ftemp[0][0] > 0) unset($arr2[$ftemp[0][1]]);
-        foreach ($arr1[$ind1] as $frase) $frasetmp = $frasetmp . ' ' . $frase;
-        if ($ftemp[0][0] == $intHit && $intHit > 0) array_push($result, [$frasetmp, $ftemp[0][2]]);
-        elseif ($ftemp[0][0] == 0 && $intHit == 0)  array_push($result, [$frasetmp, '']); // adiciona resultados do aray 1 que não tiveram hits
+        if ($ftemp[0][0] > 0)
+            unset($arr2[$ftemp[0][1]]); foreach ($arr1[$ind1] as $frase)
+            $frasetmp = $frasetmp . ' ' . $frase;
+        if ($ftemp[0][0] == $intHit && $intHit > 0)
+            array_push($result, [$frasetmp, $ftemp[0][2]]);
+        elseif ($ftemp[0][0] == 0 && $intHit == 0)
+            array_push($result, [$frasetmp, '']); // adiciona resultados do aray 1 que não tiveram hits
     }
     if ($intHit == 0) // adiciona sobras do array 2
     {
         foreach ($arr2 as $sobra) {
             $frasetmp = '';
-            foreach ($sobra as $frase) $frasetmp = $frasetmp . ' ' . $frase;
+            foreach ($sobra as $frase)
+                $frasetmp = $frasetmp . ' ' . $frase;
             array_push($result, ['', $frasetmp]);
         }
     }
     return $result;
-};
+}
+;

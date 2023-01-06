@@ -13,6 +13,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $sessionECaixa =  (isset($_POST['caixaAlta'])) ? 'checked' : '';
     $sessionEbold =  (isset($_POST['bold'])) ? 'checked' : '';
     $sessionEponto =  (isset($_POST['pontofinal'])) ? 'checked' : '';
+    $sessionESimbolos =  (isset($_POST['simbolos'])) ? 'checked' : '';
     $sessionDebug =  (isset($_POST['debug'])) ? 'checked' : '';
     $sessionEitalico =  (isset($_POST['italico'])) ? 'checked' : '';
     $sessionDoc = (isset($_POST['textDoc'])) ? $_POST['textDoc'] : '';
@@ -20,7 +21,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $sessionRascunho = (isset($_POST['rascunho'])) ? $_POST['rascunho'] : '';
 } else {
     $sessionDoc = $sessionArte = $sessionDebug = $sessionRascunho = $sessionEbold = $sessionEitalico = '';
-    $sessionEDuplo = $sessionECaixa = $sessionEponto =  'checked';
+    $sessionEDuplo = $sessionECaixa = $sessionEponto = $sessionESimbolos= 'checked';
 }
 ?>
 
@@ -31,8 +32,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     <meta name="viewport" content="width=device-width, initial-scale=1.0" charset="utf-8">
     <link rel="icon" type="image/png" href="./images/favicon.svg" />
     <!-- Latest compiled and minified CSS -->
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
-    <script src="https://cdn.tiny.cloud/1/1hwzefvhux0zaed3wgjhtj8xrid32be83jl71noha1gb803t/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous">
+    </script>
+    <script src="https://cdn.tiny.cloud/1/1hwzefvhux0zaed3wgjhtj8xrid32be83jl71noha1gb803t/tinymce/6/tinymce.min.js" referrerpolicy="origin"></script>
     <script type='text/javascript' src='partials/functions.js'></script>
     <link rel="stylesheet" href="css/style.css">
     <title>QC Text Compare</title>
@@ -56,7 +59,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                             Textos do Documento:
                         </span>
                         <div class="textwrapper">
-                            <textarea id='textDoc' name='textDoc' style="width:100%"><?php echo $sessionDoc; ?></textarea>
+                            <textarea id='textDoc' name='textDoc'
+                                style="width:100%"><?php echo $sessionDoc; ?></textarea>
                         </div>
                     </div>
                     <div class="col-md-6">
@@ -64,44 +68,58 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                             Textos da Arte:
                         </span>
                         <div class="textwrapper">
-                            <textarea id="textArte" name='textArte' style="width:100%"><?php echo $sessionArte; ?></textarea>
+                            <textarea id="textArte" name='textArte'
+                                style="width:100%"><?php echo $sessionArte; ?></textarea>
                         </div>
                     </div>
                 </div>
                 <div class="row p-2">
                     <div class="col-2">
                         <div class="form-check">
-                            <input class="form-check-input" type="checkbox" id="espacoDuplo" name="espacoDuplo" value="<?php echo $sessionEDuplo; ?>" <?php echo $sessionEDuplo; ?>>
+                            <input class="form-check-input" type="checkbox" id="espacoDuplo" name="espacoDuplo"
+                                value="<?php echo $sessionEDuplo; ?>" <?php echo $sessionEDuplo; ?>>
                             <label class="form-check-label" for="espacoDuplo">Ignorar espaços duplos</label>
                         </div>
                     </div>
                     <div class="col-2">
                         <div class="form-check">
-                            <input class="form-check-input" type="checkbox" id="caixaAlta" name="caixaAlta" value="<?php echo $sessionECaixa; ?>" <?php echo $sessionECaixa; ?>>
+                            <input class="form-check-input" type="checkbox" id="caixaAlta" name="caixaAlta"
+                                value="<?php echo $sessionECaixa; ?>" <?php echo $sessionECaixa; ?>>
                             <label class="form-check-label" for="caixaAlta">Ignorar Maiúsculas</label>
                         </div>
                     </div>
                     <div class="col-2">
                         <div class="form-check">
-                            <input class="form-check-input" type="checkbox" id="bold" name="bold" value="<?php echo $sessionEbold; ?>" <?php echo $sessionEbold; ?>>
+                            <input class="form-check-input" type="checkbox" id="bold" name="bold"
+                                value="<?php echo $sessionEbold; ?>" <?php echo $sessionEbold; ?>>
                             <label class="form-check-label" for="bold">Ignorar Bold</label>
                         </div>
                     </div>
                     <div class="col-2">
                         <div class="form-check">
-                            <input class="form-check-input" type="checkbox" id="italico" name="italico" value="<?php echo $sessionEitalico; ?>" <?php echo $sessionEitalico; ?>>
+                            <input class="form-check-input" type="checkbox" id="italico" name="italico"
+                                value="<?php echo $sessionEitalico; ?>" <?php echo $sessionEitalico; ?>>
                             <label class="form-check-label" for="italico">Ignorar Itálico</label>
                         </div>
                     </div>
                     <div class="col-2">
                         <div class="form-check">
-                            <input class="form-check-input" type="checkbox" id="pontofinal" name="pontofinal" value="<?php echo $sessionEponto; ?>" <?php echo $sessionEponto; ?>>
+                            <input class="form-check-input" type="checkbox" id="pontofinal" name="pontofinal"
+                                value="<?php echo $sessionEponto; ?>" <?php echo $sessionEponto; ?>>
                             <label class="form-check-label" for="pontofinal">Ignorar Pontos Finais</label>
                         </div>
                     </div>
                     <div class="col-2">
                         <div class="form-check">
-                            <input class="form-check-input" type="checkbox" id="debug" name="debug" value="<?php echo $sessionDebug; ?>" <?php echo $sessionDebug; ?>>
+                            <input class="form-check-input" type="checkbox" id="simbolos" name="simbolos"
+                                value="<?php echo $sessionESimbolos; ?>" <?php echo $sessionESimbolos; ?>>
+                            <label class="form-check-label" for="simbolos">Ignorar Símbolos</label>
+                        </div>
+                    </div>
+                    <div class="col-2">
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="debug" name="debug"
+                                value="<?php echo $sessionDebug; ?>" <?php echo $sessionDebug; ?>>
                             <label class="form-check-label" for="debug">Modo debug (dev)</label>
                         </div>
                     </div>
@@ -112,51 +130,56 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             </form>
 
             <script>
-                // Roda a comparação com Ctrl-Enter ou F5
-                document.addEventListener("keydown", comparar => {
-                    if ((comparar.key.toLowerCase() === "enter" && comparar.ctrlKey) || comparar.key.toLowerCase() === "f5") {
-                        document.getElementById("comparar").click();
-                    }
-                })
+            // Roda a comparação com Ctrl-Enter ou F5
+            document.addEventListener("keydown", comparar => {
+                if ((comparar.key.toLowerCase() === "enter" && comparar.ctrlKey) || comparar.key
+                    .toLowerCase() === "f5") {
+                    document.getElementById("comparar").click();
+                }
+            })
 
-                // inicia o pkugin TinyMCE Documento
-                tinymce.init({
-                    selector: 'textarea#textDoc',
-                    plugins: 'searchreplace fullscreen wordcount visualchars autosave paste save table textpattern visualblocks',
-                    menubar: false,
-                    toolbar: 'bold italic fontsizeselect  paste pastetext searchreplace visualchars visualblocks spellchecker fullscreen table tabledelete | tableprops tablerowprops tablecellprops | tableinsertrowbefore tableinsertrowafter tabledeleterow | tableinsertcolbefore tableinsertcolafter tabledeletecol',
-                    toolbar_mode: 'floating',
-                    tinycomments_mode: 'embedded',
-                    tinycomments_author: 'Author name',
-                    height: 300,
-                    init_instance_callback: function(editor) {}
-                });
-                // Inicia o plugin TinyMCE da Arte
-                tinymce.init({
-                    selector: 'textarea#textArte',
-                    plugins: 'searchreplace fullscreen wordcount visualchars autosave paste save table textpattern visualblocks',
-                    menubar: false,
-                    toolbar: 'bold italic fontsizeselect  paste pastetext searchreplace visualchars visualblocks spellchecker fullscreen table tabledelete | tableprops tablerowprops tablecellprops | tableinsertrowbefore tableinsertrowafter tabledeleterow | tableinsertcolbefore tableinsertcolafter tabledeletecol',
-                    toolbar_mode: 'floating',
-                    tinycomments_mode: 'embedded',
-                    tinycomments_author: 'Author name',
-                    height: 300,
-                    init_instance_callback: function(editor) {}
-                });
+            // inicia o pkugin TinyMCE Documento
+            tinymce.init({
+                selector: 'textarea#textDoc',
+                plugins: 'searchreplace fullscreen wordcount visualchars autosave paste save table textpattern visualblocks',
+                menubar: false,
+                toolbar: 'bold italic fontsizeselect  paste pastetext searchreplace visualchars visualblocks spellchecker fullscreen table tabledelete | tableprops tablerowprops tablecellprops | tableinsertrowbefore tableinsertrowafter tabledeleterow | tableinsertcolbefore tableinsertcolafter tabledeletecol',
+                toolbar_mode: 'floating',
+                tinycomments_mode: 'embedded',
+                tinycomments_author: 'Author name',
+                height: 300,
+                init_instance_callback: function(editor) {}
+            });
+            // Inicia o plugin TinyMCE da Arte
+            tinymce.init({
+                selector: 'textarea#textArte',
+                plugins: 'searchreplace fullscreen wordcount visualchars autosave paste save table textpattern visualblocks',
+                menubar: false,
+                toolbar: 'bold italic fontsizeselect  paste pastetext searchreplace visualchars visualblocks spellchecker fullscreen table tabledelete | tableprops tablerowprops tablecellprops | tableinsertrowbefore tableinsertrowafter tabledeleterow | tableinsertcolbefore tableinsertcolafter tabledeletecol',
+                toolbar_mode: 'floating',
+                tinycomments_mode: 'embedded',
+                tinycomments_author: 'Author name',
+                height: 300,
+                init_instance_callback: function(editor) {}
+            });
 
-                // function updateValues() {
-                //     <?php
-                        //     $sessionDoc = "<script>master.html.get()</script>";
-                        //     $sessionArte = "<script>copy.html.get()</script>";
-                        //     
-                        ?>
-                // }
+            function updateValues() {
+                <?php
+                $sessionDoc = "<script>master.html.get()            
+            </script>";
+            $sessionArte = "<script>
+            copy.html.get()
+            </script>";
+            ?>
+            }
             </script>
 
             <?php
 
             if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 require('partials/functions.php');
+                
+                
 
                 //Variables
                 // var_dump($_POST['textDoc']);
@@ -190,6 +213,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 else $italico = false;
                 if (isset($sessionEponto)) $pontoFinal = ($sessionEponto == 'checked') ? true : false;
                 else $pontoFinal = false;
+                if (isset($sessionESimbolos)) $simbolos = ($sessionESimbolos == 'checked') ? true : false;
+                else $simbolos = false;
                 if (isset($sessionDebug)) $debugMode = ($sessionDebug == 'checked') ? true : false;
                 else $debugMode = false;
 
@@ -198,9 +223,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 $textArte = limpaHtmlSpaceBreak($textArte);
 
                 //converte para Decodifica HTML
+                require_once('partials/Encoding.php');
+            
                 $textDoc = html_entity_decode($textDoc);
                 $textArte = html_entity_decode($textArte);
-
+ 
                 //Verifica textos obrigatorios BOLD/Italic/Caixa alta
                 if (!$bold) array_push($faltaBOLD, isNotTagged('fabricado', 'ltda', 'strong', $textArte));
                 if (!$bold) array_push($faltaBOLD, isNotTagged('fabricado', 's.a.', 'strong', $textArte));
@@ -215,6 +242,19 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 $faltaItalic = array_filter($faltaItalic);
                 $faltaCAIXA = array_filter($faltaCAIXA);
 
+                
+                // Limpa sobras de formatação Html
+                $textDoc = limpaSujeiraHtml($textDoc);
+                $textArte = limpaSujeiraHtml($textArte);
+                
+                //ignora pontos finais
+                $textDoc = ($pontoFinal) ? limpaPontofinal($textDoc) : $textDoc;
+                $textArte = ($pontoFinal) ? limpaPontofinal($textArte) : $textArte;
+                
+                //ignora simbolos
+                $textDoc = ($simbolos) ? limpaSimbolos($textDoc) : $textDoc;
+                $textArte= ($simbolos) ? limpaSimbolos($textArte):$textArte;
+                
                 // Remove Bolds antes de checar
                 $textDoc = ($bold) ? removeBold($textDoc) : $textDoc;
                 $textArte = ($bold) ? removebold($textArte) : $textArte;
@@ -227,13 +267,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 $textDoc = ($espacoDuplo) ? removeEspacoduplo($textDoc) : $textDoc;
                 $textArte = ($espacoDuplo) ? removeEspacoduplo($textArte) : $textArte;
 
-                // Limpa sobras de formatação Html
-                $textDoc = limpaSujeiraHtml($textDoc);
-                $textArte = limpaSujeiraHtml($textArte);
+                $textDoc = \ForceUTF8\Encoding::fixUTF8($textDoc);
+                $textArte = \ForceUTF8\Encoding::fixUTF8($textArte);
 
-                //ignora pontos finais
-                $textDoc = ($pontoFinal) ? limpaPontofinal($textDoc) : $textDoc;
-                $textArte = ($pontoFinal) ? limpaPontofinal($textArte) : $textArte;
 
                 // converte texto para array dividido por linhas
                 $textDocLinhas = explode('|', $textDoc);
@@ -257,9 +293,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
                 // Mostra no Console os textos para encontrar falhas na conversao
                 if ($debugMode) {
-                    echo 'Texto documento:\n';
+                    echo 'Texto documento:<br>';
                     debug($textDoc);
-                    echo '\nTexto arte:\n';
+                    echo '<br><br>Texto arte:<br>';
                     debug($textArte);
                 }
 

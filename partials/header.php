@@ -21,6 +21,9 @@
         <li class="nav-item">
           <a class="nav-link" href="text_compare.php">Compara texto</a>
         </li>
+        <li class="nav-item">
+          <a class="nav-link" href="about.php">Sobre o Autor</a>
+        </li>
       </ul>
     </div>
   </div>
