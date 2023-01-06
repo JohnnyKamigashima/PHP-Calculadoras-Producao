@@ -204,7 +204,7 @@ function removeBold($str)
 }
 function limpaSimbolos($str)
 {
-    return preg_replace("/(\"|\'|\;|\,|\?|\*|\&|\%|\#|\+|\.|\©|\®|\™|\\\|\/|\:|\-)/", " ", $str);
+    return preg_replace("/(\"|\'|\*|\;|\,|\?|\!|\&|\%|\#|\+|\.|\©|\®|\™|\\\|([[:alnum:]]| +)\/|\:|\-)/", " ", $str);
 }
 function removeItalico($str)
 {

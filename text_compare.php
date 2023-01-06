@@ -20,8 +20,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $sessionArte = (isset($_POST['textArte'])) ? $_POST['textArte'] : '';
     $sessionRascunho = (isset($_POST['rascunho'])) ? $_POST['rascunho'] : '';
 } else {
-    $sessionDoc = $sessionArte = $sessionDebug = $sessionRascunho = $sessionEbold = $sessionEitalico = '';
-    $sessionEDuplo = $sessionECaixa = $sessionEponto = $sessionESimbolos= 'checked';
+    $sessionDoc = $sessionArte = $sessionDebug = $sessionESimbolos = $sessionRascunho = $sessionEbold = $sessionEitalico = '';
+    $sessionEDuplo = $sessionECaixa = $sessionEponto = 'checked';
 }
 ?>
 
