@@ -40,8 +40,8 @@
         clip_pt_mm = new Clipboard
         calc_pt_mm = new Convert_mm
         $(document).ready(() => {
-            $('#pt').keyup(() => $("#resultmm").val(calc_pt_mm.pt2mm($("#pt").val())))
-            $('#resultmm').keyup(() => $("#pt").val(calc_pt_mm.mm2pt($("#resultmm").val())))
+            $('#pt').keyup(() => $("#resultmm").val(calc_pt_mm.pt2mm($("#pt").val().replace(',','.'))))
+            $('#resultmm').keyup(() => $("#pt").val(calc_pt_mm.mm2pt($("#resultmm").val().replace(',','.'))))
         })
     </script>
 </div>

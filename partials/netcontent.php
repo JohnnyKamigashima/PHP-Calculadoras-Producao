@@ -70,22 +70,22 @@
          $(document).ready(() => {
              $('#largFOP3').keyup(() => {
                  $("#peso").val("");
-                 $("#largFOP").val($("#largFOP3").val());
-                 $("#largFOP1").val($("#largFOP3").val());
-                 $("#largFOP2").val($("#largFOP3").val());
+                 $("#largFOP").val($("#largFOP3").val().replace(',','.'));
+                 $("#largFOP1").val($("#largFOP3").val().replace(',','.'));
+                 $("#largFOP2").val($("#largFOP3").val().replace(',','.'));
                  resultado_mm();
              })
              $('#altFOP3').keyup(() => {
                  $("#peso").val("");
-                 $("#altFOP").val($("#altFOP3").val());
-                 $("#altFOP1").val($("#altFOP3").val());
-                 $("#altFOP2").val($("#altFOP3").val());
+                 $("#altFOP").val($("#altFOP3").val()).replace(',','.');
+                 $("#altFOP1").val($("#altFOP3").val().replace(',','.'));
+                 $("#altFOP2").val($("#altFOP3").val()).replace(',','.');
                  resultado_mm();
              })
              $('#pais').change(() => resultado_mm())
              $("#peso").keyup(() => {
-                 $("#altFOP3").val("");
-                 $("#largFOP3").val("");
+                 $("#altFOP3").val("").replace(',','.');
+                 $("#largFOP3").val("").replace(',','.');
                  resultado_mm();
              })
          })
@@ -93,9 +93,9 @@
          function resultado_mm() {
              calc_peso = new Peso
              $("#resultmm1").val(
-                 calc_peso.pesoNeto($("#altFOP3").val(),
-                     $("#largFOP3").val(),
-                     $("#peso").val(),
+                 calc_peso.pesoNeto($("#altFOP3").val().replace(',','.'),
+                     $("#largFOP3").val().replace(',','.'),
+                     $("#peso").val().replace(',','.'),
                      $("#pais").val(),
                      "descricao")
              );

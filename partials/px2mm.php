@@ -47,7 +47,7 @@
         calc = new Convert_mm
         clip_pixel = new Clipboard
         $(document).ready(() => {
-            $('#mm').keyup(() => $("#pixel").val(calc.mm2px($("#resolucao").val(), $("#mm").val())))
+            $('#mm').keyup(() => $("#pixel").val(calc.mm2px($("#resolucao").val(), $("#mm").val().replace(',','.'))))
             $('#pixel').keyup(() => $("#mm").val(calc.px2mm($("#resolucao").val(), $("#pixel").val())))
         })
     </script>

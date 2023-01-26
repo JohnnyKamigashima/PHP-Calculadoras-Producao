@@ -68,7 +68,7 @@
               $("#distorc").val(calc_atualiza.distorC(
                   $("#arteA").val(),
                   $("#cilindro").val(),
-                  $("input[type='radio'][name='repetition']:checked").val()
+                  $("input[type='radio'][name='repetition']:checked").val().replace(',','.')
               ));
           }
 
@@ -76,8 +76,8 @@
               calc_handle = new Distorcao
               $("#distorc").val(
                   calc_handle.distorC(
-                      $("#arteA").val(),
-                      $("#cilindro").val(),
+                      $("#arteA").val().replace(',','.'),
+                      $("#cilindro").val().replace(',','.'),
                       $("input[type='radio'][name='repetition']:checked").val()
                   ));
           }

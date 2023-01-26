@@ -39,7 +39,7 @@
         function calcula_escala() {
             calc_escala = new Escala_plano
             $("#escalaC").val(
-                calc_escala.escalaPlano($("#medA").val(), $("#medR").val()));
+                calc_escala.escalaPlano($("#medA").val().replace(',','.'), $("#medR").val().replace(',','.')));
         }
     </script>
 </div>

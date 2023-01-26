@@ -305,4 +305,149 @@ function frasesMaisSemelhantes($arr1, $arr2, $intHit)
     }
     return $result;
 }
+
+function uploadFile($targetDir, $fileType, $tamanhoMaximo)
+{
+    $resposta = '';
+    $target_file = $targetDir . basename($_FILES["fileToUpload"]["name"]);
+    $uploadOk = 1;
+    $uploadFileType = strtolower(pathinfo($target_file, PATHINFO_EXTENSION));
+
+    // Check if image file is a actual XML or fake image
+    if (isset($_POST["submit"])) {
+
+        // Check if file already exists
+        //if (file_exists($target_file)) {
+        //   echo "Sorry, file already exists.";
+        //    $uploadOk = 0;
+        // }
+
+        // Check file size
+
+        if ($_FILES["fileToUpload"]["size"] > $tamanhoMaximo) {
+            $resposta = "Desculpe-me mas o arquivo ultrapassa $tamanhoMaximo.";
+            $uploadOk = 0;
+        }
+
+        // Allow certain file formats
+        if (
+            $uploadFileType != $fileType
+        ) {
+            $resposta = "Desculpe-me mas somente aceito arquivos " . $fileType;
+            $uploadOk = 0;
+        }
+
+        // Check if $uploadOk is set to 0 by an error
+        if ($uploadOk == 0) {
+            $resposta = "Desculpe-me mas seu arquivo não foi subido.";
+            // if everything is ok, try to upload file
+        } else {
+            if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file)) {
+                $resposta = "O arquivo " . htmlspecialchars(basename($_FILES["fileToUpload"]["name"])) . " subiu corretamente.";
+
+            } else {
+                $resposta = "Desculpe-me mas houve algum erro ao subir o arquivo.";
+            }
+        }
+    }
+    return [$resposta, $target_file];
+}
+
+function readAndCleanupReportFile($target_file)
+{
+    $texto = file_get_contents($target_file);
+    if ($texto != '') {
+        $texto = preg_replace("/(<ul id=\"tree\">)\n?.*\n?(Process finished with exit code)/iU", '$1<br>$2', $texto);
+        file_put_contents($target_file, $texto);
+        $resposta = '<br><a href="' . $target_file . '" target="_blank">Veja o arquivo em uma nova aba</a>';
+    }
+    return $resposta;
+}
+
+ function limpaXFDFTexto($texto) {
+     $texto = htmlDecode($texto);
+     $texto = preg_replace('/(\n>|\n\/>)/Umi','>',$texto);
+     //$texto = preg_replace('/\n/','<br>',$texto);
+     $texto = preg_replace('/(<\/span.*>)/Umi', '$1
+     ', $texto);
+     $texto = preg_replace('/(<(span.*font-weight:bold.*|strong)>)(.*)(<\/(span|strong).*>)/Umi', '[strong]$3[/strong]', $texto);
+     
+     $texto = preg_replace('/(<(span.*font-weight:italic.*|em)>)(.*)(<\/(span|em).*>)/Umi', '[em]$3[/em]',$texto);
+        $texto = preg_replace('/(<.*>|&#xD;)/Um', ' ',$texto);
+        $texto = preg_replace('/\[(\/)?(strong|em)\]/Um', '<$1$2>',$texto);
+        $texto = preg_replace('/(<br>|\n+)+/Ui', '<br>',$texto);
+
+        return $texto;
+    };
+
+   function  htmlDecode($entrada) {
+        $caracteres = [
+            ["À", "&Agrave;"],
+            ["Á", "&Aacute;"],
+            ["Â", "&Acirc;"],
+            ["Ã", "&Atilde;"],
+            ["Ä", "&Auml;"],
+            ["Å", "&Aring;"],
+            ["Æ", "&AElig;"],
+            ["Ç", "&Ccedil;"],
+            ["È", "&Egrave;"],
+            ["É", "&Eacute;"],
+            ["Ê", "&Ecirc;"],
+            ["Ë", "&Euml;"],
+            ["Ì", "&Igrave;"],
+            ["Í", "&Iacute;"],
+            ["Î", "&Icirc;"],
+            ["Ï", "&Iuml;"],
+            ["Ñ", "&Ntilde;"],
+            ["Ò", "&Ograve;"],
+            ["Ó", "&Oacute;"],
+            ["Ô", "&Ocirc;"],
+            ["Õ", "&Otilde;"],
+            ["Ö", "&Ouml;"],
+            ["Ø", "&Oslash;"],
+            ["Ù", "&Ugrave;"],
+            ["Ú", "&Uacute;"],
+            ["Û", "&Ucirc;"],
+            ["Ü", "&Uuml;"],
+            ["Ý", "&Yacute;"],
+            ["ß", "&szlig;"],
+            ["à", "&agrave;"],
+            ["á", "&aacute;"],
+            ["â", "&acirc;"],
+            ["ã", "&atilde;"],
+            ["ä", "&auml;"],
+            ["å", "&aring;"],
+            ["æ", "&aelig;"],
+            ["ç", "&ccedil;"],
+            ["è", "&egrave;"],
+            ["é", "&eacute;"],
+            ["ê", "&ecirc;"],
+            ["ë", "&euml;"],
+            ["ì", "&igrave;"],
+            ["í", "&iacute;"],
+            ["î", "&icirc;"],
+            ["ï", "&iuml;"],
+            ["ð", "&eth;"],
+            ["ñ", "&ntilde;"],
+            ["ò", "&ograve;"],
+            ["ó", "&oacute;"],
+            ["ô", "&ocirc;"],
+            ["õ", "&otilde;"],
+            ["ö", "&ouml;"],
+            ["ù", "&ugrave;"],
+            ["ú", "&uacute;"],
+            ["û", "&ucirc;"],
+            ["ü", "&uuml;"],
+            ["ý", "&yacute;"],
+            ["ÿ", "&yuml;"],
+            [">", "&gt;"],
+            ["<", "&lt;"],
+            ["&", "&amp;"],
+            ["&ndash;", "-"]
+
+        ];
+        foreach($caracteres as $char)
+            $entrada = preg_replace('/(${element[1]})/im', $char[0], $entrada);
+        return $entrada;
+    };
 ;

@@ -19,7 +19,7 @@
             <div class="row">
 
                 <img class="foto-autor-redondo" src="images/1516932944701.jpeg"
-                alt="Fotografia de Johnny Kamigashima estilizado com boné">
+                    alt="Fotografia de Johnny Kamigashima estilizado com boné">
                 <div class="row">
                 </div>
                 <div class="m-auto w-auto text-center identificacao-do-autor">
@@ -30,15 +30,11 @@
             <div class="row flex-column">
                 <p class="mt-3  bio">
                     Programador de natureza mas não de profissão, fiz cursos livres de programação em Clipper e
-                    dBase na
-                    década de 90 antes de completar ao ensino médio e fiz colegial
-                    técnico de processamento de dados com programação Pascal, Delphi, banco de dados SQL e ODBC. Por
-                    falta de uma melhor estrutura Universitária do curso de Ciências da
-                    Computação em Blumenau/SC e, por estar trabalhando na área de Artes gráficas, optei pela
-                    Graduação
+                    dBase na década de 90 antes de completar ao ensino médio e fiz colegial técnico de processamento de
+                    dados com programação Pascal, Delphi, banco de dados SQL e ODBC.
+                    Por estar trabalhando na área de Artes gráficas, optei pela Graduação
                     em Comunicação Social com habilitação em Publicidade e Propaganda e atuei na área de qualidade
-                    de
-                    produtos gráficos por mais de 20 anos.
+                    de produtos gráficos por mais de 20 anos.
                 </p>
                 <p class="mt-3 bio">
                     Trabalhar com informática e programação foi sempre uma paixão e nunca me distanciei totalmente
@@ -52,6 +48,8 @@
                     Apesar de conhecer também Javascript, Cypress, Ruby e PHP, prefiro a eficiência do Robot+Browser
                     e
                     estou focando neste framework. E também por que é Python.
+                    Atualmente estou ingressado no grupo da turma 9 do PTQS - Júlio de Lima e a turma FTS137 da
+                    Iterasys
                 </p>
                 <p class="mt-3 bio">
                     Atualmente aplico conceitos de automação de processos no setor de produção de embalagens através
