@@ -21,17 +21,30 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $sessionArte = (isset($_POST['textArte'])) ? $_POST['textArte'] : '';
     $sessionRascunho = (isset($_POST['rascunho'])) ? $_POST['rascunho'] : '';
     $autoXFDFClean = false;
-    $uploadXFDF = uploadFile('uploads/', 'xfdf', 100000);
-    if (is_file($uploadXFDF[1])) {
-        $autoXFDFClean = true;
-        $arquivoLidoXFDF = file_get_contents($uploadXFDF[1]);
-        $sessionDocTmp = $sessionDoc . "<br>" . $arquivoLidoXFDF;
-        $sessionDocTmp = preg_replace('/\n/i', ' ', $sessionDocTmp);
-        $sessionDocTmp = preg_replace('/(&gt;|&lt;|\')/i', '', $sessionDocTmp);
-        $sessionDoc = limpaXFDFTexto($sessionDocTmp);
-    }
+    if (isset($_POST['xdf'])){
+        $fileToUpload = $_POST['xdf'];
+        $uploadXFDF = uploadFile('uploads/', 'xfdf', 100000, 'docFileToUpload');
 
-    // this path points to a file
+        if (is_file($uploadXFDF[1])) {
+            $autoXFDFClean = true;
+            $arquivoLidoXFDF = file_get_contents($uploadXFDF[1]);
+            
+            if ($fileToUpload == 'docFileToUpload') $sessionTmp = $sessionDoc; 
+            else $sessionTmp = $sessionArte; 
+            
+            $sessionTmp = $sessionTmp . "<br>" . $arquivoLidoXFDF;
+            $sessionTmp = preg_replace('/\n/i', ' ', $sessionTmp);
+            $sessionTmp = preg_replace('/(&gt;|&lt;|\')/i', '', $sessionTmp);
+            
+            if ($fileToUpload == 'docFileToUpload') {
+                $sessionDoc = limpaXFDFTexto($sessionTmp);
+            }
+            else {
+                $sessionArte = limpaXFDFTexto($sessionTmp);
+            }
+            }
+    }
+        // this path points to a file
 } else {
     $sessionDoc = $sessionArte = $sessionDebug = $sessionESimbolos = $sessionRascunho = $sessionEbold = $sessionEitalico = '';
     $sessionEDuplo = $sessionECaixa = $sessionEponto = 'checked';
@@ -67,13 +80,25 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             <div class="titulo p-2 pt-3 m-2">
                 <h2> Compara Textos</h2>
             </div>
-            <form method="post" name="fileUpload" action="text_compare.php" enctype="multipart/form-data">
-                <div class="d-flex justify-content-center">
-                    <input class="m-2" type="file" name="fileToUpload" id="fileToUpload">
-                    <input class="m-2" type="submit" value="Subir Textos do Documento de arquivo XFDF do Acrobat"
-                        name="submit">
+            <div class="row">
+                    <form method="post" name="fileUpload" action="text_compare.php" enctype="multipart/form-data">
+                        <div class="d-flex justify-content-center">
+                        
+                            <input class="m-2 col-lg-6 col-md-4" type="file" name="docFileToUpload" id="docFileToUpload" data-buttonText="Your label here.">
+                            <div class="p-2 mt-1">
+                                <input class="form-check-input" type="radio" id="xdfDoc" name="xdf" value="docFileToUpload" checked="true">
+                                <label class="form-check-label" for="xdfDoc">Documento</label>
+                            </div>
+                            <div class="p-2  mt-1">
+                                <input class="form-check-input" type="radio" id="xdfArte" name="xdf" value="artFileToUpload">
+                                <label class="form-check-label" for="xdfArte">Arte</label>
+                            </div>
+                            <input class="m-2" type="submit" value="Subir Textos arquivo XFDF do Acrobat"
+                            name="submit">
+                        </div>
+                        
                 </div>
-
+            </div>
                 <div class="row p-2">
                     <div class="col-lg-6 col-md-12">
                         <label for="textDoc" class="input-group-text textwrapper p-2">
@@ -165,7 +190,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     selector: 'textarea#textDoc',
                     plugins: 'searchreplace fullscreen wordcount visualchars autosave  save table  visualblocks',
                     menubar: false,
-                    toolbar: 'bold italic fontsizeselect  paste pastetext customBreakButton customXFDFButton searchreplace visualchars visualblocks spellchecker fullscreen table tabledelete | tableprops tablerowprops tablecellprops | tableinsertrowbefore tableinsertrowafter tabledeleterow | tableinsertcolbefore tableinsertcolafter tabledeletecol',
+                    toolbar: 'bold italic fontsizeselect  paste pastetext customBreakButton  searchreplace visualchars visualblocks spellchecker fullscreen table tabledelete | tableprops tablerowprops tablecellprops | tableinsertrowbefore tableinsertrowafter tabledeleterow | tableinsertcolbefore tableinsertcolafter tabledeletecol',
                     toolbar_mode: 'floating',
                     setup: function (editor) {
                         editor.ui.registry.addButton('customBreakButton', {
@@ -174,12 +199,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                                 textCompare.quebraLinhas("textDoc");
                             }
                         });
-                       // editor.ui.registry.addButton('customXFDFButton', {
-                      //      text: 'XSDF', onAction: () => {
-                      //          textCompare = new TextCompare;
-                       //         textCompare.limpaXFDF("textDoc");
-                      //      }
-                     //   });
+                    
                     },
                     tinycomments_mode: 'embedded',
                     tinycomments_author: 'Author name',
@@ -191,7 +211,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     selector: 'textarea#textArte',
                     plugins: 'searchreplace fullscreen wordcount visualchars autosave  save table  visualblocks',
                     menubar: false,
-                    toolbar: 'bold italic fontsizeselect  paste pastetext customBreakButton customXFDFButton searchreplace visualchars visualblocks spellchecker fullscreen table tabledelete | tableprops tablerowprops tablecellprops | tableinsertrowbefore tableinsertrowafter tabledeleterow | tableinsertcolbefore tableinsertcolafter tabledeletecol',
+                    toolbar: 'bold italic fontsizeselect  paste pastetext customBreakButton  searchreplace visualchars visualblocks spellchecker fullscreen table tabledelete | tableprops tablerowprops tablecellprops | tableinsertrowbefore tableinsertrowafter tabledeleterow | tableinsertcolbefore tableinsertcolafter tabledeletecol',
                     toolbar_mode: 'floating',
                     setup: function (editor) {
                         editor.ui.registry.addButton('customBreakButton', {
@@ -201,12 +221,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
                             }
                         });
-                      //  editor.ui.registry.addButton('customXFDFButton', {
-                    //        text: 'XSDF', onAction: () => {
-                     //           textCompare = new TextCompare;
-                    //            textCompare.limpaXFDF("textArte");
-                   //         }
-                  //      });
+                      
                     },
                     tinycomments_mode: 'embedded',
                     tinycomments_author: 'Author name',
@@ -218,7 +233,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
             <?php
 
-            if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['textDoc']) && isset($_POST['textArte'])){
                 //require('partials/functions.php');
                 //Variables
               
@@ -462,15 +477,15 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 if ((isset($textDocLinhasNovo) && count($textDocLinhasNovo) > 0) || (isset($textArteLinhasNovo) && count($textArteLinhasNovo) > 0) || max(count($textDocPalavras), count($textArtePalavras)) > 0) {
                     echo '<div class="row p-3 m-0">';
                     echo '<div class="col-md-6">';
-                    echo '<h5>Os ' . (count_valid($textDocLinhasNovo) + count_valid($textDocPalavras)) . '/' . (count_valid($textDocLinhasNovo) + count_valid($textCompara) + count_valid($textDocPalavras)) . ' parágrafos não correspondentes<br>no Documento são:</h5><br>';
+                    echo '<h5>Os ' . (countValid($textDocLinhasNovo) + countValid($textDocPalavras)) . '/' . (countValid($textDocLinhasNovo) + countValid($textCompara) + countValid($textDocPalavras)) . ' parágrafos não correspondentes<br>no Documento são:</h5><br>';
                     echo '</div>';
                     echo '<div class="col-md-6">';
-                    echo '<h5>Os ' . (count_valid($textArteLinhasNovo) + count_valid($textArtePalavras)) . '/' . (count_valid($textArteLinhasNovo) + count_valid($textCompara) + count_valid($textArtePalavras)) . ' parágrafos não correspondentes<br>na Arte são:</h5><br>';
+                    echo '<h5>Os ' . (countValid($textArteLinhasNovo) + countValid($textArtePalavras)) . '/' . (countValid($textArteLinhasNovo) + countValid($textCompara) + countValid($textArtePalavras)) . ' parágrafos não correspondentes<br>na Arte são:</h5><br>';
                     echo '</div>';
                     echo '</div>';
                     echo '<br>';
 
-                    for ($item = 0; $item < max(count_valid($textDocLinhasNovo), count_valid($textArteLinhasNovo)); $item++) { {
+                    for ($item = 0; $item < max(countValid($textDocLinhasNovo), countValid($textArteLinhasNovo)); $item++) { {
                             if ($alterna)
                                 echo '<div class="row p-3 m-0" style="background-color:' . BGCOLOR1 . '">';
                             else

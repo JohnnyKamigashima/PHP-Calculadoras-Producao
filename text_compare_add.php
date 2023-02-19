@@ -53,7 +53,7 @@
             if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 if ($_POST['novaPalavra'] != '') {
                     $palavraNova = "|" . $_POST['novaPalavra'];
-                    file_put_contents('QuebraLinhas.txt', str_replace(" ", ".*", trim($palavraNova)), FILE_APPEND);
+                    file_put_contents('QuebraLinhas.txt', str_replace(" ", " ", trim($palavraNova)), FILE_APPEND);
                     echo $palavraNova . " adicionado com sucesso!";
                 }
 

@@ -1,0 +1,30 @@
+{
+	"name": "jstewmc/rtf",
+	"description": "Read and write Rich Text Format (RTF) documents with PHP",
+	"license": "MIT",
+	"keywords": ["PHP", "rich", "text", "format", "rtf", "read", "write", "parse", "render", "lex"],
+	"authors": [
+		{
+			"name": "Jack Clayton",
+			"email": "clayjs0@gmail.com"
+		}
+	],
+	"require": {
+		"jstewmc/stream": "^0.4.2"
+	},
+	"require-dev": {
+		"mikey179/vfsstream": "^1.6",
+		"phpunit/phpunit": "^9.0",
+		"roave/security-advisories": "dev-latest",
+		"slevomat/coding-standard": "^6"
+	},
+	"autoload": {
+		"psr-4": {
+			"Jstewmc\\Rtf\\": "src/"
+		},
+		"classmap": [
+        "tests/Element/TestElement.php",
+				"tests/Element/Control/TestControl.php"
+    ]
+	}
+}

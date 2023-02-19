@@ -7,7 +7,7 @@
 
     <div class="entrada_normal">
         <div class="input-group-prepend">
-            <label for="altura_farol_eq" class="input-group-text" >
+            <label for="altura_farol_eq" class="input-group-text">
                 Altura FOP (mm):
             </label>
         </div>
@@ -16,7 +16,7 @@
 
     <div class="entrada_normal">
         <div class="input-group-prepend">
-            <label for="largura_farol_eq" class="input-group-text" >
+            <label for="largura_farol_eq" class="input-group-text">
                 Largura FOP (mm):
             </label>
         </div>
@@ -25,7 +25,7 @@
 
     <div class="entrada_normal">
         <div class="input-group-prepend">
-            <label for="area_farol_eq" class="input-group-text" >
+            <label for="area_farol_eq" class="input-group-text">
                 Area FOP (mm2):
             </label>
         </div>
@@ -34,7 +34,7 @@
 
     <div class="entrada_normal align-items-center">
         <div class="input-group-prepend">
-            <label for="cilindro" class="input-group-text" >
+            <label for="cilindro" class="input-group-text">
                 Cilindrico:
             </label>
         </div>
@@ -49,19 +49,19 @@
     </div>
     <div class="linha_resposta">
         <div class="col-7 align-self-center">
-          <label for="largura_final"> A largura do Farol <br> deve ser de:</label>
+            <label for="largura_final"> A largura do Farol <br> deve ser de:</label>
         </div>
         <div class="col-3 align-self-center">
             <input type="text" class="form-control" id="largura_final" value="0" style="height:66px; margin:auto">
         </div>
         <div class="col-2 align-self-center pl-5">
-            <img src="https://cdn4.iconfinder.com/data/icons/ionicons/512/icon-clipboard-512.png" alt="Botão de copiar resultado para a Área de colagem" class="icon" onclick="clip_equador.copyToClipboard(document.getElementById('largura_final').value+' mm')">
+            <img src="https://cdn4.iconfinder.com/data/icons/ionicons/512/icon-clipboard-512.png"
+                alt="Botão de copiar resultado para a Área de colagem" class="icon"
+                onclick="copyToClipboard(document.getElementById('largura_final').value+' mm')">
         </div>
     </div>
-    <script src="./partials/functions/faroleq_lib.js"></script>
-    <script src="./partials/functions/copytoclipboard_lib.js"></script>
     <script>
-        clip_equador = new Clipboard
+        const copyToClipboard = require("functions/CopyToClipboard_lib.js")
 
         $(document).ready(() => {
 
@@ -85,10 +85,10 @@
         }
 
         function largF1() {
-            calc_farol = new Equador
+            const farolEq = require("functions/FarolEq_lib.js")
             var cilindro = $("input[type='radio']:checked").val();
             $("#largura_final").val(
-                calc_farol.farolEq($("#largura_farol_eq").val(),
+                farolEq($("#largura_farol_eq").val(),
                     $("#altura_farol_eq").val(),
                     $("#area_farol_eq").val(),
                     cilindro)

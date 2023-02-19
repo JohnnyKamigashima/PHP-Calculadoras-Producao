@@ -34,15 +34,13 @@
             <div class="col-2 align-self-center pl-5"><img
                     src="https://cdn4.iconfinder.com/data/icons/ionicons/512/icon-clipboard-512.png"
                     alt="Botão de copiar resultado para a Área de colagem" class="icon"
-                    onclick="clip_trans.copyToClipboard(document.getElementById('largT1').value+' mm')">
+                    onclick="copyToClipboard(document.getElementById('largT1').value+' mm')">
             </div>
         </div>
 
     </div>
-    <script type="text/javascript" src="./partials/functions/transgenico_lib.js"></script>
-    <script type="text/javascript" src="./partials/functions/copytoclipboard_lib.js"></script>
     <script>
-        clip_trans = new Clipboard
+        const copyToClipboard = require("functions/CopyToClipboard_lib.js")
         $(document).ready(() => {
             $('#altFOP2').keyup(() => { //calculate points
                 $("#altFOP").val($("#altFOP2").val());
@@ -61,8 +59,8 @@
         })
 
         function calcula() {
-            calc_trans = new Transgen
-            $("#largT1").val(calc_trans.Transgenico($("#altFOP2").val().replace(',', '.'), $("#largFOP2").val().replace(',', '.')));
+coost Transgenico = require("functions/Transgenico_lib.js")
+            $("#largT1").val(Transgenico($("#altFOP2").val().replace(',', '.'), $("#largFOP2").val().replace(',', '.')));
         }
     </script>
 </div>
