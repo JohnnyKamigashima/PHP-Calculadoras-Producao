@@ -29,15 +29,15 @@
             </div>
         </div>
     </div>
+    <script type="text/javascript" src="partials/functions/EscalaPlano_lib.js"></script>
+    <script type="text/javascript" src="partials/functions/CopyToClipboard_lib.js"></script>
     <script>
-        const copyToClipboard = require("functions/CopyToClipboard_lib.js")
         $(document).ready(() => {
             $('#medA').keyup(() => calcula_escala())
             $('#medR').keyup(() => calcula_escala())
         })
 
         function calcula_escala() {
-            const escalaPlano = require("functions/EscalaPlano_lib.js")
             $("#escalaC").val(
                 escalaPlano($("#medA").val().replace(',', '.'), $("#medR").val().replace(',', '.')));
         }

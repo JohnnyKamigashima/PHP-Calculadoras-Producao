@@ -61,24 +61,23 @@
             </div>
         </div>
     </div>
+    <script src="partials/functions/DistorC_lib.js"></script>
+    <script src="partials/functions/CopyToClipboard_lib.js"></script>
     <script>
-        const copyToClipboard = require("CopyToClipboard_lib.js")
         $(document).ready(() => {
             $('#cilindro').keyup(() => atualizaDistorc())
             $('#arteA').keyup(() => atualizaDistorc())
         })
 
         function atualizaDistorc() {
-            const distorC = require("functions/DistorC")
             $("#distorc").val(distorC(
-                $("#arteA").val(),
-                $("#cilindro").val(),
-                $("input[type='radio'][name='repetition']:checked").val().replace(',', '.')
+                $("#arteA").val().replace(',', '.'),
+                $("#cilindro").val().replace(',', '.'),
+                $("input[type='radio'][name='repetition']:checked").val()
             ));
         }
 
         function handleClick(myRadio) {
-            const distorC = require("functions/DistorC")
             $("#distorc").val(
                 distorC(
                     $("#arteA").val().replace(',', '.'),

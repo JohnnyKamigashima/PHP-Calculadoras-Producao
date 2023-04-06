@@ -1,4 +1,5 @@
-<html>
+<html lang="pt-BR">
+    <title>Calculadora de Farol Octagono</title>
 
 <!-- calculadora Farol Octagono-->
 
@@ -51,8 +52,9 @@
             </p>
         </div>
     </div>
+    <script src="partials/functions/CopyToClipboard_lib.js"></script>
+    <script src="partials/functions/FarolOctagono_lib.js"></script>
     <script>
-        const copyToClipboard = require("functions/CopyToClipboard_lib.js")
         $(document).ready(() => {
             $('#pais5').change(() => largura_final());
             $('#altFOP5').change(() => largura_final())
@@ -63,7 +65,6 @@
         });
 
         function largura_final() {
-            const faroloctagono = require("functions/FarolOctagono_lib.js")
             $("#largF5").val(
                 faroloctagono($("#altFOP5").val(),
                     $("#largFOP5").val(),

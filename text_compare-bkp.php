@@ -20,8 +20,16 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $sessionArte = (isset($_POST['textArte'])) ? $_POST['textArte'] : '';
     $sessionRascunho = (isset($_POST['rascunho'])) ? $_POST['rascunho'] : '';
 } else {
-    $sessionDoc = $sessionArte = $sessionDebug = $sessionESimbolos = $sessionRascunho = $sessionEbold = $sessionEitalico = '';
-    $sessionEDuplo = $sessionECaixa = $sessionEponto = 'checked';
+    $sessionDoc    =
+        $sessionArte =
+        $sessionDebug =
+        $sessionESimbolos =
+        $sessionRascunho =
+        $sessionEbold =
+        $sessionEitalico = '';
+    $sessionEDuplo =
+        $sessionECaixa =
+        $sessionEponto = 'checked';
 }
 ?>
 
@@ -29,7 +37,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" charset="utf-8">
+    <meta name="viewport" content="
+    width=device-width, initial-scale=1.0" charset="utf-8">
     <link rel="icon" type="image/png" href="./images/favicon.svg" />
     <!-- Latest compiled and minified CSS -->
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
@@ -141,9 +150,36 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             // inicia o pkugin TinyMCE Documento
             tinymce.init({
                 selector: 'textarea#textDoc',
-                plugins: 'searchreplace fullscreen wordcount visualchars autosave paste save table textpattern visualblocks',
+                plugins: '
+                    searchreplace
+                    fullscreen
+                    wordcount
+                    visualchars
+                    autosave
+                    paste
+                    save
+                    table
+                    textpattern
+                    visualblocks',
                 menubar: false,
-                toolbar: 'bold italic fontsizeselect  paste pastetext searchreplace visualchars visualblocks spellchecker fullscreen table tabledelete | tableprops tablerowprops tablecellprops | tableinsertrowbefore tableinsertrowafter tabledeleterow | tableinsertcolbefore tableinsertcolafter tabledeletecol',
+                toolbar: 'bold
+                    italic
+                    fontsizeselect
+                    paste
+                    pastetext
+                    searchreplace
+                    visualchars
+                    visualblocks
+                    spellchecker
+                    fullscreen
+                    table
+                    tabledelete | tableprops
+                    tablerowprops
+                    tablecellprops | tableinsertrowbefore
+                    tableinsertrowafter
+                    tabledeleterow | tableinsertcolbefore
+                    tableinsertcolafter
+                    tabledeletecol',
                 toolbar_mode: 'floating',
                 tinycomments_mode: 'embedded',
                 tinycomments_author: 'Author name',
@@ -153,9 +189,33 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             // Inicia o plugin TinyMCE da Arte
             tinymce.init({
                 selector: 'textarea#textArte',
-                plugins: 'searchreplace fullscreen wordcount visualchars autosave paste save table textpattern visualblocks',
+                plugins: 'searchreplace
+                    fullscreen
+                    wordcount
+                    visualchars
+                    autosave
+                    paste
+                    save
+                    table
+                    textpattern
+                    visualblocks',
                 menubar: false,
-                toolbar: 'bold italic fontsizeselect  paste pastetext searchreplace visualchars visualblocks spellchecker fullscreen table tabledelete | tableprops tablerowprops tablecellprops | tableinsertrowbefore tableinsertrowafter tabledeleterow | tableinsertcolbefore tableinsertcolafter tabledeletecol',
+                toolbar: 'bold
+                    italic
+                    fontsizeselect
+                    paste
+                    pastetext
+                    searchreplace
+                    visualchars
+                    visualblocks
+                    spellchecker
+                    fullscreen
+                    table
+                    tabledelete | tableprops
+                    tablerowprops
+                    tablecellprops | tableinsertrowbefore tableinsertrowafter
+                    tabledeleterow | tableinsertcolbefore tableinsertcolafter
+                    tabledeletecol',
                 toolbar_mode: 'floating',
                 tinycomments_mode: 'embedded',
                 tinycomments_author: 'Author name',
@@ -165,21 +225,18 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
             function updateValues() {
                 <?php
-                $sessionDoc = "<script>master.html.get()            
+                $sessionDoc  = "<script>master.html.get()
             </script>";
             $sessionArte = "<script>
             copy.html.get()
             </script>";
             ?>
             }
-            </script>
 
             <?php
 
             if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 require('partials/functions.php');
-                
-                
 
                 //Variables
                 // var_dump($_POST['textDoc']);
@@ -194,29 +251,57 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 $alterna = true;
 
                 //Constants
-                define('ENCODING',        'UTF-8');
-                define("ATENCAO",         '880000');
-                define("ALERTA",          'FF0000');
-                define('UNIDADEMEDIDA',   '/\d+(cm|m|km|mcg|mg|g|kg|ml|l|cal|kcal)/i');
-                define('TERMOSINVALIDOS', '/(\d+ |\d+)(CM|cM|Cm|mt|M|Mt|mT|KM|kM|MCG|Mcg|McG|mcG|MGc|MG|Mg|mG|G|GR|Gr|KG|Kg|kG|ML|Ml|CAL|Cal|CaL|cAL|caL|KCAL|Kcal|kCAL|kcAL|kcaL|KcaL|KCal|KcAL) /');
-                define('BGCOLOR1',        '#faebd7');
-                define('BGCOLOR2',        '#eddcc5');
+                define('ENCODING', 'UTF-8');
+                define("ATENCAO", '880000');
+                define("ALERTA", 'FF0000');
+                define('UNIDADEMEDIDA', '/\d+(cm|m|km|mcg|mg|g|kg|ml|l|cal|kcal)/i');
+                define(
+                    'TERMOSINVALIDOS',
+                    '/(\d+ |\d+)(CM|cM|Cm|mt|M|Mt|mT|KM|kM|MCG|Mcg|McG|mcG|MGc|MG|Mg|mG|G|GR|Gr|KG|Kg|kG|ML|Ml|CAL|Cal|CaL|cAL|caL|KCAL|Kcal|kCAL|kcAL|kcaL|KcaL|KCal|KcAL) /'
+                );
+                define('BGCOLOR1', '#faebd7');
+                define('BGCOLOR2', '#eddcc5');
+                define('HR_CENTER', '<hr style=" width-100%; text-align-center; margin-left-auto">');
+                define('CLOSEDIV', '</div>');
+                define('DIV_COL', '<div class="col-md-6 m-0">');
+                define('DIV_ROW', '<div class="row p-3 m-0" style="background-color-');
 
                 //Checa opçoes selecionadas
-                if (isset($sessionEDuplo)) $espacoDuplo = ($sessionEDuplo == 'checked') ? true : false;
-                else $espacoDuplo = false;
-                if (isset($sessionECaixa)) $caixaAlta = ($sessionECaixa == 'checked') ? true : false;
-                else $caixaAlta = false;
-                if (isset($sessionEbold)) $bold = ($sessionEbold == 'checked') ? true : false;
-                else $bold = false;
-                if (isset($sessionEitalico)) $italico = ($sessionEitalico == 'checked') ? true : false;
-                else $italico = false;
-                if (isset($sessionEponto)) $pontoFinal = ($sessionEponto == 'checked') ? true : false;
-                else $pontoFinal = false;
-                if (isset($sessionESimbolos)) $simbolos = ($sessionESimbolos == 'checked') ? true : false;
-                else $simbolos = false;
-                if (isset($sessionDebug)) $debugMode = ($sessionDebug == 'checked') ? true : false;
-                else $debugMode = false;
+                if (isset($sessionEDuplo)) {
+                    $espacoDuplo = ($sessionEDuplo == 'checked') ? true : false;
+                } else {
+                    $espacoDuplo = false;
+                }
+                if (isset($sessionECaixa)) {
+                    $caixaAlta = ($sessionECaixa == 'checked') ? true : false;
+                } else {
+                    $caixaAlta = false;
+                }
+                if (isset($sessionEbold)) {
+                    $bold = ($sessionEbold == 'checked') ? true : false;
+                } else {
+                    $bold = false;
+                }
+                if (isset($sessionEitalico)) {
+                    $italico = ($sessionEitalico == 'checked') ? true : false;
+                } else {
+                    $italico = false;
+                }
+                if (isset($sessionEponto)) {
+                    $pontoFinal = ($sessionEponto == 'checked') ? true : false;
+                } else {
+                    $pontoFinal = false;
+                }
+                if (isset($sessionESimbolos)) {
+                    $simbolos = ($sessionESimbolos == 'checked') ? true : false;
+                } else {
+                    $simbolos = false;
+                }
+                if (isset($sessionDebug)) {
+                    $debugMode = ($sessionDebug == 'checked') ? true : false;
+                } else {
+                    $debugMode = false;
+                }
 
                 // Limpeza inicial de Tags HTML
                 $textDoc = limpaHtmlSpaceBreak($textDoc);
@@ -224,37 +309,57 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
                 //converte para Decodifica HTML
                 require_once('partials/Encoding.php');
-            
+
                 $textDoc = html_entity_decode($textDoc);
                 $textArte = html_entity_decode($textArte);
- 
+
                 //Verifica textos obrigatorios BOLD/Italic/Caixa alta
-                if (!$bold) array_push($faltaBOLD, isNotTagged('fabricado', 'ltda', 'strong', $textArte));
-                if (!$bold) array_push($faltaBOLD, isNotTagged('fabricado', 's.a.', 'strong', $textArte));
-                if (!$bold) array_push($faltaBOLD, isNotTagged('importado', 'ltda', 'strong', $textArte));
-                if (!$bold) array_push($faltaBOLD, isNotTagged('importado', 's.a.', 'strong', $textArte));
-                if (!$bold) array_push($faltaBOLD, isNotTagged('(contém lactose|contém glúten|^ingredientes|^ingred|^ingr)', '', 'strong', $textArte));
-                if (!$italico) array_push($faltaItalic, isNotTagged('trans', '', 'em', $textArte));
-                array_push($faltaCAIXA, isCaixa('contém', '(glúten|lactose)', $textArte));
+                if (!$bold) {
+                    array_push($faltaBOLD, isNotTagged('fabricado', 'ltda', 'strong', $textArte));
+                }
+                if (!$bold) {
+                    array_push($faltaBOLD, isNotTagged('fabricado', 's.a.', 'strong', $textArte));
+                }
+                if (!$bold) {
+                    array_push($faltaBOLD, isNotTagged('importado', 'ltda', 'strong', $textArte));
+                }
+                if (!$bold) {
+                    array_push($faltaBOLD, isNotTagged('importado', 's.a.', 'strong', $textArte));
+                }
+                if (!$bold) {
+                    array_push(
+                        $faltaBOLD,
+                        isNotTagged(
+                            '(contém lactose|contém glúten|^ingredientes|^ingred|^ingr)',
+                            '',
+                            'strong',
+                            $textArte
+                        )
+                    );
+                }
+                if (!$italico) {
+                    array_push($faltaItalic, isNotTagged('trans', '', 'em', $textArte));
+                    array_push($faltaCAIXA, isCaixa('contém', '(glúten|lactose)', $textArte));
+                }
 
                 // Limpa arrays vazios
                 $faltaBOLD = array_filter($faltaBOLD);
                 $faltaItalic = array_filter($faltaItalic);
                 $faltaCAIXA = array_filter($faltaCAIXA);
 
-                
+
                 // Limpa sobras de formatação Html
                 $textDoc = limpaSujeiraHtml($textDoc);
                 $textArte = limpaSujeiraHtml($textArte);
-                
+
                 //ignora pontos finais
                 $textDoc = ($pontoFinal) ? limpaPontofinal($textDoc) : $textDoc;
                 $textArte = ($pontoFinal) ? limpaPontofinal($textArte) : $textArte;
-                
+
                 //ignora simbolos
                 $textDoc = ($simbolos) ? limpaSimbolos($textDoc) : $textDoc;
                 $textArte= ($simbolos) ? limpaSimbolos($textArte):$textArte;
-                
+
                 // Remove Bolds antes de checar
                 $textDoc = ($bold) ? removeBold($textDoc) : $textDoc;
                 $textArte = ($bold) ? removebold($textArte) : $textArte;
@@ -310,7 +415,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                             $caixaDoc = $docLinha;
                         }
                         if ($caixaArte == $caixaDoc) {
-                            if ($caixaDoc != '') array_push($textCompara, $arteLinha);
+                            if ($caixaDoc != '') {
+                                array_push($textCompara, $arteLinha);
+                            }
                             unset($textDocLinhas[$indiceDoc]);
                             unset($textArteLinhas[$indiceArte]);
                             break;
@@ -319,26 +426,82 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 }
 
                 // compara palavra por palavra
-                foreach ($textDocLinhas as $cadalinha) array_push($textDocPalavras, explode(' ', $cadalinha));
-                foreach ($textArteLinhas as $cadalinha) array_push($textArtePalavras, explode(' ', $cadalinha));
+                foreach ($textDocLinhas as $cadalinha) {
+                    array_push($textDocPalavras, explode(' ', $cadalinha));
+                }
+                foreach ($textArteLinhas as $cadalinha) {
+                    array_push($textArtePalavras, explode(' ', $cadalinha));
+                }
                 foreach ($textDocPalavras as $indicePalavraDoc => $palavrasDoc) {
                     $palavrasIguais = array();
 
                     // joga palavras iguais numa array para ver qual linha tem mais repeticoes
                     foreach ($textArtePalavras as $indicePalavraArte => $palavrasArte) {
                         $difNumPalavras = 9999 - abs(count($palavrasDoc) - count($palavrasArte));
-                        $correspond = true;
-                        if (abs(count($palavrasDoc) - count($palavrasArte)) > (count($palavrasDoc) / 3)) $correspond = false;
-                        if ($caixaAlta) array_push($palavrasIguais, [$difNumPalavras, count(descomparaArrays($palavrasDoc, $palavrasArte, $caixaAlta)), $indicePalavraDoc, $indicePalavraArte, $correspond]);
-                        else array_push($palavrasIguais, [$difNumPalavras, count(descomparaArrays($palavrasDoc, $palavrasArte, $caixaAlta)), $indicePalavraDoc, $indicePalavraArte, $correspond]);
-                    }
-                    rsort($palavrasIguais); //coloca em ordem decrescente para que a linha com mais repeticoes seja a primeira
+                        $correspond     = true;
+                        if (abs(count($palavrasDoc) - count($palavrasArte)) > (count($palavrasDoc) / 3)) {
+                            $correspond = false;
+                        }
+                        array_push(
+                            $palavrasIguais,
+                            [
+                                $difNumPalavras,
+                                count(
+                                    descomparaArrays(
+                                        $palavrasDoc,
+                                        $palavrasArte,
+                                        $caixaAlta
+                                    )
+                                ),
+                                $indicePalavraDoc,
+                                $indicePalavraArte,
+                                $correspond
+                            ]
+                        );
 
-                    if (isset($palavrasIguais[0][1]) && $palavrasIguais[0][1] > 1 && $palavrasIguais[0][4] == true) {
-                        $difdeDoc = comparaArrays($textDocPalavras[$palavrasIguais[0][2]], $textArtePalavras[$palavrasIguais[0][3]], $caixaAlta);
-                        $difdeArte = comparaArrays($textArtePalavras[$palavrasIguais[0][3]], $textDocPalavras[$palavrasIguais[0][2]], $caixaAlta);
-                        array_push($textDocLinhasNovo, frasesDiff($textDocPalavras[$palavrasIguais[0][2]], $textArtePalavras[$palavrasIguais[0][3]], $caixaAlta, ALERTA, ATENCAO));
-                        array_push($textArteLinhasNovo, frasesDiff($textArtePalavras[$palavrasIguais[0][3]], $textDocPalavras[$palavrasIguais[0][2]], $caixaAlta, ALERTA, ATENCAO));
+                    }
+                    rsort($palavrasIguais);
+                    //coloca em ordem decrescente para que a linha com mais repeticoes seja a primeira
+            
+                    if (isset($palavrasIguais[0][1]) && $palavrasIguais[0][1] > 1 && $palavrasIguais[0][4]) {
+                        $difdeDoc  = comparaArrays(
+                            $textDocPalavras[
+                            $palavrasIguais[0][2]],
+                            $textArtePalavras[
+                            $palavrasIguais[0][3]],
+                            $caixaAlta
+                        );
+                        $difdeArte = comparaArrays(
+                            $textArtePalavras[
+                            $palavrasIguais[0][3]],
+                            $textDocPalavras[
+                            $palavrasIguais[0][2]],
+                            $caixaAlta
+                        );
+                        array_push(
+                            $textDocLinhasNovo,
+                            frasesDiff(
+                                $textDocPalavras[
+                                $palavrasIguais[0][2]],
+                                $textArtePalavras[
+                                $palavrasIguais[0][3]],
+                                $caixaAlta,
+                                ALERTA,
+                                ATENCAO
+                            )
+                        );
+                        array_push(
+                            $textArteLinhasNovo,
+                            frasesDiff(
+                                $textArtePalavras[
+                                $palavrasIguais[0][3]],
+                                $textDocPalavras[
+                                $palavrasIguais[0][2]],
+                                $caixaAlta,
+                                ALERTA,
+                                ATENCAO
+                            )
+                        );
                         unset($textDocPalavras[$palavrasIguais[0][2]]);
                         unset($textArtePalavras[$palavrasIguais[0][3]]);
                     }
@@ -352,66 +515,139 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 echo ' <div class="container p-6 m-0">';
                 if (isset($unidadeMedidaEspaco) && count($unidadeMedidaEspaco) > 0) {
                     echo '<hr>';
-                    echo "<h5 style='width: 100%;display: flex;margin: auto;justify-content: center'>Unidades de medida sem espaço: </h5>";
+                    echo "<h5 style='
+                    width: 100%;
+                    display: flex;
+                    margin: auto;
+                    justify-content: center'>Unidades de medida sem espaço: </h5>";
                     echo "<strong style='color:#" . ATENCAO . "'>";
-                    foreach ($unidadeMedidaEspaco as $erro) echo "<br><h7>" .  $erro . "</h7><br>";
+                    foreach ($unidadeMedidaEspaco as $erro) {
+                        echo "<br><h7>" . $erro . "</h7><br>";
+                    }
                     echo "</strong>";
                 }
                 if (isset($unidadeMedidaCaixa) && count($unidadeMedidaCaixa) > 0) {
-                    echo "<br><h6 style='width: 100%;display: flex;margin: auto;justify-content: center'>Unidades de medida com escrita errada: </h6>";
+                    echo "<br><h6 style='
+                    width: 100%;
+                    display: flex;
+                    margin: auto;
+                    justify-content: center'>Unidades de medida com escrita errada: </h6>";
                     echo "<strong style='color:#" . ATENCAO . "'>";
-                    foreach ($unidadeMedidaCaixa as $erro) echo "<br><h7>" .  $erro . "</h7><br>";
+                    foreach ($unidadeMedidaCaixa as $erro) {
+                        echo "<br><h7>" . $erro . "</h7><br>";
+                    }
                     echo "</strong>";
                 }
                 if (count($faltaBOLD) > 0) {
-                    echo '<hr style="width:100%;text-align:center;margin-left:auto">';
-                    echo '<h5 style="width: 100%;display: flex;margin: auto;justify-content: center">Atenção a estas frases que não estão em BOLD:</h5><br>';
-                    foreach ($faltaBOLD as $lin) echo "<br><h7>$lin</h7>";
+                    echo HR_CENTER;
+                    echo '<h5 style="
+                    width: 100%;
+                    display: flex;
+                    margin: auto;
+                    justify-content: center">Atenção a estas frases que não estão em BOLD:</h5><br>';
+                    foreach ($faltaBOLD as $lin) {
+                        echo "<br><h7>$lin</h7>";
+                    }
                 }
                 if (count($faltaItalic) > 0) {
-                    echo '<hr style="width:100%;text-align:center;margin-left:auto">';
-                    echo '<h5 style="width: 100%;display: flex;margin: auto;justify-content: center">Atenção a estas palavras que não estão em Itálico:</h5><br>';
-                    foreach ($faltaItalic as $lin) echo "<br><h7>$lin</h7>";
+                    echo HR_CENTER;
+                    echo '<h5 style="
+                    width: 100%;
+                    display: flex;
+                    margin: auto;
+                    justify-content: center">Atenção a estas palavras que não estão em Itálico:</h5><br>';
+                    foreach ($faltaItalic as $lin) {
+                        echo "<br><h7>$lin</h7>";
+                    }
                 }
                 if (count($faltaCAIXA) > 0) {
-                    echo '<hr style="width:100%;text-align:center;margin-left:auto">';
-                    echo '<h5 style="width: 100%;display: flex;margin: auto;justify-content: center">Atenção a estas palavras que não estão em CAIXA ALTA:</h5><br>';
-                    foreach ($faltaCAIXA as $lin) echo "<br><h7>$lin</h7>";
+                    echo HR_CENTER;
+                    echo '<h5 style="
+                    width: 100%;
+                    display: flex;
+                    margin: auto;
+                    justify-content: center">Atenção a estas palavras que não estão em CAIXA ALTA:</h5><br>';
+                    foreach ($faltaCAIXA as $lin) {
+                        echo "<br><h7>$lin</h7>";
+                    }
                 }
 
                 // Mostra resultados da comparação de paragrafos
                 echo '<hr>';
                 if (isset($textCompara)) {
-                    echo '<br><h5 style="width: 100%;display: flex;margin: auto;justify-content: center">' . count($textCompara) . ' parágrafos correspondem.</h5><br>';
-                    echo '</div>';
+                    echo '<br><h5 style="
+                    width: 100%;
+                    display: flex;
+                    margin: auto;
+                    justify-content: center">' . count($textCompara) . ' parágrafos correspondem.</h5><br>';
+                    echo CLOSEDIV;
                     echo '<div class="row p-3 m-0">';
                     echo '<div class="col-md-12 m-0">';
-                    foreach ($textCompara as $showtextOK) echo "<br>$showtextOK";
+                    foreach ($textCompara as $showtextOK) {
+                        echo "<br>$showtextOK";
+                    }
                     echo '</div></div>';
                 }
 
                 //Mostra resultados que parecem que estão errados
-                if ((isset($textDocLinhasNovo) && count($textDocLinhasNovo) > 0) || (isset($textArteLinhasNovo) && count($textArteLinhasNovo) > 0) || max(count($textDocPalavras), count($textArtePalavras)) > 0) {
+                if (
+                    (isset($textDocLinhasNovo)
+                        && !empty($textDocLinhasNovo))
+                    || (isset($textArteLinhasNovo)
+                        && !empty($textArteLinhasNovo)
+                    )
+                    || max(count($textDocPalavras), count($textArtePalavras)) > 0
+                ) {
+
                     echo '<div class="row p-3 m-0">';
-                    echo '<div class="col-md-6">';
-                    echo '<h5>Os ' . (count_valid($textDocLinhasNovo) + count_valid($textDocPalavras)) . '/' . (count_valid($textDocLinhasNovo) + count_valid($textCompara) + count_valid($textDocPalavras)) . ' parágrafos não correspondentes<br>no Documento são:</h5><br>';
-                    echo '</div>';
-                    echo '<div class="col-md-6">';
-                    echo '<h5>Os ' . (count_valid($textArteLinhasNovo) + count_valid($textArtePalavras))  . '/' . (count_valid($textArteLinhasNovo) + count_valid($textCompara) + count_valid($textArtePalavras)) .  ' parágrafos não correspondentes<br>na Arte são:</h5><br>';
-                    echo '</div>';
-                    echo '</div>';
+                    echo DIV_COL;
+                    echo '<h5>Os '
+                        . (countValid($textDocLinhasNovo) + countValid($textDocPalavras))
+                        . '/'
+                        . (countValid($textDocLinhasNovo) + countValid($textCompara) + countValid($textDocPalavras))
+                        . ' parágrafos não correspondentes<br>no Documento são:</h5><br>';
+                    echo CLOSEDIV;
+                    echo DIV_COL;
+                    echo '<h5>Os '
+                        . (countValid($textArteLinhasNovo) + countValid($textArtePalavras))
+                        . '/'
+                        . (countValid($textArteLinhasNovo) + countValid($textCompara) + countValid($textArtePalavras))
+                        . ' parágrafos não correspondentes<br>na Arte são:</h5><br>';
+                    echo CLOSEDIV;
+                    echo CLOSEDIV;
                     echo '<br>';
 
-                    for ($item = 0; $item < max(count_valid($textDocLinhasNovo), count_valid($textArteLinhasNovo)); $item++) { {
-                            if ($alterna) echo '<div class="row p-3 m-0" style="background-color:' . BGCOLOR1 . '">';
-                            else echo '<div class="row p-3 m-0" style="background-color:' . BGCOLOR2 . '">';
+                    for (
+                        $item = 0;
+                        $item < max(
+                            countValid($textDocLinhasNovo),
+                            countValid($textArteLinhasNovo)
+                        );
+                        $item++
+                    ) { {
+
+                            if ($alterna) {
+                                echo DIV_ROW
+                                    . BGCOLOR1
+                                    . '">';
+                            } else {
+                                echo DIV_ROW
+                                    . BGCOLOR2
+                                    . '">';
+                            }
                             $alterna = !$alterna;
-                            echo '<div class="col-md-6">';
-                            foreach ($textDocLinhasNovo[$item] as $textResult) echo $textResult . ' ';
-                            echo '</div>';
-                            echo '<div class="col-md-6">';
-                            foreach ($textArteLinhasNovo[$item] as $textResult) echo $textResult . ' ';
-                            echo '</div></div>';
+                            echo DIV_COL;
+                            foreach ($textDocLinhasNovo[$item] as $textResult) {
+                                echo $textResult
+                                    . ' ';
+                            }
+                            echo CLOSEDIV;
+                            echo DIV_COL;
+                            foreach ($textArteLinhasNovo[$item] as $textResult) {
+                                echo $textResult
+                                    . ' ';
+                                echo '</div></div>';
+                            }
                         }
                     }
                 }
@@ -419,20 +655,33 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 for ($coincidencias = 100; $coincidencias >= 0; $coincidencias--) {
 
                     foreach (frasesMaisSemelhantes($textDocPalavras, $textArtePalavras, $coincidencias) as $result) {
-                        if ($alterna) echo '<div class="row p-3 m-0" style="background-color:' . BGCOLOR1 . '">';
-                        else echo '<div class="row p-3 m-0" style="background-color:' . BGCOLOR2 . '">';
+                        if ($alterna) {
+                            echo DIV_ROW
+                                . BGCOLOR1
+                                . '">';
+                        } else {
+                            echo DIV_ROW
+                                . BGCOLOR2
+                                . '">';
+                        }
                         $alterna = !$alterna;
-                        echo '<div class="col-md-6">';
-                        echo "<text style='color:#" . ALERTA . "'>";
-                        echo $result[0] . ' ';
+                        echo DIV_COL;
+                        echo "<text style='color:#"
+                            . ALERTA
+                            . "'>";
+                        echo $result[0]
+                            . ' ';
                         echo "</text>";
-                        echo '</div>';
-                        echo '<div class="col-md-6">';
-                        echo "<text style='color:#" . ALERTA . "'>";
-                        echo $result[1] . ' ';
+                        echo CLOSEDIV;
+                        echo DIV_COL;
+                        echo "<text style='color:#"
+                            . ALERTA
+                            . "'>";
+                        echo $result[1]
+                            . ' ';
                         echo "</text>";
-                        echo '</div>';
-                        echo '</div>';
+                        echo CLOSEDIV;
+                        echo CLOSEDIV;
                     }
                 }
             }

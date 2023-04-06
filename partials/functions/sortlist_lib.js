@@ -1,5 +1,5 @@
-module.exports = function sortList(elementid) {
-    var list, i, switching, b, shouldSwitch;
+function sortList(elementid) {
+    let list, i, switching, b, shouldSwitch;
     list = document.getElementById(elementid);
     switching = true;
     /* Make a loop that will continue until

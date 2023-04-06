@@ -60,11 +60,14 @@
                 onclick="copyToClipboard(document.getElementById('largura_final').value+' mm')">
         </div>
     </div>
+    <script 
+        src="partials/functions/FarolEq_lib.js">
+    </script>
+    <script 
+        src="partials/functions/CopyToClipboard_lib.js">
+    </script>
     <script>
-        const copyToClipboard = require("functions/CopyToClipboard_lib.js")
-
         $(document).ready(() => {
-
             $('#altura_farol_eq').change(() => {
                 areaFop1();
                 largF1();
@@ -85,7 +88,6 @@
         }
 
         function largF1() {
-            const farolEq = require("functions/FarolEq_lib.js")
             var cilindro = $("input[type='radio']:checked").val();
             $("#largura_final").val(
                 farolEq($("#largura_farol_eq").val(),

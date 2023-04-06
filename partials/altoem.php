@@ -98,8 +98,9 @@
             </div>
         </div>
     </div>
+    <script src="partials/functions/CopyToClipboard_lib.js"></script>
+    <script src="partials/functions/AltoEm_lib.js"></script>
     <script>
-        const copyToClipboard = require("functions/CopyToClipboard_lib.js")
         $(document).ready(() => {
             $('#altFOP').change(() => {
                 areaFop();
@@ -128,7 +129,6 @@
         })
 
         function largF() {
-            const altoEm = require("functions/AltoEm_lib")
             $("#largF").val(
                 altoEm($("#altFOP").val(),
                     $("#largFOP").val(),
@@ -145,7 +145,6 @@
         }
 
         function largMx() {
-            const altoEm = require("functions/AltoEm_lib")
             $("#largMx").val(
                 altoEm(
                     $("#altFOP").val(),

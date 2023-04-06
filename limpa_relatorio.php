@@ -3,7 +3,7 @@
 <!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
 <!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
 <!--[if gt IE 8]>      <html class="no-js"> <!--<![endif]-->
-<html>
+<html lang="pt-BR">
 
 <head>
     <meta charset="utf-8">
@@ -24,8 +24,10 @@
 </head>
 <?php
 include_once 'partials/functions.php';
-$respostaArr = uploadFile('uploads/', 'html', 100000);
-$resposta = strpos($respostaArr[0], "corretamente") != false ? $respostaArr[0] . "<br>" . readAndCleanupReportFile($respostaArr[1]) : $respostaArr[0];
+$respostaArr = uploadFile('uploads/', 'html', 100000, 'fileToUpload');
+$resposta    = strpos($respostaArr[0], "corretamente")
+    ? $respostaArr[0] . "<br>" . readAndCleanupReportFile($respostaArr[1])
+    : $respostaArr[0];
 ?>
 
 <body>
@@ -69,9 +71,6 @@ $resposta = strpos($respostaArr[0], "corretamente") != false ? $respostaArr[0] .
         </div>
     </div>
 
-    <!--[if lt IE 7]>
-            <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="#">upgrade your browser</a> to improve your experience.</p>
-        <![endif]-->
 
     <script src="" async defer></script>
 

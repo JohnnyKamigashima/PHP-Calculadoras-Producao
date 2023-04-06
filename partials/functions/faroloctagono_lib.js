@@ -1,6 +1,6 @@
-module.exports = function faroloctagono(alt, larg, area, pais, elemento) {
+function faroloctagono(alt, larg, area, pais, elemento) {
     let menorX = Math.sqrt(
-        (0.15 * this.mmarea2cm(parseFloat(alt * larg))) / 4680
+        (0.15 * mmarea2cm(parseFloat(alt * larg))) / 4680
     ),
         MX = [
             [5, menorX, 65, 72, "SECRETARÌA DE SALUD", 3.07],
@@ -48,10 +48,8 @@ module.exports = function faroloctagono(alt, larg, area, pais, elemento) {
             [301, 3.5, 1, 1, "Ministerio de Salud", 0.034],
         ];
 
-    alt = this.mm2cm(parseFloat(alt));
-    larg = this.mm2cm(parseFloat(larg));
-    area = this.mmarea2cm(parseFloat(area));
-    pais = pais;
+    alt = mm2cm(parseFloat(alt));
+    larg = mm2cm(parseFloat(larg));
 
     let areaFOP5 = alt * larg;
 
@@ -60,67 +58,91 @@ module.exports = function faroloctagono(alt, larg, area, pais, elemento) {
     console.log("menorx = " + menorX);
     if (pais == "MX") {
         document.getElementById(elemento).innerHTML =
-            MX[this.verifica_octagono(MX, areaFOP5)][4] +
+            MX[verifica_octagono(MX, areaFOP5)][4] +
             " altura mínima de " +
-            this.cm2mm(
-                MX[this.verifica_octagono(MX, areaFOP5)][5] *
-                MX[this.verifica_octagono(MX, areaFOP5)][1]
+            cm2mm(
+                MX[verifica_octagono(MX, areaFOP5)][5] *
+                MX[verifica_octagono(MX, areaFOP5)][1]
             ).toFixed(2) +
             " mm";
         console.log(
-            MX[this.verifica_octagono(MX, areaFOP5)][4] +
+            MX[verifica_octagono(MX, areaFOP5)][4] +
             " altura mínima de " +
-            this.cm2mm(
-                MX[this.verifica_octagono(MX, areaFOP5)][5] *
-                MX[this.verifica_octagono(MX, areaFOP5)][1]
+            cm2mm(
+                MX[verifica_octagono(MX, areaFOP5)][5] *
+                MX[verifica_octagono(MX, areaFOP5)][1]
             ) +
             " mm"
         );
-        return this.cm2mm(
-            MX[this.verifica_octagono(MX, areaFOP5)][1] *
-            MX[this.verifica_octagono(MX, areaFOP5)][2]
+        return cm2mm(
+            MX[verifica_octagono(MX, areaFOP5)][1] *
+            MX[verifica_octagono(MX, areaFOP5)][2]
         ).toFixed(2);
     } else if (pais == "PE") {
         document.getElementById(elemento).innerHTML =
-            PE[this.verifica_octagono(PE, areaFOP5)][4] +
+            PE[verifica_octagono(PE, areaFOP5)][4] +
             " altura mínima de " +
-            this.cm2mm(
-                PE[this.verifica_octagono(PE, areaFOP5)][5] *
-                PE[this.verifica_octagono(PE, areaFOP5)][1]
+            cm2mm(
+                PE[verifica_octagono(PE, areaFOP5)][5] *
+                PE[verifica_octagono(PE, areaFOP5)][1]
             ).toFixed(2) +
             " mm";
-        return this.cm2mm(
-            PE[this.verifica_octagono(PE, areaFOP5)][1] *
-            PE[this.verifica_octagono(PE, areaFOP5)][2]
+        return cm2mm(
+            PE[verifica_octagono(PE, areaFOP5)][1] *
+            PE[verifica_octagono(PE, areaFOP5)][2]
         ).toFixed(2);
     } else if (pais == "UY") {
         document.getElementById(elemento).innerHTML =
-            UY[this.verifica_octagono(UY, areaFOP5)][4];
-        return this.cm2mm(
-            UY[this.verifica_octagono(UY, areaFOP5)][1] *
-            UY[this.verifica_octagono(UY, areaFOP5)][2]
+            UY[verifica_octagono(UY, areaFOP5)][4];
+        return cm2mm(
+            UY[verifica_octagono(UY, areaFOP5)][1] *
+            UY[verifica_octagono(UY, areaFOP5)][2]
         ).toFixed(2);
     } else if (pais == "CH") {
         document.getElementById(elemento).innerHTML =
-            CH[this.verifica_octagono(CH, areaFOP5)][4] +
+            CH[verifica_octagono(CH, areaFOP5)][4] +
             " altura mínima de " +
-            this.cm2mm(
-                CH[this.verifica_octagono(CH, areaFOP5)][5] *
-                CH[this.verifica_octagono(CH, areaFOP5)][1]
+            cm2mm(
+                CH[verifica_octagono(CH, areaFOP5)][5] *
+                CH[verifica_octagono(CH, areaFOP5)][1]
             ).toFixed(2) +
             " mm";
-        return this.cm2mm(
-            CH[this.verifica_octagono(CH, areaFOP5)][1] *
-            CH[this.verifica_octagono(CH, areaFOP5)][2]
+        return cm2mm(
+            CH[verifica_octagono(CH, areaFOP5)][1] *
+            CH[verifica_octagono(CH, areaFOP5)][2]
         ).toFixed(2);
     }
 }
 
+function mmarea2cm(valor) {
+    if (typeof valor == "number") {
+        return valor / 100;
+    }
+};
+
+function cm2mm(valor) {
+    if (typeof valor == "number") {
+        return valor * 10;
+    }
+}
 
 
+function cmarea2mm(valor) {
+    if (typeof valor == "number") {
+        return valor * 100;
+    }
+};
 
-
-
-
-
-
+function mm2cm(valor) {
+    if (typeof valor == "number") {
+        return valor / 10;
+    }
+};
+function verifica_octagono(array, valor) {
+    let x;
+    for (x = 0; x <= array.length - 1; x++) {
+        if (x < array.length - 1) {
+            return x;
+        }
+    }
+}

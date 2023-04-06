@@ -1,4 +1,5 @@
 <head>
+  <title>Cabeçalho</title>
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1547916377215738"
     crossorigin="anonymous"></script>
 </head>

@@ -34,23 +34,39 @@
             <div class="col-2 align-self-center pl-5"><img
                     src="https://cdn4.iconfinder.com/data/icons/ionicons/512/icon-clipboard-512.png"
                     alt="Botão de copiar resultado para a Área de colagem" class="icon"
-                    onclick="copyToClipboard(document.getElementById('largT1').value+' mm')">
+                    onclick="copyToClipboard(document.getElementById('largT1')
+                    .value+' mm')">
             </div>
         </div>
 
     </div>
+</div>
+<script 
+    type="text/javascript" 
+    src="partials/functions/Transgenico_lib.js">
+</script>
+<script
+    type="text/javascript"
+    src="partials/functions/CopyToClipboard_lib.js">
+</script>
     <script>
-        const copyToClipboard = require("functions/CopyToClipboard_lib.js")
         $(document).ready(() => {
             $('#altFOP2').keyup(() => { //calculate points
-                $("#altFOP").val($("#altFOP2").val());
-                $("#altFOP1").val($("#altFOP2").val());
-                $("#altFOP3").val($("#altFOP2").val());
+                $("#altFOP")
+                .val($("#altFOP2")
+                .val());
+                $("#altFOP1")
+                .val($("#altFOP2")
+                .val());
+                $("#altFOP3")
+                .val($("#altFOP2")
+                .val());
                 calcula();
             })
 
             $('#largFOP2').keyup(() => { //calculate points
-                $("#largFOP").val($("#largFOP2").val());
+                $("#largFOP")
+                .val($("#largFOP2").val());
                 $("#largFOP1").val($("#largFOP2").val());
                 $("#largFOP3").val($("#largFOP2").val());
                 calcula();
@@ -59,8 +75,10 @@
         })
 
         function calcula() {
-coost Transgenico = require("functions/Transgenico_lib.js")
-            $("#largT1").val(Transgenico($("#altFOP2").val().replace(',', '.'), $("#largFOP2").val().replace(',', '.')));
+            $("#largT1")
+            .val(Transgenico($("#altFOP2")
+            .val().replace(',', '.'),
+              $("#largFOP2")
+            .val().replace(',', '.')));
         }
     </script>
-</div>

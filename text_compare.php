@@ -83,13 +83,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             <div class="row">
                     <form method="post" name="fileUpload" action="text_compare.php" enctype="multipart/form-data">
                         <div class="d-flex justify-content-center">
-                        
-                            <input class="m-2 col-lg-6 col-md-4" type="file" name="docFileToUpload" id="docFileToUpload" data-buttonText="Your label here.">
-                            <div class="p-2 mt-1">
-                                <input class="form-check-input" type="radio" id="xdfDoc" name="xdf" value="docFileToUpload" checked="true">
+                            <input class="m-2" type="file" name="docFileToUpload" id="docFileToUpload">
+                            <div class="p-2">
+                                <input class="form-check-input" type="radio" id="xdfDoc" name="xdf" value="docFileToUpload">
                                 <label class="form-check-label" for="xdfDoc">Documento</label>
                             </div>
-                            <div class="p-2  mt-1">
+                            <div class="p-2">
                                 <input class="form-check-input" type="radio" id="xdfArte" name="xdf" value="artFileToUpload">
                                 <label class="form-check-label" for="xdfArte">Arte</label>
                             </div>
@@ -477,15 +476,15 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 if ((isset($textDocLinhasNovo) && count($textDocLinhasNovo) > 0) || (isset($textArteLinhasNovo) && count($textArteLinhasNovo) > 0) || max(count($textDocPalavras), count($textArtePalavras)) > 0) {
                     echo '<div class="row p-3 m-0">';
                     echo '<div class="col-md-6">';
-                    echo '<h5>Os ' . (countValid($textDocLinhasNovo) + countValid($textDocPalavras)) . '/' . (countValid($textDocLinhasNovo) + countValid($textCompara) + countValid($textDocPalavras)) . ' parágrafos não correspondentes<br>no Documento são:</h5><br>';
+                    echo '<h5>Os ' . (count_valid($textDocLinhasNovo) + count_valid($textDocPalavras)) . '/' . (count_valid($textDocLinhasNovo) + count_valid($textCompara) + count_valid($textDocPalavras)) . ' parágrafos não correspondentes<br>no Documento são:</h5><br>';
                     echo '</div>';
                     echo '<div class="col-md-6">';
-                    echo '<h5>Os ' . (countValid($textArteLinhasNovo) + countValid($textArtePalavras)) . '/' . (countValid($textArteLinhasNovo) + countValid($textCompara) + countValid($textArtePalavras)) . ' parágrafos não correspondentes<br>na Arte são:</h5><br>';
+                    echo '<h5>Os ' . (count_valid($textArteLinhasNovo) + count_valid($textArtePalavras)) . '/' . (count_valid($textArteLinhasNovo) + count_valid($textCompara) + count_valid($textArtePalavras)) . ' parágrafos não correspondentes<br>na Arte são:</h5><br>';
                     echo '</div>';
                     echo '</div>';
                     echo '<br>';
 
-                    for ($item = 0; $item < max(countValid($textDocLinhasNovo), countValid($textArteLinhasNovo)); $item++) { {
+                    for ($item = 0; $item < max(count_valid($textDocLinhasNovo), count_valid($textArteLinhasNovo)); $item++) { {
                             if ($alterna)
                                 echo '<div class="row p-3 m-0" style="background-color:' . BGCOLOR1 . '">';
                             else

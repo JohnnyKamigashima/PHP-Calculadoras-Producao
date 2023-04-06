@@ -16,7 +16,7 @@
             <span class="input-group-text">
                 <img src="https://cdn4.iconfinder.com/data/icons/ionicons/512/icon-clipboard-512.png"
                     alt="Botão de copiar resultado para a Área de colagem" class="icon"
-                    onclick="clip_pt_mm.copyToClipboard(document.getElementById('pt').value+' pt')">
+                    onclick="copyToClipboard(document.getElementById('pt').value+' pt')">
             </span>
         </div>
     </div>
@@ -36,15 +36,24 @@
             </span>
         </div>
     </div>
-    <!-- <script type="text/javascript" src="./partials/functions/convert_mm_lib.js"></script> -->
-
+    <script 
+        type="text/javascript" 
+        src="partials/functions/CopyToClipboard_lib.js">
+    </script>
+    <script 
+        type="text/javascript" 
+        src="partials/functions/Pt2mm_lib.js">
+    </script>
+    <script 
+        type="text/javascript" 
+        src="partials/functions/Mm2pt_lib.js">
+    </script>
     <script>
-        const copyToClipboard = require("functions/CopyToClipboard_lib.js")
-        const pt2mm = require("functions/Pt2mm_lib.js")
-        const mm2pt = require("functions/Mm2pt_lib.js")
         $(document).ready(() => {
-            $('#pt').keyup(() => $("#resultmm").val(pt2mm($("#pt").val().replace(',', '.'))))
-            $('#resultmm').keyup(() => $("#pt").val(mm2pt($("#resultmm").val().replace(',', '.'))))
+            $('#pt').keyup(() => 
+                $("#resultmm").val(pt2mm($("#pt").val().replace(',', '.'))))
+            $('#resultmm').keyup(() => 
+                $("#pt").val(mm2pt($("#resultmm").val().replace(',', '.'))))
         })
     </script>
 </div>

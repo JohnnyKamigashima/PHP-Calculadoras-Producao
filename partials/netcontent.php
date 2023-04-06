@@ -61,36 +61,36 @@
             </div>
         </div>
     </div>
+    <script type="text/javascript" src="partials/functions/Sort_lib.js"></script>
+    <script type="text/javascript" src="partials/functions/CopyToClipboard_lib.js"></script>
+    <script type="text/javascript" src="partials/functions/PesoNeto_lib.js"></script>
     <script>
-        const copyToClipboard = require("functions/CopyToClipboard_lib.js")
-        const sort = require("functions/Sort_lib.js")
         sort("pais");
         $("#pais").val("MC");
         $(document).ready(() => {
             $('#largFOP3').keyup(() => {
                 $("#peso").val("");
-                $("#largFOP").val($("#largFOP3").val().replace(',', '.'));
-                $("#largFOP1").val($("#largFOP3").val().replace(',', '.'));
-                $("#largFOP2").val($("#largFOP3").val().replace(',', '.'));
+                $("#largFOP").val($("#largFOP3").val());
+                $("#largFOP1").val($("#largFOP3").val());
+                $("#largFOP2").val($("#largFOP3").val());
                 resultado_mm();
             })
             $('#altFOP3').keyup(() => {
                 $("#peso").val("");
-                $("#altFOP").val($("#altFOP3").val()).replace(',', '.');
-                $("#altFOP1").val($("#altFOP3").val().replace(',', '.'));
-                $("#altFOP2").val($("#altFOP3").val()).replace(',', '.');
+                $("#altFOP").val($("#altFOP3").val());
+                $("#altFOP1").val($("#altFOP3").val());
+                $("#altFOP2").val($("#altFOP3").val());
                 resultado_mm();
             })
             $('#pais').change(() => resultado_mm())
             $("#peso").keyup(() => {
-                $("#altFOP3").val("").replace(',', '.');
-                $("#largFOP3").val("").replace(',', '.');
+                $("#altFOP3").val();
+                $("#largFOP3").val();
                 resultado_mm();
             })
         })
 
         function resultado_mm() {
-            const pesoNeto = require("functions/PesoNeto_lib.js")
             $("#resultmm1").val(
                 pesoNeto($("#altFOP3").val().replace(',', '.'),
                     $("#largFOP3").val().replace(',', '.'),
