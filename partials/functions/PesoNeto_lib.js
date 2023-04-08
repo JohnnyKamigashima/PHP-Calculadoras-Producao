@@ -1,9 +1,6 @@
 
 
 function pesoNeto(alt, larg, peso, pais) {
-    console.log("Peso Neto: " + peso + "g");
-    console.log("Altura: " + alt + "cm");
-    console.log("Largura: " + larg + "cm");
     let PE_NET = [[1, 1]];
     let IC_NET = [[1, 1.6]];
     let EC_NET = [
@@ -112,7 +109,6 @@ function pesoNeto(alt, larg, peso, pais) {
 
 function verifica(array, valor) {
     let x;
-    console.log(valor)
     for (x = 0; x <= array.length - 1; x++) {
         if (valor <= array[x][0]) {
             return array[x][1];
@@ -124,7 +120,6 @@ function verifica(array, valor) {
 function area(altura, largura) {
     if (altura != 0 && largura != 0) {
         let area = altura * largura;
-        console.log("Área do FOP: " + area + "cm²");
         return area;
     }
 }
