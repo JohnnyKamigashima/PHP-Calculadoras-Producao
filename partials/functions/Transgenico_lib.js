@@ -12,3 +12,5 @@ function Transgenico(altPDP, largPDP) {
         }
     }
 }
+
+if (typeof module === "object") { module.exports = Transgenico }

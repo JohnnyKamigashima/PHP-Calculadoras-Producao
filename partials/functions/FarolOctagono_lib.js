@@ -146,3 +146,13 @@ function verifica_octagono(array, valor) {
         }
     }
 }
+
+if (typeof module !== 'undefined') {
+    module.exports = {
+        verifica_octagono,
+        mmarea2cm,
+        cm2mm,
+        cmarea2mm,
+        mm2cm
+    }
+}

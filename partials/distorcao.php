@@ -64,6 +64,7 @@
     <script src="partials/functions/DistorC_lib.js"></script>
     <script src="partials/functions/CopyToClipboard_lib.js"></script>
     <script>
+        
         $(document).ready(() => {
             $('#cilindro').keyup(() => atualizaDistorc())
             $('#arteA').keyup(() => atualizaDistorc())

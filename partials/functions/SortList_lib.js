@@ -29,3 +29,5 @@ function sortList(elementid) {
         }
     }
 }
+
+if (typeof module === "object") { module.exports = sortList }

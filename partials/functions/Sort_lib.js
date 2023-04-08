@@ -26,3 +26,6 @@ function sort(elementid) {
     // (re)add re-ordered OPTIONs to SELECT
     for (let i = 0, len = ary.length; i < len; i++) sel.add(ary[i], null);
 }
+
+
+if (typeof module === "object") { module.exports = sort }

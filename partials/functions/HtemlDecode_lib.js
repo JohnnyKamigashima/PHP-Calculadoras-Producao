@@ -70,3 +70,5 @@ module.exports = function htmlDecode(entrada) {
     });
     return entrada;
 }
+
+if (typeof module === "object") { module.exports = htmlDecode }

@@ -1,6 +1,6 @@
 
 
-function pesoNeto(alt, larg, peso, pais, elemento) {
+function pesoNeto(alt, larg, peso, pais) {
     console.log("Peso Neto: " + peso + "g");
     console.log("Altura: " + alt + "cm");
     console.log("Largura: " + larg + "cm");
@@ -61,60 +61,53 @@ function pesoNeto(alt, larg, peso, pais, elemento) {
         [258001, 12],
     ]
     let MX_FOP = [
-        [50, 1.5],
-        [200, 2],
-        [750, 3],
-        [1000, 4.5],
-        [5000, 5],
-        [5001, 6],
+        [5000, 1.5],
+        [20000, 2],
+        [75000, 3],
+        [100000, 4.5],
+        [500000, 5],
+        [500001, 6],
     ];
-    let mensagemPE_BO_CAM_RD = "Tamanho do conteúdo independente.";
     let areaFOP = area(alt, larg);
+    let mensagem;
+    mensagem = "Tamanho do conteúdo pode ser baseado no peso ou no tamanho do FOP.";
 
     switch (pais) {
         case "PE" == "BO" == "CAM" == "RD":
-            pesoNetoMensagem(mensagemPE_BO_CAM_RD, elemento);
-            return PE_NET[0][1];
+            mensagem = "Tamanho do conteúdo independente.";
+            return [PE_NET[0][1], mensagem];
         case "EC":
-            pesoNetoMensagem("Tamanho do conteúdo pode ser baseado no peso ou no tamanho do FOP.", elemento);
             return (areaFOP > 0)
-                ? verifica(EC_FOP, areaFOP)
-                : verifica(EC_NET, peso);
+                ? [verifica(EC_FOP, areaFOP), mensagem]
+                : [verifica(EC_NET, peso), mensagem];
         case "CL":
-            pesoNetoMensagem("Tamanho do conteúdo baseado na altura do FOP.", elemento);
+            mensagem = "Tamanho do conteúdo baseado na altura do FOP.";
             return (alt / 36 >= 2)
-                ? alt / 36
-                : 2;
+                ? [alt / 36, mensagem]
+                : [2, mensagem];
         case "CO":
-            pesoNetoMensagem("Tamanho do conteúdo pode ser baseado no peso ou no tamanho do FOP.", elemento);
             return (areaFOP > 0)
-                ? verifica(CO_FOP, areaFOP)
-                : verifica(CO_NET, peso);
+                ? [verifica(CO_FOP, areaFOP), mensagem]
+                : [verifica(CO_NET, peso), mensagem];
         case "PR":
-            pesoNetoMensagem("Tamanho do conteúdo baseado na área do FOP.", elemento);
+            mensagem = "Tamanho do conteúdo baseado na área do FOP.";
             return (areaFOP > 0)
-                ? verifica(PR_FOP, areaFOP)
-                : 0;
+                ? [verifica(PR_FOP, areaFOP), mensagem]
+                : [0, mensagem];
         case "IC":
-            pesoNetoMensagem("Tamanho do conteúdo independente.", elemento);
-            return IC_NET[0][0];
+            mensagem = "Tamanho do conteúdo independente.";
+            return [IC_NET[0][0], mensagem];
         case "MC":
-            pesoNetoMensagem("Tamanho do conteúdo pode ser baseado no peso ou no tamanho do FOP.", elemento);
             return (areaFOP > 0)
-                ? verifica(MC_FOP, areaFOP)
-                : verifica(MC_NET, peso);
+                ? [verifica(MC_FOP, areaFOP), mensagem]
+                : [verifica(MC_NET, peso), mensagem];
         case "MX":
-            pesoNetoMensagem("Tamanho do conteúdo pode ser baseado no peso ou no tamanho do FOP.", elemento);
             return (areaFOP > 0)
-                ? verifica(MX_FOP, areaFOP)
-                : verifica(MX_NET, peso);
+                ? [verifica(MX_FOP, areaFOP), mensagem]
+                : [verifica(MX_NET, peso), mensagem];
         default:
-            pesoNetoMensagem("Tamanho do conteúdo pode ser baseado no peso ou no tamanho do FOP.", elemento);
-            return 0;
+            return [0, mensagem];
     }
-}
-function pesoNetoMensagem(mensagem, elemento) {
-    document.getElementById(elemento).innerHTML = mensagem;
 }
 
 function verifica(array, valor) {
@@ -136,4 +129,4 @@ function area(altura, largura) {
     }
 }
 
-module.exports = pesoNeto;
+if (typeof module === "object") { module.exports = pesoNeto; }

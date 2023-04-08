@@ -74,3 +74,5 @@ module.exports = function quebraLinhas(id) {
         tinymce.get(id).setContent(textoQuebraPontos);
         });
 }
+
+if (typeof module === 'object') { module.exports = quebraLinhas; }

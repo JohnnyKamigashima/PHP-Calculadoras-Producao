@@ -4,4 +4,4 @@ function escalaPlano(medA, medR) {
         : ((medR * 100) / medA).toFixed(2);
 };
 
-module.exports = escalaPlano;
+if (typeof module === "object") { module.exports = escalaPlano };

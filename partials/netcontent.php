@@ -65,6 +65,7 @@
     <script type="text/javascript" src="partials/functions/CopyToClipboard_lib.js"></script>
     <script type="text/javascript" src="partials/functions/PesoNeto_lib.js"></script>
     <script>
+        
         sort("pais");
         $("#pais").val("MC");
         $(document).ready(() => {
@@ -91,13 +92,13 @@
         })
 
         function resultado_mm() {
-            $("#resultmm1").val(
-                pesoNeto($("#altFOP3").val().replace(',', '.'),
+            var result_mm = pesoNeto($("#altFOP3").val().replace(',', '.'),
                     $("#largFOP3").val().replace(',', '.'),
                     $("#peso").val().replace(',', '.'),
-                    $("#pais").val(),
-                    "descricao")
-            );
+                    $("#pais").val());
+            console.log("result mm: " + result_mm[0] + " texto: " +result_mm[1]);
+            $("#resultmm1").val(result_mm[0]);
+            document.getElementById("descricao").innerHTML = result_mm[1];
         }
     </script>
 </div>

@@ -12,3 +12,5 @@ module.exports = function limpaXFDF(id) {
     texto = texto.replace(/\n+/gui, '<br>');
     tinymce.get(id).setContent(texto);
 }
+
+if (typeof module === 'object') { module.exports = limpaXFDF; }

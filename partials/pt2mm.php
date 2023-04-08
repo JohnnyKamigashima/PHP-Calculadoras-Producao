@@ -36,23 +36,23 @@
             </span>
         </div>
     </div>
-    <script 
-        type="text/javascript" 
+    <script
+        type="text/javascript"
         src="partials/functions/CopyToClipboard_lib.js">
     </script>
-    <script 
-        type="text/javascript" 
+    <script
+        type="text/javascript"
         src="partials/functions/Pt2mm_lib.js">
     </script>
-    <script 
-        type="text/javascript" 
+    <script
+        type="text/javascript"
         src="partials/functions/Mm2pt_lib.js">
     </script>
     <script>
         $(document).ready(() => {
-            $('#pt').keyup(() => 
+            $('#pt').keyup(() =>
                 $("#resultmm").val(pt2mm($("#pt").val().replace(',', '.'))))
-            $('#resultmm').keyup(() => 
+            $('#resultmm').keyup(() =>
                 $("#pt").val(mm2pt($("#resultmm").val().replace(',', '.'))))
         })
     </script>

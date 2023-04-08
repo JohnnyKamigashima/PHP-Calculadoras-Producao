@@ -4,7 +4,7 @@ function px2mm(resolucao, px) {
         : (px / (resolucao / 25.4)).toFixed(2);
 };
 
-module.exports = px2mm;
+if (typeof module === "object") { module.exports = px2mm };
 
 
 

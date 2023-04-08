@@ -1,4 +1,4 @@
-function altoEm(altura, largura, area, nutrientes, tipo, area_FOP, alto_em_a) {
+function altoEm(altura, largura, area, nutrientes, tipo) {
 
     let larguraFinal = 0;
 
@@ -23,7 +23,7 @@ function altoEm(altura, largura, area, nutrientes, tipo, area_FOP, alto_em_a) {
         return [0, 0];
     }
 
-    $(area_FOP).val(altura * largura);
+    // $(area_FOP).val(altura * largura);
     if (areaPDP < 10000) {
         areaNutri1 = areaPDP * 0.035;
         areaNutri2 = areaPDP * 0.0525;
@@ -39,13 +39,16 @@ function altoEm(altura, largura, area, nutrientes, tipo, area_FOP, alto_em_a) {
     }
     switch (nutrientes) {
         case 1:
-            $(alto_em_a).val(areaNutri1);
+            // $(alto_em_a).val(areaNutri1);
+            altoEmA = areaNutri1;
             break;
         case 2:
-            $(alto_em_a).val(areaNutri2);
+            // $(alto_em_a).val(areaNutri2);
+            altoEmA = areaNutri2;
             break;
         case 3:
-            $(alto_em_a).val(areaNutri3);
+            // $(alto_em_a).val(areaNutri3);
+            altoEmA = areaNutri3;
             break;
     }
 
@@ -130,15 +133,13 @@ function altoEm(altura, largura, area, nutrientes, tipo, area_FOP, alto_em_a) {
     }
     larguraFinal = ladoMaior(areaNutriFinal, blocos, tipo) * blocos_hor;
     fonte = altoEmLpF(larguraFinal, blocos_hor);
-
     // Verifica se a largura não está impondo fonte acima ou abaixo da legislação
-    larguraFinal = (fonte < minFont)
-        ? altoemFpL(larguraFinal, blocos_hor, minFont)
-        : altoemFpL(larguraFinal, blocos_hor, maxFont);
-    larguramax = altoemFpL(larguraFinal, blocos_hor, maxFont)
-    larguraFinal = larguraFinal.toFixed(2);
 
-    return [larguraFinal, larguramax];
+    if (fonte < minFont) larguraFinal = altoemFpL(blocos_hor, minFont)
+
+    larguramax = altoemFpL(blocos_hor, maxFont)
+    larguraFinal = larguraFinal.toFixed(2);
+    return [larguraFinal, larguramax, altoEmA];
 }
 
 
@@ -217,4 +218,8 @@ function altoemFpL(blocos, pontos) {
     else if (blocos == 3) coeficiente = 2.16;
     else coeficiente = 2.15;
     return (pontos * coeficiente) * blocos; // retorna largura necessaria para obter esses pontos
+}
+
+if (typeof module === 'object') {
+    module.exports = altoEm;
 }

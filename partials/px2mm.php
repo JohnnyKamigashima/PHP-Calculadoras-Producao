@@ -45,16 +45,16 @@
             </span>
         </div>
     </div>
-    <script 
-        type="text/javascript" 
+    <script
+        type="text/javascript"
         src="partials/functions/CopyToClipboard_lib.js">
     </script>
-    <script 
-        type="text/javascript" 
+    <script
+        type="text/javascript"
         src="partials/functions/Mm2px_lib.js">
     </script>
-    <script 
-        type="text/javascript" 
+    <script
+        type="text/javascript"
         src="partials/functions/Px2mm_lib.js">
     </script>
     <script>

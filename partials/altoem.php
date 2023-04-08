@@ -129,15 +129,13 @@
         })
 
         function largF() {
-            $("#largF").val(
-                altoEm($("#altFOP").val(),
+            let result = altoEm($("#altFOP").val(),
                     $("#largFOP").val(),
                     $("#areaFOP").val(),
                     $("#nutrientes").val(),
-                    $("#tipo").val(),
-                    "#areaFOP",
-                    "#altoemA")[0]
-            );
+                    $("#tipo").val());
+            $("#largF").val(result[0]);
+            $("#altoemA").val(result[2]);
         }
 
         function areaFop() {
@@ -145,16 +143,13 @@
         }
 
         function largMx() {
-            $("#largMx").val(
-                altoEm(
-                    $("#altFOP").val(),
+             let result = altoEm($("#altFOP").val(),
                     $("#largFOP").val(),
                     $("#areaFOP").val(),
                     $("#nutrientes").val(),
-                    $("#tipo").val(),
-                    "#areaFOP",
-                    "#altoemA")[1]
-            );
+                    $("#tipo").val());
+            $("#largMx").val(result[1]);
+            $("#altoemA").val(result[2]);
         }
     </script>
 </div>

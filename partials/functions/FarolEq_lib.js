@@ -29,3 +29,5 @@ function farolEq(largura, altura, area, cilindro) {
         return Nresultado;
     }
 }
+
+if (typeof module === "object") { module.exports = farolEq }

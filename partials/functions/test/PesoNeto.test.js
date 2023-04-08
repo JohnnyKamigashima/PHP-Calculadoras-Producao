@@ -1,9 +1,9 @@
 const pesoNeto = require("../PesoNeto_lib");
-describe.skip("Verifica altura mínima do Peso Neto", () => {
+describe("Verifica altura mínima do Peso Neto", () => {
     it.each([
-        [120, 25, 50, "EC", "elemento", 4.5]
-    ])("Altura mínima do Peso Neto: %i", (altura, largura, peso, pais, elemento, resultado) => {
-        expect(pesoNeto(altura, largura, peso, pais, elemento)).toBe(resultado);
+        [120, 25, 50, "EC", 1.6, "Tamanho do conteúdo pode ser baseado no peso ou no tamanho do FOP."],
+    ])("Altura mínima do Peso Neto: %i", (altura, largura, peso, pais, resultado, mensagem) => {
+        expect(pesoNeto(altura, largura, peso, pais)[0]).toBe(resultado);
+        expect(pesoNeto(altura, largura, peso, pais)[1]).toBe(mensagem);
     })
-
 });
