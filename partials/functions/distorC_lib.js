@@ -3,3 +3,4 @@ function distorC(medidaCliche, medidaCilindro, repeticoes) {
         ? '0.000'
         : ((medidaCilindro * 100) / (medidaCliche * repeticoes)).toFixed(3);
 }
+module.exports = distorC;

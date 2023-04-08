@@ -3,3 +3,4 @@ function escalaPlano(medA, medR) {
         ? '0.00'
         : ((medR * 100) / medA).toFixed(2);
 }
+module.exports = escalaPlano;

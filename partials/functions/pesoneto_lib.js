@@ -135,3 +135,5 @@ function area(altura, largura) {
         return area;
     }
 }
+
+module.exports = pesoNeto;
