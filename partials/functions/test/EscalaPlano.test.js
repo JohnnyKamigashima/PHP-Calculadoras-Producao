@@ -1,4 +1,4 @@
-const escalaPlano = require("functions/EscalaPlano_lib.js")
+const escalaPlano = require("../EscalaPlano_lib.js")
 
 describe('Testa a escala do Plano dado tamanho atual e cota', () => {
     it.each([
