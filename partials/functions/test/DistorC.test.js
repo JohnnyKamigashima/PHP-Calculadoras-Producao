@@ -1,4 +1,4 @@
-const distorC = require('../DistorC_lib');
+const distorC = require("../DistorC_lib");
 describe('Testa distorção de cilindro', () => {
     it.each([
         [550, 540, 2, "49.091"]
