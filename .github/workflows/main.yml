@@ -36,6 +36,5 @@ jobs:
       - uses: willcaul/jest-github-action@v2
         env:
            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      - name: Jest coverage report
       - uses: ArtiomTr/jest-coverage-report-action@v2.2.2
 
