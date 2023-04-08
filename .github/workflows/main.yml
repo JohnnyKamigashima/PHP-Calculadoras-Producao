@@ -1,0 +1,13 @@
+name: Jest CI
+
+on: [push]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+      - uses: willcaul/jest-github-action@v2
+           env:
+              GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
