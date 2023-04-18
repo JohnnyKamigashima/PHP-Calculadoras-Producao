@@ -1,0 +1,95 @@
+@import "./bootstrap";
+
+#main {
+  font-family: Georgia, "Times New Roman", Times, serif;
+  font-size: small;
+  background-color: antiquewhite;
+  padding: 5px;
+  display: block;
+  z-index: 0;
+}
+#main-image {
+  font-family: Georgia, "Times New Roman", Times, serif;
+  font-size: small;
+  background-color: antiquewhite;
+  padding: 5px;
+  z-index: 0;
+  background-image: url("../images/20190706_092927.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.cells {
+  @extend .p-3;
+  background-color: rgb(216, 216, 216);
+  border: solid antiquewhite 5px;
+}
+
+.linha_resposta {
+  @extend .row;
+  @extend .bg-light;
+  @extend .p-2;
+  @extend .m-auto;
+}
+
+.entrada_normal {
+  @extend .input-group;
+  @extend .mb-3;
+}
+
+.titulo {
+  @extend .rounded;
+  @extend .mt-0;
+  @extend .mb-3;
+  @extend .p-2;
+  text-align: center;
+  background-color: aquamarine;
+  color: black;
+  font-weight: 600;
+}
+
+.icon {
+  width: 25px;
+  height: 25px;
+}
+
+.media-icon {
+  width: 80px;
+  height: 80px;
+}
+
+.textwrapper {
+  border: 1px solid #999999;
+  margin: 5px 0;
+  padding: 3px;
+  text-align: center;
+}
+
+.foto-autor-redondo {
+  margin: auto;
+  border-radius: 50%;
+  padding: 5px;
+  width: 50%;
+}
+
+.identificacao-do-autor {
+  font-size: larger;
+  font-family: Cambria, Cochin, Georgia, Times, "Times New Roman", serif;
+  font-weight: 500;
+}
+
+.bio {
+  font-size: medium;
+  font-family: Georgia, "Times New Roman", Times, serif;
+  font-weight: 300;
+}
+
+.noblur {
+  filter: blur(0);
+  opacity: 1;
+  z-index: 10;
+}
+
+a {
+  color: #000969;
+}
